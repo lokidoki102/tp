@@ -5,31 +5,31 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Email
-Class Name
-Class Phone
-Class Tag
-Class PostalCode
-Class Street
-Class Level
-Class UnitNumber
-Class Block
-Class Buyer extends Person
-Class Seller extends Person
-Class House
-Class Landed extends House
-Class NonLanded extends House
+    Class UniquePersonList
+    Class Person
+    Class Email
+    Class Name
+    Class Phone
+    Class Tag
+    Class PostalCode
+    Class Street
+    Class Level
+    Class UnitNumber
+    Class Block
+    Class House
+    Class Landed extends House
+    Class NonLanded extends House
+    Class Buyer extends Person
+    Class Seller extends Person
 
-Class I #FFFFFF
+    Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -53,18 +53,20 @@ Person *--> "*" Tag
 House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
-Seller *--> House
 NonLanded *--> Block
 NonLanded *--> Level
-
-
-
+Buyer "0..1" *-- House : has
+Seller "1" -- House : owns
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 
-
 ModelManager --> "~* filtered" Person
+
+House "1" -- "1" UnitNumber
+House "1" -- "1" PostalCode
+NonLanded "1" -- "1" Level
+NonLanded "1" -- "1" Block
 @enduml
