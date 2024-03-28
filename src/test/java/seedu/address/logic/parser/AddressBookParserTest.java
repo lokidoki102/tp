@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditBuyerCommand;
+import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -23,9 +25,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.EditBuyerDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.SellerBuilder;
@@ -70,6 +74,15 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editBuyer() throws Exception {
+        Buyer buyer = new BuyerBuilder().build();
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(buyer).build();
+        EditBuyerCommand command = (EditBuyerCommand) parser.parseCommand(EditBuyerCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditBuyerDescriptorDetails(descriptor));
+        assertEquals(new EditBuyerCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

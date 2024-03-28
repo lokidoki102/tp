@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new EditBuyerCommand object
  */
-public class EditBuyerCommandParser {
+public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
     // TODO update this command parser to include budget later on.
     /**
      * Parses the given {@code String} of arguments in the context of the EditBuyerCommand
