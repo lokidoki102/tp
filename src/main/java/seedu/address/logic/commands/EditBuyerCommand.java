@@ -54,18 +54,18 @@ public class EditBuyerCommand extends Command {
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a buyer.";
 
     private final Index index;
-    private final EditBuyerCommand.EditBuyerDescriptor editBuyerDescriptor;
+    private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
      * @param index                of the person in the filtered person list to edit
      * @param editBuyerDescriptor details to edit the person with
      */
-    public EditBuyerCommand(Index index, EditBuyerCommand.EditBuyerDescriptor editBuyerDescriptor) {
+    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
         requireNonNull(index);
         requireNonNull(editBuyerDescriptor);
 
         this.index = index;
-        this.editBuyerDescriptor = new EditBuyerCommand.EditBuyerDescriptor(editBuyerDescriptor);
+        this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
     }
 
     @Override
@@ -76,7 +76,6 @@ public class EditBuyerCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         if (!(lastShownList.get(index.getZeroBased()) instanceof Buyer)) {
             throw new CommandException(MESSAGE_WRONG_TYPE);
         }
