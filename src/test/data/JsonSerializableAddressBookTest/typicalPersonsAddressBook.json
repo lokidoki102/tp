@@ -118,5 +118,17 @@
     "email" : "bob@example.com",
     "housingType" : "Condominium",
     "tags" : [ "friend", "husband" ]
+  }, {
+    "name" : "Zack York",
+    "phone" : "82937163",
+    "email" : "zack@gmail.com",
+    "housingType" : "HDB",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Zane York",
+    "phone" : "82937163",
+    "email" : "zack@gmail.com",
+    "housingType" : "HDB",
+    "tags" : [ "friends" ]
   } ]
 }
