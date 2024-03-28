@@ -21,6 +21,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "housingType" : "HDB",
+    "budget": "22200",
     "tags" : [ "friends" ]
   } ]
 }

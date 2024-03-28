@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -18,12 +19,14 @@ public class BuyerBuilder {
     public static final String DEFAULT_NAME = "James Lim";
     public static final String DEFAULT_PHONE = "93840172";
     public static final String DEFAULT_EMAIL = "james@gmail.com";
+    public static final String DEFAULT_BUDGET = "666000";
     public static final String DEFAULT_HOUSING_TYPE = "HDB";
 
     private Name name;
     private Phone phone;
     private Email email;
     private String housingType;
+    private Budget budget;
     private Set<Tag> tags;
 
     /**
@@ -34,6 +37,7 @@ public class BuyerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         housingType = DEFAULT_HOUSING_TYPE;
+        budget = new Budget(DEFAULT_BUDGET);
         tags = new HashSet<>();
     }
 
@@ -45,6 +49,7 @@ public class BuyerBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         housingType = personToCopy.getHousingType();
+        budget = personToCopy.getBudget();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -81,6 +86,14 @@ public class BuyerBuilder {
     }
 
     /**
+     * Sets the {@code Budget} of the {@code Buyer} that we are building.
+     */
+    public BuyerBuilder withBudget(String budget) {
+        this.budget = new Budget(budget.trim());
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public BuyerBuilder withTags(String ... tags) {
@@ -89,6 +102,6 @@ public class BuyerBuilder {
     }
 
     public Buyer build() {
-        return new Buyer(name, phone, email, housingType, tags);
+        return new Buyer(name, phone, email, housingType, budget, tags);
     }
 }
