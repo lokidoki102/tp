@@ -782,7 +782,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 * 1a. The given contact name does not match any contact names in the contact list.
     * 1a1. EstateEase shows an error message indicating no matches found.
- 
+
       Use case ends.
 
 
@@ -818,7 +818,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 * 2a. EstateEase detects an invalid name.
     * 2a1. EstateEase shows an error message regarding an invalid entry.
-  
+ 
       Use case ends.
 * 2b. Command does not match EstateEase's registered command spelling.
     * 2b1. EstateEase shows an error message regarding an invalid command.
@@ -883,21 +883,21 @@ Use case ends.
 
 * 2a. The given index for the buyer is invalid input type.
     * 2a1. EstateEase shows an error message indicating the invalid input type.
- 
+
       Use case resumes at step 1.
 
 * 2b. The given index for the buyer is out of range.
     * 2b1. EstateEase shows an error message indicating the out of range for the index.
-  
+
       Use case resumes at step 1.
 
 * 3a. There are no sellers in the contact list.
     * 3a1. EstateEase shows a message indicating there is no sellers in the contact list.
- 
+
       Use case ends.
 
 * 3b. There are no matching properties based on the buyer's requirements.
-    * 3b1. EstateEase shows a message indicating there is no matching results. 
+    * 3b1. EstateEase shows a message indicating there is no matching results.
 
       Use case ends.
 
@@ -933,7 +933,7 @@ Use case ends.
     * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
       Use case ends.
 
-  
+
 
 **Use case: UC16 - Differentiate home-seller status**
 
@@ -949,7 +949,7 @@ Use case ends.
 
 * 2a. Pending home-sellers are displayed in red.
   *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
- 
+
        Use case ends.
 
 * 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
