@@ -5,31 +5,13 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-    Class "<<interface>>\nModel" as Model
-    Class AddressBook
-    Class ModelManager
-    Class UserPrefs
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class AddressBook
+Class ModelManager
+Class UserPrefs
 
-<<<<<<< HEAD
-    Class UniquePersonList
-    Class Person
-    Class Email
-    Class Name
-    Class Phone
-    Class Tag
-    Class PostalCode
-    Class Street
-    Class Level
-    Class UnitNumber
-    Class Block
-    Class House
-    Class Landed extends House
-    Class NonLanded extends House
-    Class Buyer extends Person
-    Class Seller extends Person
-=======
 Class UniquePersonList
 Class Person
 Class Email
@@ -50,9 +32,8 @@ Class Condo implements House
 Class HDB implements House
 Class Landed implements House
 Class Budget
->>>>>>> 4295d66cb871d9743a0f8df8c56a0ea191814e05
 
-    Class I #FFFFFF
+Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -76,28 +57,17 @@ Person *--> "*" Tag
 House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
-<<<<<<< HEAD
-NonLanded *--> Block
-NonLanded *--> Level
-Buyer "0..1" *-- House : has
-Seller "1" -- House : owns
-=======
 Seller *--> "1..*" House : sells
 Buyer *--> "*" House : buy
 Buyer *--> Budget
 Buyer *--> InterestedHousingType
 
->>>>>>> 4295d66cb871d9743a0f8df8c56a0ea191814e05
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 
-ModelManager --> "~* filtered" Person
 
-House "1" -- "1" UnitNumber
-House "1" -- "1" PostalCode
-NonLanded "1" -- "1" Level
-NonLanded "1" -- "1" Block
+ModelManager --> "~* filtered" Person
 @enduml
