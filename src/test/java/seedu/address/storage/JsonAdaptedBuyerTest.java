@@ -28,7 +28,7 @@ public class JsonAdaptedBuyerTest {
     private static final String VALID_NAME = ALICE_BUYER.getName().toString();
     private static final String VALID_PHONE = ALICE_BUYER.getPhone().toString();
     private static final String VALID_EMAIL = ALICE_BUYER.getEmail().toString();
-    private static final String VALID_HOUSING_TYPE = ALICE_BUYER.getHousingType();
+    private static final String VALID_HOUSING_TYPE = ALICE_BUYER.getHousingType().toString();
     private static final String VALID_BUDGET = ALICE_BUYER.getBudget().toString();
 
     private static final List<JsonAdaptedTag> VALID_TAGS = ALICE_BUYER.getTags().stream()
