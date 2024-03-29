@@ -241,7 +241,7 @@ Previously, AB3 does not have a House implementation. Given that buyers and sell
 associated, there is a need to for an add House feature.
 
 #### Implementation Details
-- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level 
+- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level
 - or UnitNumber.
 - The System will then create a House associated with the Seller.
 - The House will be linked to the Seller for all further commands.
@@ -255,7 +255,7 @@ associated, there is a need to for an add House feature.
 
 #### Proposed Implementation
 
-This feature aims to facilitate the process of adding buyer to EstateEase. 
+This feature aims to facilitate the process of adding buyer to EstateEase.
 
 Given below is an example usage scenario and how the add buyer behaves at each step.
 
@@ -484,11 +484,11 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3f. EstateEase detects incorrect format for email in the entered data. <br>
     * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
       Use case resumes from step 2.
-  
+
 * 3g. EstateEase detects missing housing type in the entered data. <br>
     * 3g1. EstateEase shows an error message regarding missing housing type. <br>
       Use case resumes from step 2.
-  
+
 * 3h. EstateEase detects incorrect housing type in the entered data. <br>
     * 3h1. EstateEase shows an error message regarding the entry of incorrect of housing type. <br>
       Use case resumes from step 2.
@@ -547,7 +547,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3a. EstateEase detects missing name in the entered data. <br>
     * 3a1. EstateEase shows an error message regarding missing name. <br>
       Use case resumes from step 2.
-  
+
 * 3b. EstateEase detects duplicate name in the entered data. <br>
     * 3b1. EstateEase shows an error message regarding duplicate name. <br>
       Use case ends.
@@ -782,7 +782,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 * 1a. The given contact name does not match any contact names in the contact list.
     * 1a1. EstateEase shows an error message indicating no matches found.
-    
+ 
       Use case ends.
 
 
@@ -811,18 +811,18 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 1. User enters the command to view the specific seller's requirements.
 2. EstateEase processes the view command with home-seller as filter.
 3. EstateEase displays the home-seller's requirements.
-   
+
     Use case ends.
 
 **Extensions**
 
 * 2a. EstateEase detects an invalid name.
     * 2a1. EstateEase shows an error message regarding an invalid entry.
-      
+  
       Use case ends.
 * 2b. Command does not match EstateEase's registered command spelling.
     * 2b1. EstateEase shows an error message regarding an invalid command.
-      
+
       Use case ends.
 
 
@@ -878,27 +878,27 @@ Use case ends.
 **Extensions**
 
 * 1a. The list is empty.
-  
+
   Use case ends.
 
 * 2a. The given index for the buyer is invalid input type.
     * 2a1. EstateEase shows an error message indicating the invalid input type.
-      
+ 
       Use case resumes at step 1.
 
 * 2b. The given index for the buyer is out of range.
     * 2b1. EstateEase shows an error message indicating the out of range for the index.
-      
+  
       Use case resumes at step 1.
 
 * 3a. There are no sellers in the contact list.
     * 3a1. EstateEase shows a message indicating there is no sellers in the contact list.
-      
+ 
       Use case ends.
 
 * 3b. There are no matching properties based on the buyer's requirements.
-    * 3b1. EstateEase shows a message indicating there is no matching results.
-      
+    * 3b1. EstateEase shows a message indicating there is no matching results. 
+
       Use case ends.
 
 
@@ -933,7 +933,7 @@ Use case ends.
     * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
       Use case ends.
 
-      
+  
 
 **Use case: UC16 - Differentiate home-seller status**
 
@@ -949,7 +949,7 @@ Use case ends.
 
 * 2a. Pending home-sellers are displayed in red.
   *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
-      
+ 
        Use case ends.
 
 * 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
@@ -962,9 +962,9 @@ Use case ends.
 **MSS:**
 
 1.  User requests to <u>view all contacts</u>.
-2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green, 
+2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green,
     and the home-buyers who are pending in finalizing a deal or done deal in red.
-    
+
     Use case ends.
 
 
@@ -974,7 +974,7 @@ Use case ends.
 
 1. User enters a remark regarding a client.
 2. EstateEase adds the provided remark to the client identified by the specified index.
-   
+
    Use case ends.
 
 **Extensions**
@@ -991,7 +991,7 @@ Use case ends.
 
 1. User enters the 'exit' command.
 2. EstateEase immediately closes the application.
-   
+
    Use case ends.
 
 **Extensions**
