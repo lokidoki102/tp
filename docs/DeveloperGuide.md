@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the
+[SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,6 +158,27 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### [Proposed] Matching Buyer feature
+
+#### Proposed Implementation
+
+The Matching Buyer feature aims to facilitate the process of connecting buyers with suitable seller houses based on their housing type and budget.
+
+#### Implementation Details
+- Upon invoking the command `match [buyer_name]`, the system will identify the specified buyer by name.
+- It will then retrieve the buyer's housing type and budget from the database.
+- The system will compare these attributes with each available seller house's housing type and price.
+- Suitable matches will be determined based on compatibility, and a list of matched seller houses will be presented to the user.
+
+#### Why It's Implemented That Way
+- This implementation focuses on simplicity and efficiency by directly comparing buyer requirements with available seller houses.
+- Retrieving buyer information by name ensures personalized matching and ease of use.
+- By considering both housing type and budget, the system ensures that matched houses meet the buyer's specific criteria effectively.
+
+#### Alternatives Considered
+- Alternative approaches, such as machine learning-based recommendation systems, were considered but deemed unnecessary for the current scope of the feature.
+- Additional matching criteria, such as location or amenities, were also contemplated, but it was decided to prioritize simplicity and clarity for the initial implementation.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -293,6 +314,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* * * *` | real estate agent           | delete the contact that I want to remove                                                      | remove outdated or irrelevant contacts                                       |
 | `* * * *` | real estate agent           | be able to exit the program when I want to                                                    | close the application                                                        |
 | `* * * *` | real estate agent           | be able to automatically save the data I added, changed, and deleted                          | load the data when I open the application, with the saved data, next time    |
+| `* * *`   | real estate agent           | keep track of my buyer's budget and the price of the houses                                   | better manage my client's requirement                                        |
+| `* * *`   | real estate agent           | match the buyer with sellers based on the buyer's requirements                                | quickly identify properties that align with the buyers' preferences          |
 | `* * *`   | real estate agent           | find for a specific contact                                                                   | access their details without scrolling through a long list                   |
 | `* * *`   | real estate agent           | easily update or modify existing contact information                                          | have accurate and up-to-date records                                         |
 | `* * *`   | real estate agent           | add new houses to the home-sellers                                                            | keep track of the houses the home-sellers have                               |
@@ -305,7 +328,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* *`     | forgetful real estate agent | link a buyer to sellers with the properties they are interested in buying                     | push them towards making a transaction                                       |
 | `*`       | busy real estate agent      | be able to add notes about clients when talking to them                                       | do not need to consolidate afterwards                                        |
 | `*`       | real estate agent           | differentiate between home-buyers who are looking for houses and finalizing a deal            | manage them effectively                                                      |
-| `*`       | real estate agent           | differentiate between home-sellers who are looking to sell their houses and finalizing a deal | manage them effectively.                                                     |
+| `*`       | real estate agent           | differentiate between home-sellers who are looking to sell their houses and finalizing a deal | manage them effectively                                                      |
 | `*`       | real estate agent           | see the priority of home-sellers after filtering out their selling requirements               | determine who I should prioritize in handling the transactions first         |
 
 
