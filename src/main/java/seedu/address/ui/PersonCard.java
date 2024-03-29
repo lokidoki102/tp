@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.NonLanded;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
@@ -33,6 +34,8 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label housingType;
+    @FXML
+    private Label budget;
     @FXML
     private Label email;
     @FXML
@@ -59,6 +62,8 @@ public class PersonCard extends UiPart<Region> {
 
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
+            // Show no budget
+            budget.setVisible(false);
             Seller seller = (Seller) person;
             if (seller.getHouses() != null) {
                 seller.getHouses().forEach(house -> {
@@ -92,6 +97,8 @@ public class PersonCard extends UiPart<Region> {
         } else {
             // We assumed that buyer does not have a house for now
             housesContainer.setVisible(false);
+            Buyer buyer = (Buyer) person;
+            budget.setText("$" + buyer.getBudget().toString());
         }
     }
 }
