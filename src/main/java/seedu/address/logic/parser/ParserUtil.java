@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.House;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
@@ -135,13 +136,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code String houseType} is invalid.
      */
-    public static String parseHousing(String houseType) throws ParseException {
+    public static HousingType parseHousing(String houseType) throws ParseException {
         requireNonNull(houseType);
         String trimmedName = houseType.trim();
         if (!House.isValidName(trimmedName)) {
             throw new ParseException(House.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new HousingType(trimmedName);
     }
 
     /**

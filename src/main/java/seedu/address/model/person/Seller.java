@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.address.model.house.House;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,7 +23,7 @@ public class Seller extends Person {
      * @param houses      The houses the seller has (modified to accept a list of houses)
      * @param tags        The tags associated with the seller.
      */
-    public Seller(Name name, Phone phone, Email email, String housingType, ArrayList<House> houses, Set<Tag> tags) {
+    public Seller(Name name, Phone phone, Email email, HousingType housingType, ArrayList<House> houses, Set<Tag> tags) {
         super(name, phone, email, housingType, tags);
         this.houses = houses;
     }
