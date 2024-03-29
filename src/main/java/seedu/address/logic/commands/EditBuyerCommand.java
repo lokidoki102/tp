@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -109,10 +110,12 @@ public class EditBuyerCommand extends Command {
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
+        // TODO update budget
+        Budget updatedBudget = buyerToEdit.getBudget();
         String updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedHousingType,
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedHousingType, updatedBudget,
                 updatedTags);
     }
 
@@ -149,6 +152,7 @@ public class EditBuyerCommand extends Command {
         private Phone phone;
         private Email email;
         private String housingType;
+        private Budget budget;
         private Set<Tag> tags;
 
         public EditBuyerDescriptor() {
@@ -163,6 +167,7 @@ public class EditBuyerCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setHousingType(toCopy.housingType);
+            setBudget(toCopy.budget);
             setTags(toCopy.tags);
         }
 
@@ -195,6 +200,13 @@ public class EditBuyerCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+        public void setBudget(Budget budget) {
+            this.budget = budget;
+        }
+
+        public Optional<Budget> getBudget() {
+            return Optional.ofNullable(budget);
         }
 
         public void setHousingType(String housingType) {

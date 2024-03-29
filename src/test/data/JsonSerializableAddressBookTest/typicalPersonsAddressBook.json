@@ -114,21 +114,24 @@
   } ],
   "buyers" : [ {
     "name" : "Ben Ten",
-    "phone" : "22222222",
-    "email" : "bob@example.com",
+    "phone" : "33333333",
+    "email" : "ben@example.com",
     "housingType" : "Condominium",
+    "budget": "123000",
     "tags" : [ "friend", "husband" ]
   }, {
     "name" : "Zack York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
     "housingType" : "HDB",
+    "budget": "400000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Zane York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
     "housingType" : "HDB",
+    "budget": "500000",
     "tags" : [ "friends" ]
   } ]
 }

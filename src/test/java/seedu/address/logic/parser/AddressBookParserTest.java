@@ -40,7 +40,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addBuyer() throws Exception {
-        Person buyer = new BuyerBuilder().build();
+        Buyer buyer = new BuyerBuilder().build();
         AddBuyerCommand command = (AddBuyerCommand) parser.parseCommand(PersonUtil.getAddBuyerCommand(buyer));
         assertEquals(new AddBuyerCommand(buyer), command);
     }

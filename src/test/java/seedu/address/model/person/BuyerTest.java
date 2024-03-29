@@ -96,11 +96,10 @@ public class BuyerTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Buyer.class.getCanonicalName()
-                + "{name=" + ALI_BUYER.getName()
-                + ", phone=" + ALI_BUYER.getPhone()
-                + ", email=" + ALI_BUYER.getEmail()
-                + ", housingType=" + ALI_BUYER.getHousingType()
+        String expected = Buyer.class.getCanonicalName() + "{name="
+                + ALI_BUYER.getName() + ", phone=" + ALI_BUYER.getPhone()
+                + ", email=" + ALI_BUYER.getEmail() + ", housingType=" + ALI_BUYER.getHousingType()
+                + ", budget=" + ALI_BUYER.getBudget()
                 + ", tags=" + ALI_BUYER.getTags() + "}";
         assertEquals(expected, ALI_BUYER.toString());
     }

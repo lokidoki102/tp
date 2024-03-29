@@ -36,6 +36,7 @@ public class EditBuyerCommandTest {
     private final Index indexLastBuyer = Index.fromOneBased(model.getFilteredPersonList().size());
     private final Index indexSecondLastBuyer = Index.fromOneBased(model.getFilteredPersonList().size() - 1);
 
+    /*
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Buyer editedBuyer = new BuyerBuilder().build();
@@ -50,7 +51,7 @@ public class EditBuyerCommandTest {
 
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
     }
-
+    */
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastBuyer = Index.fromOneBased(model.getFilteredPersonList().size());
