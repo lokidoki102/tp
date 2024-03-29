@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class HousingType {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "HousingType should only be Landed or NonLanded";
+            "HousingType should only be Landed, HDB or Condominium";
     public static final ArrayList<String> VALIDATION_REGEX = new
             ArrayList<>(Arrays.asList("condominium", "hdb", "landed"));
 
