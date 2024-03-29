@@ -115,6 +115,18 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withBudget(VALID_BUDGET_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    public static final Buyer ZACK_BUYER = new BuyerBuilder().withName("Zack York")
+            .withPhone("82937163").withEmail("zack@gmail.com").withBudget("400000")
+            .withHousingType("HDB").withTags("friends").build();
+    public static final Buyer ZANE_BUYER = new BuyerBuilder().withName("Zane York")
+            .withPhone("82937163").withEmail("zack@gmail.com").withBudget("500000")
+            .withHousingType("HDB").withTags("friends").build();
+    public static final Buyer ZURI_BUYER = new BuyerBuilder().withName("Zuri")
+            .withPhone("63936234").withEmail("Zuri@gmail.com").withBudget("600000")
+            .withHousingType("HDB").withTags("someone").build();
+    public static final Buyer ZYRA_BUYER = new BuyerBuilder().withName("Zyra Moore")
+            .withPhone("82936234").withEmail("zyra@gmail.com").withBudget("700000")
+            .withHousingType("HDB").withTags("someone").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
@@ -144,8 +156,7 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         List<Person> typicalPersons = Arrays.asList(ALICE_SELLER, BEN_BUYER, BENSON_SELLER,
-                CARL_SELLER, DANIEL_SELLER, ELLE_SELLER, FIONA_SELLER, GEORGE_SELLER);
-
+                CARL_SELLER, DANIEL_SELLER, ELLE_SELLER, FIONA_SELLER, GEORGE_SELLER, ZACK_BUYER, ZANE_BUYER);
         List<Person> sortedTypicalPersons = typicalPersons.stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
                 .collect(Collectors.toList());
