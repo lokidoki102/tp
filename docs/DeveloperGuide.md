@@ -158,6 +158,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Edit Buyer/Seller feature
+
+#### Proposed Implementation
+
+The proposed edit buyer/seller mechanism allows user to edit a Buyer or Seller accordingly.
+Previously, AB3 only allows users to edit a Person, but since we have two types of Person,
+there's a need to separate out the requirements accordingly.
+
+#### Implementation Details
+- Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
+- The System, will then check if the target person type corresponds to the right command.
+  (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
+- It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
+- Once, the edit is successful, the json (storage) is also updated accordingly.
+
+#### Why It's Implemented That Way
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
 ### [Proposed] Matching Buyer feature
 
 #### Proposed Implementation
@@ -178,6 +196,92 @@ The Matching Buyer feature aims to facilitate the process of connecting buyers w
 #### Alternatives Considered
 - Alternative approaches, such as machine learning-based recommendation systems, were considered but deemed unnecessary for the current scope of the feature.
 - Additional matching criteria, such as location or amenities, were also contemplated, but it was decided to prioritize simplicity and clarity for the initial implementation.
+
+### \[Proposed\] Add seller feature
+
+#### Proposed Implementation
+
+The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
+This feature aims to facilitate the process of adding seller to EstateEase. Additionally, it implements the following operations:
+* `Seller#addHouse()` — Add a house to the seller list of houses.
+* `Seller#addHouse()` — Get a list of houses from the seller.
+
+Given below is an example usage scenario and how the add seller behaves at each step.
+
+Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+Step 2: The user executes the `addSeller n/David ...` command to add one `Seller` and one `House` in the `AddressBook`.
+
+Step 3: After the user add `Seller` to EstateEase, it will then be displayed in the list of `Person`.
+
+**Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+
+**Aspect: How `addSeller` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Seller`.
+    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * Cons: May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
+  itself.
+    * Pros: Having lesser commands is easier for the user to remember.
+    * Cons: Difficult to implement, having more prefixes means more validation.
+
+_{more aspects and alternatives to be added}_
+
+
+### \[Proposed\] Add House feature
+
+#### Proposed Implementation
+
+The proposed add house mechanism allows user to add a House.
+Previously, AB3 does not have a House implementation. Given that buyers and sellers will need to have Houses
+associated, there is a need to for an add House feature.
+
+#### Implementation Details
+- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level
+- or UnitNumber.
+- The System will then create a House associated with the Seller.
+- The House will be linked to the Seller for all further commands.
+
+#### Why It's Implemented That Way
+- The add house function allows houses to be easily added alongside Sellers, making it more convenient as compared
+- to adding separately.
+
+
+### \[Proposed\] Add buyer feature
+
+#### Proposed Implementation
+
+This feature aims to facilitate the process of adding buyer to EstateEase.
+
+Given below is an example usage scenario and how the add buyer behaves at each step.
+
+Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+Step 2: The user executes the `addBuyer n/Ben ...` command to add one `Buyer`.
+
+Step 3: After the user add `Buyer` to EstateEase, it will then be displayed in the list of `Person`.
+
+**Note:** If the `Buyer` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+
+**Aspect: How `addBuyer` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Buyer`.
+    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * Cons: May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
+  itself.
+    * Pros: Having lesser commands is easier for the user to remember.
+    * Cons: Difficult to implement, having more prefixes means more validation.
+
+_{more aspects and alternatives to be added}_
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -380,11 +484,11 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3f. EstateEase detects incorrect format for email in the entered data. <br>
     * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
       Use case resumes from step 2.
-  
+
 * 3g. EstateEase detects missing housing type in the entered data. <br>
     * 3g1. EstateEase shows an error message regarding missing housing type. <br>
       Use case resumes from step 2.
-  
+
 * 3h. EstateEase detects incorrect housing type in the entered data. <br>
     * 3h1. EstateEase shows an error message regarding the entry of incorrect of housing type. <br>
       Use case resumes from step 2.
@@ -443,7 +547,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3a. EstateEase detects missing name in the entered data. <br>
     * 3a1. EstateEase shows an error message regarding missing name. <br>
       Use case resumes from step 2.
-  
+
 * 3b. EstateEase detects duplicate name in the entered data. <br>
     * 3b1. EstateEase shows an error message regarding duplicate name. <br>
       Use case ends.
@@ -678,7 +782,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 * 1a. The given contact name does not match any contact names in the contact list.
     * 1a1. EstateEase shows an error message indicating no matches found.
-    
+
       Use case ends.
 
 
@@ -707,18 +811,18 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 1. User enters the command to view the specific seller's requirements.
 2. EstateEase processes the view command with home-seller as filter.
 3. EstateEase displays the home-seller's requirements.
-   
+
     Use case ends.
 
 **Extensions**
 
 * 2a. EstateEase detects an invalid name.
     * 2a1. EstateEase shows an error message regarding an invalid entry.
-      
+ 
       Use case ends.
 * 2b. Command does not match EstateEase's registered command spelling.
     * 2b1. EstateEase shows an error message regarding an invalid command.
-      
+
       Use case ends.
 
 
@@ -774,27 +878,27 @@ Use case ends.
 **Extensions**
 
 * 1a. The list is empty.
-  
+
   Use case ends.
 
 * 2a. The given index for the buyer is invalid input type.
     * 2a1. EstateEase shows an error message indicating the invalid input type.
-      
+
       Use case resumes at step 1.
 
 * 2b. The given index for the buyer is out of range.
     * 2b1. EstateEase shows an error message indicating the out of range for the index.
-      
+
       Use case resumes at step 1.
 
 * 3a. There are no sellers in the contact list.
     * 3a1. EstateEase shows a message indicating there is no sellers in the contact list.
-      
+
       Use case ends.
 
 * 3b. There are no matching properties based on the buyer's requirements.
     * 3b1. EstateEase shows a message indicating there is no matching results.
-      
+
       Use case ends.
 
 
@@ -829,7 +933,7 @@ Use case ends.
     * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
       Use case ends.
 
-      
+
 
 **Use case: UC16 - Differentiate home-seller status**
 
@@ -845,7 +949,7 @@ Use case ends.
 
 * 2a. Pending home-sellers are displayed in red.
   *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
-      
+
        Use case ends.
 
 * 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
@@ -858,9 +962,9 @@ Use case ends.
 **MSS:**
 
 1.  User requests to <u>view all contacts</u>.
-2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green, 
+2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green,
     and the home-buyers who are pending in finalizing a deal or done deal in red.
-    
+
     Use case ends.
 
 
@@ -870,7 +974,7 @@ Use case ends.
 
 1. User enters a remark regarding a client.
 2. EstateEase adds the provided remark to the client identified by the specified index.
-   
+
    Use case ends.
 
 **Extensions**
@@ -887,7 +991,7 @@ Use case ends.
 
 1. User enters the 'exit' command.
 2. EstateEase immediately closes the application.
-   
+
    Use case ends.
 
 **Extensions**
