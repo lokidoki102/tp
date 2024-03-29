@@ -35,8 +35,8 @@ public class EditBuyerCommand extends Command {
     // TODO: Allow command to edit the budget of the buyer, or any other field that's yet to be added.
     public static final String COMMAND_WORD = "editBuyer";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "
+            + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -50,7 +50,7 @@ public class EditBuyerCommand extends Command {
 
     public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Person(Buyer): %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in EstateEase.";
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a buyer.";
 
     private final Index index;
