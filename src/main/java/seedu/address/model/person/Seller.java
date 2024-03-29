@@ -23,7 +23,8 @@ public class Seller extends Person {
      * @param houses      The houses the seller has (modified to accept a list of houses)
      * @param tags        The tags associated with the seller.
      */
-    public Seller(Name name, Phone phone, Email email, HousingType housingType, ArrayList<House> houses, Set<Tag> tags) {
+    public Seller(Name name, Phone phone, Email email, HousingType housingType, ArrayList<House> houses,
+                  Set<Tag> tags) {
         super(name, phone, email, housingType, tags);
         this.houses = houses;
     }

@@ -18,7 +18,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.house.*;
+import seedu.address.model.house.Block;
+import seedu.address.model.house.House;
+import seedu.address.model.house.HousingType;
+import seedu.address.model.house.Landed;
+import seedu.address.model.house.Level;
+import seedu.address.model.house.NonLanded;
+import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Street;
+import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;

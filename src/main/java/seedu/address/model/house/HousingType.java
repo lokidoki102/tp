@@ -1,10 +1,10 @@
 package seedu.address.model.house;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
