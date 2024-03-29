@@ -69,5 +69,5 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Person 
 @enduml
