@@ -4,31 +4,37 @@ import seedu.address.commons.util.ToStringBuilder;
 
 
 /**
- * Represents a landed house.
+ * Represents a Condominium
  */
-class Landed implements House {
+class Condominium implements House {
 
     public final PostalCode postalCode;
     public final Street street;
     public final UnitNumber unitNumber;
+    public final Block block;
+    public final Level level;
 
     /**
-     * Constructs a Landed house.
+     * Constructs a HDB.
      *
      * @param unitNumber The unit number of the house.
      * @param postalCode The postal code of the house.
      * @param street     The street of the house.
+     * @param block      The block of the house.
+     * @param level      The level of the house.
      */
-    public Landed(UnitNumber unitNumber, PostalCode postalCode, Street street) {
+    public Condominium(UnitNumber unitNumber, PostalCode postalCode, Street street, Block block, Level level) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
+        this.block = block;
+        this.level = level;
     }
 
     /**
-     * Retrieves the unit number of the landed house.
+     * Retrieves the unit number of the HDB.
      *
-     * @return The unit number of the landed house.
+     * @return The unit number of the HDB.
      */
     @Override
     public UnitNumber getUnitNumber() {
@@ -36,9 +42,9 @@ class Landed implements House {
     }
 
     /**
-     * Retrieves the postal code of the landed house.
+     * Retrieves the postal code of the HDB.
      *
-     * @return The postal code of the landed house.
+     * @return The postal code of the HDB.
      */
     @Override
     public PostalCode getPostalCode() {
@@ -46,13 +52,31 @@ class Landed implements House {
     }
 
     /**
-     * Retrieves the street of the landed house.
+     * Retrieves the street of the HDB.
      *
-     * @return The street of the landed house.
+     * @return The street of the HDB.
      */
     @Override
     public Street getStreet() {
         return this.street;
+    }
+
+    /**
+     * Retrieves the block of the HDB.
+     *
+     * @return The block of the HDB.
+     */
+    public Block getBlock() {
+        return this.block;
+    }
+
+    /**
+     * Retrieves the level of the HDB.
+     *
+     * @return The level of the HDB.
+     */
+    public Level getLevel() {
+        return this.level;
     }
 
     /**
@@ -77,17 +101,19 @@ class Landed implements House {
     }
 
     /**
-     * Returns a string representation of the landed house.
+     * Returns a string representation of the hdb.
      *
-     * @return A string representation of the landed house.
+     * @return A string representation of the hdb.
      */
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this);
         // For now, it just appends the super class's toString method.
-        return "Landed House: " + builder.toString() + ", " + new ToStringBuilder(this)
-                .add("Unit Number", unitNumber)
+        return "HDB: " + builder.toString() + ", " + new ToStringBuilder(this)
                 .add("Street", street)
+                .add("Block", block)
+                .add("Level", level)
+                .add("Unit Number", unitNumber)
                 .add("Postal Code", postalCode)
                 .toString();
     }

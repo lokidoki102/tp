@@ -5,7 +5,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a non-landed house.
  */
-public class NonLanded extends House {
+public class NonLanded implements House {
 
     /** The block of the house. */
     public final Block block;
