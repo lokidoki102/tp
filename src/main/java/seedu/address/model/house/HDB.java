@@ -4,25 +4,31 @@ import seedu.address.commons.util.ToStringBuilder;
 
 
 /**
- * Represents a landed house.
+ * Represents a HDB.
  */
-class Landed implements House {
+class HDB implements House {
 
     public final PostalCode postalCode;
     public final Street street;
     public final UnitNumber unitNumber;
+    public final Block block;
+    public final Level level;
 
     /**
-     * Constructs a Landed house.
+     * Constructs a HDB.
      *
      * @param unitNumber The unit number of the house.
      * @param postalCode The postal code of the house.
      * @param street     The street of the house.
+     * @param block      The block of the house.
+     * @param level      The level of the house.
      */
-    public Landed(UnitNumber unitNumber, PostalCode postalCode, Street street) {
+    public HDB(UnitNumber unitNumber, PostalCode postalCode, Street street, Block block, Level level) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
+        this.block = block;
+        this.level = level;
     }
 
     @Override
@@ -78,4 +84,5 @@ class Landed implements House {
     }
 }
 
+}
 
