@@ -202,7 +202,7 @@ The Matching Buyer feature aims to facilitate the process of connecting buyers w
 #### Proposed Implementation
 
 The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
-This feature aims to facilitate the process of adding seller to the address book. Additionally, it implements the following operations:
+This feature aims to facilitate the process of adding seller to EstateEase. Additionally, it implements the following operations:
 * `Seller#addHouse()` — Add a house to the seller list of houses.
 * `Seller#addHouse()` — Get a list of houses from the seller.
 
@@ -212,7 +212,7 @@ Step 1: The user launches the application for the first time. The `AddressBook` 
 
 Step 2: The user executes the `addSeller n/David ...` command to add one `Seller` and one `House` in the `AddressBook`.
 
-Step 3: After the user add `Seller` to the address book, it will then be displayed in the list of `Person`.
+Step 3: After the user add `Seller` to EstateEase, it will then be displayed in the list of `Person`.
 
 **Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
 
@@ -231,6 +231,7 @@ Step 3: After the user add `Seller` to the address book, it will then be display
 
 _{more aspects and alternatives to be added}_
 
+
 ### \[Proposed\] Add House feature
 
 #### Proposed Implementation
@@ -248,6 +249,39 @@ associated, there is a need to for an add House feature.
 #### Why It's Implemented That Way
 - The add house function allows houses to be easily added alongside Sellers, making it more convenient as compared
 - to adding separately.
+
+
+### \[Proposed\] Add buyer feature
+
+#### Proposed Implementation
+
+This feature aims to facilitate the process of adding buyer to EstateEase. 
+
+Given below is an example usage scenario and how the add buyer behaves at each step.
+
+Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+Step 2: The user executes the `addBuyer n/Ben ...` command to add one `Buyer`.
+
+Step 3: After the user add `Buyer` to EstateEase, it will then be displayed in the list of `Person`.
+
+**Note:** If the `Buyer` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+
+**Aspect: How `addBuyer` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Buyer`.
+    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * Cons: May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
+  itself.
+    * Pros: Having lesser commands is easier for the user to remember.
+    * Cons: Difficult to implement, having more prefixes means more validation.
+
+_{more aspects and alternatives to be added}_
+
 
 ### \[Proposed\] Undo/redo feature
 
