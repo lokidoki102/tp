@@ -130,13 +130,13 @@ public class PersonUtil {
      * Returns the part of command string for the given {@code EditBuyerDescriptor}'s details.
      */
     public static String getEditBuyerDescriptorDetails(EditBuyerDescriptor descriptor) {
-        // TODO add budget
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getHousingType().ifPresent(housingType ->
                 sb.append(PREFIX_HOUSING_TYPE).append(housingType).append(" "));
+        descriptor.getBudget().ifPresent(budget -> sb.append(PREFIX_BUDGET).append(budget.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

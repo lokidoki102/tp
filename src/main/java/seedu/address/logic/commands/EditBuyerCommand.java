@@ -110,8 +110,7 @@ public class EditBuyerCommand extends Command {
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
-        // TODO update budget
-        Budget updatedBudget = buyerToEdit.getBudget();
+        Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
         String updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
@@ -250,6 +249,7 @@ public class EditBuyerCommand extends Command {
                     && Objects.equals(phone, otherEditDescriptor.phone)
                     && Objects.equals(email, otherEditDescriptor.email)
                     && Objects.equals(housingType, otherEditDescriptor.housingType)
+                    && Objects.equals(budget, otherEditDescriptor.budget)
                     && Objects.equals(tags, otherEditDescriptor.tags);
         }
 
@@ -260,6 +260,7 @@ public class EditBuyerCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("housingType", housingType)
+                    .add("budget", budget)
                     .add("tags", tags)
                     .toString();
         }
