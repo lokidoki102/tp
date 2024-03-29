@@ -158,6 +158,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Edit Buyer/Seller feature
+
+#### Proposed Implementation
+
+The proposed edit buyer/seller mechanism allows user to edit a Buyer or Seller accordingly.
+Previously, AB3 only allows users to edit a Person, but since we have two types of Person,
+there's a need to separate out the requirements accordingly.
+
+#### Implementation Details
+- Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
+- The System, will then check if the target person type corresponds to the right command. 
+  (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
+- It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
+- Once, the edit is successful, the json (storage) is also updated accordingly.
+
+#### Why It's Implemented That Way
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
