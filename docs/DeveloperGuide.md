@@ -168,7 +168,7 @@ there's a need to separate out the requirements accordingly.
 
 #### Implementation Details
 - Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
-- The System, will then check if the target person type corresponds to the right command. 
+- The System, will then check if the target person type corresponds to the right command.
   (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
 - It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
 - Once, the edit is successful, the json (storage) is also updated accordingly.
