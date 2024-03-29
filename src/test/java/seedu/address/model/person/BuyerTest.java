@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALI;
-import static seedu.address.testutil.TypicalPersons.BEN;
+import static seedu.address.testutil.TypicalPersons.ALI_BUYER;
+import static seedu.address.testutil.TypicalPersons.BEN_BUYER;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -22,83 +22,85 @@ public class BuyerTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person buyer = new BuyerBuilder().build();
+        Buyer buyer = new BuyerBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> buyer.getTags().remove(0));
     }
 
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALI.isSamePerson(ALI));
+        assertTrue(ALI_BUYER.isSamePerson(ALI_BUYER));
 
         // null -> returns false
-        assertFalse(ALI.isSamePerson(null));
+        assertFalse(ALI_BUYER.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAli = new BuyerBuilder(ALI).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAli = new BuyerBuilder(ALI_BUYER).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withHousingType(VALID_HOUSING_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALI.isSamePerson(editedAli));
+        assertTrue(ALI_BUYER.isSamePerson(editedAli));
 
         // different name, all other attributes same -> returns false
-        editedAli = new BuyerBuilder(ALI).withName(VALID_NAME_BEN).build();
-        assertFalse(ALI.isSamePerson(editedAli));
+        editedAli = new BuyerBuilder(ALI_BUYER).withName(VALID_NAME_BEN).build();
+        assertFalse(ALI_BUYER.isSamePerson(editedAli));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBen = new BuyerBuilder(BEN).withName(VALID_NAME_BEN.toLowerCase()).build();
-        assertFalse(BEN.isSamePerson(editedBen));
+        Person editedBen = new BuyerBuilder(BEN_BUYER).withName(VALID_NAME_BEN.toLowerCase()).build();
+        assertFalse(BEN_BUYER.isSamePerson(editedBen));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BEN + " ";
-        editedBen = new BuyerBuilder(BEN).withName(nameWithTrailingSpaces).build();
-        assertFalse(BEN.isSamePerson(editedBen));
+        editedBen = new BuyerBuilder(BEN_BUYER).withName(nameWithTrailingSpaces).build();
+        assertFalse(BEN_BUYER.isSamePerson(editedBen));
     }
 
     @Test
     public void equals() {
 
-        Person buyerAliCopy = new BuyerBuilder(ALI).build();
+        Person buyerAliCopy = new BuyerBuilder(ALI_BUYER).build();
 
         // same object -> returns true
-        assertTrue(ALI.equals(buyerAliCopy));
+        assertTrue(ALI_BUYER.equals(buyerAliCopy));
 
         // same object -> returns true
-        assertTrue(ALI.equals(ALI));
+        assertTrue(ALI_BUYER.equals(ALI_BUYER));
 
         // null -> returns false
-        assertFalse(ALI.equals(null));
+        assertFalse(ALI_BUYER.equals(null));
 
         // different type -> returns false
-        assertFalse(ALI.equals(5));
+        assertFalse(ALI_BUYER.equals(5));
 
         // different person -> returns false
-        assertFalse(ALI.equals(BOB));
+        assertFalse(ALI_BUYER.equals(BOB));
 
         // different name -> returns false
-        Person editedAli = new BuyerBuilder(ALI).withName(VALID_NAME_BOB).build();
-        assertFalse(ALI.equals(editedAli));
+        Person editedAli = new BuyerBuilder(ALI_BUYER).withName(VALID_NAME_BOB).build();
+        assertFalse(ALI_BUYER.equals(editedAli));
 
         // different phone -> returns false
-        editedAli = new BuyerBuilder(ALI).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALI.equals(editedAli));
+        editedAli = new BuyerBuilder(ALI_BUYER).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALI_BUYER.equals(editedAli));
 
         // different email -> returns false
-        editedAli = new BuyerBuilder(ALI).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALI.equals(editedAli));
+        editedAli = new BuyerBuilder(ALI_BUYER).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALI_BUYER.equals(editedAli));
 
         // different housingtype -> returns false
-        editedAli = new BuyerBuilder(ALI).withHousingType(VALID_HOUSING_TYPE_BOB).build();
-        assertFalse(ALI.equals(editedAli));
+        editedAli = new BuyerBuilder(ALI_BUYER).withHousingType(VALID_HOUSING_TYPE_BOB).build();
+        assertFalse(ALI_BUYER.equals(editedAli));
 
         // different tags -> returns false
-        editedAli = new BuyerBuilder(ALI).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALI.equals(editedAli));
+        editedAli = new BuyerBuilder(ALI_BUYER).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALI_BUYER.equals(editedAli));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Buyer.class.getCanonicalName() + "{name=" + ALI.getName() + ", phone=" + ALI.getPhone()
-                + ", email=" + ALI.getEmail() + ", housing type=" + ALI.getHousingType()
-                + ", tags=" + ALI.getTags() + "}";
-        assertEquals(expected, ALI.toString());
+        String expected = Buyer.class.getCanonicalName() + "{name="
+                + ALI_BUYER.getName() + ", phone=" + ALI_BUYER.getPhone()
+                + ", email=" + ALI_BUYER.getEmail() + ", housingType=" + ALI_BUYER.getHousingType()
+                + ", budget=" + ALI_BUYER.getBudget()
+                + ", tags=" + ALI_BUYER.getTags() + "}";
+        assertEquals(expected, ALI_BUYER.toString());
     }
 }

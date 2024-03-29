@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the
+[SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,6 +158,97 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Edit Buyer/Seller feature
+
+#### Proposed Implementation
+
+The proposed edit buyer/seller mechanism allows user to edit a Buyer or Seller accordingly.
+Previously, AB3 only allows users to edit a Person, but since we have two types of Person,
+there's a need to separate out the requirements accordingly.
+
+#### Implementation Details
+- Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
+- The System, will then check if the target person type corresponds to the right command. 
+  (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
+- It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
+- Once, the edit is successful, the json (storage) is also updated accordingly.
+
+#### Why It's Implemented That Way
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
+### [Proposed] Matching Buyer feature
+
+#### Proposed Implementation
+
+The Matching Buyer feature aims to facilitate the process of connecting buyers with suitable seller houses based on their housing type and budget.
+
+#### Implementation Details
+- Upon invoking the command `match [buyer_name]`, the system will identify the specified buyer by name.
+- It will then retrieve the buyer's housing type and budget from the database.
+- The system will compare these attributes with each available seller house's housing type and price.
+- Suitable matches will be determined based on compatibility, and a list of matched seller houses will be presented to the user.
+
+#### Why It's Implemented That Way
+- This implementation focuses on simplicity and efficiency by directly comparing buyer requirements with available seller houses.
+- Retrieving buyer information by name ensures personalized matching and ease of use.
+- By considering both housing type and budget, the system ensures that matched houses meet the buyer's specific criteria effectively.
+
+#### Alternatives Considered
+- Alternative approaches, such as machine learning-based recommendation systems, were considered but deemed unnecessary for the current scope of the feature.
+- Additional matching criteria, such as location or amenities, were also contemplated, but it was decided to prioritize simplicity and clarity for the initial implementation.
+
+### \[Proposed\] Add seller feature
+
+#### Proposed Implementation
+
+The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
+This feature aims to facilitate the process of adding seller to the address book. Additionally, it implements the following operations:
+* `Seller#addHouse()` — Add a house to the seller list of houses.
+* `Seller#addHouse()` — Get a list of houses from the seller.
+
+Given below is an example usage scenario and how the add seller behaves at each step.
+
+Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+Step 2: The user executes the `addSeller n/David ...` command to add one `Seller` and one `House` in the `AddressBook`.
+
+Step 3: After the user add `Seller` to the address book, it will then be displayed in the list of `Person`.
+
+**Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+
+**Aspect: How `addSeller` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Seller`.
+    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * Cons: May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
+  itself.
+    * Pros: Having lesser commands is easier for the user to remember.
+    * Cons: Difficult to implement, having more prefixes means more validation.
+
+_{more aspects and alternatives to be added}_
+
+### \[Proposed\] Add House feature
+
+#### Proposed Implementation
+
+The proposed add house mechanism allows user to add a House.
+Previously, AB3 does not have a House implementation. Given that buyers and sellers will need to have Houses
+associated, there is a need to for an add House feature.
+
+#### Implementation Details
+- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level 
+- or UnitNumber.
+- The System will then create a House associated with the Seller.
+- The House will be linked to the Seller for all further commands.
+
+#### Why It's Implemented That Way
+- The add house function allows houses to be easily added alongside Sellers, making it more convenient as compared
+- to adding separately.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -293,6 +384,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* * * *` | real estate agent           | delete the contact that I want to remove                                                      | remove outdated or irrelevant contacts                                       |
 | `* * * *` | real estate agent           | be able to exit the program when I want to                                                    | close the application                                                        |
 | `* * * *` | real estate agent           | be able to automatically save the data I added, changed, and deleted                          | load the data when I open the application, with the saved data, next time    |
+| `* * *`   | real estate agent           | keep track of my buyer's budget and the price of the houses                                   | better manage my client's requirement                                        |
+| `* * *`   | real estate agent           | match the buyer with sellers based on the buyer's requirements                                | quickly identify properties that align with the buyers' preferences          |
 | `* * *`   | real estate agent           | find for a specific contact                                                                   | access their details without scrolling through a long list                   |
 | `* * *`   | real estate agent           | easily update or modify existing contact information                                          | have accurate and up-to-date records                                         |
 | `* * *`   | real estate agent           | add new houses to the home-sellers                                                            | keep track of the houses the home-sellers have                               |
@@ -305,7 +398,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* *`     | forgetful real estate agent | link a buyer to sellers with the properties they are interested in buying                     | push them towards making a transaction                                       |
 | `*`       | busy real estate agent      | be able to add notes about clients when talking to them                                       | do not need to consolidate afterwards                                        |
 | `*`       | real estate agent           | differentiate between home-buyers who are looking for houses and finalizing a deal            | manage them effectively                                                      |
-| `*`       | real estate agent           | differentiate between home-sellers who are looking to sell their houses and finalizing a deal | manage them effectively.                                                     |
+| `*`       | real estate agent           | differentiate between home-sellers who are looking to sell their houses and finalizing a deal | manage them effectively                                                      |
 | `*`       | real estate agent           | see the priority of home-sellers after filtering out their selling requirements               | determine who I should prioritize in handling the transactions first         |
 
 

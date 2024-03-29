@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALI;
+import static seedu.address.testutil.TypicalPersons.ALI_BUYER;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -45,13 +45,14 @@ public class AddBuyerCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateBuyer_throwsCommandException() {
         Person validPerson = new BuyerBuilder().build();
         AddBuyerCommand addBuyerCommand = new AddBuyerCommand(validPerson);
         ModelStub modelStub = new ModelStubWithBuyer(validPerson);
-        assertThrows(CommandException.class, AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () ->
-                addBuyerCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () -> addBuyerCommand.execute(modelStub));
     }
+
     @Test
     public void equals() {
         Person ali = new BuyerBuilder().withName("Ali").build();
@@ -78,8 +79,8 @@ public class AddBuyerCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(ALI);
-        String expected = AddBuyerCommand.class.getCanonicalName() + "{buyerToAdd=" + ALI + "}";
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(ALI_BUYER);
+        String expected = AddBuyerCommand.class.getCanonicalName() + "{buyerToAdd=" + ALI_BUYER + "}";
         assertEquals(expected, addBuyerCommand.toString());
     }
 

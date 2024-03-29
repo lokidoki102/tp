@@ -12,6 +12,7 @@ Package Model as ModelPackage <<Rectangle>>{
     Class ModelManager
     Class UserPrefs
 
+<<<<<<< HEAD
     Class UniquePersonList
     Class Person
     Class Email
@@ -28,6 +29,28 @@ Package Model as ModelPackage <<Rectangle>>{
     Class NonLanded extends House
     Class Buyer extends Person
     Class Seller extends Person
+=======
+Class UniquePersonList
+Class Person
+Class Email
+Class Name
+Class Phone
+Class Tag
+Class PostalCode
+'@@author lokidoki102
+Class Street
+Class Level
+Class Block
+'@@author
+Class UnitNumber
+Class Buyer extends Person
+Class Seller extends Person
+Class House
+Class Condo implements House
+Class HDB implements House
+Class Landed implements House
+Class Budget
+>>>>>>> 4295d66cb871d9743a0f8df8c56a0ea191814e05
 
     Class I #FFFFFF
 }
@@ -53,10 +76,18 @@ Person *--> "*" Tag
 House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
+<<<<<<< HEAD
 NonLanded *--> Block
 NonLanded *--> Level
 Buyer "0..1" *-- House : has
 Seller "1" -- House : owns
+=======
+Seller *--> "1..*" House : sells
+Buyer *--> "*" House : buy
+Buyer *--> Budget
+Buyer *--> InterestedHousingType
+
+>>>>>>> 4295d66cb871d9743a0f8df8c56a0ea191814e05
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
