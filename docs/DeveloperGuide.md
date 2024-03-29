@@ -179,6 +179,40 @@ The Matching Buyer feature aims to facilitate the process of connecting buyers w
 - Alternative approaches, such as machine learning-based recommendation systems, were considered but deemed unnecessary for the current scope of the feature.
 - Additional matching criteria, such as location or amenities, were also contemplated, but it was decided to prioritize simplicity and clarity for the initial implementation.
 
+### \[Proposed\] Add seller feature
+
+#### Proposed Implementation
+
+The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
+This feature aims to facilitate the process of adding seller to the address book. Additionally, it implements the following operations:
+* `Seller#addHouse()` — Add a house to the seller list of houses.
+* `Seller#addHouse()` — Get a list of houses from the seller.
+
+Given below is an example usage scenario and how the add seller behaves at each step.
+
+Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+Step 2: The user executes the `addSeller n/David ...` command to add one `Seller` and one `House` in the `AddressBook`.
+
+Step 3: After the user add `Seller` to the address book, it will then be displayed in the list of `Person`.
+
+**Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+
+**Aspect: How `addSeller` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Seller`.
+    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * Cons: May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
+  itself.
+    * Pros: Having lesser commands is easier for the user to remember.
+    * Cons: Difficult to implement, having more prefixes means more validation.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
