@@ -14,6 +14,7 @@ import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,13 +29,13 @@ public class SampleDataUtil {
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"),
-                        new Email("alexyeoh@example.com"), "HDB",
+                        new Email("alexyeoh@example.com"), "HDB", new Budget("100000"),
                         getTagSet("friends")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"),
-                        new Email("berniceyu@example.com"), "Condominium",
+                        new Email("berniceyu@example.com"), "Condominium", new Budget("200000"),
                         getTagSet("colleagues", "friends")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                        new Email("charlotte@example.com"), "HDB",
+                        new Email("charlotte@example.com"), "HDB", new Budget("300000"),
                         getTagSet("neighbours")),
         };
     }

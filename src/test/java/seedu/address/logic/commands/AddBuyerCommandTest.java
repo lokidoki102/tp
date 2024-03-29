@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALI;
+import static seedu.address.testutil.TypicalPersons.ALI_BUYER;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -79,8 +79,8 @@ public class AddBuyerCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(ALI);
-        String expected = AddBuyerCommand.class.getCanonicalName() + "{buyerToAdd=" + ALI + "}";
+        AddBuyerCommand addBuyerCommand = new AddBuyerCommand(ALI_BUYER);
+        String expected = AddBuyerCommand.class.getCanonicalName() + "{buyerToAdd=" + ALI_BUYER + "}";
         assertEquals(expected, addBuyerCommand.toString());
     }
 
