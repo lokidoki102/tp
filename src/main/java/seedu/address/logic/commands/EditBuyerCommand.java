@@ -10,14 +10,17 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.logging.Logger;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -52,6 +55,8 @@ public class EditBuyerCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in EstateEase.";
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a buyer.";
+    private final Logger logger = LogsCenter.getLogger(EditBuyerCommand.class);
+
 
     private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
@@ -70,6 +75,7 @@ public class EditBuyerCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("----------------[EDIT BUYER] executing edit command");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -77,6 +83,7 @@ public class EditBuyerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         if (!(lastShownList.get(index.getZeroBased()) instanceof Buyer)) {
+            logger.info("----------------[EDIT BUYER] target person is not a buyer");
             throw new CommandException(MESSAGE_WRONG_TYPE);
         }
 
