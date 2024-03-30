@@ -7,7 +7,7 @@ package seedu.address.model.house;
 public interface House {
     // I think we should take note this part, I believe that we should separate out House and Housing Type
     public static final String MESSAGE_CONSTRAINTS = "Housing types can only be Hdb, Condominium or Landed.";
-    public static final String[] VALIDATION_REGEX = {"HDB", "Condominium", "Landed"};
+    public static final String[] VALIDATION_REGEX = {"Hdb", "Condominium", "Landed"};
 
     /**
      * Retrieves the unit number of the house.
