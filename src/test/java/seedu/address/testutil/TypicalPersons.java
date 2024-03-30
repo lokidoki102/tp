@@ -74,7 +74,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withHouses(new Hdb(new Level("21"), new PostalCode("654326"),
                     new Street("Orchard Street 5"), new UnitNumber("150"), new Block("10F"))).build();
     public static final Buyer ALICE_BUYER = new BuyerBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("heinz@example.com").withBudget("333000").withHousingType("HDB").build();
+            .withEmail("heinz@example.com").withBudget("333000").withHousingType("Hdb").build();
 
     // Manually added
     public static final Seller HOON_SELLER = new SellerBuilder().withName("Hoon Meier").withPhone("8482424")
