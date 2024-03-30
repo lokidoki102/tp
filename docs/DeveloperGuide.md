@@ -1071,4 +1071,3 @@ testers are expected to do more *exploratory* testing.
         - _{Explain how to simulate a missing or corrupted data file during saving, and the expected behavior}_
 
 3. _{ more test cases …​ }_
-4. 
