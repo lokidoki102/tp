@@ -6,15 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalHouses.HOUSE1;
@@ -95,6 +99,11 @@ public class TypicalPersons {
             .withHousingType(VALID_HOUSING_TYPE_AMY).withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withTags(VALID_TAG_FRIEND).withHouses(HOUSE2).build();
+
+    public static final Seller KHOONSUN_SELLER = new SellerBuilder().withName(VALID_NAME_KHOONSUN)
+            .withHousingType(VALID_HOUSING_TYPE_KHOONSUN).withEmail(VALID_EMAIL_KHOONSUN)
+            .withPhone(VALID_PHONE_KHOONSUN)
+            .withTags(VALID_TAG_FRIEND).withHouses(HOUSE1).build();
 
     public static final Seller BOB_SELLER = new SellerBuilder().withName(VALID_NAME_BOB)
             .withHousingType(VALID_HOUSING_TYPE_BOB).withEmail(VALID_EMAIL_BOB)

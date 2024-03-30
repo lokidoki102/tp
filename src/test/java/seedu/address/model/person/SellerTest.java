@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -13,6 +14,7 @@ import static seedu.address.testutil.TypicalHouses.HOUSE2;
 import static seedu.address.testutil.TypicalHouses.HOUSE3;
 import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
 import static seedu.address.testutil.TypicalPersons.BOB_SELLER;
+import static seedu.address.testutil.TypicalPersons.KHOONSUN_SELLER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,9 +53,10 @@ public class SellerTest {
         assertFalse(BOB_SELLER.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new SellerBuilder(BOB_SELLER).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB_SELLER.isSamePerson(editedBob));
+        String nameWithTrailingSpaces = VALID_NAME_KHOONSUN + " ";
+        editedBob = new SellerBuilder(KHOONSUN_SELLER).withName(nameWithTrailingSpaces).build();
+        assertFalse(KHOONSUN_SELLER.isSamePerson(editedBob));
+
     }
 
     @Test
