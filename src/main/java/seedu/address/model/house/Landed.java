@@ -68,12 +68,12 @@ public class Landed implements House {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof House)) {
+        if (!(other instanceof Landed)) {
             return false;
         }
 
-        House otherStreet = (House) other;
-        return this.toString().equals(otherStreet.toString());
+        House otherLanded = (House) other;
+        return this.toString().equals(otherLanded.toString());
     }
 
     /**
