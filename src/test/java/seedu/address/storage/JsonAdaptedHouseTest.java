@@ -79,7 +79,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_nullStreet_throwsIllegalValueException() {
-            JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 VALID_POSTAL_CODE, null, VALID_UNIT_NUMBER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 Street.class.getSimpleName());
