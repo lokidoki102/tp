@@ -108,7 +108,7 @@ public class JsonAdaptedHouse {
             } else {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
             }
-        } else if ("Hdb".equals(type)) {
+        } else if ("hdb".equalsIgnoreCase(type)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
             return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
