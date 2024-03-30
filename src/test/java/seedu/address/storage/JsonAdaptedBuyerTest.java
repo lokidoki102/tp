@@ -91,7 +91,7 @@ public class JsonAdaptedBuyerTest {
         JsonAdaptedBuyer buyer =
                 new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_HOUSING_TYPE,
                         VALID_BUDGET, VALID_TAGS);
-        String expectedMessage = "Housing types can only be HDB, Condominium or Landed.";
+        String expectedMessage = "Housing types can only be Hdb, Condominium or Landed.";
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 
