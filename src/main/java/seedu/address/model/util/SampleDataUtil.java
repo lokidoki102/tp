@@ -31,13 +31,13 @@ public class SampleDataUtil {
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"),
-                        new Email("alexyeoh@example.com"), new HousingType("HDB"), new Budget("100000"),
+                        new Email("alexyeoh@example.com"), new HousingType("Hdb"), new Budget("100000"),
                         getTagSet("friends")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"),
                         new Email("berniceyu@example.com"), new HousingType("Condominium"), new Budget("200000"),
                         getTagSet("colleagues", "friends")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                        new Email("charlotte@example.com"), new HousingType("HDB"), new Budget("300000"),
+                        new Email("charlotte@example.com"), new HousingType("Hdb"), new Budget("300000"),
                         getTagSet("neighbours")),
         };
     }
