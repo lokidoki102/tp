@@ -108,12 +108,12 @@ public class Condominium implements House {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof House)) {
+        if (!(other instanceof Condominium)) {
             return false;
         }
 
-        House otherStreet = (House) other;
-        return this.toString().equals(otherStreet.toString());
+        House otherCondominium = (House) other;
+        return this.toString().equals(otherCondominium.toString());
     }
 
     /**

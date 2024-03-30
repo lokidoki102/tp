@@ -92,12 +92,12 @@ public class Hdb implements House {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof House)) {
+        if (!(other instanceof Hdb)) {
             return false;
         }
 
-        House otherStreet = (House) other;
-        return this.toString().equals(otherStreet.toString());
+        House otherHdb = (House) other;
+        return this.toString().equals(otherHdb.toString());
     }
 
     /**
