@@ -19,7 +19,8 @@ public class JsonAdaptedHouseTest {
     private static final String INVALID_POSTAL_CODE = "Postal";
     private static final String INVALID_STREET = "";
     private static final String INVALID_UNIT_NUMBER = "Unit 23";
-    private static final String VALID_TYPE_NON_LANDED = "NonLanded";
+    private static final String VALID_TYPE_CONDOMINIUM = "Condominium";
+    private static final String VALID_TYPE_HDB = "Hdb";
     private static final String VALID_TYPE_LANDED = "Landed";
     private static final String VALID_BLOCK = "10A";
     private static final String VALID_LEVEL = "15";
@@ -28,8 +29,8 @@ public class JsonAdaptedHouseTest {
     private static final String VALID_UNIT_NUMBER = "150";
 
     @Test
-    public void toModelType_validCondominiumDetails_returnsHouse() throws Exception {
-        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_NON_LANDED, VALID_BLOCK,
+    public void toModelType_validCondominiumDetails_returnsCondominium() throws Exception {
+        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_CONDOMINIUM, VALID_BLOCK,
                 VALID_LEVEL, VALID_POSTAL_CODE,
                 VALID_STREET, VALID_UNIT_NUMBER);
         Condominium expectedHouse = new Condominium(new Level(VALID_LEVEL),
@@ -39,8 +40,8 @@ public class JsonAdaptedHouseTest {
     }
 
     @Test
-    public void toModelType_validHdbDetails_returnsHouse() throws Exception {
-        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_NON_LANDED, VALID_BLOCK,
+    public void toModelType_validHdbDetails_returnsHdb() throws Exception {
+        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_HDB, VALID_BLOCK,
                 VALID_LEVEL, VALID_POSTAL_CODE,
                 VALID_STREET, VALID_UNIT_NUMBER);
         Hdb expectedHouse = new Hdb(new Level(VALID_LEVEL),
@@ -50,7 +51,7 @@ public class JsonAdaptedHouseTest {
     }
 
     @Test
-    public void toModelType_validLandedDetails_returnsHouse() throws Exception {
+    public void toModelType_validLandedDetails_returnsLanded() throws Exception {
         JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_LANDED, null, null,
                 VALID_POSTAL_CODE, VALID_STREET, VALID_UNIT_NUMBER);
         Landed expectedHouse = new Landed(new UnitNumber(VALID_UNIT_NUMBER),
@@ -60,8 +61,8 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_nullPostalCode_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
-                null, VALID_STREET, VALID_UNIT_NUMBER);
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
+                null, VALID_STREET, VALID_UNIT_NUMER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 PostalCode.class.getSimpleName());
         assertThrows(IllegalValueException.class, house::toModelType, expectedMessage);
@@ -69,7 +70,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_invalidPostalCode_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 INVALID_POSTAL_CODE, VALID_STREET, VALID_UNIT_NUMBER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 PostalCode.class.getSimpleName());
@@ -78,7 +79,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_nullStreet_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
+            JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 VALID_POSTAL_CODE, null, VALID_UNIT_NUMBER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 Street.class.getSimpleName());
@@ -87,7 +88,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_invalidStreet_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 VALID_POSTAL_CODE, INVALID_STREET, VALID_UNIT_NUMBER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 Street.class.getSimpleName());
@@ -96,7 +97,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_nullUnitNumber_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 VALID_POSTAL_CODE, VALID_STREET, null);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 UnitNumber.class.getSimpleName());
@@ -105,7 +106,7 @@ public class JsonAdaptedHouseTest {
 
     @Test
     public void toModelType_invalidUnitNumber_throwsIllegalValueException() {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", VALID_BLOCK, VALID_LEVEL,
+        JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
                 VALID_POSTAL_CODE, VALID_STREET, INVALID_UNIT_NUMBER);
         String expectedMessage = UnitNumber.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, house::toModelType, expectedMessage);
@@ -120,8 +121,8 @@ public class JsonAdaptedHouseTest {
     }
 
     @Test
-    public void toModelType_condominiumNoBlockWithLevel_returnsNonLandedHouse() throws Exception {
-        JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", null, VALID_LEVEL,
+    public void toModelType_condominiumNoBlockWithLevel_returnsCondominium() throws Exception {
+        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_CONDOMINIUM, null, VALID_LEVEL,
                 VALID_POSTAL_CODE, VALID_STREET, VALID_UNIT_NUMBER);
         Condominium expectedHouse = new Condominium(new Level(VALID_LEVEL), new PostalCode(VALID_POSTAL_CODE),
                 new Street(VALID_STREET), new UnitNumber(VALID_UNIT_NUMBER));

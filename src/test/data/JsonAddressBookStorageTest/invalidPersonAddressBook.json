@@ -3,9 +3,9 @@
     "name" : "Person with invalid name field: Ha!ns Mu@ster",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "housingType" : "HDB",
+    "housingType" : "Hdb",
     "houses" : [ {
-      "type" : "NonLanded",
+      "type" : "Hdb",
       "block" : "311",
       "level" : "02",
       "postalCode" : "578578",
