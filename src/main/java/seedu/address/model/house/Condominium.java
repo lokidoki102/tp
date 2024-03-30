@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a Condominium
  */
-class Condominium implements House {
+public class Condominium implements House {
 
     public final PostalCode postalCode;
     public final Street street;
@@ -15,7 +15,7 @@ class Condominium implements House {
     public final Level level;
 
     /**
-     * Constructs a HDB.
+     * Constructs a Condominium.
      *
      * @param unitNumber The unit number of the house.
      * @param postalCode The postal code of the house.
@@ -23,7 +23,7 @@ class Condominium implements House {
      * @param block      The block of the house.
      * @param level      The level of the house.
      */
-    public Condominium(UnitNumber unitNumber, PostalCode postalCode, Street street, Block block, Level level) {
+    public Condominium(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber, Block block) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
@@ -31,10 +31,18 @@ class Condominium implements House {
         this.level = level;
     }
 
+    public Condominium(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber) {
+        this.postalCode = postalCode;
+        this.street = street;
+        this.unitNumber = unitNumber;
+        this.block = new Block("N/A");
+        this.level = level;
+    }
+
     /**
-     * Retrieves the unit number of the HDB.
+     * Retrieves the unit number of the Condominium.
      *
-     * @return The unit number of the HDB.
+     * @return The unit number of the Condominium.
      */
     @Override
     public UnitNumber getUnitNumber() {
@@ -42,9 +50,9 @@ class Condominium implements House {
     }
 
     /**
-     * Retrieves the postal code of the HDB.
+     * Retrieves the postal code of the Condominium.
      *
-     * @return The postal code of the HDB.
+     * @return The postal code of the Condominium.
      */
     @Override
     public PostalCode getPostalCode() {
@@ -52,9 +60,9 @@ class Condominium implements House {
     }
 
     /**
-     * Retrieves the street of the HDB.
+     * Retrieves the street of the Condominium.
      *
-     * @return The street of the HDB.
+     * @return The street of the Condominium.
      */
     @Override
     public Street getStreet() {
@@ -62,18 +70,18 @@ class Condominium implements House {
     }
 
     /**
-     * Retrieves the block of the HDB.
+     * Retrieves the block of the Condominium.
      *
-     * @return The block of the HDB.
+     * @return The block of the Condominium.
      */
     public Block getBlock() {
         return this.block;
     }
 
     /**
-     * Retrieves the level of the HDB.
+     * Retrieves the level of the Condominium.
      *
-     * @return The level of the HDB.
+     * @return The level of the Condominium.
      */
     public Level getLevel() {
         return this.level;

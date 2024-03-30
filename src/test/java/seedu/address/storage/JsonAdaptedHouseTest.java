@@ -9,7 +9,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;

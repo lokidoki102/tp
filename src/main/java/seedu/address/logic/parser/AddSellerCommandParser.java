@@ -19,11 +19,12 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.HDB;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
@@ -71,14 +72,19 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNITNUMBER).get());
 
         // Non-landed unit: Has Block, Has Level
-        if (hasBlock && hasLevel) {
+        if (housingType.toString().toLowerCase().equals("hdb")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new NonLanded(block, level, postalCode, street, unitNumber));
+            houses.add(new HDB(level, postalCode, street, unitNumber, block));
+            // Non-landed unit: Has No Block, Has Level
+        } else if (housingType.toString().toLowerCase().equals("condominium")) {
+            Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
+            Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
+            houses.add(new Condominium(level, postalCode, street, unitNumber, block));
             // Non-landed unit: Has No Block, Has Level
         } else if (!hasBlock && hasLevel) {
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new NonLanded(level, postalCode, street, unitNumber));
+            houses.add(new Condominium(level, postalCode, street, unitNumber));
             // Landed unit: Has No Block, Has No Level
         } else {
             houses.add(new Landed(unitNumber, postalCode, street));

@@ -8,10 +8,11 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.HDB;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
@@ -43,16 +44,16 @@ public class SampleDataUtil {
 
     public static Seller[] getSampleSellers() {
         ArrayList<House> davidLiHouses = new ArrayList<>();
-        davidLiHouses.add(new NonLanded(new Block("51"), new Level("3"), new PostalCode("098703"),
-                new Street("Ang Mo Kio Avenue 1"), new UnitNumber("02")));
+        davidLiHouses.add(new HDB(new Level("3"), new PostalCode("098703"),
+                new Street("Ang Mo Kio Avenue 1"), new UnitNumber("02"), new Block("51")));
         ArrayList<House> irfanHouses = new ArrayList<>();
-        irfanHouses.add(new NonLanded(new Block("52"), new Level("4"), new PostalCode("098713"),
-                new Street("Ang Mo Kio Avenue 2"), new UnitNumber("03")));
+        irfanHouses.add(new Condominium(new Level("4"), new PostalCode("098713"),
+                new Street("Ang Mo Kio Avenue 2"), new UnitNumber("03"), new Block("52")));
         ArrayList<House> royHouses = new ArrayList<>();
-        royHouses.add(new NonLanded(new Block("53"), new Level("5"), new PostalCode("098723"),
-                new Street("Ang Mo Kio Avenue 3"), new UnitNumber("04")));
-        royHouses.add(new NonLanded(new Block("54"), new Level("6"), new PostalCode("098724"),
-                new Street("Toa Payoh Avenue 4"), new UnitNumber("05")));
+        royHouses.add(new HDB(new Level("5"), new PostalCode("098723"),
+                new Street("Ang Mo Kio Avenue 3"), new UnitNumber("04"), new Block("53")));
+        royHouses.add(new HDB(new Level("6"), new PostalCode("098724"),
+                new Street("Toa Payoh Avenue 4"), new UnitNumber("05"), new Block("54")));
 
         return new Seller[] {
             new Seller(new Name("David Li"), new Phone("91031282"),

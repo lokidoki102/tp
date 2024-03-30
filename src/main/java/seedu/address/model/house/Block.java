@@ -31,6 +31,9 @@ public class Block {
      * Returns true if a given string is a valid block number.
      */
     public static boolean isValidBlock(String test) {
+        if (test.equals("N/A")) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX) && !test.matches(ZERO_REGEX) && !test.matches(ZERO_AND_ALPHABET_REGEX);
     }
 

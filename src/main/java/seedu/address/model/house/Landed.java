@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a landed house.
  */
-class Landed implements House {
+public class Landed implements House {
 
     public final PostalCode postalCode;
     public final Street street;
