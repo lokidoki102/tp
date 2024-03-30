@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # EstateEase Developer Guide
@@ -216,6 +216,22 @@ Step 3: After the user add `Seller` to EstateEase, it will then be displayed in 
 
 **Note:** If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
 
+The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" />
+
+Similarly, how an `addSeller` operation goes through the `Model` component:
+
+<puml src="diagrams/AddSellerSequenceDiagram-Model.puml" alt="AddSellerSequenceDiagram-Model" />
+
+Similarly, how an `addSeller` operation goes through the `Storage` component:
+
+<puml src="diagrams/AddSellerSequenceDiagram-Model.puml" alt="AddSellerSequenceDiagram-Model" />
+
+The following activity diagram summarizes what happens when a user executes the `addSeller` command
+
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="250" />
+
 #### Design Considerations
 
 **Aspect: How `addSeller` executes:**
@@ -230,7 +246,6 @@ Step 3: After the user add `Seller` to EstateEase, it will then be displayed in 
     * Cons: Difficult to implement, having more prefixes means more validation.
 
 _{more aspects and alternatives to be added}_
-
 
 ### \[Proposed\] Add House feature
 
@@ -366,13 +381,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -448,22 +463,19 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 2. EstateEase requests for the details of the home-seller.
 3. User enters the requested details.
 4. EstateEase adds the home-seller and displays the newly added home-seller. <br>
-    Use case ends.
+   Use case ends.
 
-**Precondition for Extension 3i:** EstateEase has received the details of the home-seller from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the housing type is HDB/Condo.
+**Precondition for Extension 3g:** EstateEase has received the details of the home-seller from the user. <br>
+**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the house is HDB/Condo.
 
-**Precondition for Extension 3k and 3l:** EstateEase has received the details of the home-seller from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the housing type is HDB/Condo.
-
-**Precondition for Extension 3i, 3j, 3k, 3l, 3m, 3n:** EstateEase has received the details of the home-seller from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects missing block number, street name, unit number and postal code in the entered data when he is a home-seller.
+**Precondition for Extension 3i and 3j:** EstateEase has received the details of the home-seller from the user. <br>
+**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the house is HDB/Condo.
 
 **Extensions**
 
 * 3a. EstateEase detects missing name in the entered data. <br>
     * 3a1. EstateEase shows an error message regarding missing name. <br>
-  Use case resumes from step 2.
+      Use case resumes from step 2.
 
 * 3b. EstateEase detects duplicate name in the entered data. <br>
     * 3b1. EstateEase shows an error message regarding duplicate name. <br>
@@ -485,48 +497,36 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
       Use case resumes from step 2.
 
-* 3g. EstateEase detects missing housing type in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding missing housing type. <br>
+* 3g. EstateEase detects missing block number in the entered data. <br>
+    * 3g1. EstateEase shows an error message regarding missing block number. <br>
       Use case resumes from step 2.
 
-* 3h. EstateEase detects incorrect housing type in the entered data. <br>
-    * 3h1. EstateEase shows an error message regarding the entry of incorrect of housing type. <br>
+* 3h. EstateEase detects missing street name in the entered data. <br>
+    * 3h1. EstateEase shows an error message regarding missing street name. <br>
       Use case resumes from step 2.
 
-* 3i. EstateEase detects missing block number in the entered data. <br>
-    * 3i1. EstateEase shows an error message regarding missing block number. <br>
+* 3i. EstateEase detects missing unit number in the entered data. <br>
+    * 3i1. EstateEase shows an error message regarding missing unit number. <br>
       Use case resumes from step 2.
 
-* 3j. EstateEase detects missing street name in the entered data. <br>
-    * 3j1. EstateEase shows an error message regarding missing street name. <br>
+* 3j. EstateEase detects incorrect format for unit number in the entered data. <br>
+    * 3j1. EstateEase shows an error message regarding incorrect format for unit number. <br>
       Use case resumes from step 2.
 
-* 3k. EstateEase detects missing unit number in the entered data. <br>
-    * 3k1. EstateEase shows an error message regarding missing unit number. <br>
+* 3k. EstateEase detects missing postal code in the entered data. <br>
+    * 3k1. EstateEase shows an error message regarding missing postal code. <br>
       Use case resumes from step 2.
 
-* 3l. EstateEase detects incorrect format for unit number in the entered data. <br>
-    * 3l1. EstateEase shows an error message regarding incorrect format for unit number. <br>
+* 3l. EstateEase detects incorrect format for postal code in the entered data. <br>
+    * 3l1. EstateEase shows an error message regarding incorrect format for postal code. <br>
       Use case resumes from step 2.
 
-* 3m. EstateEase detects missing postal code in the entered data. <br>
-    * 3m1. EstateEase shows an error message regarding missing postal code. <br>
+* 3m. EstateEase detects missing house price in the entered data. <br>
+    * 3m1. EstateEase shows an error message regarding missing house price. <br>
       Use case resumes from step 2.
 
-* 3n. EstateEase detects incorrect format for postal code in the entered data. <br>
-    * 3n1. EstateEase shows an error message regarding incorrect format for postal code. <br>
-      Use case resumes from step 2.
-
-* 3o. EstateEase detects missing role in the entered data. <br>
-    * 3o1. EstateEase shows an error message regarding missing role. <br>
-      Use case resumes from step 2.
-
-* 3p. EstateEase detects incorrect role in the entered data. <br>
-    * 3p1. EstateEase shows an error message regarding the entry of incorrect role. <br>
-      Use case resumes from step 2.
-
-* 3q. EstateEase detects incorrect priority level in the entered data. <br>
-    * 3q1. EstateEase shows an error message regarding the entry of incorrect priority level. <br>
+* 3n. EstateEase detects incorrect format for house price in the entered data. <br>
+    * 3n1. EstateEase shows an error message regarding incorrect format for house price. <br>
       Use case resumes from step 2.
 
 **Use case: UC02 - Add a home-buyer to contact list**
@@ -539,9 +539,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 4. EstateEase adds the home-buyer and displays the newly added home-buyer. <br>
    Use case ends.
 
-**Precondition for Extension 3i:** EstateEase has received the details of the home-buyer from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects block number, street name, unit number and postal code in the entered data when he is a home-buyer.
-
 **Extensions**
 
 * 3a. EstateEase detects missing name in the entered data. <br>
@@ -568,24 +565,12 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3f1. EstateEase shows an error message regarding incorrect format for email. <br>
       Use case resumes from step 2.
 
-* 3g. EstateEase detects missing housing type (requirement for filter) in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding missing housing type. <br>
+* 3g. EstateEase detects incorrect format for interested housing type in the entered data. <br>
+    * 3g1. EstateEase shows an error message regarding incorrect format for interested housing type. <br>
       Use case resumes from step 2.
 
-* 3h. EstateEase detects incorrect housing type (requirement for filter) in the entered data. <br>
-    * 3h1. EstateEase shows an error message regarding the entry of incorrect of housing type. <br>
-      Use case resumes from step 2.
-
-* 3i. EstateEase detects block number, street name, unit number and postal code in the entered data. <br>
-    * 3i1. EstateEase shows an error message regarding the entry of housing details because home-buyer should not have a home yet. <br>
-      Use case resumes from step 2.
-
-* 3j. EstateEase detects missing role in the entered data. <br>
-    * 3j1. EstateEase shows an error message regarding missing role. <br>
-      Use case resumes from step 2.
-
-* 3k. EstateEase detects incorrect role in the entered data. <br>
-    * 3k1. EstateEase shows an error message regarding the entry of incorrect role. <br>
+* 3g. EstateEase detects missing interested housing type in the entered data. <br>
+    * 3g1. EstateEase shows an error message regarding missing interested housing type. <br>
       Use case resumes from step 2.
 
 **Use case: UC03 - Add more houses to home-seller**
@@ -598,11 +583,11 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 4. EstateEase adds the new house and displays the newly added house of the home-seller. <br>
    Use case ends.
 
-**Precondition for Extension 3i:** EstateEase has received the details of the house from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the housing type is HDB/Condo.
+**Precondition for Extension 3d:** EstateEase has received the details of the house from the user. <br>
+**Trigger:** EstateEase validates the entered details and detects that the block number is missing when the house is HDB/Condo.
 
-**Precondition for Extension 3k and 3l:** EstateEase has received the details of the house from the user. <br>
-**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the housing type is HDB/Condo.
+**Precondition for Extension 3f and 3g:** EstateEase has received the details of the house from the user. <br>
+**Trigger:** EstateEase validates the entered details and detects that the unit number is missing when the house is HDB/Condo.
 
 **Extensions**
 * 1a. The contact list does not have any home-seller. <br>
@@ -621,38 +606,37 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3c1. EstateEase shows an error message regarding home can only be attached to home-seller, instead of home-buyer. <br>
       Use case resumes from step 2.
 
-* 3d. EstateEase detects missing housing type in the entered data. <br>
-    * 3d1. EstateEase shows an error message regarding missing housing type. <br>
+* 3d. EstateEase detects missing block number in the entered data. <br>
+    * 3d1. EstateEase shows an error message regarding missing block number. <br>
       Use case resumes from step 2.
 
-* 3e. EstateEase detects incorrect housing type in the entered data. <br>
-    * 3e1. EstateEase shows an error message regarding the entry of incorrect of housing type. <br>
+* 3e. EstateEase detects missing street name in the entered data. <br>
+    * 3e1. EstateEase shows an error message regarding missing street name. <br>
       Use case resumes from step 2.
 
-* 3f. EstateEase detects missing block number in the entered data. <br>
-    * 3f1. EstateEase shows an error message regarding missing block number. <br>
-         Use case resumes from step 2.
-
-* 3g. EstateEase detects missing street name in the entered data. <br>
-    * 3g1. EstateEase shows an error message regarding missing street name. <br>
+* 3f. EstateEase detects missing unit number in the entered data. <br>
+    * 3f1. EstateEase shows an error message regarding missing unit number. <br>
       Use case resumes from step 2.
 
-* 3h. EstateEase detects missing unit number in the entered data. <br>
-    * 3h1. EstateEase shows an error message regarding missing unit number. <br>
+* 3g. EstateEase detects incorrect format for unit number in the entered data. <br>
+    * 3g1. EstateEase shows an error message regarding incorrect format for unit number. <br>
       Use case resumes from step 2.
 
-* 3i. EstateEase detects incorrect format for unit number in the entered data. <br>
-    * 3i1. EstateEase shows an error message regarding incorrect format for unit number. <br>
+* 3h. EstateEase detects missing postal code in the entered data. <br>
+    * 3h1. EstateEase shows an error message regarding missing postal code. <br>
       Use case resumes from step 2.
 
-* 3j. EstateEase detects missing postal code in the entered data. <br>
-    * 3j1. EstateEase shows an error message regarding missing postal code. <br>
+* 3i. EstateEase detects incorrect format for postal code in the entered data. <br>
+    * 3i1. EstateEase shows an error message regarding incorrect format for postal code. <br>
       Use case resumes from step 2.
 
-* 3k. EstateEase detects incorrect format for postal code in the entered data. <br>
-    * 3k1. EstateEase shows an error message regarding incorrect format for postal code. <br>
+* 3j. EstateEase detects missing house price in the entered data. <br>
+    * 3j1. EstateEase shows an error message regarding missing house price. <br>
       Use case resumes from step 2.
 
+* 3k. EstateEase detects incorrect format for house price in the entered data. <br>
+    * 3k1. EstateEase shows an error message regarding incorrect format for house price. <br>
+      Use case resumes from step 2.
 
 **Use case: UC04 - View all contacts**
 
@@ -776,7 +760,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 1. User requests to search for a contact.
 2. EstateEase displays all the contacts that match the inputted contact name.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -812,13 +796,13 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 2. EstateEase processes the view command with home-seller as filter.
 3. EstateEase displays the home-seller's requirements.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. EstateEase detects an invalid name.
     * 2a1. EstateEase shows an error message regarding an invalid entry.
- 
+
       Use case ends.
 * 2b. Command does not match EstateEase's registered command spelling.
     * 2b1. EstateEase shows an error message regarding an invalid command.
@@ -942,15 +926,15 @@ Use case ends.
 1. User filters for home-sellers
 2. EstateEase displays home-sellers. Free home-sellers are highlighted in green.
 
-    Use case ends.
+   Use case ends.
 
 
 **Extensions**
 
 * 2a. Pending home-sellers are displayed in red.
-  *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
+    *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
 
-       Use case ends.
+        Use case ends.
 
 * 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
 
@@ -1042,15 +1026,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -1059,16 +1043,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -1087,4 +1071,4 @@ testers are expected to do more *exploratory* testing.
         - _{Explain how to simulate a missing or corrupted data file during saving, and the expected behavior}_
 
 3. _{ more test cases …​ }_
-
+4. 
