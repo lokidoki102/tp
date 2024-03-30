@@ -62,7 +62,7 @@ public class JsonAdaptedHouseTest {
     @Test
     public void toModelType_nullPostalCode_throwsIllegalValueException() {
         JsonAdaptedHouse house = new JsonAdaptedHouse("Hdb", VALID_BLOCK, VALID_LEVEL,
-                null, VALID_STREET, VALID_UNIT_NUMER);
+                null, VALID_STREET, VALID_UNIT_NUMBER);
         String expectedMessage = String.format(JsonAdaptedHouse.MISSING_FIELD_MESSAGE_FORMAT,
                 PostalCode.class.getSimpleName());
         assertThrows(IllegalValueException.class, house::toModelType, expectedMessage);
