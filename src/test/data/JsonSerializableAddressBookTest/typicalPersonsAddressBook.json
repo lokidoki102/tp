@@ -99,10 +99,10 @@
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "heinz@example.com",
-    "housingType": "Hdb",
+    "housingType": "Landed",
     "houses": [
       {
-        "type": "Hdb",
+        "type": "Landed",
         "block": "10F",
         "level": "21",
         "postalCode": "654326",
