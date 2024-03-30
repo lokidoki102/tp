@@ -17,6 +17,8 @@ import java.util.Set;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
@@ -85,13 +87,21 @@ public class PersonUtil {
         // Append house details
         for (House house : seller.getHouses()) {
             sb.append(PREFIX_STREET + house.getStreet().value + " ");
-            if (house instanceof NonLanded) {
-                NonLanded nonLanded = (NonLanded) house;
-                if (nonLanded.getBlock() != null) {
-                    sb.append(PREFIX_BLOCK).append(nonLanded.getBlock().value).append(" ");
+            if (house instanceof Hdb) {
+                Hdb hdb = (Hdb) house;
+                if (hdb.getBlock() != null) {
+                    sb.append(PREFIX_BLOCK).append(hdb.getBlock().value).append(" ");
                 }
-                if (nonLanded.getLevel() != null) {
-                    sb.append(PREFIX_LEVEL).append(nonLanded.getLevel().value).append(" ");
+                if (hdb.getLevel() != null) {
+                    sb.append(PREFIX_LEVEL).append(hdb.getLevel().value).append(" ");
+                }
+            } else if (house instanceof Condominium) {
+                Condominium condominium = (Condominium) house;
+                if (condominium.getBlock() != null) {
+                    sb.append(PREFIX_BLOCK).append(condominium.getBlock().value).append(" ");
+                }
+                if (condominium.getLevel() != null) {
+                    sb.append(PREFIX_LEVEL).append(condominium.getLevel().value).append(" ");
                 }
             }
             sb.append(PREFIX_UNITNUMBER + house.getUnitNumber().value + " ");

@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
@@ -42,47 +44,47 @@ import seedu.address.model.person.Seller;
 public class TypicalPersons {
 
     public static final Seller ALICE_SELLER = new SellerBuilder().withName("Alice Pauline")
-            .withHousingType("HDB").withEmail("alice@example.com")
-            .withPhone("94351253").withHouses(new NonLanded(new Block("10A"), new Level("15"),
-                    new PostalCode("654321"), new Street("Orchard Street"), new UnitNumber("150")))
+            .withHousingType("Hdb").withEmail("alice@example.com")
+            .withPhone("94351253").withHouses(new Hdb(new Level("15"),
+                    new PostalCode("654321"), new Street("Orchard Street"), new UnitNumber("150"), new Block("10A")))
             .withTags("friends").build();
     public static final Seller BENSON_SELLER = new SellerBuilder().withName("Benson Meier")
-            .withHousingType("HDB").withEmail("johnd@example.com")
-            .withPhone("94351253").withHouses(new NonLanded(new Level("16"), new PostalCode("654321"),
+            .withHousingType("Condominium").withEmail("johnd@example.com")
+            .withPhone("94351253").withHouses(new Condominium(new Level("16"), new PostalCode("654321"),
                     new Street("Orchard Street"), new UnitNumber("150")))
             .withTags("friends").build();
     public static final Seller CARL_SELLER = new SellerBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withHousingType("HDB").withEmail("heinz@example.com").withHouses(new NonLanded(new Block("10B"),
-                    new Level("17"), new PostalCode("654322"), new Street("Orchard Street 1"), new UnitNumber("150")))
+            .withHousingType("Hdb").withEmail("heinz@example.com").withHouses(new Hdb(new Level("17"),
+                    new PostalCode("654322"), new Street("Orchard Street 1"), new UnitNumber("150"), new Block("10B")))
             .build();
     public static final Seller DANIEL_SELLER = new SellerBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withHousingType("HDB")
-            .withEmail("cornelia@example.com").withHouses(new NonLanded(new Block("10C"), new Level("18"),
+            .withHousingType("Hdb")
+            .withEmail("cornelia@example.com").withHouses(new Hdb(new Level("18"),
                     new PostalCode("654323"), new Street("Orchard Street 2"),
-                    new UnitNumber("150"))).withTags("friends").build();
+                    new UnitNumber("150"), new Block("10C"))).withTags("friends").build();
     public static final Seller ELLE_SELLER = new SellerBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withHousingType("HDB")
-            .withEmail("heinz@example.com").withHouses(new NonLanded(new Block("10D"), new Level("19"),
-                    new PostalCode("654324"), new Street("Orchard Street 3"), new UnitNumber("150"))).build();
+            .withHousingType("Hdb")
+            .withEmail("heinz@example.com").withHouses(new Hdb(new Level("19"), new PostalCode("654324"),
+                    new Street("Orchard Street 3"), new UnitNumber("150"), new Block("10D"))).build();
     public static final Seller FIONA_SELLER = new SellerBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withHousingType("HDB")
-            .withEmail("heinz@example.com").withHouses(new NonLanded(new Block("10E"), new Level("20"),
-                    new PostalCode("654325"), new Street("Orchard Street 4"), new UnitNumber("150"))).build();
+            .withHousingType("Hdb")
+            .withEmail("heinz@example.com").withHouses(new Hdb(new Level("20"), new PostalCode("654325"),
+                    new Street("Orchard Street 4"), new UnitNumber("150"), new Block("10E"))).build();
     public static final Seller GEORGE_SELLER = new SellerBuilder().withName("George Best").withPhone("9482442")
-            .withHousingType("HDB")
-            .withEmail("heinz@example.com").withHouses(new NonLanded(new Block("10F"), new Level("21"),
-                    new PostalCode("654326"), new Street("Orchard Street 5"), new UnitNumber("150"))).build();
+            .withHousingType("Hdb")
+            .withEmail("heinz@example.com").withHouses(new Hdb(new Level("21"), new PostalCode("654326"),
+                    new Street("Orchard Street 5"), new UnitNumber("150"), new Block("10F"))).build();
     public static final Buyer ALICE_BUYER = new BuyerBuilder().withName("George Best").withPhone("9482442")
             .withEmail("heinz@example.com").withBudget("333000").withHousingType("HDB").build();
 
     // Manually added
     public static final Seller HOON_SELLER = new SellerBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withHousingType("HDB")
-            .withEmail("stefan@example.com").withEmail("heinz@example.com").withHouses(new NonLanded(new Level("22"),
+            .withHousingType("Condominium")
+            .withEmail("stefan@example.com").withEmail("heinz@example.com").withHouses(new Condominium(new Level("22"),
                     new PostalCode("654327"), new Street("Orchard Street 6"), new UnitNumber("150"))).build();
     public static final Seller IDA_SELLER = new SellerBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withHousingType("HDB")
-            .withEmail("hans@example.com").withEmail("heinz@example.com").withHouses(new NonLanded(new Level("23"),
+            .withHousingType("Condominium")
+            .withEmail("hans@example.com").withEmail("heinz@example.com").withHouses(new Condominium(new Level("23"),
                     new PostalCode("654328"), new Street("Orchard Street 7"), new UnitNumber("150"))).build();
 
     // Manually added - Seller's details found in {@code CommandTestUtil}

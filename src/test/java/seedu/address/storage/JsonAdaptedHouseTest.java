@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
@@ -26,13 +28,24 @@ public class JsonAdaptedHouseTest {
     private static final String VALID_UNIT_NUMBER = "150";
 
     @Test
-    public void toModelType_validNonLandedDetails_returnsHouse() throws Exception {
+    public void toModelType_validCondominiumDetails_returnsHouse() throws Exception {
         JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_NON_LANDED, VALID_BLOCK,
                 VALID_LEVEL, VALID_POSTAL_CODE,
                 VALID_STREET, VALID_UNIT_NUMBER);
-        NonLanded expectedHouse = new NonLanded(new Block(VALID_BLOCK), new Level(VALID_LEVEL),
+        Condominium expectedHouse = new Condominium(new Level(VALID_LEVEL),
                 new PostalCode(VALID_POSTAL_CODE),
-                new Street(VALID_STREET), new UnitNumber(VALID_UNIT_NUMBER));
+                new Street(VALID_STREET), new UnitNumber(VALID_UNIT_NUMBER), new Block(VALID_BLOCK));
+        assertEquals(expectedHouse, house.toModelType());
+    }
+
+    @Test
+    public void toModelType_validHdbDetails_returnsHouse() throws Exception {
+        JsonAdaptedHouse house = new JsonAdaptedHouse(VALID_TYPE_NON_LANDED, VALID_BLOCK,
+                VALID_LEVEL, VALID_POSTAL_CODE,
+                VALID_STREET, VALID_UNIT_NUMBER);
+        Hdb expectedHouse = new Hdb(new Level(VALID_LEVEL),
+                new PostalCode(VALID_POSTAL_CODE),
+                new Street(VALID_STREET), new UnitNumber(VALID_UNIT_NUMBER), new Block(VALID_BLOCK));
         assertEquals(expectedHouse, house.toModelType());
     }
 
@@ -107,10 +120,10 @@ public class JsonAdaptedHouseTest {
     }
 
     @Test
-    public void toModelType_nonLandedNoBlockWithLevel_returnsNonLandedHouse() throws Exception {
+    public void toModelType_CondominiumNoBlockWithLevel_returnsNonLandedHouse() throws Exception {
         JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", null, VALID_LEVEL,
                 VALID_POSTAL_CODE, VALID_STREET, VALID_UNIT_NUMBER);
-        NonLanded expectedHouse = new NonLanded(new Level(VALID_LEVEL), new PostalCode(VALID_POSTAL_CODE),
+        Condominium expectedHouse = new Condominium(new Level(VALID_LEVEL), new PostalCode(VALID_POSTAL_CODE),
                 new Street(VALID_STREET), new UnitNumber(VALID_UNIT_NUMBER));
         assertEquals(expectedHouse, house.toModelType());
     }
