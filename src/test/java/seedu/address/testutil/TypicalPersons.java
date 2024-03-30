@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalHouses.HOUSE1;
 import static seedu.address.testutil.TypicalHouses.HOUSE2;
 import static seedu.address.testutil.TypicalHouses.HOUSE3;
 
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Hdb;
+import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
@@ -70,9 +72,9 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withHouses(new Hdb(new Level("20"), new PostalCode("654325"),
                     new Street("Orchard Street 4"), new UnitNumber("150"), new Block("10E"))).build();
     public static final Seller GEORGE_SELLER = new SellerBuilder().withName("George Best").withPhone("9482442")
-            .withHousingType("Hdb")
-            .withEmail("heinz@example.com").withHouses(new Hdb(new Level("21"), new PostalCode("654326"),
-                    new Street("Orchard Street 5"), new UnitNumber("150"), new Block("10F"))).build();
+            .withHousingType("Landed")
+            .withEmail("heinz@example.com").withHouses(new Landed(new UnitNumber("150"), new PostalCode("654326"),
+                    new Street("Orchard Street 5"))).build();
     public static final Buyer ALICE_BUYER = new BuyerBuilder().withName("George Best").withPhone("9482442")
             .withEmail("heinz@example.com").withBudget("333000").withHousingType("Hdb").build();
 
