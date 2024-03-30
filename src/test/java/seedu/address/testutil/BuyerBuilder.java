@@ -21,7 +21,7 @@ public class BuyerBuilder {
     public static final String DEFAULT_PHONE = "93840172";
     public static final String DEFAULT_EMAIL = "james@gmail.com";
     public static final String DEFAULT_BUDGET = "666000";
-    public static final String DEFAULT_HOUSING_TYPE = "HDB";
+    public static final String DEFAULT_HOUSING_TYPE = "Hdb";
 
     private Name name;
     private Phone phone;
