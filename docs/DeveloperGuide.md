@@ -226,7 +226,7 @@ Similarly, how an `addSeller` operation goes through the `Model` component:
 
 Similarly, how an `addSeller` operation goes through the `Storage` component:
 
-<puml src="diagrams/AddSellerSequenceDiagram-Model.puml" alt="AddSellerSequenceDiagram-Model" />
+<puml src="diagrams/AddSellerSequenceDiagram-Storage.puml" alt="AddSellerSequenceDiagram-Storage" />
 
 The following activity diagram summarizes what happens when a user executes the `addSeller` command
 
