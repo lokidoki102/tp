@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a HDB.
  */
-public class HDB implements House {
+public class Hdb implements House {
 
     public final PostalCode postalCode;
     public final Street street;
@@ -23,7 +23,7 @@ public class HDB implements House {
      * @param block      The block of the house.
      * @param level      The level of the house.
      */
-    public HDB(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber, Block block) {
+    public Hdb(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber, Block block) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
@@ -109,7 +109,7 @@ public class HDB implements House {
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this);
         // For now, it just appends the super class's toString method.
-        return "HDB: " + builder.toString() + ", " + new ToStringBuilder(this)
+        return "Hdb: " + builder.toString() + ", " + new ToStringBuilder(this)
                 .add("Street", street)
                 .add("Block", block)
                 .add("Level", level)

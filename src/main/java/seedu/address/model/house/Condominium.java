@@ -31,6 +31,14 @@ public class Condominium implements House {
         this.level = level;
     }
 
+    /**
+     * Constructs a Condominium with no block
+     *
+     * @param unitNumber The unit number of the house.
+     * @param postalCode The postal code of the house.
+     * @param street     The street of the house.
+     * @param level      The level of the house.
+     */
     public Condominium(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber) {
         this.postalCode = postalCode;
         this.street = street;

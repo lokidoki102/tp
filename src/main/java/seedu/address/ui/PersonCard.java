@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Condominium;
-import seedu.address.model.house.HDB;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Level;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
@@ -75,9 +75,9 @@ public class PersonCard extends UiPart<Region> {
                     houseDetails.getChildren().add(new Label("Unit Number: " + house.getUnitNumber().value));
 
                     // If the house is HDB, check for block and level
-                    if (house instanceof HDB) {
-                        Block block = ((HDB) house).getBlock();
-                        Level level = ((HDB) house).getLevel();
+                    if (house instanceof Hdb) {
+                        Block block = ((Hdb) house).getBlock();
+                        Level level = ((Hdb) house).getLevel();
                         houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
                         houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
                     } else if (house instanceof Condominium) {

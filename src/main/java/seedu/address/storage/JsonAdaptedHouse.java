@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Condominium;
-import seedu.address.model.house.HDB;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
@@ -53,11 +53,11 @@ public class JsonAdaptedHouse {
             this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
             this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
             this.type = "Condominium";
-        } else if (source instanceof HDB) {
-            HDB hdb = (HDB) source;
+        } else if (source instanceof Hdb) {
+            Hdb hdb = (Hdb) source;
             this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
             this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
-            this.type = "HDB";
+            this.type = "Hdb";
         } else {
             this.block = null;
             this.level = null;
@@ -108,10 +108,10 @@ public class JsonAdaptedHouse {
             } else {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
             }
-        } else if ("HDB".equals(type)) {
+        } else if ("Hdb".equals(type)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
-            return new HDB(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
+            return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
         } else if ("Landed".equals(type)) {
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet);
         } else {

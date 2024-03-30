@@ -20,7 +20,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.Condominium;
-import seedu.address.model.house.HDB;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Landed;
@@ -75,7 +75,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         if (housingType.toString().toLowerCase().equals("hdb")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new HDB(level, postalCode, street, unitNumber, block));
+            houses.add(new Hdb(level, postalCode, street, unitNumber, block));
             // Non-landed unit: Has No Block, Has Level
         } else if (housingType.toString().toLowerCase().equals("condominium")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
