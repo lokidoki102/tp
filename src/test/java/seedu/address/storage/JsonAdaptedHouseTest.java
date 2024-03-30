@@ -120,7 +120,7 @@ public class JsonAdaptedHouseTest {
     }
 
     @Test
-    public void toModelType_CondominiumNoBlockWithLevel_returnsNonLandedHouse() throws Exception {
+    public void toModelType_condominiumNoBlockWithLevel_returnsNonLandedHouse() throws Exception {
         JsonAdaptedHouse house = new JsonAdaptedHouse("NonLanded", null, VALID_LEVEL,
                 VALID_POSTAL_CODE, VALID_STREET, VALID_UNIT_NUMBER);
         Condominium expectedHouse = new Condominium(new Level(VALID_LEVEL), new PostalCode(VALID_POSTAL_CODE),
