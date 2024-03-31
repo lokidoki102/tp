@@ -11,6 +11,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 
@@ -25,6 +26,7 @@ public class JsonAdaptedHouse {
     private final String postalCode;
     private final String street;
     private final String unitNumber;
+    private final String price;
 
     /**
      * Constructs a {@code JsonAdaptedHouse} with the given house details.
@@ -35,13 +37,15 @@ public class JsonAdaptedHouse {
                             @JsonProperty("level") String level,
                             @JsonProperty("postalCode") String postalCode,
                             @JsonProperty("street") String street,
-                            @JsonProperty("unitNumber") String unitNumber) {
+                            @JsonProperty("unitNumber") String unitNumber,
+                            @JsonProperty("price") String price) {
         this.type = type;
         this.block = block;
         this.level = level;
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
+        this.price = price;
     }
 
     /**
@@ -66,6 +70,7 @@ public class JsonAdaptedHouse {
         this.postalCode = source.getPostalCode().value;
         this.street = source.getStreet().value;
         this.unitNumber = source.getUnitNumber().value;
+        this.price = source.getPrice().value;
     }
 
     /**
@@ -100,20 +105,30 @@ public class JsonAdaptedHouse {
         }
         final UnitNumber modelUnitNumber = new UnitNumber(unitNumber);
 
+        if (price == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPrice(price)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price);
+
         if ("Condominium".equals(type)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
             if (modelBlock != null) {
-                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
+                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock,
+                        modelPrice);
             } else {
-                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
+                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelPrice);
             }
         } else if ("hdb".equalsIgnoreCase(type)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
-            return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
+            return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock, modelPrice);
         } else if ("Landed".equals(type)) {
-            return new Landed(modelUnitNumber, modelPostalCode, modelStreet);
+            return new Landed(modelUnitNumber, modelPostalCode, modelStreet, modelPrice);
         } else {
             throw new IllegalValueException("Unknown House Type");
         }
