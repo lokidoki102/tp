@@ -57,7 +57,7 @@ public class SampleDataUtil {
 
         return new Seller[] {
             new Seller(new Name("David Li"), new Phone("91031282"),
-                        new Email("lidavid@example.com"), new HousingType("HDB"),
+                        new Email("lidavid@example.com"), new HousingType("Hdb"),
                         davidLiHouses,
                         getTagSet("family")),
             new Seller(new Name("Irfan Ibrahim"), new Phone("92492021"),
@@ -65,7 +65,7 @@ public class SampleDataUtil {
                         irfanHouses,
                         getTagSet("classmates")),
             new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"), new HousingType("HDB"),
+                        new Email("royb@example.com"), new HousingType("Hdb"),
                         royHouses,
                         getTagSet("colleagues"))
         };
