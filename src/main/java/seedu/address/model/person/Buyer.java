@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +24,7 @@ public class Buyer extends Person {
      * @param tags        The tags associated with the buyer.
      * @param budget      The budget of the buyer.
      */
-    public Buyer(Name name, Phone phone, Email email, String housingType, Budget budget, Set<Tag> tags) {
+    public Buyer(Name name, Phone phone, Email email, HousingType housingType, Budget budget, Set<Tag> tags) {
         super(name, phone, email, housingType, tags);
         this.budget = budget;
     }

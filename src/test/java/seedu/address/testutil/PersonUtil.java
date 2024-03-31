@@ -17,8 +17,9 @@ import java.util.Set;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
@@ -51,7 +52,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + person.getHousingType() + " ");
+        sb.append(PREFIX_HOUSING_TYPE + person.getHousingType().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -66,7 +67,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + buyer.getName().fullName + " ");
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + buyer.getHousingType() + " ");
+        sb.append(PREFIX_HOUSING_TYPE + buyer.getHousingType().value + " ");
         sb.append(PREFIX_BUDGET + buyer.getBudget().value + " ");
         buyer.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -82,17 +83,25 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + seller.getName().fullName + " ");
         sb.append(PREFIX_PHONE + seller.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + seller.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + seller.getHousingType() + " ");
+        sb.append(PREFIX_HOUSING_TYPE + seller.getHousingType().value + " ");
         // Append house details
         for (House house : seller.getHouses()) {
             sb.append(PREFIX_STREET + house.getStreet().value + " ");
-            if (house instanceof NonLanded) {
-                NonLanded nonLanded = (NonLanded) house;
-                if (nonLanded.getBlock() != null) {
-                    sb.append(PREFIX_BLOCK).append(nonLanded.getBlock().value).append(" ");
+            if (house instanceof Hdb) {
+                Hdb hdb = (Hdb) house;
+                if (hdb.getBlock() != null) {
+                    sb.append(PREFIX_BLOCK).append(hdb.getBlock().value).append(" ");
                 }
-                if (nonLanded.getLevel() != null) {
-                    sb.append(PREFIX_LEVEL).append(nonLanded.getLevel().value).append(" ");
+                if (hdb.getLevel() != null) {
+                    sb.append(PREFIX_LEVEL).append(hdb.getLevel().value).append(" ");
+                }
+            } else if (house instanceof Condominium) {
+                Condominium condominium = (Condominium) house;
+                if (condominium.getBlock() != null) {
+                    sb.append(PREFIX_BLOCK).append(condominium.getBlock().value).append(" ");
+                }
+                if (condominium.getLevel() != null) {
+                    sb.append(PREFIX_LEVEL).append(condominium.getLevel().value).append(" ");
                 }
             }
             sb.append(PREFIX_UNITNUMBER + house.getUnitNumber().value + " ");
