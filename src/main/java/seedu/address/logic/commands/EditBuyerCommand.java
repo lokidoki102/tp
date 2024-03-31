@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
@@ -110,9 +111,8 @@ public class EditBuyerCommand extends Command {
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
-        // TODO update budget
-        Budget updatedBudget = buyerToEdit.getBudget();
-        String updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
+        Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
+        HousingType updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
         return new Buyer(updatedName, updatedPhone, updatedEmail, updatedHousingType, updatedBudget,
@@ -151,7 +151,7 @@ public class EditBuyerCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private String housingType;
+        private HousingType housingType;
         private Budget budget;
         private Set<Tag> tags;
 
@@ -209,11 +209,11 @@ public class EditBuyerCommand extends Command {
             return Optional.ofNullable(budget);
         }
 
-        public void setHousingType(String housingType) {
+        public void setHousingType(HousingType housingType) {
             this.housingType = housingType;
         }
 
-        public Optional<String> getHousingType() {
+        public Optional<HousingType> getHousingType() {
             return Optional.ofNullable(housingType);
         }
 
@@ -250,6 +250,7 @@ public class EditBuyerCommand extends Command {
                     && Objects.equals(phone, otherEditDescriptor.phone)
                     && Objects.equals(email, otherEditDescriptor.email)
                     && Objects.equals(housingType, otherEditDescriptor.housingType)
+                    && Objects.equals(budget, otherEditDescriptor.budget)
                     && Objects.equals(tags, otherEditDescriptor.tags);
         }
 
@@ -260,6 +261,7 @@ public class EditBuyerCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("housingType", housingType)
+                    .add("budget", budget)
                     .add("tags", tags)
                     .toString();
         }

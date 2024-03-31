@@ -35,16 +35,23 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+
+    public static final String VALID_NAME_KHOONSUN = "Yek KhoonSun";
     public static final String VALID_NAME_BEN = "Ben Ten";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_BEN = "33333333";
+
+    public static final String VALID_PHONE_KHOONSUN = "44444444";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_BEN = "ben@example.com";
-    public static final String VALID_HOUSING_TYPE_AMY = "HDB";
+
+    public static final String VALID_EMAIL_KHOONSUN = "khoonsun@example.com";
+    public static final String VALID_HOUSING_TYPE_AMY = "Hdb";
     public static final String VALID_HOUSING_TYPE_BOB = "Condominium";
     public static final String VALID_HOUSING_TYPE_BEN = "Condominium";
+    public static final String VALID_HOUSING_TYPE_KHOONSUN = "Landed";
     public static final String VALID_BUDGET_AMY = "999000";
     public static final String VALID_BUDGET_BOB = "1000000";
     public static final String VALID_BUDGET_BEN = "123000";

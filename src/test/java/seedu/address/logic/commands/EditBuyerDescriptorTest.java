@@ -60,12 +60,13 @@ public class EditBuyerDescriptorTest {
     @Test
     public void toStringMethod() {
         EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
-        String expected = EditBuyerDescriptor.class.getCanonicalName() + "{name="
-                + editBuyerDescriptor.getName().orElse(null) + ", phone="
-                + editBuyerDescriptor.getPhone().orElse(null) + ", email="
-                + editBuyerDescriptor.getEmail().orElse(null) + ", housingType="
-                + editBuyerDescriptor.getHousingType().orElse(null) + ", tags="
-                + editBuyerDescriptor.getTags().orElse(null) + "}";
+        String expected = EditBuyerDescriptor.class.getCanonicalName()
+                + "{name=" + editBuyerDescriptor.getName().orElse(null)
+                + ", phone=" + editBuyerDescriptor.getPhone().orElse(null)
+                + ", email=" + editBuyerDescriptor.getEmail().orElse(null)
+                + ", housingType=" + editBuyerDescriptor.getHousingType().orElse(null)
+                + ", budget=" + editBuyerDescriptor.getBudget().orElse(null)
+                + ", tags=" + editBuyerDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editBuyerDescriptor.toString());
     }
 }

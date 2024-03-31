@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,7 +24,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditBuyerCommand object
  */
 public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
-    // TODO update this command parser to include budget later on.
     /**
      * Parses the given {@code String} of arguments in the context of the EditBuyerCommand
      * and returns an EditBuyerCommand object for execution.
@@ -33,7 +33,7 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
-                        PREFIX_TAG);
+                        PREFIX_BUDGET, PREFIX_TAG);
 
         Index index;
 
@@ -44,7 +44,8 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBuyerCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
+                PREFIX_BUDGET);
 
         EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
 
@@ -61,7 +62,10 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
             editBuyerDescriptor.setHousingType(ParserUtil.parseHousing(argMultimap
                     .getValue(PREFIX_HOUSING_TYPE).get()));
         }
-
+        if (argMultimap.getValue(PREFIX_BUDGET).isPresent()) {
+            editBuyerDescriptor.setBudget(ParserUtil.parseBudget(argMultimap
+                    .getValue(PREFIX_BUDGET).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBuyerDescriptor::setTags);
         if (!editBuyerDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditBuyerCommand.MESSAGE_NOT_EDITED);
