@@ -42,7 +42,7 @@ public class AddressBookParserTest {
         assertEquals(new AddBuyerCommand(buyer), command);
     }
 
-    //    This test case needed to be modified based on the Condo, HDB, Landed criteria (since some of the fields
+    //    This test case needed to be modified based on the Condo, Hdb, Landed criteria (since some of the fields
     //    can be empty
     //    @Test
     //    public void parseCommand_addSeller() throws Exception {

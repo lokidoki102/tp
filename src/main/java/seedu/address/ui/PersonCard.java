@@ -9,8 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
@@ -73,10 +74,15 @@ public class PersonCard extends UiPart<Region> {
                     houseDetails.getChildren().add(new Label("Street: " + house.getStreet().value));
                     houseDetails.getChildren().add(new Label("Unit Number: " + house.getUnitNumber().value));
 
-                    // If the house is NonLanded, check for block and level
-                    if (house instanceof NonLanded) {
-                        Block block = ((NonLanded) house).getBlock();
-                        Level level = ((NonLanded) house).getLevel();
+                    // If the house is HDB, check for block and level
+                    if (house instanceof Hdb) {
+                        Block block = ((Hdb) house).getBlock();
+                        Level level = ((Hdb) house).getLevel();
+                        houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
+                        houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
+                    } else if (house instanceof Condominium) {
+                        Block block = ((Condominium) house).getBlock();
+                        Level level = ((Condominium) house).getLevel();
                         houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
                         houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
                     }

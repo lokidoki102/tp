@@ -21,7 +21,6 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    // Critically, this refers to what type the buyer WANTS, and what type the seller HAS
     // I think this one we have to clarify whether housingType should be under House or Person,
     // because it seems very weird to be under Person
     private final HousingType housingType;
