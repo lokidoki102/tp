@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.house.House;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+
 
 /**
  * The API of the Model component.
@@ -53,9 +56,25 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns the person with the unique name {@code name} .
+     */
+    Person findPersonByName(Name name);
+
+    /**
+     * Returns true if a person who is the same object as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same name as {@code person} exists in the address book.
+     */
+    boolean hasPerson(Name name);
+
+
+    /**
+     * Returns true if a house with the same postal code as {@code house} exists in the address book.
+     */
+    boolean hasHouse(House house);
 
     /**
      * Deletes the given person.
@@ -64,10 +83,22 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given house.
+     * The house must belong to a seller in the address book.
+     */
+    void deleteHouse(House house);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given house.
+     * {@code house} must not already exist in the address book.
+     */
+    void addHouse(House house, Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -75,6 +106,13 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given house {@code target} with {@code editedHouse}.
+     * {@code target} must exist in the address book.
+     * The postal code of {@code editedHouse} must not be the same as another existing house in the address book.
+     */
+    void setHouse(House target, House editedHouse);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

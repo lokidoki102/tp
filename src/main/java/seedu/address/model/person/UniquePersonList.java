@@ -37,6 +37,33 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person with the same name as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        for (Person p: internalList) {
+            if (p.getName().equals(toCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns the person whose name matches the given argument.
+     */
+    public Person findPersonByName(Name toCheck) {
+        requireNonNull(toCheck);
+        assert this.contains(toCheck): "Person with this name must exist in AddressBook.";
+        for (Person p: internalList) {
+            if (p.getName().equals(toCheck)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
