@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,13 +24,13 @@ public class Person {
     // Critically, this refers to what type the buyer WANTS, and what type the seller HAS
     // I think this one we have to clarify whether housingType should be under House or Person,
     // because it seems very weird to be under Person
-    private final String housingType;
+    private final HousingType housingType;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, String housingType, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, HousingType housingType, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, housingType, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +51,7 @@ public class Person {
         return email;
     }
 
-    public String getHousingType() {
+    public HousingType getHousingType() {
         return housingType;
     }
 

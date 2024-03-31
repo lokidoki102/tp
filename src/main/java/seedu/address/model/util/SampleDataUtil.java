@@ -9,6 +9,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.House;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
@@ -29,13 +30,13 @@ public class SampleDataUtil {
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"),
-                        new Email("alexyeoh@example.com"), "HDB", new Budget("100000"),
+                        new Email("alexyeoh@example.com"), new HousingType("HDB"), new Budget("100000"),
                         getTagSet("friends")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"),
-                        new Email("berniceyu@example.com"), "Condominium", new Budget("200000"),
+                        new Email("berniceyu@example.com"), new HousingType("Condominium"), new Budget("200000"),
                         getTagSet("colleagues", "friends")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                        new Email("charlotte@example.com"), "HDB", new Budget("300000"),
+                        new Email("charlotte@example.com"), new HousingType("HDB"), new Budget("300000"),
                         getTagSet("neighbours")),
         };
     }
@@ -55,15 +56,15 @@ public class SampleDataUtil {
 
         return new Seller[] {
             new Seller(new Name("David Li"), new Phone("91031282"),
-                        new Email("lidavid@example.com"), "HDB",
+                        new Email("lidavid@example.com"), new HousingType("HDB"),
                         davidLiHouses,
                         getTagSet("family")),
             new Seller(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                        new Email("irfan@example.com"), "Condominium",
+                        new Email("irfan@example.com"), new HousingType("Condominium"),
                         irfanHouses,
                         getTagSet("classmates")),
             new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"), "HDB",
+                        new Email("royb@example.com"), new HousingType("HDB"),
                         royHouses,
                         getTagSet("colleagues"))
         };

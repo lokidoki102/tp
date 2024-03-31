@@ -20,6 +20,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.Block;
 import seedu.address.model.house.House;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.NonLanded;
@@ -58,7 +59,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        String housingType = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
+        HousingType housingType = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();

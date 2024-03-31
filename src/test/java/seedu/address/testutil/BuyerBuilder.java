@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
@@ -25,7 +26,7 @@ public class BuyerBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private String housingType;
+    private HousingType housingType;
     private Budget budget;
     private Set<Tag> tags;
 
@@ -36,7 +37,7 @@ public class BuyerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        housingType = DEFAULT_HOUSING_TYPE;
+        housingType = new HousingType(DEFAULT_HOUSING_TYPE);
         budget = new Budget(DEFAULT_BUDGET);
         tags = new HashSet<>();
     }
@@ -81,7 +82,7 @@ public class BuyerBuilder {
      * Sets the {@code Address} of the {@code Buyer} that we are building.
      */
     public BuyerBuilder withHousingType(String housingType) {
-        this.housingType = housingType;
+        this.housingType = new HousingType(housingType);
         return this;
     }
 
