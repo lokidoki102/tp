@@ -53,6 +53,21 @@ public class EditBuyerCommandTest {
     }
 
     @Test
+    public void execute_notBuyerType_failure() {
+        Buyer editedBuyer = new BuyerBuilder().build();
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(editedBuyer).build();
+        EditBuyerCommand editBuyerCommand = new EditBuyerCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_WRONG_TYPE,
+                Messages.format(editedBuyer));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(indexLastBuyer.getZeroBased()), editedBuyer);
+
+        assertCommandFailure(editBuyerCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastBuyer = Index.fromOneBased(model.getFilteredPersonList().size());
         // In this dummy model, buyers are guaranteed to be at the end of the list.
