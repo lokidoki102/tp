@@ -72,6 +72,8 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNITNUMBER).get());
 
         // Non-landed unit: Has Block, Has Level
+        // CHANGE TO SWITCH CASE
+
         if (housingType.toString().toLowerCase().equals("hdb")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
