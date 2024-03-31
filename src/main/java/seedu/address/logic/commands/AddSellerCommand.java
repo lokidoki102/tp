@@ -41,7 +41,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_HOUSING_TYPE + "HDB "
+            + PREFIX_HOUSING_TYPE + "Hdb "
             + PREFIX_STREET + "Clementi Ave 2 "
             + PREFIX_BLOCK + "311 "
             + PREFIX_LEVEL + "02 "

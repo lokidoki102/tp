@@ -1,9 +1,10 @@
 package seedu.address.testutil;
 
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
@@ -21,20 +22,20 @@ public class TypicalHouses {
     );
 
     // Non-landed house example (e.g., HDB Flat)
-    public static final NonLanded HOUSE2 = new NonLanded(
-            new Block("99B"),
+    public static final Hdb HOUSE2 = new Hdb(
             new Level("10"),
             new PostalCode("654321"),
             new Street("Orchard Road"),
-            new UnitNumber("38")
+            new UnitNumber("38"),
+            new Block("99B")
     );
 
     // Non-landed house example (e.g., Condominium)
-    public static final NonLanded HOUSE3 = new NonLanded(
-            new Block("99A"),
+    public static final Condominium HOUSE3 = new Condominium(
             new Level("11"),
             new PostalCode("654321"),
             new Street("Toa Payoh Road"),
-            new UnitNumber("38")
+            new UnitNumber("38"),
+            new Block("99A")
     );
 }

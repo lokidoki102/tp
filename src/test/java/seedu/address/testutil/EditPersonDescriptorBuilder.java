@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -65,7 +66,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the Housing Type of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withHousingType(String housingType) {
-        descriptor.setHousingType(housingType);
+        descriptor.setHousingType(new HousingType(housingType));
         return this;
     }
 

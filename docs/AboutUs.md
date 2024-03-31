@@ -20,7 +20,7 @@ You can reach us at the email `felixchanyy.22@u.nus.edu`
 [[portfolio](https://www.linkedin.com/in/felixchanyy)]
 
 * Role: Team Lead, Scheduling and Tracking, Git Expert
-* Responsibilities: Responsible for overall project coordination,  in charge of defining, assigning, and tracking 
+* Responsibilities: Responsible for overall project coordination,  in charge of defining, assigning, and tracking
 project tasks, helps other team members with matters related to Git
 
 ### Yek Khoon Sun
@@ -37,11 +37,11 @@ project tasks, helps other team members with matters related to Git
 
 <img src="images/lokidoki102.png" width="200px">
 
-[[github](http://github.com/lokidoki102)] 
+[[github](http://github.com/lokidoki102)]
 [[portfolio](https://www.linkedin.com/in/carl-lim-483980152/)]
 
 * Role: Code Quality, IntelliJ expert
-* Responsibilities: Looks after code quality and code review, ensures adherence to coding standards, 
+* Responsibilities: Looks after code quality and code review, ensures adherence to coding standards,
 helps other team members with matters related to IntelliJ
 
 ### Zeng Zihui

@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.house.Block;
+import seedu.address.model.house.Condominium;
+import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
-import seedu.address.model.house.NonLanded;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
@@ -47,11 +48,16 @@ public class JsonAdaptedHouse {
      * Converts a given {@code House} into this class for Jackson use.
      */
     public JsonAdaptedHouse(House source) {
-        if (source instanceof NonLanded) {
-            NonLanded nonLanded = (NonLanded) source;
-            this.block = nonLanded.getBlock() == null ? null : nonLanded.getBlock().value;
-            this.level = nonLanded.getLevel() == null ? null : nonLanded.getLevel().value;
-            this.type = "NonLanded";
+        if (source instanceof Condominium) {
+            Condominium condominium = (Condominium) source;
+            this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
+            this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
+            this.type = "Condominium";
+        } else if (source instanceof Hdb) {
+            Hdb hdb = (Hdb) source;
+            this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
+            this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
+            this.type = "Hdb";
         } else {
             this.block = null;
             this.level = null;
@@ -94,16 +100,18 @@ public class JsonAdaptedHouse {
         }
         final UnitNumber modelUnitNumber = new UnitNumber(unitNumber);
 
-        if ("NonLanded".equals(type)) {
+        if ("Condominium".equals(type)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
-            // Non-Landed: Got Block, Got Level
             if (modelBlock != null) {
-                return new NonLanded(modelBlock, modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
-                // Non-Landed: No Block, Got Level
+                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
             } else {
-                return new NonLanded(modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
+                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber);
             }
+        } else if ("hdb".equalsIgnoreCase(type)) {
+            Block modelBlock = block != null ? new Block(block) : null;
+            Level modelLevel = level != null ? new Level(level) : null;
+            return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock);
         } else if ("Landed".equals(type)) {
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet);
         } else {

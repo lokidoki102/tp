@@ -7,8 +7,8 @@
 EstateEase simplifies residential property management for real estate listing agents in Singapore.
 
 ### Key Features:
-  * With intuitive tools for listing and client communication, the app is tailored for efficiency. 
-  * Agents can quickly access contacts and prioritize them, ensuring swift connections with clients. 
+  * With intuitive tools for listing and client communication, the app is tailored for efficiency.
+  * Agents can quickly access contacts and prioritize them, ensuring swift connections with clients.
 
 ### Example Usages:
   * Allows real estate agents to add and delete client information.
@@ -16,5 +16,5 @@ EstateEase simplifies residential property management for real estate listing ag
   * Allows real estate agents to load and save the list using JSON file
 
 ## Acknowledgements
-This project is based on the AddressBook-Level3 project created by the 
+This project is based on the AddressBook-Level3 project created by the
 [SE-EDU initiative](https://se-education.org).

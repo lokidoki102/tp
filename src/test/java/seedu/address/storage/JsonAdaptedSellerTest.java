@@ -25,7 +25,7 @@ public class JsonAdaptedSellerTest {
     private static final String VALID_NAME = BOB_SELLER.getName().toString();
     private static final String VALID_PHONE = BOB_SELLER.getPhone().toString();
     private static final String VALID_EMAIL = BOB_SELLER.getEmail().toString();
-    private static final String VALID_HOUSING_TYPE = BOB_SELLER.getHousingType();
+    private static final String VALID_HOUSING_TYPE = BOB_SELLER.getHousingType().toString();
     private static final List<JsonAdaptedHouse> VALID_HOUSES = BOB_SELLER.getHouses().stream()
             .map(JsonAdaptedHouse::new)
             .collect(Collectors.toList());
@@ -96,7 +96,7 @@ public class JsonAdaptedSellerTest {
         JsonAdaptedSeller seller =
                 new JsonAdaptedSeller(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_HOUSING_TYPE,
                         VALID_HOUSES, VALID_TAGS);
-        String expectedMessage = "Housing types can only be HDB, Condominium or Landed.";
+        String expectedMessage = "Housing types can only be Hdb, Condominium or Landed.";
         assertThrows(IllegalValueException.class, expectedMessage, seller::toModelType);
     }
 
@@ -122,7 +122,7 @@ public class JsonAdaptedSellerTest {
     @Test
     public void toModelType_invalidHouses_throwsIllegalValueException() {
         List<JsonAdaptedHouse> invalidHouses = new ArrayList<>(VALID_HOUSES);
-        invalidHouses.add(new JsonAdaptedHouse("NonLanded", "InvalidBlock", "InvalidLevel",
+        invalidHouses.add(new JsonAdaptedHouse("InvalidType", "InvalidBlock", "InvalidLevel",
                 "123456", "Maple Street", "120A"));
         JsonAdaptedSeller seller = new JsonAdaptedSeller(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_HOUSING_TYPE,
                 invalidHouses, VALID_TAGS);
