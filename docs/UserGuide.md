@@ -30,7 +30,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney` : Adds a seller named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -49,7 +49,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addBuyer n/NAME`, `NAME` is a parameter which can be used as `addBuyer n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -74,21 +74,21 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a seller: `addSeller`
 
-### Adding a person: `add`
+Adds a seller to the address book.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [street/STREET]  [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE] [t/TAG]…​`
 
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
+
+**Note:** A seller need to have at least one house. Hence, adding a seller will also add a house to his/her list of houses.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney`
 
 ### Listing all persons : `list`
 
@@ -195,10 +195,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+**Add Seller**    | `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [street/STREET]  [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE] [t/TAG]…​`<br> e.g.,`addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney`
+**Clear**         | `clear`
+**Delete**        | `delete INDEX`<br> e.g., `delete 3`
+**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**          | `list`
+**Help**          | `help`
