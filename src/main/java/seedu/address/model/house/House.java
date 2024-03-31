@@ -31,6 +31,13 @@ public interface House {
     Street getStreet();
 
     /**
+     * Retrieves the price of the house.
+     *
+     * @return The price of the house.
+     */
+    Price getPrice();
+
+    /**
      * Checks if the given name is a valid housing type.
      *
      * @param name The name to check.

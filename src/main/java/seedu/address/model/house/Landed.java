@@ -11,6 +11,7 @@ public class Landed implements House {
     public final PostalCode postalCode;
     public final Street street;
     public final UnitNumber unitNumber;
+    public final Price price;
 
     /**
      * Constructs a Landed house.
@@ -18,11 +19,13 @@ public class Landed implements House {
      * @param unitNumber The unit number of the house.
      * @param postalCode The postal code of the house.
      * @param street     The street of the house.
+     * @param price      The price of the house.
      */
-    public Landed(UnitNumber unitNumber, PostalCode postalCode, Street street) {
+    public Landed(UnitNumber unitNumber, PostalCode postalCode, Street street, Price price) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
+        this.price = price;
     }
 
     /**
@@ -56,12 +59,20 @@ public class Landed implements House {
     }
 
     /**
+     * Retrieves the price of the landed house.
+     *
+     * @return The price of the landed house.
+     */
+    @Override
+    public Price getPrice() {
+        return price;
+    }
+    /**
      * Checks if this house is equal to another object.
      *
      * @param other The object to compare to.
      * @return True if the objects are equal, false otherwise.
      */
-
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -89,6 +100,7 @@ public class Landed implements House {
                 .add("Unit Number", unitNumber)
                 .add("Street", street)
                 .add("Postal Code", postalCode)
+                .add("Price", price)
                 .toString();
     }
 }
