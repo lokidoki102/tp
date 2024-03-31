@@ -113,7 +113,7 @@ public class TypicalPersons {
     // Manually added - Buyer's details found in {@code CommandTestUtil}
     public static final Buyer ALI_BUYER = new BuyerBuilder().withName("Ali York")
             .withPhone("82937163").withEmail("ali@gmail.com").withBudget("400000")
-            .withHousingType("HDB").withTags("friends").build();
+            .withHousingType("Hdb").withTags("friends").build();
     public static final Buyer BEN_BUYER = new BuyerBuilder().withName(VALID_NAME_BEN).withPhone(VALID_PHONE_BEN)
             .withEmail(VALID_EMAIL_BEN).withBudget(VALID_BUDGET_BEN).withHousingType(VALID_HOUSING_TYPE_BEN)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
@@ -130,16 +130,16 @@ public class TypicalPersons {
             .build();
     public static final Buyer ZACK_BUYER = new BuyerBuilder().withName("Zack York")
             .withPhone("82937163").withEmail("zack@gmail.com").withBudget("400000")
-            .withHousingType("HDB").withTags("friends").build();
+            .withHousingType("Hdb").withTags("friends").build();
     public static final Buyer ZANE_BUYER = new BuyerBuilder().withName("Zane York")
             .withPhone("82937163").withEmail("zack@gmail.com").withBudget("500000")
-            .withHousingType("HDB").withTags("friends").build();
+            .withHousingType("Hdb").withTags("friends").build();
     public static final Buyer ZURI_BUYER = new BuyerBuilder().withName("Zuri")
             .withPhone("63936234").withEmail("Zuri@gmail.com").withBudget("600000")
-            .withHousingType("HDB").withTags("someone").build();
+            .withHousingType("Hdb").withTags("someone").build();
     public static final Buyer ZYRA_BUYER = new BuyerBuilder().withName("Zyra Moore")
             .withPhone("82936234").withEmail("zyra@gmail.com").withBudget("700000")
-            .withHousingType("HDB").withTags("someone").build();
+            .withHousingType("Hdb").withTags("someone").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")

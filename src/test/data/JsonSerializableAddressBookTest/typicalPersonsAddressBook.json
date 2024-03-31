@@ -123,14 +123,14 @@
     "name" : "Zack York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
-    "housingType" : "HDB",
+    "housingType" : "Hdb",
     "budget": "400000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Zane York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
-    "housingType" : "HDB",
+    "housingType" : "Hdb",
     "budget": "500000",
     "tags" : [ "friends" ]
   } ]
