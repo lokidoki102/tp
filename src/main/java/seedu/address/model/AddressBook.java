@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a house with the same identity as {@code housse} exists in the address book.
      */
     public boolean hasHouse(House house) {
         requireNonNull(house);

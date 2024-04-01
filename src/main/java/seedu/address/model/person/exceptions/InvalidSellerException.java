@@ -1,8 +1,7 @@
 package seedu.address.model.person.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Persons (Persons are considered duplicates if they have the same
- * identity).
+ * Signals that the Person is not a Seller.
  */
 public class InvalidSellerException extends RuntimeException {
     public InvalidSellerException() {
