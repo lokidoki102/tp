@@ -12,7 +12,8 @@
         "level": "15",
         "postalCode": "654321",
         "street": "Orchard Street",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "100000"
       }
     ],
     "tags" : [ "friends" ]
@@ -27,7 +28,8 @@
         "level": "16",
         "postalCode": "654321",
         "street": "Orchard Street",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "200000"
       }
     ],
     "tags" : [ "friends" ]
@@ -43,7 +45,8 @@
         "level": "17",
         "postalCode": "654322",
         "street": "Orchard Street 1",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "300000"
       }
     ],
     "tags" : [ ]
@@ -59,7 +62,8 @@
         "level": "18",
         "postalCode": "654323",
         "street": "Orchard Street 2",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "400000"
       }
     ],
     "tags" : [ "friends" ]
@@ -75,7 +79,8 @@
         "level": "19",
         "postalCode": "654324",
         "street": "Orchard Street 3",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "500000"
       }
     ],
     "tags" : [ ]
@@ -91,7 +96,8 @@
         "level": "20",
         "postalCode": "654325",
         "street": "Orchard Street 4",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "600000"
       }
     ],
     "tags" : [ ]
@@ -107,7 +113,8 @@
         "level": "21",
         "postalCode": "654326",
         "street": "Orchard Street 5",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "700000"
       }
     ],
     "tags" : [ ]
@@ -119,5 +126,19 @@
     "housingType" : "Condominium",
     "budget": "123000",
     "tags" : [ "friend", "husband" ]
+  }, {
+    "name" : "Zack York",
+    "phone" : "82937163",
+    "email" : "zack@gmail.com",
+    "housingType" : "Hdb",
+    "budget": "400000",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Zane York",
+    "phone" : "82937163",
+    "email" : "zack@gmail.com",
+    "housingType" : "Hdb",
+    "budget": "500000",
+    "tags" : [ "friends" ]
   } ]
 }

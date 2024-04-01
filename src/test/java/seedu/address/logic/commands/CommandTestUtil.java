@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
@@ -25,6 +26,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditBuyerDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -66,7 +68,8 @@ public class CommandTestUtil {
     public static final String VALID_STREET_BOB = "Toa Payoh Road";
     public static final String VALID_UNIT_NUMBER_AMY = "38";
     public static final String VALID_UNIT_NUMBER_BOB = "38";
-
+    public static final String VALID_PRICE_AMY = "3000000";
+    public static final String VALID_PRICE_BOB = "4000000";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -87,12 +90,15 @@ public class CommandTestUtil {
     public static final String STREET_DESC_BOB = " " + PREFIX_STREET + VALID_STREET_BOB;
     public static final String UNIT_NUMBER_DESC_AMY = " " + PREFIX_UNITNUMBER + VALID_UNIT_NUMBER_AMY;
     public static final String UNIT_NUMBER_DESC_BOB = " " + PREFIX_UNITNUMBER + VALID_UNIT_NUMBER_BOB;
+    public static final String PRICE_DESC_AMY = " " + PREFIX_PRICE + VALID_PRICE_AMY;
+    public static final String PRICE_DESC_BOB = " " + PREFIX_PRICE + VALID_PRICE_AMY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_HOUSING_TYPE_DESC = " " + PREFIX_HOUSING_TYPE;
     public static final String INVALID_BUDGET_DESC = " " + PREFIX_BUDGET; // "" not allowed in budget
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE; // "" not allowed in price
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -101,11 +107,21 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_AMY;
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_BOB;
+
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BUYER_AMY = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_BUYER_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

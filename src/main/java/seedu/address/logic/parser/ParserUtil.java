@@ -14,6 +14,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Address;
@@ -233,5 +234,20 @@ public class ParserUtil {
             throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
         }
         return new Budget(trimmedBudget);
+    }
+
+    /**
+     * Parses a {@code String price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedPrice);
     }
 }

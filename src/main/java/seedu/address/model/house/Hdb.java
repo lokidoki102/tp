@@ -13,6 +13,7 @@ public class Hdb implements House {
     public final UnitNumber unitNumber;
     public final Block block;
     public final Level level;
+    public final Price price;
 
     /**
      * Constructs a HDB.
@@ -22,13 +23,15 @@ public class Hdb implements House {
      * @param street     The street of the house.
      * @param block      The block of the house.
      * @param level      The level of the house.
+     * @param price      The price of the house.
      */
-    public Hdb(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber, Block block) {
+    public Hdb(Level level, PostalCode postalCode, Street street, UnitNumber unitNumber, Block block, Price price) {
         this.postalCode = postalCode;
         this.street = street;
         this.unitNumber = unitNumber;
         this.block = block;
         this.level = level;
+        this.price = price;
     }
 
     /**
@@ -80,12 +83,21 @@ public class Hdb implements House {
     }
 
     /**
+     * Retrieves the price of the HDB.
+     *
+     * @return The price of the HDB.
+     */
+    @Override
+    public Price getPrice() {
+        return price;
+    }
+
+    /**
      * Checks if this house is equal to another object.
      *
      * @param other The object to compare to.
      * @return True if the objects are equal, false otherwise.
      */
-
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -115,6 +127,7 @@ public class Hdb implements House {
                 .add("Level", level)
                 .add("Unit Number", unitNumber)
                 .add("Postal Code", postalCode)
+                .add("Price", price)
                 .toString();
     }
 }

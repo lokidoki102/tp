@@ -87,6 +87,9 @@ public class PersonCard extends UiPart<Region> {
                         houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
                     }
 
+                    // Add price to house
+                    houseDetails.getChildren().add(new Label("Price: $" + house.getPrice().toString()));
+
                     // Add the house details to the houses container
                     housesContainer.getChildren().add(houseDetails);
 

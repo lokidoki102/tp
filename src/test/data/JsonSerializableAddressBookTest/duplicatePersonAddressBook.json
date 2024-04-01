@@ -11,7 +11,8 @@
         "level": "15",
         "postalCode": "654321",
         "street": "Orchid Street",
-        "unitNumber": "150"
+        "unitNumber": "150",
+        "price": "800000"
       }
     ],
     "tags": [ "friends" ]
