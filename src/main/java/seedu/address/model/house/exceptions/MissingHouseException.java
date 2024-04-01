@@ -1,7 +1,7 @@
 package seedu.address.model.house.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Houses (Housess are considered duplicates if they have the same
+ * Signals that the operation will result in Missing houses
  * identity).
  */
 public class MissingHouseException extends RuntimeException {

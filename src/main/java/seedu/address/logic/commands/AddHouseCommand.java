@@ -19,13 +19,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
 /**
- * Adds a seller to the address book.
+ * Adds a house to the seller.
  */
 public class AddHouseCommand extends Command {
 
     public static final String COMMAND_WORD = "addHouse";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a house to EstateEase. Indicate N/A for "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a house to a Seller. Indicate N/A for "
             + "nonexistent fields. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -47,7 +47,7 @@ public class AddHouseCommand extends Command {
             + PREFIX_PRICE + "99999 ";
 
     public static final String MESSAGE_SUCCESS = "New house added!";
-    public static final String MESSAGE_DUPLICATE_SELLER = "This house already exists in EstateEase";
+    public static final String MESSAGE_DUPLICATE_HOUSE = "This house already exists in EstateEase";
 
     public static final String MESSAGE_INVALID_SELLER = "This Seller does not exist in EstateEase";
 
@@ -60,6 +60,7 @@ public class AddHouseCommand extends Command {
      */
     public AddHouseCommand(House house, Name name) {
         requireNonNull(house);
+        requireNonNull(name);
         houseToAdd = house;
         nameToCheck = name;
     }
@@ -76,7 +77,7 @@ public class AddHouseCommand extends Command {
         requireNonNull(model);
 
         if (model.hasHouse(houseToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SELLER);
+            throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
         }
 
         if (!model.hasPerson(nameToCheck)) {

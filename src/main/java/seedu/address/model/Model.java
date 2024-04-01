@@ -73,7 +73,7 @@ public interface Model {
 
 
     /**
-     * Returns true if a house with the same postal code as {@code house} exists in the address book.
+     * Returns true if a house with the same address details as {@code house} exists in the address book.
      */
     boolean hasHouse(House house);
 
