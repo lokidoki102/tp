@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditSellerCommand;
-import seedu.address.logic.commands.EditSellerCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -110,7 +110,7 @@ public class EditSellerCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + HOUSING_TYPE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditSellerCommand expectedCommand = new EditSellerCommand(targetIndex, descriptor);
@@ -123,7 +123,7 @@ public class EditSellerCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditSellerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditSellerCommand.EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditSellerCommand expectedCommand = new EditSellerCommand(targetIndex, descriptor);
 
@@ -135,7 +135,7 @@ public class EditSellerCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditSellerCommand.EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditSellerCommand expectedCommand = new EditSellerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -201,7 +201,7 @@ public class EditSellerCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditSellerDescriptorBuilder().withTags().build();
+        EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withTags().build();
         EditSellerCommand expectedCommand = new EditSellerCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

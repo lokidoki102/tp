@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditSellerCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.testutil.EditSellerDescriptorBuilder;
 
 public class EditSellerDescriptorTest {
@@ -21,7 +21,7 @@ public class EditSellerDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditSellerDescriptor descriptorWithSameValues = new EditSellerDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +37,7 @@ public class EditSellerDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditSellerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditSellerDescriptor editedAmy = new EditSellerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
@@ -59,13 +59,13 @@ public class EditSellerDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", housingType="
-                + editPersonDescriptor.getHousingType().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditSellerDescriptor editSellerDescriptor = new EditSellerDescriptor();
+        String expected = EditSellerDescriptor.class.getCanonicalName()
+                + "{name=" + editSellerDescriptor.getName().orElse(null)
+                + ", phone=" + editSellerDescriptor.getPhone().orElse(null)
+                + ", email=" + editSellerDescriptor.getEmail().orElse(null)
+                + ", housingType=" + editSellerDescriptor.getHousingType().orElse(null)
+                + ", tags=" + editSellerDescriptor.getTags().orElse(null) + "}";
+        assertEquals(expected, editSellerDescriptor.toString());
     }
 }

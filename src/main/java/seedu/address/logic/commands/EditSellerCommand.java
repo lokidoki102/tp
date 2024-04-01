@@ -34,8 +34,8 @@ public class EditSellerCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the seller identified "
+            + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -46,23 +46,24 @@ public class EditSellerCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited Person(Seller): %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This seller already exists in the address book.";
+    public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a seller.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditSellerDescriptor editSellerDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index                of the seller in the filtered person list to edit
+     * @param editSellerDescriptor details to edit the seller with
      */
-    public EditSellerCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditSellerCommand(Index index, EditSellerDescriptor editSellerDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editSellerDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editSellerDescriptor = new EditSellerDescriptor(editSellerDescriptor);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class EditSellerCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, editSellerDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -83,21 +84,21 @@ public class EditSellerCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Seler} with the details of {@code sellerToEdit}
+     * edited with {@code editSellerDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditSellerDescriptor editSellerDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        HousingType updatedHouse = editPersonDescriptor.getHousingType().orElse(personToEdit.getHousingType());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editSellerDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editSellerDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editSellerDescriptor.getEmail().orElse(personToEdit.getEmail());
+        HousingType updatedHouse = editSellerDescriptor.getHousingType().orElse(personToEdit.getHousingType());
+        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedHouse,
                 updatedTags);
@@ -116,36 +117,36 @@ public class EditSellerCommand extends Command {
 
         EditSellerCommand otherEditSellerCommand = (EditSellerCommand) other;
         return index.equals(otherEditSellerCommand.index)
-                && editPersonDescriptor.equals(otherEditSellerCommand.editPersonDescriptor);
+                && editSellerDescriptor.equals(otherEditSellerCommand.editSellerDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editPersonDescriptor", editSellerDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the seller with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditSellerDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private HousingType housingType;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {
+        public EditSellerDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditSellerDescriptor(EditSellerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -217,16 +218,16 @@ public class EditSellerCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditSellerDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(housingType, otherEditPersonDescriptor.housingType)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditSellerDescriptor otherEditSellerDescriptor = (EditSellerDescriptor) other;
+            return Objects.equals(name, otherEditSellerDescriptor.name)
+                    && Objects.equals(phone, otherEditSellerDescriptor.phone)
+                    && Objects.equals(email, otherEditSellerDescriptor.email)
+                    && Objects.equals(housingType, otherEditSellerDescriptor.housingType)
+                    && Objects.equals(tags, otherEditSellerDescriptor.tags);
         }
 
         @Override

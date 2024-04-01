@@ -17,7 +17,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
-import seedu.address.logic.commands.EditSellerCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.model.house.Condominium;
 import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
@@ -118,7 +118,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditSellerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

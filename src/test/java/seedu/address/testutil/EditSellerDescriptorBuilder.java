@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditSellerCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -17,21 +17,21 @@ import seedu.address.model.tag.Tag;
  */
 public class EditSellerDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditSellerDescriptor descriptor;
 
     public EditSellerDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditSellerDescriptor();
     }
 
-    public EditSellerDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditSellerDescriptorBuilder(EditSellerDescriptor descriptor) {
+        this.descriptor = new EditSellerDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
     public EditSellerDescriptorBuilder(Person person) {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditSellerDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
@@ -81,7 +81,7 @@ public class EditSellerDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditSellerDescriptor build() {
         return descriptor;
     }
 }

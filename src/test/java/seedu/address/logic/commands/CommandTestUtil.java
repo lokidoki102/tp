@@ -104,8 +104,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditSellerCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditSellerCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_AMY;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_BOB;
 
     public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_AMY;
     public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_BOB;
