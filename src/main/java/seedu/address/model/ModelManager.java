@@ -23,6 +23,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private Person currentDisplayedPerson = null;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -110,6 +112,13 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public void showPerson(Person target) {
+        requireNonNull(target);
+        this.currentDisplayedPerson = target;
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

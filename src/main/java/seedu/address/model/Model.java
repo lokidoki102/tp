@@ -76,6 +76,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Displays the given person.
+     * {@code target} must exist in the address book.
+     */
+    void showPerson(Person target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
