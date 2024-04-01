@@ -58,8 +58,16 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("label");
+                    if ("Seller".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-seller");
+                    } else if ("Buyer".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-buyer");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
             // Show no budget
