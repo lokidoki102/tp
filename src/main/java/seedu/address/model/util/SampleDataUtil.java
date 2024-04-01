@@ -14,6 +14,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Budget;
@@ -45,19 +46,19 @@ public class SampleDataUtil {
     public static Seller[] getSampleSellers() {
         ArrayList<House> davidLiHouses = new ArrayList<>();
         davidLiHouses.add(new Hdb(new Level("3"), new PostalCode("098703"),
-                new Street("Ang Mo Kio Avenue 1"), new UnitNumber("02"), new Block("51")));
+                new Street("Ang Mo Kio Avenue 1"), new UnitNumber("02"), new Block("51"), new Price("1111111")));
         ArrayList<House> irfanHouses = new ArrayList<>();
         irfanHouses.add(new Condominium(new Level("4"), new PostalCode("098713"),
-                new Street("Ang Mo Kio Avenue 2"), new UnitNumber("03"), new Block("52")));
+                new Street("Ang Mo Kio Avenue 2"), new UnitNumber("03"), new Block("52"), new Price("2222222")));
         ArrayList<House> royHouses = new ArrayList<>();
         royHouses.add(new Hdb(new Level("5"), new PostalCode("098723"),
-                new Street("Ang Mo Kio Avenue 3"), new UnitNumber("04"), new Block("53")));
+                new Street("Ang Mo Kio Avenue 3"), new UnitNumber("04"), new Block("53"), new Price("3333333")));
         royHouses.add(new Hdb(new Level("6"), new PostalCode("098724"),
-                new Street("Toa Payoh Avenue 4"), new UnitNumber("05"), new Block("54")));
+                new Street("Toa Payoh Avenue 4"), new UnitNumber("05"), new Block("54"), new Price("4444444")));
 
         return new Seller[] {
             new Seller(new Name("David Li"), new Phone("91031282"),
-                        new Email("lidavid@example.com"), new HousingType("HDB"),
+                        new Email("lidavid@example.com"), new HousingType("Hdb"),
                         davidLiHouses,
                         getTagSet("family")),
             new Seller(new Name("Irfan Ibrahim"), new Phone("92492021"),
@@ -65,7 +66,7 @@ public class SampleDataUtil {
                         irfanHouses,
                         getTagSet("classmates")),
             new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"), new HousingType("HDB"),
+                        new Email("royb@example.com"), new HousingType("Hdb"),
                         royHouses,
                         getTagSet("colleagues"))
         };

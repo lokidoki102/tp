@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
@@ -26,6 +27,7 @@ import seedu.address.model.house.HousingType;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Email;
@@ -48,19 +50,21 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_HOUSING_TYPE, PREFIX_LEVEL, PREFIX_BLOCK, PREFIX_STREET,
-                        PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_TAG);
+                        PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
-                PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER,
+                PREFIX_PRICE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_HOUSING_TYPE, PREFIX_LEVEL,
-                PREFIX_EMAIL, PREFIX_BLOCK, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_POSTALCODE);
+                PREFIX_EMAIL, PREFIX_BLOCK, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         HousingType housingType = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
+        Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
@@ -77,19 +81,19 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         if (housingType.toString().toLowerCase().equals("hdb")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Hdb(level, postalCode, street, unitNumber, block));
+            houses.add(new Hdb(level, postalCode, street, unitNumber, block, price));
             // Non-landed unit: Has No Block, Has Level
         } else if (housingType.toString().toLowerCase().equals("condominium")) {
             Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Condominium(level, postalCode, street, unitNumber, block));
+            houses.add(new Condominium(level, postalCode, street, unitNumber, block, price));
             // Non-landed unit: Has No Block, Has Level
         } else if (!hasBlock && hasLevel) {
             Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Condominium(level, postalCode, street, unitNumber));
+            houses.add(new Condominium(level, postalCode, street, unitNumber, price));
             // Landed unit: Has No Block, Has No Level
         } else {
-            houses.add(new Landed(unitNumber, postalCode, street));
+            houses.add(new Landed(unitNumber, postalCode, street, price));
         }
 
         Seller seller = new Seller(name, phone, email, housingType, houses, tagList);

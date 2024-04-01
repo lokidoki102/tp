@@ -37,6 +37,7 @@ import seedu.address.model.house.Hdb;
 import seedu.address.model.house.Landed;
 import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Buyer;
@@ -51,34 +52,38 @@ public class TypicalPersons {
     public static final Seller ALICE_SELLER = new SellerBuilder().withName("Alice Pauline")
             .withHousingType("Hdb").withEmail("alice@example.com")
             .withPhone("94351253").withHouses(new Hdb(new Level("15"),
-                    new PostalCode("654321"), new Street("Orchard Street"), new UnitNumber("150"), new Block("10A")))
+                    new PostalCode("654321"), new Street("Orchard Street"), new UnitNumber("150"), new Block("10A"),
+                    new Price("123456")))
             .withTags("friends").build();
     public static final Seller BENSON_SELLER = new SellerBuilder().withName("Benson Meier")
             .withHousingType("Hdb").withEmail("johnd@example.com")
             .withPhone("94351253").withHouses(new Hdb(new Level("16"), new PostalCode("654321"),
-                    new Street("Orchard Street"), new UnitNumber("150"), new Block("9A")))
+                    new Street("Orchard Street"), new UnitNumber("150"), new Block("9A"), new Price("789101112")))
             .withTags("friends").build();
     public static final Seller CARL_SELLER = new SellerBuilder().withName("Carl Kurz").withPhone("95352563")
             .withHousingType("Hdb").withEmail("heinz@example.com").withHouses(new Hdb(new Level("17"),
-                    new PostalCode("654322"), new Street("Orchard Street 1"), new UnitNumber("150"), new Block("10B")))
+                    new PostalCode("654322"), new Street("Orchard Street 1"), new UnitNumber("150"), new Block("10B"),
+                    new Price("43146141")))
             .build();
     public static final Seller DANIEL_SELLER = new SellerBuilder().withName("Daniel Meier").withPhone("87652533")
             .withHousingType("Hdb")
             .withEmail("cornelia@example.com").withHouses(new Hdb(new Level("18"),
                     new PostalCode("654323"), new Street("Orchard Street 2"),
-                    new UnitNumber("150"), new Block("10C"))).withTags("friends").build();
+                    new UnitNumber("150"), new Block("10C"), new Price("3123123"))).withTags("friends").build();
     public static final Seller ELLE_SELLER = new SellerBuilder().withName("Elle Meyer").withPhone("9482224")
             .withHousingType("Hdb")
             .withEmail("heinz@example.com").withHouses(new Hdb(new Level("19"), new PostalCode("654324"),
-                    new Street("Orchard Street 3"), new UnitNumber("150"), new Block("10D"))).build();
+                    new Street("Orchard Street 3"), new UnitNumber("150"), new Block("10D"),
+                    new Price("3453465"))).build();
     public static final Seller FIONA_SELLER = new SellerBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withHousingType("Hdb")
             .withEmail("heinz@example.com").withHouses(new Hdb(new Level("20"), new PostalCode("654325"),
-                    new Street("Orchard Street 4"), new UnitNumber("150"), new Block("10E"))).build();
+                    new Street("Orchard Street 4"), new UnitNumber("150"), new Block("10E"),
+                    new Price("55555555"))).build();
     public static final Seller GEORGE_SELLER = new SellerBuilder().withName("George Best").withPhone("9482442")
             .withHousingType("Landed")
             .withEmail("heinz@example.com").withHouses(new Landed(new UnitNumber("150"), new PostalCode("654326"),
-                    new Street("Orchard Street 5"))).build();
+                    new Street("Orchard Street 5"), new Price("8945939"))).build();
     public static final Buyer ALICE_BUYER = new BuyerBuilder().withName("George Best").withPhone("9482442")
             .withEmail("heinz@example.com").withBudget("333000").withHousingType("Hdb").build();
 
@@ -87,12 +92,12 @@ public class TypicalPersons {
             .withHousingType("Hdb")
             .withEmail("stefan@example.com").withEmail("heinz@example.com").withHouses(new Hdb(new Level("22"),
                     new PostalCode("654327"), new Street("Orchard Street 6"),
-                    new UnitNumber("150"), new Block("3"))).build();
+                    new UnitNumber("150"), new Block("3"), new Price("7777777"))).build();
     public static final Seller IDA_SELLER = new SellerBuilder().withName("Ida Mueller").withPhone("8482131")
             .withHousingType("Hdb")
             .withEmail("hans@example.com").withEmail("heinz@example.com").withHouses(new Hdb(new Level("23"),
                     new PostalCode("654328"), new Street("Orchard Street 7"), new UnitNumber("150"),
-                    new Block("4"))).build();
+                    new Block("4"), new Price("9876372"))).build();
 
     // Manually added - Seller's details found in {@code CommandTestUtil}
     public static final Seller AMY_SELLER = new SellerBuilder().withName(VALID_NAME_AMY)
@@ -113,7 +118,7 @@ public class TypicalPersons {
     // Manually added - Buyer's details found in {@code CommandTestUtil}
     public static final Buyer ALI_BUYER = new BuyerBuilder().withName("Ali York")
             .withPhone("82937163").withEmail("ali@gmail.com").withBudget("400000")
-            .withHousingType("HDB").withTags("friends").build();
+            .withHousingType("Hdb").withTags("friends").build();
     public static final Buyer BEN_BUYER = new BuyerBuilder().withName(VALID_NAME_BEN).withPhone(VALID_PHONE_BEN)
             .withEmail(VALID_EMAIL_BEN).withBudget(VALID_BUDGET_BEN).withHousingType(VALID_HOUSING_TYPE_BEN)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
@@ -128,6 +133,18 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withBudget(VALID_BUDGET_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+    public static final Buyer ZACK_BUYER = new BuyerBuilder().withName("Zack York")
+            .withPhone("82937163").withEmail("zack@gmail.com").withBudget("400000")
+            .withHousingType("Hdb").withTags("friends").build();
+    public static final Buyer ZANE_BUYER = new BuyerBuilder().withName("Zane York")
+            .withPhone("82937163").withEmail("zack@gmail.com").withBudget("500000")
+            .withHousingType("Hdb").withTags("friends").build();
+    public static final Buyer ZURI_BUYER = new BuyerBuilder().withName("Zuri")
+            .withPhone("63936234").withEmail("Zuri@gmail.com").withBudget("600000")
+            .withHousingType("Hdb").withTags("someone").build();
+    public static final Buyer ZYRA_BUYER = new BuyerBuilder().withName("Zyra Moore")
+            .withPhone("82936234").withEmail("zyra@gmail.com").withBudget("700000")
+            .withHousingType("Hdb").withTags("someone").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
@@ -157,8 +174,7 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         List<Person> typicalPersons = Arrays.asList(ALICE_SELLER, BEN_BUYER, BENSON_SELLER,
-                CARL_SELLER, DANIEL_SELLER, ELLE_SELLER, FIONA_SELLER, GEORGE_SELLER);
-
+                CARL_SELLER, DANIEL_SELLER, ELLE_SELLER, FIONA_SELLER, GEORGE_SELLER, ZACK_BUYER, ZANE_BUYER);
         List<Person> sortedTypicalPersons = typicalPersons.stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
                 .collect(Collectors.toList());

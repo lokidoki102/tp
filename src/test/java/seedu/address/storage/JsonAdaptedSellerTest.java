@@ -123,7 +123,7 @@ public class JsonAdaptedSellerTest {
     public void toModelType_invalidHouses_throwsIllegalValueException() {
         List<JsonAdaptedHouse> invalidHouses = new ArrayList<>(VALID_HOUSES);
         invalidHouses.add(new JsonAdaptedHouse("InvalidType", "InvalidBlock", "InvalidLevel",
-                "123456", "Maple Street", "120A"));
+                "123456", "Maple Street", "120A", "12300000"));
         JsonAdaptedSeller seller = new JsonAdaptedSeller(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_HOUSING_TYPE,
                 invalidHouses, VALID_TAGS);
         assertThrows(IllegalValueException.class, seller::toModelType);
