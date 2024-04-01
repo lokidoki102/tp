@@ -13,6 +13,7 @@ import seedu.address.model.tag.Tag;
 public class Buyer extends Person {
 
     private final Budget budget;
+    private final HousingType preferredHousingType;
 
     /**
      * Constructs a new Buyer instance without specifying a house. Default constructor.
@@ -20,17 +21,22 @@ public class Buyer extends Person {
      * @param name        The name of the buyer.
      * @param phone       The phone number of the buyer.
      * @param email       The email address of the buyer.
-     * @param housingType The type of housing the buyer wants.
+     * @param preferredHousingType The type of housing the buyer wants.
      * @param tags        The tags associated with the buyer.
      * @param budget      The budget of the buyer.
      */
-    public Buyer(Name name, Phone phone, Email email, HousingType housingType, Budget budget, Set<Tag> tags) {
-        super(name, phone, email, housingType, tags);
+    public Buyer(Name name, Phone phone, Email email, Budget budget, HousingType preferredHousingType, Set<Tag> tags) {
+        super(name, phone, email, tags);
+        this.preferredHousingType = preferredHousingType;
         this.budget = budget;
     }
 
     public Budget getBudget() {
         return budget;
+    }
+
+    public HousingType getPreferredHousingType() {
+        return preferredHousingType;
     }
 
     @Override
@@ -39,7 +45,6 @@ public class Buyer extends Person {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Buyer)) {
             return false;
         }
@@ -49,12 +54,13 @@ public class Buyer extends Person {
         }
 
         Buyer buyer = (Buyer) other;
-        return Objects.equals(budget, buyer.budget);
+        return Objects.equals(budget, buyer.budget)
+                && Objects.equals(preferredHousingType, buyer.preferredHousingType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), budget);
+        return Objects.hash(super.hashCode(), budget, preferredHousingType);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class Buyer extends Person {
                 .add("name", getName())
                 .add("phone", getPhone())
                 .add("email", getEmail())
-                .add("housingType", getHousingType())
+                .add("housingType", preferredHousingType)
                 .add("budget", budget)
                 .add("tags", getTags())
                 .toString();

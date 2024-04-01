@@ -114,11 +114,11 @@ public class EditBuyerCommand extends Command {
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
         Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
-        HousingType updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
+        HousingType updatedHousingType = editBuyerDescriptor.getHousingType()
+                .orElse(buyerToEdit.getPreferredHousingType());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedHousingType, updatedBudget,
-                updatedTags);
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType, updatedTags);
     }
 
     @Override

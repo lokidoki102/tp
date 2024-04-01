@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * Represents a House's housing type.
- * Guarantees: immutable; is valid as declared in {@link #isValidLevel(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidHousingType(String)}
  */
 public class HousingType {
 
@@ -28,14 +28,14 @@ public class HousingType {
      */
     public HousingType(String housingType) {
         requireNonNull(housingType);
-        checkArgument(isValidLevel(housingType), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidHousingType(housingType), MESSAGE_CONSTRAINTS);
         value = housingType;
     }
 
     /**
      * Returns true if a given string is a valid housing type.
      */
-    public static boolean isValidLevel(String test) {
+    public static boolean isValidHousingType(String test) {
         return VALIDATION_REGEX.contains(test.toLowerCase());
     }
 

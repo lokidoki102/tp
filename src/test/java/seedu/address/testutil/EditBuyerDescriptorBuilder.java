@@ -35,7 +35,7 @@ public class EditBuyerDescriptorBuilder {
         this.descriptor.setName(buyer.getName());
         this.descriptor.setPhone(buyer.getPhone());
         this.descriptor.setEmail(buyer.getEmail());
-        this.descriptor.setHousingType(buyer.getHousingType());
+        this.descriptor.setHousingType(buyer.getPreferredHousingType());
         this.descriptor.setBudget(buyer.getBudget());
         this.descriptor.setTags(buyer.getTags());
     }

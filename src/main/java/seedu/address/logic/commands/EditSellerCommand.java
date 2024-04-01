@@ -102,12 +102,10 @@ public class EditSellerCommand extends Command {
         Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
-        HousingType updatedHouse = editSellerDescriptor.getHousingType().orElse(sellerToEdit.getHousingType());
         Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
         ArrayList<House> houses = sellerToEdit.getHouses();
 
-        return new Seller(updatedName, updatedPhone, updatedEmail, updatedHouse, houses,
-                updatedTags);
+        return new Seller(updatedName, updatedPhone, updatedEmail, houses, updatedTags);
     }
 
     @Override

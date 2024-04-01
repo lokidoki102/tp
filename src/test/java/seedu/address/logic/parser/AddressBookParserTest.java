@@ -45,15 +45,6 @@ public class AddressBookParserTest {
         assertEquals(new AddBuyerCommand(buyer), command);
     }
 
-    //    This test case needed to be modified based on the Condo, Hdb, Landed criteria (since some of the fields
-    //    can be empty
-    //    @Test
-    //    public void parseCommand_addSeller() throws Exception {
-    //        Seller seller = new SellerBuilder().build();
-    //        AddSellerCommand command = (AddSellerCommand) parser.parseCommand(PersonUtil.getAddSellerCommand(seller));
-    //        assertEquals(new AddSellerCommand(seller), command);
-    //    }
-
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);

@@ -5,7 +5,6 @@ package seedu.address.model.house;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public interface House {
-    // I think we should take note this part, I believe that we should separate out House and Housing Type
     public static final String MESSAGE_CONSTRAINTS = "Housing types can only be Hdb, Condominium or Landed.";
     public static final String[] VALIDATION_REGEX = {"Hdb", "Condominium", "Landed"};
 

@@ -60,6 +60,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_HOUSING_TYPE, PREFIX_LEVEL,
                 PREFIX_EMAIL, PREFIX_BLOCK, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -67,37 +68,47 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
-        boolean hasLevel = argMultimap.getValue(PREFIX_LEVEL).isPresent();
-
         ArrayList<House> houses = new ArrayList<>();
+        // Seperated out the methods to create hdb, condominium and landed (adhere to SLAP)
+        houses.add(createHouse(argMultimap, housingType, price));
+
+        Seller seller = new Seller(name, phone, email, houses, tagList);
+        return new AddSellerCommand(seller);
+    }
+
+    private House createHouse(ArgumentMultimap argMultimap, HousingType housingType, Price price)
+            throws ParseException {
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTALCODE).get());
         Street street = ParserUtil.parseStreet(argMultimap.getValue(PREFIX_STREET).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNITNUMBER).get());
 
-        // Non-landed unit: Has Block, Has Level
-        // CHANGE TO SWITCH CASE
-
-        if (housingType.toString().toLowerCase().equals("hdb")) {
-            Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-            Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Hdb(level, postalCode, street, unitNumber, block, price));
-            // Non-landed unit: Has No Block, Has Level
-        } else if (housingType.toString().toLowerCase().equals("condominium")) {
-            Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-            Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Condominium(level, postalCode, street, unitNumber, block, price));
-            // Non-landed unit: Has No Block, Has Level
-        } else if (!hasBlock && hasLevel) {
-            Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-            houses.add(new Condominium(level, postalCode, street, unitNumber, price));
-            // Landed unit: Has No Block, Has No Level
-        } else {
-            houses.add(new Landed(unitNumber, postalCode, street, price));
+        switch (housingType.toString().toLowerCase()) {
+        case "hdb":
+            return createHdb(argMultimap, postalCode, street, unitNumber, price);
+        case "condominium":
+            return createCondominium(argMultimap, postalCode, street, unitNumber, price);
+        default:
+            return new Landed(unitNumber, postalCode, street, price);
         }
+    }
 
-        Seller seller = new Seller(name, phone, email, housingType, houses, tagList);
-        return new AddSellerCommand(seller);
+    private Hdb createHdb(ArgumentMultimap argMultimap, PostalCode postalCode, Street street,
+                          UnitNumber unitNumber, Price price) throws ParseException {
+        Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
+        Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
+        return new Hdb(level, postalCode, street, unitNumber, block, price);
+    }
+
+    private Condominium createCondominium(ArgumentMultimap argMultimap, PostalCode postalCode, Street street,
+                                          UnitNumber unitNumber, Price price) throws ParseException {
+        boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
+        Level level = hasBlock ? ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()) : null;
+        Block block = hasBlock ? ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get()) : null;
+        if (block != null && level != null) {
+            return new Condominium(level, postalCode, street, unitNumber, block, price);
+        } else {
+            return new Condominium(level, postalCode, street, unitNumber, price);
+        }
     }
 
     /**
