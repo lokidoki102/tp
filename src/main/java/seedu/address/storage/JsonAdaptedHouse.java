@@ -20,7 +20,7 @@ import seedu.address.model.house.UnitNumber;
  */
 public class JsonAdaptedHouse {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "House's %s field is missing!";
-    private final String type;
+    private final String housingType;
     private final String block;
     private final String level;
     private final String postalCode;
@@ -32,14 +32,14 @@ public class JsonAdaptedHouse {
      * Constructs a {@code JsonAdaptedHouse} with the given house details.
      */
     @JsonCreator
-    public JsonAdaptedHouse(@JsonProperty("type") String type,
+    public JsonAdaptedHouse(@JsonProperty("housingType") String housingType,
                             @JsonProperty("block") String block,
                             @JsonProperty("level") String level,
                             @JsonProperty("postalCode") String postalCode,
                             @JsonProperty("street") String street,
                             @JsonProperty("unitNumber") String unitNumber,
                             @JsonProperty("price") String price) {
-        this.type = type;
+        this.housingType = housingType;
         this.block = block;
         this.level = level;
         this.postalCode = postalCode;
@@ -56,16 +56,16 @@ public class JsonAdaptedHouse {
             Condominium condominium = (Condominium) source;
             this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
             this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
-            this.type = "Condominium";
+            this.housingType = "Condominium";
         } else if (source instanceof Hdb) {
             Hdb hdb = (Hdb) source;
             this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
             this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
-            this.type = "Hdb";
+            this.housingType = "Hdb";
         } else {
             this.block = null;
             this.level = null;
-            this.type = "Landed";
+            this.housingType = "Landed";
         }
         this.postalCode = source.getPostalCode().value;
         this.street = source.getStreet().value;
@@ -114,7 +114,7 @@ public class JsonAdaptedHouse {
         }
         final Price modelPrice = new Price(price);
 
-        if ("Condominium".equals(type)) {
+        if ("Condominium".equals(housingType)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
             if (modelBlock != null) {
@@ -123,11 +123,11 @@ public class JsonAdaptedHouse {
             } else {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelPrice);
             }
-        } else if ("hdb".equalsIgnoreCase(type)) {
+        } else if ("hdb".equalsIgnoreCase(housingType)) {
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
             return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock, modelPrice);
-        } else if ("Landed".equals(type)) {
+        } else if ("Landed".equals(housingType)) {
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet, modelPrice);
         } else {
             throw new IllegalValueException("Unknown House Type");
