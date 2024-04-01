@@ -67,4 +67,11 @@ public interface House {
      */
     @Override
     public String toString();
+
+    /**
+     * Retrieves the housing type of the house.
+     *
+     * @return The housing type of the house.
+     */
+    HousingType getHousingType();
 }
