@@ -26,7 +26,7 @@ public class BuyerBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private HousingType housingType;
+    private HousingType preferredHousingType;
     private Budget budget;
     private Set<Tag> tags;
 
@@ -37,7 +37,7 @@ public class BuyerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        housingType = new HousingType(DEFAULT_HOUSING_TYPE);
+        preferredHousingType = new HousingType(DEFAULT_HOUSING_TYPE);
         budget = new Budget(DEFAULT_BUDGET);
         tags = new HashSet<>();
     }
@@ -49,7 +49,7 @@ public class BuyerBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        housingType = personToCopy.getHousingType();
+        preferredHousingType = personToCopy.getPreferredHousingType();
         budget = personToCopy.getBudget();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -82,7 +82,7 @@ public class BuyerBuilder {
      * Sets the {@code Address} of the {@code Buyer} that we are building.
      */
     public BuyerBuilder withHousingType(String housingType) {
-        this.housingType = new HousingType(housingType);
+        this.preferredHousingType = new HousingType(housingType);
         return this;
     }
 
@@ -103,6 +103,6 @@ public class BuyerBuilder {
     }
 
     public Buyer build() {
-        return new Buyer(name, phone, email, housingType, budget, tags);
+        return new Buyer(name, phone, email, budget, preferredHousingType, tags);
     }
 }

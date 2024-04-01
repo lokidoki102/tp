@@ -51,7 +51,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Budget budget = ParserUtil.parseBudget(argMultimap.getValue(PREFIX_BUDGET).get());
 
-        Buyer buyer = new Buyer(name, phone, email, housingType, budget, tagList);
+        Buyer buyer = new Buyer(name, phone, email, budget, housingType, tagList);
         return new AddBuyerCommand(buyer);
     }
 

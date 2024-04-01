@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.house.HousingType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,20 +20,16 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    // I think this one we have to clarify whether housingType should be under House or Person,
-    // because it seems very weird to be under Person
-    private final HousingType housingType;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, HousingType housingType, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, housingType, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.housingType = housingType;
         this.tags.addAll(tags);
     }
 
@@ -49,11 +44,6 @@ public class Person {
     public Email getEmail() {
         return email;
     }
-
-    public HousingType getHousingType() {
-        return housingType;
-    }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -95,14 +85,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && housingType.equals(otherPerson.housingType)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, housingType, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -111,7 +100,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("housingType", housingType)
                 .add("tags", tags)
                 .toString();
     }
