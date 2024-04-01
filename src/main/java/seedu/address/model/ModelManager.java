@@ -119,8 +119,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteHouse(House house) {
-UNDONE
+    public void deleteHouse(House house, Person owner) {
+        addressBook.removeHouse(house, owner);
     }
 
     @Override
@@ -130,21 +130,17 @@ UNDONE
     }
 
     @Override
-    public void addHouse(House house, Person person) {
-UNDONE
+    public void addHouse(House house, Person owner) {
+        addressBook.addHouse(house, owner);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public void setHouse(House target, House editedHouse) {
-UNDONE
-    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

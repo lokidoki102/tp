@@ -8,7 +8,11 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.house.House;
+import seedu.address.model.house.exceptions.DuplicateHouseException;
+import seedu.address.model.house.exceptions.MissingHouseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.InvalidSellerException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -76,6 +80,23 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Adds a house to the person.
+     * The house must not already exist in the person's houses.
+     */
+    public void addHouse(House toAdd, Person owner) {
+        requireNonNull(toAdd);
+        if (!(owner instanceof Seller)) {
+            throw new InvalidSellerException();
+        } else if (((Seller)owner).hasHouse(toAdd)) {
+            throw new DuplicateHouseException();
+        }
+        Seller seller = (Seller) owner;
+        seller.addHouse(toAdd);
+        remove(owner);
+        add(seller);
+    }
+
+    /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
@@ -104,6 +125,23 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Removes a house from the person.
+     * The house must exist in the person's houses.
+     */
+    public void removeHouse(House toAdd, Person owner) {
+        requireNonNull(toAdd);
+        if (!(owner instanceof Seller)) {
+            throw new InvalidSellerException();
+        } else if (!((Seller)owner).hasHouse(toAdd)) {
+            throw new MissingHouseException();
+        }
+        Seller seller = (Seller) owner;
+        seller.removeHouse(toAdd);
+        remove(owner);
+        add(seller);
     }
 
     public void setPersons(UniquePersonList replacement) {

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.house.House;
+import seedu.address.model.house.UniqueHouseList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -17,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueHouseList houses;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        houses = new UniqueHouseList();
     }
 
     public AddressBook() {}
@@ -71,6 +75,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
+    public boolean hasHouse(House house) {
+        requireNonNull(house);
+        return houses.contains(house);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
@@ -93,6 +105,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a house to a person in the address book.
+     * The house must not already exist in the person's houses.
+     */
+    public void addHouse(House house, Person owner) {
+        persons.addHouse(house, owner);
+        houses.add(house);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -109,6 +130,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeHouse(House house, Person owner) {
+        persons.removeHouse(house, owner);
+        houses.remove(house);
     }
 
     //// util methods

@@ -1,5 +1,7 @@
 package seedu.address.model.house;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents a House.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -51,6 +53,7 @@ public interface House {
         }
         return false;
     }
+
 
     /**
      * Checks if this house is equal to another object.

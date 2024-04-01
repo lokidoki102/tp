@@ -86,7 +86,7 @@ public interface Model {
      * Deletes the given house.
      * The house must belong to a seller in the address book.
      */
-    void deleteHouse(House house);
+    void deleteHouse(House house, Person owner);
 
     /**
      * Adds the given person.
@@ -106,13 +106,6 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
-
-    /**
-     * Replaces the given house {@code target} with {@code editedHouse}.
-     * {@code target} must exist in the address book.
-     * The postal code of {@code editedHouse} must not be the same as another existing house in the address book.
-     */
-    void setHouse(House target, House editedHouse);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
