@@ -37,7 +37,7 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing buyer in the EstateEase contacts.
  */
 public class EditBuyerCommand extends Command {
-    // TODO: Allow command to edit the budget of the buyer, or any other field that's yet to be added.
+
     public static final String COMMAND_WORD = "editBuyer";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "

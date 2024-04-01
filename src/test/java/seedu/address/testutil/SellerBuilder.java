@@ -20,7 +20,8 @@ public class SellerBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EMAIL = "amy@gmaidasdasl.com";
+    public static final String DEFAULT_SELLER_TAG = "Seller";
 
     private Name name;
     private Phone phone;
@@ -37,6 +38,7 @@ public class SellerBuilder {
         email = new Email(DEFAULT_EMAIL);
         houses = new ArrayList<>();
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_SELLER_TAG));
     }
 
     /**

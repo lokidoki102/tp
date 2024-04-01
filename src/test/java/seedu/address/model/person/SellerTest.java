@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SELLER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalHouses.HOUSE2;
 import static seedu.address.testutil.TypicalHouses.HOUSE3;
@@ -40,7 +40,7 @@ public class SellerTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new SellerBuilder(ALICE_SELLER).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_SELLER).build();
         assertTrue(ALICE_SELLER.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false

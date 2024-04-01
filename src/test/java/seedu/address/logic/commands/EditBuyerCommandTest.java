@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BUYER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BUYER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -75,10 +75,10 @@ public class EditBuyerCommandTest {
 
         BuyerBuilder buyerInList = new BuyerBuilder(lastBuyer);
         Buyer editedBuyer = buyerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_BUYER).build();
 
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_BUYER).build();
         EditBuyerCommand editBuyerCommand = new EditBuyerCommand(indexLastBuyer, descriptor);
 
         String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS,
