@@ -8,7 +8,11 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.house.House;
+import seedu.address.model.house.exceptions.DuplicateHouseException;
+import seedu.address.model.house.exceptions.MissingHouseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.InvalidSellerException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -37,6 +41,33 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person with the same name as the given argument.
+     */
+    public boolean contains(Name toCheck) {
+        requireNonNull(toCheck);
+        for (Person p: internalList) {
+            if (p.getName().equals(toCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns the person whose name matches the given argument.
+     */
+    public Person findPersonByName(Name toCheck) {
+        requireNonNull(toCheck);
+        assert this.contains(toCheck) : "Person with this name must exist in AddressBook.";
+        for (Person p: internalList) {
+            if (p.getName().equals(toCheck)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +77,23 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a house to the person.
+     * The house must not already exist in the person's houses.
+     */
+    public void addHouse(House toAdd, Person owner) {
+        requireNonNull(toAdd);
+        if (!(owner instanceof Seller)) {
+            throw new InvalidSellerException();
+        } else if (((Seller) owner).hasHouse(toAdd)) {
+            throw new DuplicateHouseException();
+        }
+        Seller seller = (Seller) owner;
+        seller.addHouse(toAdd);
+        remove(owner);
+        add(seller);
     }
 
     /**
@@ -77,6 +125,23 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Removes a house from the person.
+     * The house must exist in the person's houses.
+     */
+    public void removeHouse(House toAdd, Person owner) {
+        requireNonNull(toAdd);
+        if (!(owner instanceof Seller)) {
+            throw new InvalidSellerException();
+        } else if (!((Seller) owner).hasHouse(toAdd)) {
+            throw new MissingHouseException();
+        }
+        Seller seller = (Seller) owner;
+        seller.removeHouse(toAdd);
+        remove(owner);
+        add(seller);
     }
 
     public void setPersons(UniquePersonList replacement) {
