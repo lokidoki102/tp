@@ -115,10 +115,7 @@ public class EditBuyerCommand extends Command {
         HousingType updatedHousingType = editBuyerDescriptor.getHousingType()
                 .orElse(buyerToEdit.getPreferredHousingType());
 
-        // Tags are non-editable
-        Set<Tag> tags = buyerToEdit.getTags();
-
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType, tags);
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType);
     }
 
     @Override

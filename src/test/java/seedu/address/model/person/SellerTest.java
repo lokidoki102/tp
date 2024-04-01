@@ -66,9 +66,9 @@ public class SellerTest {
 
         // Create new Seller instances with houses
         Seller sellerAlice = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
-                aliceHouses, ALICE_SELLER.getTags());
+                aliceHouses);
         Seller sellerBob = new Seller(BOB_SELLER.getName(), BOB_SELLER.getPhone(), BOB_SELLER.getEmail(),
-                bobHouses, BOB_SELLER.getTags());
+                bobHouses);
 
         // same object -> returns true
         assertTrue(sellerAlice.equals(sellerAlice));
@@ -84,13 +84,13 @@ public class SellerTest {
 
         // Same details, different houses -> returns false
         Seller sellerAliceCloneWithDifferentHouses = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(),
-                ALICE_SELLER.getEmail(), bobHouses, ALICE_SELLER.getTags());
+                ALICE_SELLER.getEmail(), bobHouses);
         assertFalse(sellerAlice.getHouses().get(0).toString()
                 .equals(sellerAliceCloneWithDifferentHouses.getHouses().get(0).toString()));
 
         // Same details, same houses -> returns true
         Seller sellerAliceClone = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
-                aliceHouses, ALICE_SELLER.getTags());
+                aliceHouses);
         assertTrue(sellerAlice.getHouses().get(0).toString().equals(sellerAliceClone.getHouses().get(0).toString()));
     }
 

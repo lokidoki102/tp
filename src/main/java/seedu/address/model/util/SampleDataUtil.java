@@ -33,13 +33,13 @@ public class SampleDataUtil {
         return new Buyer[]{
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"),
                         new Email("alexyeoh@example.com"), new Budget("100000"),
-                        new HousingType("Hdb"), getTagSet("Buyer")),
+                        new HousingType("Hdb")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"),
                         new Email("berniceyu@example.com"), new Budget("200000"),
-                        new HousingType("Condominium"), getTagSet("colleagues", "Buyer")),
+                        new HousingType("Condominium")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                         new Email("charlotte@example.com"), new Budget("300000"),
-                        new HousingType("Hdb"), getTagSet("Buyer")),
+                        new HousingType("Hdb")),
         };
     }
 
@@ -58,14 +58,11 @@ public class SampleDataUtil {
 
         return new Seller[]{
             new Seller(new Name("David Li"), new Phone("91031282"),
-                        new Email("lidavid@example.com"), davidLiHouses,
-                        getTagSet("Seller")),
+                        new Email("lidavid@example.com"), davidLiHouses),
             new Seller(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                        new Email("irfan@example.com"), irfanHouses,
-                        getTagSet("Seller")),
+                        new Email("irfan@example.com"), irfanHouses),
             new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                        new Email("royb@example.com"), royHouses,
-                        getTagSet("Seller"))
+                        new Email("royb@example.com"), royHouses)
         };
     }
 

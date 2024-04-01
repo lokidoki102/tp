@@ -1,16 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -22,14 +17,12 @@ public class BuyerBuilder {
     public static final String DEFAULT_EMAIL = "james@gmail.com";
     public static final String DEFAULT_BUDGET = "666000";
     public static final String DEFAULT_HOUSING_TYPE = "Hdb";
-    public static final String DEFAULT_BUYER_TAG = "Buyer";
 
     private Name name;
     private Phone phone;
     private Email email;
     private HousingType preferredHousingType;
     private Budget budget;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code BuyerBuilder} with the default information.
@@ -40,8 +33,6 @@ public class BuyerBuilder {
         email = new Email(DEFAULT_EMAIL);
         preferredHousingType = new HousingType(DEFAULT_HOUSING_TYPE);
         budget = new Budget(DEFAULT_BUDGET);
-        tags = new HashSet<>();
-        tags.add(new Tag(DEFAULT_BUYER_TAG));
     }
 
     /**
@@ -53,7 +44,6 @@ public class BuyerBuilder {
         email = personToCopy.getEmail();
         preferredHousingType = personToCopy.getPreferredHousingType();
         budget = personToCopy.getBudget();
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -96,15 +86,7 @@ public class BuyerBuilder {
         return this;
     }
 
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public BuyerBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
     public Buyer build() {
-        return new Buyer(name, phone, email, budget, preferredHousingType, tags);
+        return new Buyer(name, phone, email, budget, preferredHousingType);
     }
 }

@@ -102,11 +102,10 @@ public class EditSellerCommand extends Command {
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
 
-        // Both tags and houses are non-editable
-        Set<Tag> tags = sellerToEdit.getTags();
+        // Houses are non-editable via editSellerCommand
         ArrayList<House> houses = sellerToEdit.getHouses();
 
-        return new Seller(updatedName, updatedPhone, updatedEmail, houses, tags);
+        return new Seller(updatedName, updatedPhone, updatedEmail, houses);
     }
 
     @Override

@@ -69,9 +69,6 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
         sb.append(PREFIX_HOUSING_TYPE + buyer.getPreferredHousingType().value + " ");
         sb.append(PREFIX_BUDGET + buyer.getBudget().value + " ");
-        buyer.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
         return sb.toString();
     }
 

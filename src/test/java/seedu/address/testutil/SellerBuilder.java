@@ -93,6 +93,6 @@ public class SellerBuilder {
     }
 
     public Seller build() {
-        return new Seller(name, phone, email, houses, tags);
+        return new Seller(name, phone, email, houses);
     }
 }
