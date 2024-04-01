@@ -33,9 +33,9 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new AddHouseCommand object
  */
 public class AddHouseCommandParser implements Parser<AddHouseCommand> {
-    public static final String MESSAGE_INVALIDHDB = "Hdb must have a block and a level!";
-    public static final String MESSAGE_INVALIDCONDOMINIUM = "Condominium must have a level!";
-    public static final String MESSAGE_INVALIDLANDED = "Landed must not have a level or block!";
+    public static final String MESSAGE_INVALID_HDB = "Hdb must have a block and a level!";
+    public static final String MESSAGE_INVALID_CONDOMINIUM = "Condominium must have a level!";
+    public static final String MESSAGE_INVALID_LANDED = "Landed must not have a level or block!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddHouseCommand
@@ -68,18 +68,18 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
 
         if (housingType.toString().toLowerCase().equals("hdb")) {
             if (!hasLevel || !hasBlock) {
-                throw new ParseException(String.format(MESSAGE_INVALIDHDB, AddHouseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_HDB, AddHouseCommand.MESSAGE_USAGE));
             } else {
                 Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
                 if (block.toString().equals("N/A")) {
-                    throw new ParseException(String.format(MESSAGE_INVALIDHDB, AddHouseCommand.MESSAGE_USAGE));
+                    throw new ParseException(String.format(MESSAGE_INVALID_HDB, AddHouseCommand.MESSAGE_USAGE));
                 }
                 Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
                 houses.add(new Hdb(level, postalCode, street, unitNumber, block, price));
             }
         } else if (housingType.toString().toLowerCase().equals("condominium")) {
             if (!hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALIDCONDOMINIUM, AddHouseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_CONDOMINIUM, AddHouseCommand.MESSAGE_USAGE));
             } else if (!hasBlock) {
                 Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
                 houses.add(new Condominium(level, postalCode, street, unitNumber, price));
@@ -95,7 +95,7 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
             }
         } else if (housingType.toString().toLowerCase().equals("landed")) {
             if (hasBlock || hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALIDLANDED, AddHouseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_LANDED, AddHouseCommand.MESSAGE_USAGE));
             }
             houses.add(new Landed(unitNumber, postalCode, street, price));
         }
