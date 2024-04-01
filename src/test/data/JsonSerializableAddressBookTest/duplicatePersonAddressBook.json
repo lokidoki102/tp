@@ -3,10 +3,9 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10A",
         "level": "15",
         "postalCode": "654321",
@@ -21,7 +20,7 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "housingType" : "Hdb",
+    "preferredHousingType" : "Hdb",
     "budget": "22200",
     "tags" : [ "friends" ]
   } ]

@@ -4,10 +4,9 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10A",
         "level": "15",
         "postalCode": "654321",
@@ -21,10 +20,9 @@
     "name" : "Benson Meier",
     "phone" : "94351253",
     "email" : "johnd@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "level": "16",
         "postalCode": "654321",
         "street": "Orchard Street",
@@ -37,10 +35,9 @@
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10B",
         "level": "17",
         "postalCode": "654322",
@@ -54,10 +51,9 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10C",
         "level": "18",
         "postalCode": "654323",
@@ -71,10 +67,9 @@
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "heinz@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10D",
         "level": "19",
         "postalCode": "654324",
@@ -88,10 +83,9 @@
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "heinz@example.com",
-    "housingType": "Hdb",
     "houses": [
       {
-        "type": "Hdb",
+        "housingType": "Hdb",
         "block": "10E",
         "level": "20",
         "postalCode": "654325",
@@ -105,10 +99,9 @@
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "heinz@example.com",
-    "housingType": "Landed",
     "houses": [
       {
-        "type": "Landed",
+        "housingType": "Landed",
         "block": "10F",
         "level": "21",
         "postalCode": "654326",
@@ -123,21 +116,21 @@
     "name" : "Ben Ten",
     "phone" : "33333333",
     "email" : "ben@example.com",
-    "housingType" : "Condominium",
+    "preferredHousingType" : "Condominium",
     "budget": "123000",
     "tags" : [ "friend", "husband" ]
   }, {
     "name" : "Zack York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
-    "housingType" : "Hdb",
+    "preferredHousingType" : "Hdb",
     "budget": "400000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Zane York",
     "phone" : "82937163",
     "email" : "zack@gmail.com",
-    "housingType" : "Hdb",
+    "preferredHousingType" : "Hdb",
     "budget": "500000",
     "tags" : [ "friends" ]
   } ]

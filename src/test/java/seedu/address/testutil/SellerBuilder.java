@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.house.House;
-import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -22,12 +21,10 @@ public class SellerBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_HOUSINGTYPE = "Hdb";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private HousingType housingType;
     private ArrayList<House> houses;
     private Set<Tag> tags;
 
@@ -38,7 +35,6 @@ public class SellerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        housingType = new HousingType(DEFAULT_HOUSINGTYPE);
         houses = new ArrayList<>();
         tags = new HashSet<>();
     }
@@ -50,7 +46,6 @@ public class SellerBuilder {
         name = sellerToCopy.getName();
         phone = sellerToCopy.getPhone();
         email = sellerToCopy.getEmail();
-        housingType = sellerToCopy.getHousingType();
         houses = new ArrayList<>(sellerToCopy.getHouses());
         tags = new HashSet<>(sellerToCopy.getTags());
     }
@@ -80,14 +75,6 @@ public class SellerBuilder {
     }
 
     /**
-     * Sets the {@code HousingType} of the {@code Seller} that we are building.
-     */
-    public SellerBuilder withHousingType(String housingType) {
-        this.housingType = new HousingType(housingType);
-        return this;
-    }
-
-    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Seller} that we are building.
      */
     public SellerBuilder withTags(String... tags) {
@@ -104,6 +91,6 @@ public class SellerBuilder {
     }
 
     public Seller build() {
-        return new Seller(name, phone, email, housingType, houses, tags);
+        return new Seller(name, phone, email, houses, tags);
     }
 }
