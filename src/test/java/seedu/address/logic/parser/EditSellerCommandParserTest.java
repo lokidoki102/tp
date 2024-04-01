@@ -135,7 +135,9 @@ public class EditSellerCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditSellerCommand.EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditSellerCommand.EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .build();
         EditSellerCommand expectedCommand = new EditSellerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

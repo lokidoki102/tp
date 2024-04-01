@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,11 +21,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,7 +35,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editSeller";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the seller identified "
             + "by the index number used in the displayed list. "
@@ -41,7 +44,6 @@ public class EditSellerCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -75,32 +77,37 @@ public class EditSellerCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editSellerDescriptor);
+        if (!(lastShownList.get(index.getZeroBased()) instanceof Seller)) {
+            throw new CommandException(MESSAGE_WRONG_TYPE);
+        }
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        Seller sellerToEdit = (Seller) lastShownList.get(index.getZeroBased());
+        Seller editedSeller = createEditedSeller(sellerToEdit, editSellerDescriptor);
+
+        if (!sellerToEdit.isSamePerson(editedSeller) && model.hasPerson(editedSeller)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(sellerToEdit, editedSeller);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller)));
     }
 
     /**
-     * Creates and returns a {@code Seler} with the details of {@code sellerToEdit}
+     * Creates and returns a {@code Seller} with the details of {@code sellerToEdit}
      * edited with {@code editSellerDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditSellerDescriptor editSellerDescriptor) {
-        assert personToEdit != null;
+    private static Seller createEditedSeller(Seller sellerToEdit, EditSellerDescriptor editSellerDescriptor) {
+        assert sellerToEdit != null;
 
-        Name updatedName = editSellerDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editSellerDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editSellerDescriptor.getEmail().orElse(personToEdit.getEmail());
-        HousingType updatedHouse = editSellerDescriptor.getHousingType().orElse(personToEdit.getHousingType());
-        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
+        Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
+        Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
+        HousingType updatedHouse = editSellerDescriptor.getHousingType().orElse(sellerToEdit.getHousingType());
+        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
+        ArrayList<House> houses = sellerToEdit.getHouses();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedHouse,
+        return new Seller(updatedName, updatedPhone, updatedEmail, updatedHouse, houses,
                 updatedTags);
     }
 
@@ -124,13 +131,13 @@ public class EditSellerCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editSellerDescriptor)
+                .add("editSellerDescriptor", editSellerDescriptor)
                 .toString();
     }
 
     /**
      * Stores the details to edit the seller with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * corresponding field value of the Seller.
      */
     public static class EditSellerDescriptor {
         private Name name;
