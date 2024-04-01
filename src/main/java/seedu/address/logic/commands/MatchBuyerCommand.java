@@ -41,7 +41,7 @@ public class MatchBuyerCommand extends Command {
         } else {
             Buyer targetBuyer = (Buyer) model.getFilteredPersonList().get(0);
             Budget budget = targetBuyer.getBudget();
-            HousingType housingType = targetBuyer.getHousingType();
+            HousingType housingType = targetBuyer.getPreferredHousingType();
             PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);
             model.updateFilteredSellerList(predicate);
             return new CommandResult(
