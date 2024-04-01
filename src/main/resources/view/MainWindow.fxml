@@ -22,6 +22,7 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@CustomisedTheme.css"/>
       </stylesheets>
 
       <VBox>
@@ -46,22 +47,26 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-<!--        <HBox>-->
-<!--          -->
 
-<!--          <VBox fx:id="personDetails" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">-->
-<!--            <padding>-->
-<!--              <Insets top="10" right="10" bottom="10" left="10" />-->
-<!--            </padding>-->
-<!--            <StackPane fx:id="personDetailsPanelPlaceholder" VBox.vgrow="ALWAYS"/>-->
-<!--          </VBox>-->
-<!--        </HBox>-->
+        <HBox styleClass="test" alignment="CENTER" VBox.vgrow="ALWAYS">
+          <VBox fx:id="personList" styleClass="pane-with-border"
+                VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder"
+                       VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+          </VBox>
+
+          <VBox fx:id="personDetails" styleClass="pane-with-border"
+                VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personDetailsPanelPlaceholder"
+                       VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+          </VBox>
+        </HBox>
 
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

@@ -35,10 +35,10 @@
 <!--            <Label fx:id="budget" styleClass="cell_small_label" text="\$budget"/>-->
         </VBox>
         <!-- New VBox for displaying houses -->
-        <VBox fx:id="housesContainer" alignment="TOP_LEFT" GridPane.columnIndex="1">
-            <padding>
-                <Insets top="5" right="5" bottom="5" left="15"/>
-            </padding>
-        </VBox>
+<!--        <VBox fx:id="housesContainer" alignment="TOP_LEFT" GridPane.columnIndex="1">-->
+<!--            <padding>-->
+<!--                <Insets top="5" right="5" bottom="5" left="15"/>-->
+<!--            </padding>-->
+<!--        </VBox>-->
     </GridPane>
 </HBox>

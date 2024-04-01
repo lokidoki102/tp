@@ -66,46 +66,46 @@ public class PersonCard extends UiPart<Region> {
             // Show no budget
             // budget.setVisible(false);
             Seller seller = (Seller) person;
-            if (seller.getHouses() != null) {
-                seller.getHouses().forEach(house -> {
-                    // Create a VBox to hold the house details with spacing between elements
-                    VBox houseDetails = new VBox(4);
-                    houseDetails.getChildren().add(new Label("Postal Code: " + house.getPostalCode().value));
-                    houseDetails.getChildren().add(new Label("Street: " + house.getStreet().value));
-                    houseDetails.getChildren().add(new Label("Unit Number: " + house.getUnitNumber().value));
-
-                    // If the house is HDB, check for block and level
-                    if (house instanceof Hdb) {
-                        Block block = ((Hdb) house).getBlock();
-                        Level level = ((Hdb) house).getLevel();
-                        houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
-                        houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
-                    } else if (house instanceof Condominium) {
-                        Block block = ((Condominium) house).getBlock();
-                        Level level = ((Condominium) house).getLevel();
-                        houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
-                        houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
-                    }
-
-                    // Add price to house
-                    houseDetails.getChildren().add(new Label("Price: $" + house.getPrice().toString()));
-
-                    // Add the house details to the houses container
-                    housesContainer.getChildren().add(houseDetails);
-
-                    // Add spacing after each house's VBox, but not after the last one
-                    if (seller.getHouses().indexOf(house) < seller.getHouses().size() - 1) {
-                        housesContainer.getChildren().add(new Region() {
-                            {
-                                setPrefHeight(20);
-                            }
-                        });
-                    }
-                });
-            }
+//            if (seller.getHouses() != null) {
+//                seller.getHouses().forEach(house -> {
+//                    // Create a VBox to hold the house details with spacing between elements
+//                    VBox houseDetails = new VBox(4);
+//                    houseDetails.getChildren().add(new Label("Postal Code: " + house.getPostalCode().value));
+//                    houseDetails.getChildren().add(new Label("Street: " + house.getStreet().value));
+//                    houseDetails.getChildren().add(new Label("Unit Number: " + house.getUnitNumber().value));
+//
+//                    // If the house is HDB, check for block and level
+//                    if (house instanceof Hdb) {
+//                        Block block = ((Hdb) house).getBlock();
+//                        Level level = ((Hdb) house).getLevel();
+//                        houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
+//                        houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
+//                    } else if (house instanceof Condominium) {
+//                        Block block = ((Condominium) house).getBlock();
+//                        Level level = ((Condominium) house).getLevel();
+//                        houseDetails.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
+//                        houseDetails.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
+//                    }
+//
+//                    // Add price to house
+//                    houseDetails.getChildren().add(new Label("Price: $" + house.getPrice().toString()));
+//
+//                    // Add the house details to the houses container
+//                    housesContainer.getChildren().add(houseDetails);
+//
+//                    // Add spacing after each house's VBox, but not after the last one
+//                    if (seller.getHouses().indexOf(house) < seller.getHouses().size() - 1) {
+//                        housesContainer.getChildren().add(new Region() {
+//                            {
+//                                setPrefHeight(20);
+//                            }
+//                        });
+//                    }
+//                });
+//            }
         } else {
             // We assumed that buyer does not have a house for now
-            housesContainer.setVisible(false);
+            //housesContainer.setVisible(false);
             Buyer buyer = (Buyer) person;
             //budget.setText("$" + buyer.getBudget().toString());
         }
