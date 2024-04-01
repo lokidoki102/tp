@@ -27,11 +27,33 @@ public class Seller extends Person {
     }
 
     /**
-     * Adds a new house to the seller's list of houses. This will only be implemented when there is a add house command
+     * Adds a new house to the seller's list of houses.
      * @param house The new house to add.
      */
     public void addHouse(House house) {
         this.houses.add(house);
+    }
+
+    /**
+     * Removes a house from the seller's list of houses.
+     * @param house The house to remove.
+     */
+    public void removeHouse(House house) {
+        this.houses.remove(house);
+    }
+
+    /**
+     * Gets the seller's list of houses.
+     */
+    public ArrayList<House> getHouse() {
+        return this.houses;
+    }
+
+    /**
+     * Check if the seller's list of houses contains the house
+     */
+    public boolean hasHouse(House h) {
+        return this.houses.contains(h);
     }
 
     /**
