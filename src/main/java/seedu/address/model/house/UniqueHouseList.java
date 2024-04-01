@@ -39,12 +39,15 @@ public class UniqueHouseList implements Iterable<House> {
             for (House h: internalList) {
                 int index1 = toCheck.toString().indexOf("Street");
                 int index2 = h.toString().indexOf("Street");
+                int lastIndex1 = toCheck.toString().indexOf("price", index1);
+                int lastIndex2 = h.toString().indexOf("price", index2);
 
-                assert index1 != -1 : "Invalid house";
-                assert index2 != -1 : "Invalid house";
+                if (index1 == -1 || index2 == -1 || lastIndex1 == -1 || lastIndex2 == -1) {
+                    throw new AssertionError("Invalid house");
+                }
 
-                String substr1 = toCheck.toString().substring(index1);
-                String substr2 = h.toString().substring(index2);
+                String substr1 = toCheck.toString().substring(index1 + "Street".length(), lastIndex1);
+                String substr2 = h.toString().substring(index2 + "Street".length(), lastIndex2);
                 if (substr1.equals(substr2)) {
                     return true;
                 }
