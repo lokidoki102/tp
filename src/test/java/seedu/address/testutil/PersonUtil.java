@@ -17,7 +17,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditPersonDescriptor;
 import seedu.address.model.house.Condominium;
 import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
