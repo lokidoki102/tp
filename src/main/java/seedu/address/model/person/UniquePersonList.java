@@ -58,7 +58,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public Person findPersonByName(Name toCheck) {
         requireNonNull(toCheck);
-        assert this.contains(toCheck): "Person with this name must exist in AddressBook.";
+        assert this.contains(toCheck) : "Person with this name must exist in AddressBook.";
         for (Person p: internalList) {
             if (p.getName().equals(toCheck)) {
                 return p;
@@ -87,7 +87,7 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toAdd);
         if (!(owner instanceof Seller)) {
             throw new InvalidSellerException();
-        } else if (((Seller)owner).hasHouse(toAdd)) {
+        } else if (((Seller) owner).hasHouse(toAdd)) {
             throw new DuplicateHouseException();
         }
         Seller seller = (Seller) owner;
@@ -135,7 +135,7 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toAdd);
         if (!(owner instanceof Seller)) {
             throw new InvalidSellerException();
-        } else if (!((Seller)owner).hasHouse(toAdd)) {
+        } else if (!((Seller) owner).hasHouse(toAdd)) {
             throw new MissingHouseException();
         }
         Seller seller = (Seller) owner;

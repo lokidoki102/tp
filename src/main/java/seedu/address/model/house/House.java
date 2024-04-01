@@ -1,6 +1,5 @@
 package seedu.address.model.house;
 
-import seedu.address.model.person.Person;
 
 /**
  * Represents a House.

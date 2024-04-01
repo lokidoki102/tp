@@ -25,8 +25,8 @@ public class AddHouseCommand extends Command {
 
     public static final String COMMAND_WORD = "addHouse";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a house to EstateEase. Indicate N/A for " +
-            "nonexistent fields. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a house to EstateEase. Indicate N/A for "
+            + "nonexistent fields. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_HOUSING_TYPE + "HOUSING_TYPE "

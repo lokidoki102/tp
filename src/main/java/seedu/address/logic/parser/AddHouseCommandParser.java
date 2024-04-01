@@ -26,7 +26,6 @@ import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
-import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 
 
@@ -45,7 +44,7 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_HOUSING_TYPE, PREFIX_LEVEL, PREFIX_BLOCK,
                         PREFIX_PRICE, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_POSTALCODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME,  PREFIX_HOUSING_TYPE, PREFIX_PRICE,
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_HOUSING_TYPE, PREFIX_PRICE,
                 PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddHouseCommand.MESSAGE_USAGE));
         }
