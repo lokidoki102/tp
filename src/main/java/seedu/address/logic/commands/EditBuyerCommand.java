@@ -116,9 +116,11 @@ public class EditBuyerCommand extends Command {
         Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
         HousingType updatedHousingType = editBuyerDescriptor.getHousingType()
                 .orElse(buyerToEdit.getPreferredHousingType());
-        Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType, updatedTags);
+        // Tags are non-editable
+        Set<Tag> tags = buyerToEdit.getTags();
+
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType, tags);
     }
 
     @Override
@@ -177,7 +179,7 @@ public class EditBuyerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, housingType, budget, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, housingType, budget);
         }
 
         public void setName(Name name) {

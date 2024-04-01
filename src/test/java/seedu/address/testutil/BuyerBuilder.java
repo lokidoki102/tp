@@ -22,6 +22,7 @@ public class BuyerBuilder {
     public static final String DEFAULT_EMAIL = "james@gmail.com";
     public static final String DEFAULT_BUDGET = "666000";
     public static final String DEFAULT_HOUSING_TYPE = "Hdb";
+    public static final String DEFAULT_BUYER_TAG = "Buyer";
 
     private Name name;
     private Phone phone;
@@ -40,6 +41,7 @@ public class BuyerBuilder {
         preferredHousingType = new HousingType(DEFAULT_HOUSING_TYPE);
         budget = new Budget(DEFAULT_BUDGET);
         tags = new HashSet<>();
+        tags.add(new Tag(DEFAULT_BUYER_TAG));
     }
 
     /**

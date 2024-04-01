@@ -9,11 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOUSING_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -23,7 +21,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -40,11 +37,8 @@ import seedu.address.model.house.House;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditBuyerDescriptorBuilder;
 public class EditBuyerCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBuyerCommand.MESSAGE_USAGE);
@@ -84,7 +78,6 @@ public class EditBuyerCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_HOUSING_TYPE_DESC, House.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -99,11 +92,10 @@ public class EditBuyerCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY
-                + HOUSING_TYPE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_BUYER;
+                + HOUSING_TYPE_DESC_AMY + NAME_DESC_AMY;
 
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
-                .withTags(VALID_TAG_BUYER).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY).build();
         EditBuyerCommand expectedCommand = new EditBuyerCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -147,12 +139,6 @@ public class EditBuyerCommandParserTest {
         descriptor = new EditBuyerDescriptorBuilder().withHousingType(VALID_HOUSING_TYPE_AMY).build();
         expectedCommand = new EditBuyerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_BUYER;
-        descriptor = new EditBuyerDescriptorBuilder().withTags(VALID_TAG_BUYER).build();
-        expectedCommand = new EditBuyerCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -185,16 +171,5 @@ public class EditBuyerCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE));
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withTags().build();
-        EditBuyerCommand expectedCommand = new EditBuyerCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
