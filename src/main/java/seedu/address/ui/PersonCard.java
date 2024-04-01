@@ -55,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        housingType.setText(person.getHousingType().value);
+        // housingType.setText(person.getHousingType().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
             // Show no budget
-            budget.setVisible(false);
+            // budget.setVisible(false);
             Seller seller = (Seller) person;
             if (seller.getHouses() != null) {
                 seller.getHouses().forEach(house -> {
@@ -107,7 +107,7 @@ public class PersonCard extends UiPart<Region> {
             // We assumed that buyer does not have a house for now
             housesContainer.setVisible(false);
             Buyer buyer = (Buyer) person;
-            budget.setText("$" + buyer.getBudget().toString());
+            //budget.setText("$" + buyer.getBudget().toString());
         }
     }
 }
