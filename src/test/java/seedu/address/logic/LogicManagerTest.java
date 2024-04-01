@@ -33,7 +33,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -174,9 +174,9 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + HOUSING_TYPE_DESC_AMY
                 + STREET_DESC_AMY + BLOCK_DESC_AMY + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
                 + PRICE_DESC_AMY;
-        Person expectedPerson = new SellerBuilder(AMY_SELLER).withTags().build();
+        Seller expectedSeller = new SellerBuilder(AMY_SELLER).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPerson(expectedSeller);
         assertCommandFailure(addSellerCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

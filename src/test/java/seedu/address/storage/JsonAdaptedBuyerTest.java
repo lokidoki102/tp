@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,7 +29,7 @@ public class JsonAdaptedBuyerTest {
     private static final String VALID_NAME = ALICE_BUYER.getName().toString();
     private static final String VALID_PHONE = ALICE_BUYER.getPhone().toString();
     private static final String VALID_EMAIL = ALICE_BUYER.getEmail().toString();
-    private static final String VALID_HOUSING_TYPE = ALICE_BUYER.getHousingType().toString();
+    private static final String VALID_HOUSING_TYPE = ALICE_BUYER.getPreferredHousingType().toString();
     private static final String VALID_BUDGET = ALICE_BUYER.getBudget().toString();
 
     private static final List<JsonAdaptedTag> VALID_TAGS = ALICE_BUYER.getTags().stream()
@@ -91,7 +92,7 @@ public class JsonAdaptedBuyerTest {
         JsonAdaptedBuyer buyer =
                 new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_HOUSING_TYPE,
                         VALID_BUDGET, VALID_TAGS);
-        String expectedMessage = "Housing types can only be Hdb, Condominium or Landed.";
+        String expectedMessage = HousingType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 

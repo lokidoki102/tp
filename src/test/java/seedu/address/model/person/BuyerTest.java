@@ -98,7 +98,7 @@ public class BuyerTest {
     public void toStringMethod() {
         String expected = Buyer.class.getCanonicalName() + "{name="
                 + ALI_BUYER.getName() + ", phone=" + ALI_BUYER.getPhone()
-                + ", email=" + ALI_BUYER.getEmail() + ", housingType=" + ALI_BUYER.getHousingType()
+                + ", email=" + ALI_BUYER.getEmail() + ", housingType=" + ALI_BUYER.getPreferredHousingType()
                 + ", budget=" + ALI_BUYER.getBudget()
                 + ", tags=" + ALI_BUYER.getTags() + "}";
         assertEquals(expected, ALI_BUYER.toString());

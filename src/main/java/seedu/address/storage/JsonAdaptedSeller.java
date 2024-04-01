@@ -26,10 +26,9 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
     public JsonAdaptedSeller(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("housingType") String housingType,
                              @JsonProperty("houses") List<JsonAdaptedHouse> houses,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, housingType, tags);
+        super(name, phone, email, tags);
         if (houses != null) {
             this.houses.addAll(houses);
         }
@@ -63,7 +62,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
             }
         }
 
-        return new Seller(person.getName(), person.getPhone(), person.getEmail(),
-                person.getHousingType(), sellerHouses, new HashSet<>(person.getTags()));
+        return new Seller(person.getName(), person.getPhone(),
+                person.getEmail(), sellerHouses, new HashSet<>(person.getTags()));
     }
 }

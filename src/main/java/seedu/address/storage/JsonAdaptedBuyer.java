@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
@@ -17,6 +18,7 @@ import seedu.address.model.person.Person;
 public class JsonAdaptedBuyer extends JsonAdaptedPerson {
 
     private final String budget;
+    private final String preferredHousingType;
 
     /**
      * Constructs a {@code JsonAdaptedBuyer}, extends from JsonAdaptedPerson
@@ -25,11 +27,12 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
     public JsonAdaptedBuyer(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("housingType") String housingType,
+                             @JsonProperty("preferredHousingType") String preferredHousingType,
                              @JsonProperty("budget") String budget,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, housingType, tags);
+        super(name, phone, email, tags);
         this.budget = budget;
+        this.preferredHousingType = preferredHousingType;
     }
 
     /**
@@ -38,6 +41,7 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
     public JsonAdaptedBuyer(Buyer source) {
         super(source);
         budget = source.getBudget().value;
+        preferredHousingType = source.getPreferredHousingType().value;
     }
 
     /**
@@ -54,8 +58,17 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
         }
         final Budget modelBudget = new Budget(budget);
 
+        if (preferredHousingType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    HousingType.class.getSimpleName()));
+        }
+        if (!HousingType.isValidHousingType(preferredHousingType)) {
+            throw new IllegalValueException(HousingType.MESSAGE_CONSTRAINTS);
+        }
+        final HousingType modelHousingType = new HousingType(preferredHousingType);
+
         Person person = super.toModelType();
         return new Buyer(person.getName(), person.getPhone(), person.getEmail(),
-                person.getHousingType(), modelBudget, new HashSet<>(person.getTags()));
+                modelBudget, modelHousingType, new HashSet<>(person.getTags()));
     }
 }
