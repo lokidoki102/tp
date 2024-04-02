@@ -12,23 +12,21 @@ import seedu.address.model.Model;
 import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
-/**
- * Deletes a person identified using it's displayed index from the displayed list.
- */
-public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+/**
+ * Displays the detail of a person identified using it's displayed index from the displayed list.
+ */
+public class ViewCommand extends Command {
+    public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Views the details of the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed the details of the Person: %1$s";
     private final Index targetIndex;
-
-    public DeleteCommand(Index targetIndex) {
+    public ViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -41,10 +39,15 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.setState(State.PERSON_LIST);
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        assert targetIndex.getZeroBased() < lastShownList.size()
+                : "Index should be within the range of the list displayed";
+        assert targetIndex.getZeroBased() >= 0
+                : "Index should be a positive number";
+        Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        model.setState(State.PERSON_DETAILS);
+        model.showPerson(personToView);
+        return new CommandResult(
+                String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
     }
 
     @Override
@@ -54,12 +57,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof ViewCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return targetIndex.equals(otherViewCommand.targetIndex);
     }
 
     @Override
@@ -69,3 +72,8 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 }
+
+
+
+
+
