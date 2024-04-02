@@ -20,6 +20,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -85,7 +86,7 @@ public class EditSellerCommand extends Command {
         if (!sellerToEdit.isSamePerson(editedSeller) && model.hasPerson(editedSeller)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        model.setState(State.PERSON_LIST);
         model.setPerson(sellerToEdit, editedSeller);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller)));

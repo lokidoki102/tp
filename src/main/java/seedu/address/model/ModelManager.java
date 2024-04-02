@@ -20,6 +20,7 @@ import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
+import seedu.address.ui.Ui;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -33,6 +34,9 @@ public class ModelManager implements Model {
 
     private final ArrayList<Seller> filteredSellers;
 
+    private Ui ui = null;
+    private State state = State.PERSON_LIST;
+    private Person currentDisplayedPerson = null;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -150,7 +154,6 @@ public class ModelManager implements Model {
     }
 
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -168,6 +171,47 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Update Ui state ============================================================================
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State newState) {
+        boolean isStateChanged = isSameState(newState);
+        if (!isStateChanged) {
+            state = newState;
+            if (ui != null) {
+                ui.updateUiLayout(newState);
+            }
+        }
+    }
+
+    public boolean isSameState(State newState) {
+        return state.equals(newState);
+    }
+
+    //=========== Get Data for displaying ====================================================================
+
+    @Override
+    public void setUi(Ui ui) {
+        this.ui = ui;
+    }
+    @Override
+    public void showPerson(Person target) {
+        requireNonNull(target);
+        this.currentDisplayedPerson = target;
+        if (ui != null) {
+            ui.showPersonDetails(currentDisplayedPerson);
+        }
+    }
+
+    @Override
+    public Person getPerson() {
+        return this.currentDisplayedPerson;
+    }
+
+    //=================================================================================================
     @Override
     public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         requireNonNull(predicate);

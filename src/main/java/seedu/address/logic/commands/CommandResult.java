@@ -19,6 +19,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean showPerson;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +28,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showPerson = false;
     }
 
     /**
@@ -36,6 +39,16 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code person}, {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showPerson) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.showPerson = showPerson;
+    }
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -46,6 +59,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShow() {
+        return showPerson;
     }
 
     @Override
