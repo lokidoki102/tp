@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +62,6 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
         }
 
         return new Seller(person.getName(), person.getPhone(),
-                person.getEmail(), sellerHouses, new HashSet<>(person.getTags()));
+                person.getEmail(), sellerHouses);
     }
 }
