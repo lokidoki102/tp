@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddHouseCommand.MESSAGE_DUPLICATE_HOUSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
@@ -17,7 +18,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.house.House;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Adds a seller to the address book.
@@ -56,14 +59,14 @@ public class AddSellerCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New seller added= %1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This person already exists in EstateEase";
 
-    private final Person sellerToAdd;
+    private final Seller sellerToAdd;
 
     /**
      * Creates an AddSellerCommand to add the specified {@code Seller}
      */
-    public AddSellerCommand(Person person) {
-        requireNonNull(person);
-        sellerToAdd = person;
+    public AddSellerCommand(Seller seller) {
+        requireNonNull(seller);
+        sellerToAdd = seller;
     }
 
     /**
@@ -82,6 +85,15 @@ public class AddSellerCommand extends Command {
         }
 
         model.addPerson(sellerToAdd);
+
+        House houseToAdd = sellerToAdd.getHouse().get(0);
+
+        if (model.hasHouse(houseToAdd)) {
+            model.deletePerson(sellerToAdd);
+            throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
+        }
+
+        model.addHouseToHouses(houseToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerToAdd)));
     }
 

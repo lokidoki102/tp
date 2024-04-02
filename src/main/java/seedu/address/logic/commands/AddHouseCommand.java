@@ -90,7 +90,11 @@ public class AddHouseCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_SELLER);
         }
 
-        model.addHouse(houseToAdd, sellerToAddTo);
+        try {
+            model.addHouse(houseToAdd, sellerToAddTo);
+        } catch (Exception e) {
+            throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

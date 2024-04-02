@@ -101,6 +101,12 @@ public interface Model {
     void addHouse(House house, Person person);
 
     /**
+     * Adds the given house.
+     * {@code house} must not already exist in the address book.
+     */
+    void addHouseToHouses(House house);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

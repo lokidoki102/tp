@@ -39,8 +39,8 @@ public class UniqueHouseList implements Iterable<House> {
             int lastIndex1 = toCheck.toString().toLowerCase().lastIndexOf("price");
             int lastIndex2 = h.toString().toLowerCase().lastIndexOf("price");
 
-            String substr1 = toCheck.toString().substring(index1 + "street".length(), lastIndex1);
-            String substr2 = h.toString().substring(index2 + "street".length(), lastIndex2);
+            String substr1 = toCheck.toString().substring(index1 + "street".length(), lastIndex1).toLowerCase();
+            String substr2 = h.toString().substring(index2 + "street".length(), lastIndex2).toLowerCase();
             if (substr1.equals(substr2)) {
                 return true;
             }
