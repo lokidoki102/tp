@@ -1,15 +1,17 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.house.House;
+import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.ui.Ui;
-
 
 /**
  * The API of the Model component.
@@ -147,4 +149,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filtered list of sellers based on the given price and housing type predicate.
+     *
+     * @param predicate The predicate to filter the sellers.
+     */
+    void updateFilteredSellerList(PriceAndHousingTypePredicate predicate);
+
+
+    /**
+     * Retrieves the filtered list of sellers.
+     * @return The filtered list of sellers.
+     */
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate);
+
+    /** Returns an unmodifiable view of seller list*/
+    public ArrayList<Seller> getFilteredSeller();
 }

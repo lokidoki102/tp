@@ -4,16 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.house.House;
+import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.ui.Ui;
 
 /**
@@ -25,6 +31,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final ArrayList<Seller> filteredSellers;
 
     private Ui ui = null;
     private State state = State.PERSON_LIST;
@@ -40,6 +48,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSellers = new ArrayList<>();
     }
 
     public ModelManager() {
@@ -203,6 +212,50 @@ public class ModelManager implements Model {
     }
 
     //=================================================================================================
+    @Override
+    public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+        requireNonNull(predicate);
+        filteredSellers.clear();
+        filteredPersons.setPredicate(person -> {
+            if (person instanceof Seller) {
+                Seller seller = ((Seller) person).copy();
+                ArrayList<House> houses = getFilteredHouses((Seller) person, predicate);
+
+                if (houses.isEmpty()) {
+                    return false;
+                }
+                seller.getHouse().clear();
+
+                for (House house : houses) {
+                    seller.addHouse(house);
+                }
+                filteredSellers.add(seller);
+                return true;
+            }
+            return false;
+        });
+    }
+    @Override
+    public ArrayList<Seller> getFilteredSeller() {
+        return filteredSellers;
+    }
+
+    private ArrayList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
+        return seller.getHouses().stream()
+                .filter(predicate)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    @Override
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+        FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
+        ObservableList<House> allHouses = filteredSellers.stream()
+                .map(seller -> ((Seller) seller).getHouses())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        return allHouses.filtered(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
