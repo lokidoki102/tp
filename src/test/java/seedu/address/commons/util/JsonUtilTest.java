@@ -40,6 +40,31 @@ public class JsonUtilTest {
     }
 
     //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+    @Test
+    public void jsonUtil_readJsonStringToObjectInstance_correctObject() throws IOException {
+        String jsonString = SerializableTestClass.JSON_STRING_REPRESENTATION;
+        SerializableTestClass actualClassInstance = JsonUtil.fromJsonString(jsonString, SerializableTestClass.class);
+
+        assertEquals(SerializableTestClass.getNameTestValue(), actualClassInstance.getName());
+        assertEquals(SerializableTestClass.getListTestValues(), actualClassInstance.getListOfLocalDateTimes());
+        assertEquals(SerializableTestClass.getHashMapTestValues(), actualClassInstance.getMapOfIntegerToString());
+    }
 
     //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+    @Test
+    public void jsonUtil_writeThenReadObjectToJson_correctObject() throws IOException {
+        SerializableTestClass originalClassInstance = new SerializableTestClass();
+        originalClassInstance.setTestValues();
+
+        String jsonString = JsonUtil.toJsonString(originalClassInstance);
+
+        SerializableTestClass deserializedClassInstance =
+                JsonUtil.fromJsonString(jsonString, SerializableTestClass.class);
+
+        assertEquals(originalClassInstance.getName(), deserializedClassInstance.getName());
+        assertEquals(originalClassInstance.getListOfLocalDateTimes(),
+                deserializedClassInstance.getListOfLocalDateTimes());
+        assertEquals(originalClassInstance.getMapOfIntegerToString(),
+                deserializedClassInstance.getMapOfIntegerToString());
+    }
 }
