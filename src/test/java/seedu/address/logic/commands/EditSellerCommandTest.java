@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_SELLER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_SELLER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SELLER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -63,7 +63,6 @@ public class EditSellerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedSeller);
-        // TODO: INDEX_FIRST_PERSON?
         assertCommandFailure(editSellerCommand, model, expectedMessage);
     }
 
@@ -74,10 +73,10 @@ public class EditSellerCommandTest {
 
         SellerBuilder sellerInList = new SellerBuilder(firstSeller);
         Seller editedSeller = sellerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_SELLER).build();
 
         EditSellerDescriptor descriptor = new EditSellerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_SELLER).build();
         EditSellerCommand editSellerCommand = new EditSellerCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS,
@@ -171,10 +170,10 @@ public class EditSellerCommandTest {
 
     @Test
     public void equals() {
-        final EditSellerCommand standardCommand = new EditSellerCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditSellerCommand standardCommand = new EditSellerCommand(INDEX_FIRST_PERSON, DESC_SELLER_AMY);
 
         // same values -> returns true
-        EditSellerDescriptor copyDescriptor = new EditSellerDescriptor(DESC_AMY);
+        EditSellerDescriptor copyDescriptor = new EditSellerDescriptor(DESC_SELLER_AMY);
         EditSellerCommand commandWithSameValues = new EditSellerCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -188,10 +187,10 @@ public class EditSellerCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditSellerCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditSellerCommand(INDEX_SECOND_PERSON, DESC_SELLER_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditSellerCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditSellerCommand(INDEX_FIRST_PERSON, DESC_SELLER_BOB)));
     }
 
     @Test

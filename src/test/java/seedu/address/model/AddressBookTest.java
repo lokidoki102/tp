@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SELLER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE_BUYER;
 import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
@@ -47,7 +47,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         Person editedAlice = new SellerBuilder(ALICE_SELLER)
-                .withTags(VALID_TAG_HUSBAND)
+                .withTags(VALID_TAG_SELLER)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE_SELLER, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -88,7 +88,7 @@ public class AddressBookTest {
     public void hasSeller_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE_SELLER);
         Person editedAlice = new SellerBuilder(ALICE_SELLER)
-                .withTags(VALID_TAG_HUSBAND)
+                .withTags(VALID_TAG_SELLER)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
