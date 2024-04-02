@@ -17,7 +17,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.model.house.Condominium;
 import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
@@ -53,7 +53,6 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + person.getHousingType().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -68,7 +67,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + buyer.getName().fullName + " ");
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + buyer.getHousingType().value + " ");
+        sb.append(PREFIX_HOUSING_TYPE + buyer.getPreferredHousingType().value + " ");
         sb.append(PREFIX_BUDGET + buyer.getBudget().value + " ");
         buyer.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -84,7 +83,6 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + seller.getName().fullName + " ");
         sb.append(PREFIX_PHONE + seller.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + seller.getEmail().value + " ");
-        sb.append(PREFIX_HOUSING_TYPE + seller.getHousingType().value + " ");
         // Append house details
         for (House house : seller.getHouses()) {
             sb.append(PREFIX_STREET + house.getStreet().value + " ");
@@ -118,7 +116,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditSellerDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

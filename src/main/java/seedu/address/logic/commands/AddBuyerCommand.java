@@ -27,15 +27,15 @@ public class AddBuyerCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_HOUSING_TYPE + "HOUSING_TYPE "
             + PREFIX_BUDGET + "BUDGET "
+            + PREFIX_HOUSING_TYPE + "HOUSING_TYPE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_HOUSING_TYPE + "Hdb "
             + PREFIX_BUDGET + "99999900 "
+            + PREFIX_HOUSING_TYPE + "Hdb "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

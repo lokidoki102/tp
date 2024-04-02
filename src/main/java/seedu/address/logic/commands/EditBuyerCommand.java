@@ -66,8 +66,8 @@ public class EditBuyerCommand extends Command {
     private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
-     * @param editBuyerDescriptor details to edit the person with
+     * @param index                of the buyer in the filtered person list to edit
+     * @param editBuyerDescriptor details to edit the buyer with
      */
     public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
         requireNonNull(index);
@@ -115,11 +115,11 @@ public class EditBuyerCommand extends Command {
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
         Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
-        HousingType updatedHousingType = editBuyerDescriptor.getHousingType().orElse(buyerToEdit.getHousingType());
+        HousingType updatedHousingType = editBuyerDescriptor.getHousingType()
+                .orElse(buyerToEdit.getPreferredHousingType());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedHousingType, updatedBudget,
-                updatedTags);
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedHousingType, updatedTags);
     }
 
     @Override

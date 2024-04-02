@@ -8,7 +8,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+<<<<<<< HEAD
 import seedu.address.logic.commands.*;
+=======
+import seedu.address.logic.commands.AddBuyerCommand;
+import seedu.address.logic.commands.AddHouseCommand;
+import seedu.address.logic.commands.AddSellerCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditBuyerCommand;
+import seedu.address.logic.commands.EditSellerCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+>>>>>>> 7afad24012cc46b16a9847e5afd656f775cf4214
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -51,8 +66,11 @@ public class AddressBookParser {
         case AddBuyerCommand.COMMAND_WORD:
             return new AddBuyerCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditSellerCommand.COMMAND_WORD:
+            return new EditSellerCommandParser().parse(arguments);
+
+        case AddHouseCommand.COMMAND_WORD:
+            return new AddHouseCommandParser().parse(arguments);
 
         case EditBuyerCommand.COMMAND_WORD:
             return new EditBuyerCommandParser().parse(arguments);

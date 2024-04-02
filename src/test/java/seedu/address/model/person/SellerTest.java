@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KHOONSUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -41,7 +40,7 @@ public class SellerTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new SellerBuilder(ALICE_SELLER).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withHousingType(VALID_HOUSING_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE_SELLER.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -67,9 +66,9 @@ public class SellerTest {
 
         // Create new Seller instances with houses
         Seller sellerAlice = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
-                ALICE_SELLER.getHousingType(), aliceHouses, ALICE_SELLER.getTags());
+                aliceHouses, ALICE_SELLER.getTags());
         Seller sellerBob = new Seller(BOB_SELLER.getName(), BOB_SELLER.getPhone(), BOB_SELLER.getEmail(),
-                BOB_SELLER.getHousingType(), bobHouses, BOB_SELLER.getTags());
+                bobHouses, BOB_SELLER.getTags());
 
         // same object -> returns true
         assertTrue(sellerAlice.equals(sellerAlice));
@@ -85,13 +84,13 @@ public class SellerTest {
 
         // Same details, different houses -> returns false
         Seller sellerAliceCloneWithDifferentHouses = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(),
-                ALICE_SELLER.getEmail(), ALICE_SELLER.getHousingType(), bobHouses, ALICE_SELLER.getTags());
+                ALICE_SELLER.getEmail(), bobHouses, ALICE_SELLER.getTags());
         assertFalse(sellerAlice.getHouses().get(0).toString()
                 .equals(sellerAliceCloneWithDifferentHouses.getHouses().get(0).toString()));
 
         // Same details, same houses -> returns true
         Seller sellerAliceClone = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
-                ALICE_SELLER.getHousingType(), aliceHouses, ALICE_SELLER.getTags());
+                aliceHouses, ALICE_SELLER.getTags());
         assertTrue(sellerAlice.getHouses().get(0).toString().equals(sellerAliceClone.getHouses().get(0).toString()));
     }
 
@@ -99,7 +98,7 @@ public class SellerTest {
     public void toStringMethod() {
         String expected = Seller.class.getCanonicalName()
                 + "{name=" + ALICE_SELLER.getName() + ", phone=" + ALICE_SELLER.getPhone()
-                + ", email=" + ALICE_SELLER.getEmail() + ", housingType=" + ALICE_SELLER.getHousingType()
+                + ", email=" + ALICE_SELLER.getEmail()
                 + ", tags=" + ALICE_SELLER.getTags() + "}";
         assertEquals(expected, ALICE_SELLER.toString());
     }

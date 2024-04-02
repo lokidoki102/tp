@@ -34,7 +34,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label housingType;
+    private Label preferredHousingType;
     @FXML
     private Label budget;
     @FXML
@@ -55,7 +55,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        // housingType.setText(person.getHousingType().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -64,7 +63,8 @@ public class PersonCard extends UiPart<Region> {
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
             // Show no budget
-            // budget.setVisible(false);
+            //budget.setVisible(false);
+            //preferredHousingType.setVisible(false);
             Seller seller = (Seller) person;
 //            if (seller.getHouses() != null) {
 //                seller.getHouses().forEach(house -> {
@@ -108,6 +108,7 @@ public class PersonCard extends UiPart<Region> {
             //housesContainer.setVisible(false);
             Buyer buyer = (Buyer) person;
             //budget.setText("$" + buyer.getBudget().toString());
+            //preferredHousingType.setText("Preferred Housing Type: " + buyer.getPreferredHousingType().toString());
         }
     }
 }
