@@ -5,10 +5,12 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +18,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.State;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,17 +47,23 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
+    private VBox personList;
+    @FXML
+    private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private VBox personDetails;
+    @FXML
     private StackPane personDetailsPanelPlaceholder;
 
+    @FXML
+    private SplitPane contentBoxSplitPane;
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -126,7 +136,11 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        //personDetailsPanel = new PersonDetailsPanel()
+        personDetailsPanel = new PersonDetailsPanel();
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+
+        personDetails.setVisible(false);
+        contentBoxSplitPane.getItems().removeAll(personDetails);
     }
 
     /**
@@ -169,6 +183,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    public void handleViewPerson(Person person) {
+        if (person == null) {
+            personDetails.setVisible(false);
+            return;
+        }
+        personDetails.setVisible(true);
+        personDetailsPanel.setPersonDetails(person);
+    }
+
+
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -197,6 +222,24 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    public void updateUiLayout(State newState) {
+        contentBoxSplitPane.getItems().removeAll(personList, personDetails);
+        switch (newState) {
+            case PERSON_LIST:
+                contentBoxSplitPane.getItems().addAll(personList);
+                break;
+            case PERSON_DETAILS:
+                contentBoxSplitPane.getItems().addAll(personList, personDetails);
+                break;
+            case MATCH_RESULTS:
+                // TODO to be updated
+                contentBoxSplitPane.getItems().addAll(personList);
+                break;
+            default:
+                break;
         }
     }
 }

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,8 +24,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private Ui ui = null;
+    private State state = State.PERSON_LIST;
     private Person currentDisplayedPerson = null;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -113,13 +115,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public void showPerson(Person target) {
-        requireNonNull(target);
-        this.currentDisplayedPerson = target;
-    }
-
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -137,6 +132,47 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Update Ui state ============================================================================
+
+    public State getState() {
+        return state;
+    }
+
+    // Avoid PI
+    public void setState(State newState) {
+        if (!isSameState(newState)) {
+            state = newState;
+            if (ui != null) {
+                ui.updateUiLayout(newState);
+            }
+        }
+    }
+
+    public boolean isSameState(State newState) {
+        return state.equals(newState);
+    }
+
+    //=========== Get Data for displaying ====================================================================
+
+    @Override
+    public void setUi(Ui ui) {
+        this.ui = ui;
+    }
+    @Override
+    public void showPerson(Person target) {
+        requireNonNull(target);
+        this.currentDisplayedPerson = target;
+        if (ui != null) {
+            ui.showPersonDetails(currentDisplayedPerson);
+        }
+    }
+
+    @Override
+    public Person getPerson() {
+        return this.currentDisplayedPerson;
+    }
+
+    //=================================================================================================
     @Override
     public boolean equals(Object other) {
         if (other == this) {

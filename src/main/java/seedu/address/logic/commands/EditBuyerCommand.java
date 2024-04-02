@@ -24,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
@@ -97,7 +98,7 @@ public class EditBuyerCommand extends Command {
         if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasPerson(editedBuyer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        model.setState(State.PERSON_LIST);
         model.setPerson(buyerToEdit, editedBuyer);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer)));

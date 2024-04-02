@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="personDetailsPane" fx:id="personDetailsPane"
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      VBox.vgrow="ALWAYS">
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="details-card"
+      alignment="CENTER_LEFT" minHeight="105" HBox.hgrow="ALWAYS">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15"/>
+    </padding>
+    <HBox spacing="5" alignment="CENTER_LEFT" >
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+    </HBox>
+    <FlowPane fx:id="tags"/>
+    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
+    <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
+    <Label fx:id="housingType" styleClass="cell_small_label" text="\$housingType"/>
+    <Label fx:id="budget" styleClass="cell_small_label" text="\$budget"/>
 </VBox>
+
 
 

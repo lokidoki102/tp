@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui;
 
 /**
  * The API of the Model component.
@@ -77,10 +78,35 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Returns the current ui state of the program.
+     */
+    State getState();
+
+    /**
+     * Update the ui state of the program.
+     */
+    void setState(State newState);
+
+    /**
+     * Check if the new ui state is same as the current ui state.
+     */
+    boolean isSameState(State newState);
+
+    /**
+     * Initialise the ui.
+     */
+    void setUi(Ui ui);
+
+    /**
      * Displays the given person.
      * {@code target} must exist in the address book.
      */
     void showPerson(Person target);
+
+    /**
+     * Returns the person for viewing details.
+     */
+    Person getPerson();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

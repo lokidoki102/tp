@@ -5,6 +5,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class ViewCommand extends Command{
         assert targetIndex.getZeroBased() >= 0: "Index should be a positive number";
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        model.setState(State.PERSON_DETAILS);
         model.showPerson(personToView);
         return new CommandResult(
                 String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
