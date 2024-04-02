@@ -114,6 +114,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a house to internal list.
+     * The house must not already exist in the person's houses.
+     */
+    public void addHouseToHouses(House house) {
+        houses.add(house);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

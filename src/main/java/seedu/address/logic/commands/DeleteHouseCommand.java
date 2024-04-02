@@ -21,12 +21,12 @@ import seedu.address.model.person.Seller;
 /**
  * Adds a house to the seller.
  */
-public class AddHouseCommand extends Command {
+public class DeleteHouseCommand extends Command {
 
-    public static final String COMMAND_WORD = "addHouse";
+    public static final String COMMAND_WORD = "deleteHouse";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a house to a Seller. Indicate N/A for "
-            + "nonexistent fields. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a house assigned to a Seller. Indicate N/A "
+            + "for nonexistent fields. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_HOUSING_TYPE + "HOUSING_TYPE "
@@ -46,22 +46,22 @@ public class AddHouseCommand extends Command {
             + PREFIX_POSTALCODE + "578578 "
             + PREFIX_PRICE + "99999 ";
 
-    public static final String MESSAGE_SUCCESS = "New house added!";
-    public static final String MESSAGE_DUPLICATE_HOUSE = "This house already exists in EstateEase";
+    public static final String MESSAGE_SUCCESS = "House deleted!";
+    public static final String MESSAGE_MISSING_HOUSE = "This house does not exist in EstateEase";
 
     public static final String MESSAGE_INVALID_SELLER = "This Seller does not exist in EstateEase";
 
-    private final House houseToAdd;
+    private final House houseToDelete;
 
     private final Name nameToCheck;
 
     /**
-     * Creates an AddHouseCommand to add the specified {@code house}
+     * Creates a DeleteHouseCommand to delete the specified {@code house}
      */
-    public AddHouseCommand(House house, Name name) {
+    public DeleteHouseCommand(House house, Name name) {
         requireNonNull(house);
         requireNonNull(name);
-        houseToAdd = house;
+        houseToDelete = house;
         nameToCheck = name;
     }
 
@@ -76,25 +76,21 @@ public class AddHouseCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasHouse(houseToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
+        if (!model.hasHouse(houseToDelete)) {
+            throw new CommandException(MESSAGE_MISSING_HOUSE);
         }
 
         if (!model.hasPerson(nameToCheck)) {
             throw new CommandException(MESSAGE_INVALID_SELLER);
         }
 
-        Person sellerToAddTo = model.findPersonByName(nameToCheck);
+        Person sellerToDeleteFrom = model.findPersonByName(nameToCheck);
 
-        if (!(sellerToAddTo instanceof Seller)) {
+        if (!(sellerToDeleteFrom instanceof Seller)) {
             throw new CommandException(MESSAGE_INVALID_SELLER);
         }
 
-        try {
-            model.addHouse(houseToAdd, sellerToAddTo);
-        } catch (Exception e) {
-            throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
-        }
+        model.deleteHouse(houseToDelete, sellerToDeleteFrom);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
@@ -105,18 +101,18 @@ public class AddHouseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddHouseCommand)) {
+        if (!(other instanceof DeleteHouseCommand)) {
             return false;
         }
 
-        AddHouseCommand otherAddCommand = (AddHouseCommand) other;
-        return houseToAdd.equals(otherAddCommand.houseToAdd);
+        DeleteHouseCommand otherDeleteCommand = (DeleteHouseCommand) other;
+        return houseToDelete.equals(otherDeleteCommand.houseToDelete);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("houseToAdd", houseToAdd)
+                .add("houseToDelete", houseToDelete)
                 .toString();
     }
 }

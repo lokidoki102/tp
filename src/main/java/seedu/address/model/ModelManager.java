@@ -135,6 +135,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addHouseToHouses(House house) {
+        addressBook.addHouseToHouses(house);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
