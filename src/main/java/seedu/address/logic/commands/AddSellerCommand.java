@@ -17,9 +17,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Seller;
-import seedu.address.model.State;
+
 
 /**
  * Adds a seller to the address book.
