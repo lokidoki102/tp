@@ -25,12 +25,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
+
+        if (this instanceof Seller) {
+            this.tags.add(new Tag("Seller"));
+        }
+
+        if (this instanceof Buyer) {
+            this.tags.add(new Tag("Buyer"));
+        }
     }
 
     public Name getName() {
