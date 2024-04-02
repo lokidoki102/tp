@@ -1,11 +1,9 @@
 package seedu.address.model.person;
 
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.house.HousingType;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a buyer in the address book.
@@ -22,11 +20,10 @@ public class Buyer extends Person {
      * @param phone       The phone number of the buyer.
      * @param email       The email address of the buyer.
      * @param preferredHousingType The type of housing the buyer wants.
-     * @param tags        The tags associated with the buyer.
      * @param budget      The budget of the buyer.
      */
-    public Buyer(Name name, Phone phone, Email email, Budget budget, HousingType preferredHousingType, Set<Tag> tags) {
-        super(name, phone, email, tags);
+    public Buyer(Name name, Phone phone, Email email, Budget budget, HousingType preferredHousingType) {
+        super(name, phone, email);
         this.preferredHousingType = preferredHousingType;
         this.budget = budget;
     }

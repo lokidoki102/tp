@@ -1,11 +1,8 @@
 package seedu.address.model.person;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.address.model.house.House;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a seller in the address book.
@@ -20,10 +17,9 @@ public class Seller extends Person {
      * @param phone       The phone number of the seller.
      * @param email       The email address of the seller.
      * @param houses      The houses the seller has (modified to accept a list of houses)
-     * @param tags        The tags associated with the seller.
      */
-    public Seller(Name name, Phone phone, Email email, ArrayList<House> houses, Set<Tag> tags) {
-        super(name, phone, email, tags);
+    public Seller(Name name, Phone phone, Email email, ArrayList<House> houses) {
+        super(name, phone, email);
         this.houses = houses;
     }
 
@@ -75,9 +71,7 @@ public class Seller extends Person {
         Phone copyPhone = new Phone(this.getPhone().toString());
         Email copyEmail = new Email(this.getEmail().toString());
         ArrayList<House> copyHouse = new ArrayList<>();
-        Set<Tag> copyTags = new HashSet<>();
-        copyTags.add(new Tag("Seller"));
 
-        return new Seller(copyName, copyPhone, copyEmail, copyHouse, copyTags);
+        return new Seller(copyName, copyPhone, copyEmail, copyHouse);
     }
 }
