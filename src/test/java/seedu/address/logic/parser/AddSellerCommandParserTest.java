@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.POSTAL_CODE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PRICE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STREET_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SELLER;
 import static seedu.address.logic.commands.CommandTestUtil.UNIT_NUMBER_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -34,7 +34,7 @@ public class AddSellerCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND, new AddSellerCommand(expectedSeller));
+                + PRICE_DESC_AMY , new AddSellerCommand(expectedSeller));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingName = PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingName, expectedMessage);
     }
@@ -65,7 +65,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingPhone = NAME_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingPhone, expectedMessage);
     }
@@ -77,7 +77,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingEmail = NAME_DESC_AMY + PHONE_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingEmail, expectedMessage);
     }
@@ -89,7 +89,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingHousingType = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingHousingType, expectedMessage);
     }
@@ -101,7 +101,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingPostalCode = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingPostalCode, expectedMessage);
     }
@@ -113,7 +113,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingStreet = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingStreet, expectedMessage);
     }
@@ -125,7 +125,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingUnitNumber = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + PRICE_DESC_AMY + TAG_DESC_FRIEND;
+                + PRICE_DESC_AMY + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingUnitNumber, expectedMessage);
     }
@@ -137,7 +137,7 @@ public class AddSellerCommandParserTest {
         String commandWithMissingPrice = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + HOUSING_TYPE_DESC_AMY + STREET_DESC_AMY + BLOCK_DESC_AMY
                 + LEVEL_DESC_AMY + UNIT_NUMBER_DESC_AMY + POSTAL_CODE_DESC_AMY
-                + TAG_DESC_FRIEND;
+                + TAG_DESC_SELLER;
 
         assertParseFailure(parser, commandWithMissingPrice, expectedMessage);
     }

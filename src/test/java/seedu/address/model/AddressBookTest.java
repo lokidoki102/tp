@@ -57,10 +57,9 @@ public class AddressBookTest {
 
     public void resetDate_withDuplicateBuyerAndSeller_throwsDuplicatePersonException() {
         Person editedBuyer = new BuyerBuilder(ALICE_BUYER)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         Person editedSeller = new SellerBuilder(ALICE_SELLER)
-                .withTags(VALID_TAG_HUSBAND)
+                .withTags(VALID_TAG_SELLER)
                 .build();
         List<Person> newPersons = Arrays.asList(editedSeller, editedBuyer);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -97,7 +96,6 @@ public class AddressBookTest {
     public void hasBuyer_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE_BUYER);
         Person editedAlice = new BuyerBuilder(ALICE_BUYER)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
