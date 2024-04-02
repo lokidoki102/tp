@@ -10,6 +10,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.UniqueHouseList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -114,6 +115,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a house to internal list.
+     * The house must not already exist in the person's houses.
+     */
+    public void addHouseToHouses(House house) {
+        houses.add(house);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -129,6 +138,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        if (key instanceof Seller) {
+            Seller seller = (Seller) key;
+            if (!seller.getHouses().isEmpty()) {
+                for (House h: seller.getHouses()) {
+                    houses.remove(h);
+                }
+            }
+        }
         persons.remove(key);
     }
 

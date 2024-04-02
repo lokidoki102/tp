@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
 import seedu.address.model.house.exceptions.DuplicateHouseException;
-import seedu.address.model.house.exceptions.MissingHouseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.InvalidSellerException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -133,11 +132,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void removeHouse(House toAdd, Person owner) {
         requireNonNull(toAdd);
-        if (!(owner instanceof Seller)) {
-            throw new InvalidSellerException();
-        } else if (!((Seller) owner).hasHouse(toAdd)) {
-            throw new MissingHouseException();
-        }
         Seller seller = (Seller) owner;
         seller.removeHouse(toAdd);
         remove(owner);
