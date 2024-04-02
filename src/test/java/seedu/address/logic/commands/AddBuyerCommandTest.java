@@ -26,6 +26,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.testutil.BuyerBuilder;
 
 public class AddBuyerCommandTest {
@@ -193,6 +194,11 @@ public class AddBuyerCommandTest {
 
         @Override
         public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Seller> getFilteredSeller() {
             throw new AssertionError("This method should not be called.");
         }
     }

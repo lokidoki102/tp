@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.house.House;
@@ -62,5 +63,21 @@ public class Seller extends Person {
      */
     public ArrayList<House> getHouses() {
         return new ArrayList<>(houses);
+    }
+
+    /**
+     * Creates a copy of seller.
+     *
+     * @return An instance of seller.
+     */
+    public Seller copy() {
+        Name copyName = new Name(this.getName().toString());
+        Phone copyPhone = new Phone(this.getPhone().toString());
+        Email copyEmail = new Email(this.getEmail().toString());
+        ArrayList<House> copyHouse = new ArrayList<>();
+        Set<Tag> copyTags = new HashSet<>();
+        copyTags.add(new Tag("Seller"));
+
+        return new Seller(copyName, copyPhone, copyEmail, copyHouse, copyTags);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,7 +10,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.person.Seller;
 
 /**
  * The API of the Model component.
@@ -130,4 +131,7 @@ public interface Model {
      * @return The filtered list of sellers.
      */
     public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate);
+
+    /** Returns an unmodifiable view of seller list*/
+    public ArrayList<Seller> getFilteredSeller();
 }

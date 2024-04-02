@@ -201,6 +201,10 @@ class AddSellerCommandTest {
         public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        public ArrayList<Seller> getFilteredSeller() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
