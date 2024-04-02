@@ -15,6 +15,7 @@ public interface Ui {
     /** Displays Person details */
     void showPersonDetails(Person person);
 
+    /** Updates the ui layout */
     void updateUiLayout(State newState);
 
 }

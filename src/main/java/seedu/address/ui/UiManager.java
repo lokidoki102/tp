@@ -93,6 +93,7 @@ public class UiManager implements Ui {
         mainWindow.handleViewPerson(person);
     }
 
+    @Override
     public void updateUiLayout(State newState) {
         mainWindow.updateUiLayout(newState);
 

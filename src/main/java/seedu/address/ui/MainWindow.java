@@ -183,6 +183,9 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Handles view a specific person request
+     */
     public void handleViewPerson(Person person) {
         if (person == null) {
             personDetails.setVisible(false);
@@ -191,8 +194,6 @@ public class MainWindow extends UiPart<Stage> {
         personDetails.setVisible(true);
         personDetailsPanel.setPersonDetails(person);
     }
-
-
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
@@ -225,21 +226,24 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Updates the ui layout for displaying.
+     */
     public void updateUiLayout(State newState) {
         contentBoxSplitPane.getItems().removeAll(personList, personDetails);
         switch (newState) {
-            case PERSON_LIST:
-                contentBoxSplitPane.getItems().addAll(personList);
-                break;
-            case PERSON_DETAILS:
-                contentBoxSplitPane.getItems().addAll(personList, personDetails);
-                break;
-            case MATCH_RESULTS:
-                // TODO to be updated
-                contentBoxSplitPane.getItems().addAll(personList);
-                break;
-            default:
-                break;
+        case PERSON_LIST:
+            contentBoxSplitPane.getItems().addAll(personList);
+            break;
+        case PERSON_DETAILS:
+            contentBoxSplitPane.getItems().addAll(personList, personDetails);
+            break;
+        case MATCH_RESULTS:
+            // TODO to be updated
+            contentBoxSplitPane.getItems().addAll(personList);
+            break;
+        default:
+            break;
         }
     }
 }

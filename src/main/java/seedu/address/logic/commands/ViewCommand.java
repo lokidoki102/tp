@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -8,14 +12,11 @@ import seedu.address.model.Model;
 import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Displays the detail of a person identified using it's displayed index from the displayed list.
  */
-public class ViewCommand extends Command{
+public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -38,10 +39,10 @@ public class ViewCommand extends Command{
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        assert targetIndex.getZeroBased() < lastShownList.size():
-                "Index should be within the range of the list displayed";
-        assert targetIndex.getZeroBased() >= 0: "Index should be a positive number";
-
+        assert targetIndex.getZeroBased() < lastShownList.size()
+                : "Index should be within the range of the list displayed";
+        assert targetIndex.getZeroBased() >= 0
+                : "Index should be a positive number";
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
         model.setState(State.PERSON_DETAILS);
         model.showPerson(personToView);

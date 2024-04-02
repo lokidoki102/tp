@@ -145,7 +145,6 @@ public class ModelManager implements Model {
     }
 
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -169,9 +168,9 @@ public class ModelManager implements Model {
         return state;
     }
 
-    // Avoid PI
     public void setState(State newState) {
-        if (!isSameState(newState)) {
+        boolean isStateChanged = isSameState(newState);
+        if (!isStateChanged) {
             state = newState;
             if (ui != null) {
                 ui.updateUiLayout(newState);

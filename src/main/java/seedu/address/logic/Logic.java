@@ -35,7 +35,7 @@ public interface Logic {
 
     /** Returns the person to display the details */
     Person getPersonToDisplay();
-    
+
     /**
      * Returns the user prefs' address book file path.
      */

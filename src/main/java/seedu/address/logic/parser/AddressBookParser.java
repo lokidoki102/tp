@@ -8,9 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-<<<<<<< HEAD
-import seedu.address.logic.commands.*;
-=======
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddHouseCommand;
 import seedu.address.logic.commands.AddSellerCommand;
@@ -23,7 +20,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
->>>>>>> 7afad24012cc46b16a9847e5afd656f775cf4214
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

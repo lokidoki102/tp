@@ -1,17 +1,16 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.house.HousingType;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Buyer;
+import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
-
-import static seedu.address.model.util.SampleDataUtil.getTagSet;
 
 /**
  * Panel containing the details of the selected person.
@@ -20,14 +19,14 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
 
-    public Person displayedPerson;
+    private Person displayedPerson;
 
     @FXML
     private VBox personDetailsPane;
     @FXML
     private Label name;
     //    @FXML
-//    private Label id;
+    // private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -52,10 +51,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
         name.setText(displayedPerson.getName().fullName);
         phone.setText(displayedPerson.getPhone().value);
         email.setText(displayedPerson.getEmail().value);
-        housingType.setText(displayedPerson.getHousingType().value);
+
 
         if (displayedPerson instanceof Buyer) {
             Buyer buyer = (Buyer) displayedPerson;
+            housingType.setText(buyer.getPreferredHousingType().value);
             budget.setText("$" + buyer.getBudget().toString());
         }
     }
