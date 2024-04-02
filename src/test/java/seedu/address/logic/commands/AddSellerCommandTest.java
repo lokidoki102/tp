@@ -133,7 +133,12 @@ class AddSellerCommandTest {
 
         @Override
         public void addHouse(House house, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void addHouseToHouses(House house) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
