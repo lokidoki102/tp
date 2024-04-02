@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.util.HashSet;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -69,6 +68,6 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
 
         Person person = super.toModelType();
         return new Buyer(person.getName(), person.getPhone(), person.getEmail(),
-                modelBudget, modelHousingType, new HashSet<>(person.getTags()));
+                modelBudget, modelHousingType);
     }
 }

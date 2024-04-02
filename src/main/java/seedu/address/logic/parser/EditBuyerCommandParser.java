@@ -33,7 +33,7 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
-                        PREFIX_BUDGET, PREFIX_TAG);
+                        PREFIX_BUDGET);
 
         Index index;
 

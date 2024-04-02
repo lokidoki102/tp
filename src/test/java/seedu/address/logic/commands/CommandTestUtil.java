@@ -56,8 +56,8 @@ public class CommandTestUtil {
     public static final String VALID_BUDGET_AMY = "999000";
     public static final String VALID_BUDGET_BOB = "1000000";
     public static final String VALID_BUDGET_BEN = "123000";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_BUYER = "Buyer";
+    public static final String VALID_TAG_SELLER = "Seller";
     public static final String VALID_BLOCK_AMY = "99B";
     public static final String VALID_BLOCK_BOB = "99A";
     public static final String VALID_LEVEL_AMY = "10";
@@ -76,10 +76,11 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String TAG_DESC_BUYER = " " + PREFIX_TAG + VALID_TAG_BUYER;
+    public static final String TAG_DESC_SELLER = " " + PREFIX_TAG + VALID_TAG_SELLER;
+
     public static final String HOUSING_TYPE_DESC_AMY = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_AMY;
     public static final String HOUSING_TYPE_DESC_BOB = " " + PREFIX_HOUSING_TYPE + VALID_HOUSING_TYPE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String BLOCK_DESC_AMY = " " + PREFIX_BLOCK + VALID_BLOCK_AMY;
     public static final String BLOCK_DESC_BOB = " " + PREFIX_BLOCK + VALID_BLOCK_BOB;
     public static final String LEVEL_DESC_AMY = " " + PREFIX_LEVEL + VALID_LEVEL_AMY;
@@ -92,7 +93,7 @@ public class CommandTestUtil {
     public static final String UNIT_NUMBER_DESC_BOB = " " + PREFIX_UNITNUMBER + VALID_UNIT_NUMBER_BOB;
     public static final String PRICE_DESC_AMY = " " + PREFIX_PRICE + VALID_PRICE_AMY;
     public static final String PRICE_DESC_BOB = " " + PREFIX_PRICE + VALID_PRICE_AMY;
-
+    public static final String VALID_BUDGET_DESC_AMY = " " + PREFIX_BUDGET + VALID_BUDGET_AMY;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -104,26 +105,26 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditSellerCommand.EditSellerDescriptor DESC_AMY;
-    public static final EditSellerCommand.EditSellerDescriptor DESC_BOB;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SELLER_AMY;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SELLER_BOB;
 
     public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_AMY;
     public static final EditBuyerCommand.EditBuyerDescriptor DESC_BUYER_BOB;
 
 
     static {
-        DESC_AMY = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditSellerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_SELLER_AMY = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_SELLER).build();
+        DESC_SELLER_BOB = new EditSellerDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_SELLER).build();
         DESC_BUYER_AMY = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withHousingType(VALID_HOUSING_TYPE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_BUYER).build();
         DESC_BUYER_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withHousingType(VALID_HOUSING_TYPE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_BUYER).build();
     }
 
     /**

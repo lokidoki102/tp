@@ -34,14 +34,16 @@ public class UniqueHouseList implements Iterable<House> {
     public boolean contains(House toCheck) {
         requireNonNull(toCheck);
         for (House h: internalList) {
-            int index1 = toCheck.toString().toLowerCase().indexOf("street");
-            int index2 = h.toString().toLowerCase().indexOf("street");
-            int lastIndex1 = toCheck.toString().toLowerCase().lastIndexOf("price");
-            int lastIndex2 = h.toString().toLowerCase().lastIndexOf("price");
+            int checkAddressOfHouse = toCheck.toString().toLowerCase().indexOf("street");
+            int checkAddressOfHouseInList = h.toString().toLowerCase().indexOf("street");
+            int cutOffPriceOfHouse = toCheck.toString().toLowerCase().lastIndexOf("price");
+            int cutOffPriceOfHouseInList = h.toString().toLowerCase().lastIndexOf("price");
 
-            String substr1 = toCheck.toString().substring(index1 + "street".length(), lastIndex1).toLowerCase();
-            String substr2 = h.toString().substring(index2 + "street".length(), lastIndex2).toLowerCase();
-            if (substr1.equals(substr2)) {
+            String firstAddress = toCheck.toString().substring(checkAddressOfHouse + "street".length(),
+                                                               cutOffPriceOfHouse).toLowerCase();
+            String secondAddress = h.toString().substring(checkAddressOfHouseInList + "street".length(),
+                                                          cutOffPriceOfHouseInList).toLowerCase();
+            if (firstAddress.equals(secondAddress)) {
                 return true;
             }
         }

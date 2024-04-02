@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SELLER;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +53,7 @@ public class EditBuyerDescriptorTest {
         assertFalse(DESC_BUYER_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditBuyerDescriptorBuilder(DESC_BUYER_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditBuyerDescriptorBuilder(DESC_BUYER_AMY).withTags(VALID_TAG_SELLER).build();
         assertFalse(DESC_BUYER_AMY.equals(editedAmy));
     }
 
