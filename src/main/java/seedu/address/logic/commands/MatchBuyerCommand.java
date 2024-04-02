@@ -11,6 +11,7 @@ import seedu.address.model.house.HousingType;
 import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
+import seedu.address.model.person.FullNameEqualsKeywordPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 
@@ -25,19 +26,19 @@ public class MatchBuyerCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Matches a specific buyer's budget and housing type "
             + "to sellers' house price and housing type when given the buyer's name.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: full name\n"
+            + "Example: " + COMMAND_WORD + " alice chan";
 
-    private final NameContainsKeywordsPredicate namePredicate;
+    private final FullNameEqualsKeywordPredicate fullNamePredicate;
 
-    public MatchBuyerCommand(NameContainsKeywordsPredicate namePredicate) {
-        this.namePredicate = namePredicate;
+    public MatchBuyerCommand(FullNameEqualsKeywordPredicate fullNamePredicate) {
+        this.fullNamePredicate = fullNamePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(namePredicate);
+        model.updateFilteredPersonList(fullNamePredicate);
         if (model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(Messages.MESSAGE_BUYER_NOT_FOUND);
         } else {
@@ -66,13 +67,13 @@ public class MatchBuyerCommand extends Command {
         }
 
         MatchBuyerCommand otherMatchBuyerCommand = (MatchBuyerCommand) other;
-        return namePredicate.equals(otherMatchBuyerCommand.namePredicate);
+        return fullNamePredicate.equals(otherMatchBuyerCommand.fullNamePredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("namePredicate", namePredicate)
+                .add("fullNamePredicate", fullNamePredicate)
                 .toString();
     }
 }
