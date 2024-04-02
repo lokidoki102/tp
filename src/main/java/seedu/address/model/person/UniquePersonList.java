@@ -12,7 +12,6 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.exceptions.DuplicateHouseException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.InvalidSellerException;
-import seedu.address.model.person.exceptions.MissingHouseException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
