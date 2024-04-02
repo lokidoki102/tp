@@ -17,7 +17,6 @@ import seedu.address.model.house.House;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
-import seedu.address.model.person.exceptions.MissingHouseException;
 
 /**
  * Adds a house to the seller.
@@ -49,6 +48,8 @@ public class DeleteHouseCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "House deleted!";
     public static final String MESSAGE_MISSING_HOUSE = "This house does not exist in EstateEase";
+
+    public static final String MESSAGE_WRONG_HOUSE = "This house does not belong to this seller!";
 
     public static final String MESSAGE_INVALID_SELLER = "This Seller does not exist in EstateEase";
 
@@ -92,7 +93,7 @@ public class DeleteHouseCommand extends Command {
         }
 
         if (!((Seller) sellerToDeleteFrom).hasHouse(houseToDelete)) {
-            throw new MissingHouseException();
+            throw new CommandException(MESSAGE_WRONG_HOUSE);
         }
 
         model.deleteHouse(houseToDelete, sellerToDeleteFrom);
