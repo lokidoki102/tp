@@ -92,7 +92,7 @@ public class CommandTestUtil {
     public static final String UNIT_NUMBER_DESC_BOB = " " + PREFIX_UNITNUMBER + VALID_UNIT_NUMBER_BOB;
     public static final String PRICE_DESC_AMY = " " + PREFIX_PRICE + VALID_PRICE_AMY;
     public static final String PRICE_DESC_BOB = " " + PREFIX_PRICE + VALID_PRICE_AMY;
-
+    public static final String VALID_BUDGET_DESC_AMY = " " + PREFIX_BUDGET + VALID_BUDGET_AMY;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
