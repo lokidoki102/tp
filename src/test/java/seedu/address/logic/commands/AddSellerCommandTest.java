@@ -193,7 +193,7 @@ class AddSellerCommandTest {
         }
 
         @Override
-        public ObservableList<House> getFilteredSellerList() {
+        public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

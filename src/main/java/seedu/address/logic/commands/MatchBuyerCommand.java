@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
 import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
@@ -44,8 +46,11 @@ public class MatchBuyerCommand extends Command {
             HousingType housingType = targetBuyer.getPreferredHousingType();
             PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);
             model.updateFilteredSellerList(predicate);
+
+            ObservableList<House> filteredSellerList = model.getFilteredSellerList(predicate);
+
             return new CommandResult(
-                    String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
+                    String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));
         }
     }
 

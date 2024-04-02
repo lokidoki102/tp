@@ -28,9 +28,6 @@ public class PriceAndHousingTypePredicate implements Predicate<House> {
      */
     @Override
     public boolean test(House house) {
-        if (house.getHousingType().equals(housingType)) {
-            return house.getPrice().compareTo(price) <= 0;
-        }
-        return false;
+        return house.getPrice().compareTo(price) <= 0 && house.getHousingType().equals(housingType);
     }
 }

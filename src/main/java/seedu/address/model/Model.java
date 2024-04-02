@@ -129,5 +129,5 @@ public interface Model {
      * Retrieves the filtered list of sellers.
      * @return The filtered list of sellers.
      */
-    ObservableList<House> getFilteredSellerList();
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate);
 }

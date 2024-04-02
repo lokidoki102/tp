@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -171,12 +172,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<House> getFilteredSellerList() {
+    public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
-        return filteredSellers.stream()
+        ObservableList<House> allHouses = filteredSellers.stream()
                 .map(seller -> ((Seller) seller).getHouses())
-                .flatMap(houses -> houses.stream())
+                .flatMap(Collection::stream)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        return allHouses.filtered(predicate);
     }
 
     @Override
