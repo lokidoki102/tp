@@ -115,6 +115,15 @@ public class JsonAdaptedBuyerTest {
     }
 
     @Test
+    public void toModelType_nullHousingType_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =
+                new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                        VALID_BUDGET, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, HousingType.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
