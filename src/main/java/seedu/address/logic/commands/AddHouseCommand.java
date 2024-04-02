@@ -35,7 +35,7 @@ public class AddHouseCommand extends Command {
             + PREFIX_LEVEL + "LEVEL "
             + PREFIX_UNITNUMBER + "UNIT NUMBER "
             + PREFIX_POSTALCODE + "POSTAL CODE "
-            + PREFIX_PRICE + "PRICE \n"
+            + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_HOUSING_TYPE + "Condominium "
