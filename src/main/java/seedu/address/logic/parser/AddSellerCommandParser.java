@@ -20,13 +20,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.house.Block;
-import seedu.address.model.house.Condominium;
-import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
-import seedu.address.model.house.Landed;
-import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
