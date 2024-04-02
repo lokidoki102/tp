@@ -143,7 +143,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (!seller.getHouses().isEmpty()) {
                 for (House h: seller.getHouses()) {
                     houses.remove(h);
-                }   
+                }
             }
         }
         persons.remove(key);
