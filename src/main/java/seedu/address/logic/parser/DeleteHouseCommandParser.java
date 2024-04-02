@@ -14,31 +14,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.DeleteHouseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.house.Block;
-import seedu.address.model.house.Condominium;
-import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
-import seedu.address.model.house.Landed;
-import seedu.address.model.house.Level;
 import seedu.address.model.house.PostalCode;
 import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Seller;
 
 
 /**
  * Parses input arguments and creates a new AddHouseCommand object
  */
 public class DeleteHouseCommandParser implements Parser<DeleteHouseCommand> {
-    public static final String MESSAGE_INVALID_HDB = "Hdb must have a block and a level!";
-    public static final String MESSAGE_INVALID_CONDOMINIUM = "Condominium must have a level!";
-    public static final String MESSAGE_INVALID_LANDED = "Landed must not have a level or block!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteHouseCommand
