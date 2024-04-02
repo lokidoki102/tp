@@ -12,7 +12,6 @@ import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.FullNameEqualsKeywordPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 
 /**
