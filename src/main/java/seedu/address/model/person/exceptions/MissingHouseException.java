@@ -1,4 +1,4 @@
-package seedu.address.model.house.exceptions;
+package seedu.address.model.person.exceptions;
 
 /**
  * Signals that the operation will result in Missing houses

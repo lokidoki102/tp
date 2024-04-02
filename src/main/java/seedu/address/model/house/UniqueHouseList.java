@@ -33,27 +33,20 @@ public class UniqueHouseList implements Iterable<House> {
      */
     public boolean contains(House toCheck) {
         requireNonNull(toCheck);
-        if (toCheck instanceof Landed) {
-            return internalList.stream().anyMatch(toCheck::equals);
-        } else {
-            for (House h: internalList) {
-                int index1 = toCheck.toString().indexOf("Street");
-                int index2 = h.toString().indexOf("Street");
-                int lastIndex1 = toCheck.toString().indexOf("price", index1);
-                int lastIndex2 = h.toString().indexOf("price", index2);
+        for (House h: internalList) {
+            int index1 = toCheck.toString().toLowerCase().indexOf("street");
+            int index2 = h.toString().toLowerCase().indexOf("street");
+            int lastIndex1 = toCheck.toString().toLowerCase().lastIndexOf("price");
+            int lastIndex2 = h.toString().toLowerCase().lastIndexOf("price");
 
-                if (index1 == -1 || index2 == -1 || lastIndex1 == -1 || lastIndex2 == -1) {
-                    throw new AssertionError("Invalid house");
-                }
-
-                String substr1 = toCheck.toString().substring(index1 + "Street".length(), lastIndex1);
-                String substr2 = h.toString().substring(index2 + "Street".length(), lastIndex2);
-                if (substr1.equals(substr2)) {
-                    return true;
-                }
+            String substr1 = toCheck.toString().substring(index1 + "street".length(), lastIndex1);
+            String substr2 = h.toString().substring(index2 + "street".length(), lastIndex2);
+            if (substr1.equals(substr2)) {
+                return true;
             }
-            return false;
         }
+        return false;
+
     }
 
     /**
