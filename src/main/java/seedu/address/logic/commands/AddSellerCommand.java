@@ -10,13 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,8 +37,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_LEVEL + "LEVEL "
             + PREFIX_UNITNUMBER + "UNIT NUMBER "
             + PREFIX_POSTALCODE + "POSTAL CODE "
-            + PREFIX_PRICE + "PRICE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -49,9 +48,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_LEVEL + "02 "
             + PREFIX_UNITNUMBER + "25 "
             + PREFIX_POSTALCODE + "578578 "
-            + PREFIX_PRICE + "999999999 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney ";
+            + PREFIX_PRICE + "999999999";
 
     public static final String MESSAGE_SUCCESS = "New seller added= %1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This person already exists in EstateEase";
@@ -80,7 +77,7 @@ public class AddSellerCommand extends Command {
         if (model.hasPerson(sellerToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-
+        model.setState(State.PERSON_LIST);
         model.addPerson(sellerToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerToAdd)));
     }

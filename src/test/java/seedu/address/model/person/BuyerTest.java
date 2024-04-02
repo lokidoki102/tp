@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_TYPE_BO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BEN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALI_BUYER;
 import static seedu.address.testutil.TypicalPersons.BEN_BUYER;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -36,7 +35,7 @@ public class BuyerTest {
 
         // same name, all other attributes different -> returns true
         Person editedAli = new BuyerBuilder(ALI_BUYER).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withHousingType(VALID_HOUSING_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withHousingType(VALID_HOUSING_TYPE_BOB).build();
         assertTrue(ALI_BUYER.isSamePerson(editedAli));
 
         // different name, all other attributes same -> returns false
@@ -87,10 +86,6 @@ public class BuyerTest {
 
         // different housingtype -> returns false
         editedAli = new BuyerBuilder(ALI_BUYER).withHousingType(VALID_HOUSING_TYPE_BOB).build();
-        assertFalse(ALI_BUYER.equals(editedAli));
-
-        // different tags -> returns false
-        editedAli = new BuyerBuilder(ALI_BUYER).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALI_BUYER.equals(editedAli));
     }
 

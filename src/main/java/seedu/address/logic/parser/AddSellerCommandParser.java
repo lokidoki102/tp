@@ -10,11 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddSellerCommand;
@@ -34,7 +32,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Seller;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddSellerCommand object
@@ -50,7 +47,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_HOUSING_TYPE, PREFIX_LEVEL, PREFIX_BLOCK, PREFIX_STREET,
-                        PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE, PREFIX_TAG);
+                        PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
                 PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER,
@@ -66,13 +63,12 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         HousingType housingType = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING_TYPE).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         ArrayList<House> houses = new ArrayList<>();
         // Seperated out the methods to create hdb, condominium and landed (adhere to SLAP)
         houses.add(createHouse(argMultimap, housingType, price));
 
-        Seller seller = new Seller(name, phone, email, houses, tagList);
+        Seller seller = new Seller(name, phone, email, houses);
         return new AddSellerCommand(seller);
     }
 

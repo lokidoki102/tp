@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SELLER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
 import static seedu.address.testutil.TypicalPersons.BOB_SELLER;
@@ -42,7 +42,7 @@ public class UniquePersonListTest {
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         // TODO: For v1.3, add in Buyer
         uniquePersonList.add(ALICE_SELLER);
-        Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_SELLER)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -86,7 +86,7 @@ public class UniquePersonListTest {
     public void setPerson_editedPersonHasSameIdentity_success() {
         // TODO: do for buyer as well
         uniquePersonList.add(ALICE_SELLER);
-        Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new SellerBuilder(ALICE_SELLER).withTags(VALID_TAG_SELLER)
                 .build();
         uniquePersonList.setPerson(ALICE_SELLER, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();

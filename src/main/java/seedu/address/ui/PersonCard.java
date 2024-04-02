@@ -8,10 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.house.Block;
-import seedu.address.model.house.Condominium;
-import seedu.address.model.house.Hdb;
-import seedu.address.model.house.Level;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
@@ -58,14 +54,27 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("label");
+                    if ("Seller".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-seller");
+                        // TODO(UI): Change background colour value for buyer and seller
+                        cardPane.setStyle("-fx-background-color: #511bb5;");
+                    } else if ("Buyer".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-buyer");
+                        // TODO(UI): Change background colour value for buyer and seller
+                        cardPane.setStyle("-fx-background-color: #2b5d79;");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
             // Show no budget
-            budget.setVisible(false);
-            preferredHousingType.setVisible(false);
+            //budget.setVisible(false);
+            //preferredHousingType.setVisible(false);
             Seller seller = (Seller) person;
+            /*
             if (seller.getHouses() != null) {
                 seller.getHouses().forEach(house -> {
                     // Create a VBox to hold the house details with spacing between elements
@@ -102,13 +111,13 @@ public class PersonCard extends UiPart<Region> {
                         });
                     }
                 });
-            }
+            } */
         } else {
             // We assumed that buyer does not have a house for now
-            housesContainer.setVisible(false);
+            // housesContainer.setVisible(false);
             Buyer buyer = (Buyer) person;
-            budget.setText("$" + buyer.getBudget().toString());
-            preferredHousingType.setText("Preferred Housing Type: " + buyer.getPreferredHousingType().toString());
+            // budget.setText("$" + buyer.getBudget().toString());
+            // preferredHousingType.setText("Preferred Housing Type: " + buyer.getPreferredHousingType().toString());
         }
     }
 }

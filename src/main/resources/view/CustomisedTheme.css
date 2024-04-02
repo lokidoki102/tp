@@ -1,0 +1,21 @@
+
+.test {
+    -fx-background-color: derive(#D53B1A, 100%);
+    -fx-border-color: derive(#D53B1A, 100%);
+    -fx-border-top-width: 1px;
+}
+
+/* Set width to 50% for each VBox */
+.vbox-width {
+    -fx-pref-width: 50%;
+}
+
+.test-2 {
+    -fx-background-color: derive(#D53B1A, 100%);
+    -fx-border-color: derive(#000000, 100%);
+    -fx-border-top-width: 1px;
+}
+
+.details-card {
+
+}

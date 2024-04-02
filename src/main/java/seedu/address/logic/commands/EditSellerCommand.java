@@ -20,8 +20,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
-import seedu.address.model.house.HousingType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -42,7 +42,7 @@ public class EditSellerCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_EMAIL + "EMAIL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -86,7 +86,7 @@ public class EditSellerCommand extends Command {
         if (!sellerToEdit.isSamePerson(editedSeller) && model.hasPerson(editedSeller)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        model.setState(State.PERSON_LIST);
         model.setPerson(sellerToEdit, editedSeller);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller)));
@@ -102,10 +102,11 @@ public class EditSellerCommand extends Command {
         Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
-        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
+
+        // Houses are non-editable via editSellerCommand
         ArrayList<House> houses = sellerToEdit.getHouses();
 
-        return new Seller(updatedName, updatedPhone, updatedEmail, houses, updatedTags);
+        return new Seller(updatedName, updatedPhone, updatedEmail, houses);
     }
 
     @Override
@@ -140,7 +141,6 @@ public class EditSellerCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private HousingType housingType;
         private Set<Tag> tags;
 
         public EditSellerDescriptor() {
@@ -154,7 +154,6 @@ public class EditSellerCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setHousingType(toCopy.housingType);
             setTags(toCopy.tags);
         }
 
@@ -163,7 +162,8 @@ public class EditSellerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, housingType, tags);
+            // TODO(TAG): Remove tags
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 
         public void setName(Name name) {
@@ -188,14 +188,6 @@ public class EditSellerCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setHousingType(HousingType housingType) {
-            this.housingType = housingType;
-        }
-
-        public Optional<HousingType> getHousingType() {
-            return Optional.ofNullable(housingType);
         }
 
         /**
@@ -230,7 +222,6 @@ public class EditSellerCommand extends Command {
             return Objects.equals(name, otherEditSellerDescriptor.name)
                     && Objects.equals(phone, otherEditSellerDescriptor.phone)
                     && Objects.equals(email, otherEditSellerDescriptor.email)
-                    && Objects.equals(housingType, otherEditSellerDescriptor.housingType)
                     && Objects.equals(tags, otherEditSellerDescriptor.tags);
         }
 
@@ -240,7 +231,6 @@ public class EditSellerCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("housingType", housingType)
                     .add("tags", tags)
                     .toString();
         }
