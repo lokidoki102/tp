@@ -64,8 +64,20 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
         boolean hasLevel = argMultimap.getValue(PREFIX_LEVEL).isPresent();
 
-        ArrayList<House> houses = new ArrayList<>();
 
+        House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock, hasLevel,
+                argMultimap);
+        return new AddHouseCommand(house, name);
+    }
+
+    /**
+     * Returns a house, if all the arguments are valid
+     */
+
+    public static House checkValidity(HousingType housingType, UnitNumber unitNumber, Street street,
+                                      PostalCode postalCode, Price price, boolean hasBlock, boolean hasLevel,
+                                                 ArgumentMultimap argMultimap) throws ParseException {
+        ArrayList<House> houses = new ArrayList<>();
         if (housingType.toString().toLowerCase().equals("hdb")) {
             if (!hasLevel || !hasBlock) {
                 throw new ParseException(String.format(MESSAGE_INVALID_HDB, AddHouseCommand.MESSAGE_USAGE));
@@ -99,8 +111,7 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
             }
             houses.add(new Landed(unitNumber, postalCode, street, price));
         }
-        House house = houses.get(0);
-        return new AddHouseCommand(house, name);
+        return houses.get(0);
     }
 
     /**
