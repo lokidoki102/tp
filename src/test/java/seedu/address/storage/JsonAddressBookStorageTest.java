@@ -74,7 +74,6 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(ZURI_BUYER);
-        original.removePerson(ALICE_SELLER);
         original.addPerson(ALI_BUYER);
         original.removePerson(ALI_BUYER);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
