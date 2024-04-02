@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.AddHouseCommandParser.checkValidity;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
@@ -13,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.DeleteHouseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.Block;
@@ -27,6 +29,7 @@ import seedu.address.model.house.Price;
 import seedu.address.model.house.Street;
 import seedu.address.model.house.UnitNumber;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Seller;
 
 
 /**
@@ -64,42 +67,11 @@ public class DeleteHouseCommandParser implements Parser<DeleteHouseCommand> {
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
         boolean hasLevel = argMultimap.getValue(PREFIX_LEVEL).isPresent();
 
-        ArrayList<House> houses = new ArrayList<>();
+        ArrayList<House> houses = new ArrayList<House>();
+        House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock, hasLevel,
+                argMultimap);
+        houses.add(house);
 
-        if (housingType.toString().toLowerCase().equals("hdb")) {
-            if (!hasLevel || !hasBlock) {
-                throw new ParseException(String.format(MESSAGE_INVALID_HDB, DeleteHouseCommand.MESSAGE_USAGE));
-            } else {
-                Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-                if (block.toString().equals("N/A")) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_HDB, DeleteHouseCommand.MESSAGE_USAGE));
-                }
-                Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                houses.add(new Hdb(level, postalCode, street, unitNumber, block, price));
-            }
-        } else if (housingType.toString().toLowerCase().equals("condominium")) {
-            if (!hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALID_CONDOMINIUM, DeleteHouseCommand.MESSAGE_USAGE));
-            } else if (!hasBlock) {
-                Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                houses.add(new Condominium(level, postalCode, street, unitNumber, price));
-            } else if (hasBlock) {
-                Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-                if (block.toString().equals("N/A")) {
-                    Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                    houses.add(new Condominium(level, postalCode, street, unitNumber, price));
-                } else {
-                    Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                    houses.add(new Condominium(level, postalCode, street, unitNumber, block, price));
-                }
-            }
-        } else if (housingType.toString().toLowerCase().equals("landed")) {
-            if (hasBlock || hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALID_LANDED, DeleteHouseCommand.MESSAGE_USAGE));
-            }
-            houses.add(new Landed(unitNumber, postalCode, street, price));
-        }
-        House house = houses.get(0);
         return new DeleteHouseCommand(house, name);
     }
 

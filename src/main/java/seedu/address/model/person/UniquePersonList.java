@@ -133,11 +133,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void removeHouse(House toAdd, Person owner) {
         requireNonNull(toAdd);
-        if (!(owner instanceof Seller)) {
-            throw new InvalidSellerException();
-        } else if (!((Seller) owner).hasHouse(toAdd)) {
-            throw new MissingHouseException();
-        }
         Seller seller = (Seller) owner;
         seller.removeHouse(toAdd);
         remove(owner);

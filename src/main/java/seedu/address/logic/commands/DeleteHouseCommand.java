@@ -17,6 +17,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
+import seedu.address.model.person.exceptions.MissingHouseException;
 
 /**
  * Adds a house to the seller.
@@ -35,7 +36,7 @@ public class DeleteHouseCommand extends Command {
             + PREFIX_LEVEL + "LEVEL "
             + PREFIX_UNITNUMBER + "UNIT NUMBER "
             + PREFIX_POSTALCODE + "POSTAL CODE "
-            + PREFIX_PRICE + "PRICE \n"
+            + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_HOUSING_TYPE + "Condominium "
@@ -88,6 +89,10 @@ public class DeleteHouseCommand extends Command {
 
         if (!(sellerToDeleteFrom instanceof Seller)) {
             throw new CommandException(MESSAGE_INVALID_SELLER);
+        }
+
+        if (!((Seller) sellerToDeleteFrom).hasHouse(houseToDelete)) {
+            throw new MissingHouseException();
         }
 
         model.deleteHouse(houseToDelete, sellerToDeleteFrom);
