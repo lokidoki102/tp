@@ -58,8 +58,20 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("label");
+                    if ("Seller".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-seller");
+                        // TODO(UI): Change background colour value for buyer and seller
+                        cardPane.setStyle("-fx-background-color: #511bb5;");
+                    } else if ("Buyer".equals(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-buyer");
+                        // TODO(UI): Change background colour value for buyer and seller
+                        cardPane.setStyle("-fx-background-color: #2b5d79;");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
         // Check if person is a Seller and display houses (For now, we assume only have seller have house)
         if (person instanceof Seller) {
             // Show no budget

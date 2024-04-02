@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,7 +43,14 @@ public class Messages {
                 .append("; Email= ")
                 .append(person.getEmail())
                 .append("; Tags= ");
-        person.getTags().forEach(builder::append);
+        person.getTags().forEach(tag -> builder.append("[").append(tag.tagName).append("] "));
+        if (person instanceof Buyer) {
+            Buyer buyer = (Buyer) person;
+            builder.append("; Preferred Housing Type= ")
+                    .append(buyer.getPreferredHousingType())
+                    .append("; Budget= ")
+                    .append(buyer.getBudget());
+        }
         return builder.toString();
     }
 }

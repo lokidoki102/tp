@@ -342,9 +342,17 @@
     -fx-vgap: 3;
 }
 
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+/* TODO(UI): Change colour for seller and buyer tag */
+.tag-seller {
+    -fx-background-color: #b51b7f;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.tag-buyer {
+    -fx-background-color: #273aa1;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
