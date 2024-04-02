@@ -10,6 +10,7 @@ import seedu.address.model.house.House;
 import seedu.address.model.house.UniqueHouseList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -137,6 +138,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        if (key instanceof Seller) {
+            Seller seller = (Seller) key;
+            for (House h: seller.getHouses()) {
+                houses.remove(h);
+            }
+        }
         persons.remove(key);
     }
 
