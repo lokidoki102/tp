@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,7 +62,7 @@ public class AddBuyerCommand extends Command {
         if (model.hasPerson(buyerToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
-
+        model.setState(State.PERSON_LIST);
         model.addPerson(buyerToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(buyerToAdd)));
     }

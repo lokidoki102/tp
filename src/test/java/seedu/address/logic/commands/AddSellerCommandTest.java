@@ -20,11 +20,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 import seedu.address.testutil.SellerBuilder;
+import seedu.address.ui.Ui;
 
 class AddSellerCommandTest {
 
@@ -187,6 +189,36 @@ class AddSellerCommandTest {
         }
 
         @Override
+        public State getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setState(State newState) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSameState(State newState) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUi(Ui ui) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -230,6 +262,11 @@ class AddSellerCommandTest {
         public void addPerson(Person seller) {
             requireNonNull(seller);
             sellersAdded.add(seller);
+        }
+
+        @Override
+        public void setState(State newState) {
+            requireNonNull(newState);
         }
 
         @Override

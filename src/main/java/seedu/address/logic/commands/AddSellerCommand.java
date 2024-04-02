@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Seller;
+import seedu.address.model.State;
 
 /**
  * Adds a seller to the address book.
@@ -78,7 +79,7 @@ public class AddSellerCommand extends Command {
         if (model.hasPerson(sellerToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-
+        model.setState(State.PERSON_LIST);
         model.addPerson(sellerToAdd);
 
         House houseToAdd = sellerToAdd.getHouse().get(0);
