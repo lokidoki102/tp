@@ -1024,12 +1024,22 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `matchBuyer Alice Lee`
       **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
 
-2. **Invalid formats**
+2. **Invalid name format**
 
    2. **Test case:** `matchBuyer Alice`
       **Expected:** Message indicating invalid format. The specified buyer was not found.
 
    2. **Test case:** `matchBuyer Lee`
       **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+3. **Invalid buyer**
+   
+   3. **Test case:** `matchBuyer Bob Lim`
+      **Expected:** Message indicating invalid person. The specified person is not a buyer.
+
+4. **Buyer does not exist**
+
+    4. **Test case:** `matchBuyer Ben Chan`
+       **Expected:** Message indicating invalid person. The specified buyer was not found.
 
 ### Matching Sellers to a Buyer

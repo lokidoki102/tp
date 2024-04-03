@@ -130,6 +130,21 @@ Examples:
 * `deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 * `deleteHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
 
+### Matching Sellers to a Buyer: `matchBuyer`
+
+Shows the list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
+
+Format: `matchBuyer [FULL_NAME]`
+
+<box type="tip" seamless>
+
+**Tip:** A full name of the buyer must be used in the command.
+
+</box>
+
+Examples:
+* `matchBuyer Alice Lim`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
