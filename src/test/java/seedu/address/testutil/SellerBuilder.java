@@ -48,7 +48,7 @@ public class SellerBuilder {
         name = sellerToCopy.getName();
         phone = sellerToCopy.getPhone();
         email = sellerToCopy.getEmail();
-        houses = new ArrayList<>(sellerToCopy.getHouse());
+        houses = new ArrayList<>(sellerToCopy.getHouses());
         tags = new HashSet<>(sellerToCopy.getTags());
     }
 

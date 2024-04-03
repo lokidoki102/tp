@@ -81,7 +81,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + seller.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + seller.getEmail().value + " ");
         // Append house details
-        for (House house : seller.getHouse()) {
+        for (House house : seller.getHouses()) {
             sb.append(PREFIX_STREET + house.getStreet().value + " ");
             if (house instanceof Hdb) {
                 Hdb hdb = (Hdb) house;

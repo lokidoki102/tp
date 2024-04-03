@@ -86,6 +86,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given person.
+     * The person must exist in the address book.
+     */
+    void deletePersonFromPersons(Person target);
+
+    /**
      * Deletes the given house.
      * The house must belong to a seller in the address book.
      */

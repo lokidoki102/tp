@@ -132,6 +132,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonFromPersons(Person target) {
+        addressBook.removePersonFromPersons(target);
+    }
+
+    @Override
     public void deleteHouse(House house, Person owner) {
         addressBook.removeHouse(house, owner);
     }
@@ -229,7 +234,7 @@ public class ModelManager implements Model {
                 if (houses.isEmpty()) {
                     return false;
                 }
-                seller.getHouse().clear();
+                seller.getHouses().clear();
 
                 for (House house : houses) {
                     seller.addHouse(house);
@@ -246,7 +251,7 @@ public class ModelManager implements Model {
     }
 
     private ArrayList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
-        return seller.getHouse().stream()
+        return seller.getHouses().stream()
                 .filter(predicate)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -254,7 +259,7 @@ public class ModelManager implements Model {
     public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
         ObservableList<House> allHouses = filteredSellers.stream()
-                .map(seller -> ((Seller) seller).getHouse())
+                .map(seller -> ((Seller) seller).getHouses())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 

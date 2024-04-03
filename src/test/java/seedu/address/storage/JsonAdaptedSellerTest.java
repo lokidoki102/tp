@@ -24,7 +24,7 @@ public class JsonAdaptedSellerTest {
     private static final String VALID_NAME = BOB_SELLER.getName().toString();
     private static final String VALID_PHONE = BOB_SELLER.getPhone().toString();
     private static final String VALID_EMAIL = BOB_SELLER.getEmail().toString();
-    private static final List<JsonAdaptedHouse> VALID_HOUSES = BOB_SELLER.getHouse().stream()
+    private static final List<JsonAdaptedHouse> VALID_HOUSES = BOB_SELLER.getHouses().stream()
             .map(JsonAdaptedHouse::new)
             .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BOB_SELLER.getTags().stream()

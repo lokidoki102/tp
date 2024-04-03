@@ -42,7 +42,7 @@ public class Seller extends Person {
     /**
      * Gets the seller's list of houses.
      */
-    public ArrayList<House> getHouse() {
+    public ArrayList<House> getHouses() {
         return this.houses;
     }
 

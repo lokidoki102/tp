@@ -63,7 +63,6 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
         boolean hasLevel = argMultimap.getValue(PREFIX_LEVEL).isPresent();
 
-
         House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock, hasLevel,
                 argMultimap);
         return new AddHouseCommand(house, name);
@@ -136,48 +135,6 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         }
         return new Landed(unitNumber, postalCode, street, price);
     }
-
-    /*public static House checkValidity(HousingType housingType, UnitNumber unitNumber, Street street,
-                                      PostalCode postalCode, Price price, boolean hasBlock, boolean hasLevel,
-                                      ArgumentMultimap argMultimap) throws ParseException {
-        // I not sure why need the arraylist because you returning a house.get(0), which is a house.
-        // I try to separate out the methods, so it will look neater, and adhere to SLAP.
-        ArrayList<House> houses = new ArrayList<>();
-        if (housingType.toString().toLowerCase().equals("hdb")) {
-            if (!hasLevel || !hasBlock) {
-                throw new ParseException(String.format(MESSAGE_INVALID_HDB, AddHouseCommand.MESSAGE_USAGE));
-            } else {
-                Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-                if (block.toString().equals("N/A")) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_HDB, AddHouseCommand.MESSAGE_USAGE));
-                }
-                Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                houses.add(new Hdb(level, postalCode, street, unitNumber, block, price));
-            }
-        } else if (housingType.toString().toLowerCase().equals("condominium")) {
-            if (!hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALID_CONDOMINIUM, AddHouseCommand.MESSAGE_USAGE));
-            } else if (!hasBlock) {
-                Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                houses.add(new Condominium(level, postalCode, street, unitNumber, price));
-            } else if (hasBlock) {
-                Block block = ParserUtil.parseBlock(argMultimap.getValue(PREFIX_BLOCK).get());
-                if (block.toString().equals("N/A")) {
-                    Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                    houses.add(new Condominium(level, postalCode, street, unitNumber, price));
-                } else {
-                    Level level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-                    houses.add(new Condominium(level, postalCode, street, unitNumber, block, price));
-                }
-            }
-        } else if (housingType.toString().toLowerCase().equals("landed")) {
-            if (hasBlock || hasLevel) {
-                throw new ParseException(String.format(MESSAGE_INVALID_LANDED, AddHouseCommand.MESSAGE_USAGE));
-            }
-            houses.add(new Landed(unitNumber, postalCode, street, price));
-        }
-        return houses.get(0);
-    }*/
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
