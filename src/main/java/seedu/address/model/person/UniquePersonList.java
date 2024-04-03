@@ -46,7 +46,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Name toCheck) {
         requireNonNull(toCheck);
         for (Person p: internalList) {
-            if (p.getName().equals(toCheck)) {
+            if (p.getName().toString().equalsIgnoreCase(toCheck.toString())) {
                 return true;
             }
         }
@@ -60,7 +60,7 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toCheck);
         assert this.contains(toCheck) : "Person with this name must exist in AddressBook.";
         for (Person p: internalList) {
-            if (p.getName().equals(toCheck)) {
+            if (p.getName().toString().equalsIgnoreCase(toCheck.toString())) {
                 return p;
             }
         }
