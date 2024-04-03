@@ -149,23 +149,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Edit Buyer/Seller feature
+### Edit Buyer
 
-#### Proposed Implementation
+#### Purpose
+The `editBuyer` command allows users to edit the details an existing `Buyer` in EstateEase.
 
-The proposed edit buyer/seller mechanism allows user to edit a Buyer or Seller accordingly.
-Previously, AB3 only allows users to edit a Person, but since we have two types of Person,
-there's a need to separate out the requirements accordingly.
+#### Implementation
 
-#### Implementation Details
-- Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
-- The System, will then check if the target person type corresponds to the right command.
-  (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
-- It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
-- Once, the edit is successful, the json (storage) is also updated accordingly.
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" width="1200"/>
 
-#### Why It's Implemented That Way
-- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+1. The user enters the `editBuyer` command in the format `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL]
+[type/HOUSING_TYPE] [budget/BUDGET]` (E.g. editBuyer 1 p/91234567 e/johndoe@example.com).
+2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input.
+   If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went
+   wrong.
+3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the input is valid.
+    The `editBuyerDescriptor` object contains the edited values of the `Buyer`.
+    `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the
+    `Buyer` and `editBuyerDescriptor`.
+4. The logic manager will then `execute()` of the `EditBuyerCommand` object.
+5. In the `execute()`, the system will check if the `INDEX` is valid, check if the object being edited is of `Buyer`
+   type, and check if the edited `name` value already exists in EstateEase. If any of these checks fail, a
+   `CommandException` will be thrown.
+6. Once the checks are all done, the system will construct a new `Buyer` object which contains the edited values. This
+   object will then be used to update the model through `setPerson()` method of `model`.
+
+#### Design Considerations
+It is important to ensure that the target of the `editBuyer` command is in fact a `Buyer` object as it has different
+parameters that is not available to `Seller` object. Hence, the reason why the edit command is also separated into two
+commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also
+needed as some of the commands uses the `name` to execute the command.
+
+### Edit Seller
+
+#### Purpose
+The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
+
+#### Implementation
+The overall implementation of this command is very similar to `editBuyer` command, except the command format is
+`editSeller [n/NAME] [p/PHONE] [e/EMAIL]` (E.g. editSeller 1 p/91234567 e/johndoe@example.com).
 
 ### Matching Sellers to a Buyer
 
@@ -190,7 +212,7 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
-<puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic"/>
+<puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic" width="1200"/>
 
 #### Design Considerations
 
@@ -217,12 +239,12 @@ This `addSeller` feature allows user to add a `Seller` and a `House` into the Es
 #### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addSeller` command
 
-<puml src="diagrams/AddSellerActivityDiagram.puml" width="350" />
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="500" />
 
 #### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
 
-<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" />
+<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" width="1200"/>
 
 The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
 Additionally, it implements the following operations:
@@ -285,7 +307,7 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
-<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic"/>
+<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic" width="1200"/>
 
 ### Design Considerations
 
@@ -319,7 +341,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
 
-<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic"/>
+<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic" width="1200"/>
 
 ### Design Considerations
 
@@ -771,45 +793,36 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC11 - Edit contact details**
+**Use case: UC11 - Edit buyer details**
 
 **MSS:**
 
-1.  User requests to <u>view all contacts (UC04)</u>.
-2.  User requests to edit the details of a specific person in the list.
-3.  EstateEase updates the details of the specific person selected by the user.
+1.  User executes the command to edit a Buyer in EstateEase.
+2.  EstateEase updates the details of the specific buyer selected by the user.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
-    * 2a1. EstateEase shows an error message.
+* 1a. The given index is invalid.
+    * 1a1. EstateEase shows an error message.
 
       Use case ends.
 
-* 2b. The new value for the field being updated is not valid.
-    * 2b1. EstateEase shows error message, indicating the nature of the invalid input.
+* 1b. The new value for the field being updated is not valid.
+    * 1b1. EstateEase shows format error message.
 
       Use case ends.
 
-**Use case: UC12 - Filter out buyers**
-
-**MSS:**
-
-1.  User requests to view only buyers that are still looking for a houses or those that
-    have already gotten their house.
-2.  EstateEase shows a list of all his/her house buyers based on the filter
-    (i.e. still looking for a house).
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. There are no buyers that match the filter.
-    * 1a1. EstateEase displays a message stating that the list is empty.
+* 1c. The edited name field already exists in EstateEase.
+    * 1c1. EstateEase error message, indicating that the person already exists.
 
       Use case ends.
+
+**Use case: UC12 - Edit seller details**
+This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in different field
+(i.e. parameters for name, phone, and email).
+
 
 **Use case: UC13 - Match sellers with buyer's preferences**
 
@@ -831,82 +844,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3a. There are no matching listings
     * 3a1. EstateEase shows a message indicating there is no matching results.
 
-      Use case ends.
-
-**Use case: UC14 - Link Buyer to Seller**
-
-**MSS:**
-
-1. User initiates the process of linking a buyer to sellers for a specific property.
-2. EstateEase validates the provided property information, buyer ID, and seller ID.
-3. EstateEase proceeds to link the buyer to the specified seller(s) for the given property.
-4. Use case ends.
-
-**Extensions**
-
-* 1a. User provides invalid input for linking.
-    * 1a1. EstateEase displays an error message indicating the issue with the input.
-      Use case ends.
-
-
-**Use case: UC15 - View home sellers by priority**
-
-**Preconditions:**
-- The user initialises a view command with home-seller as a filter
-
-**MSS:**
-1.  EstateEase process the view command with home-seller as filter.
-2.  EstateEase shows a list of home-sellers, arranged based on their priority. <br>
-    Use case ends.
-
-**Extensions**
-* 1a. The contact list does not have any home-seller. <br>
-    * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
-      Use case ends.
-
-**Use case: UC16 - Differentiate home-seller status**
-
-**MSS:**
-
-1. User filters for home-sellers
-2. EstateEase displays home-sellers. Free home-sellers are highlighted in green.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. Pending home-sellers are displayed in red.
-    *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
-
-        Use case ends.
-
-* 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
-
-  Use case ends.
-
-**Use case: UC17 - Differentiate home-buyer status**
-
-**MSS:**
-
-1.  User requests to <u>view all contacts</u>.
-2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green,
-    and the home-buyers who are pending in finalizing a deal or done deal in red.
-
-    Use case ends.
-
-**Use case: UC18 - Adding notes about clients**
-
-**MSS:**
-
-1. User enters a remark regarding a client.
-2. EstateEase adds the provided remark to the client identified by the specified index.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid index or remark format.
-    * 1a1. EstateEase displays an error message indicating the invalid input.
       Use case ends.
 
 **Use case: UC19 - Exit application**
