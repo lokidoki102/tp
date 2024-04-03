@@ -845,23 +845,9 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC12 - Filter out buyers**
+**Use case: UC12 - Edit seller details**
 
-**MSS:**
-
-1.  User requests to view only buyers that are still looking for a houses or those that
-    have already gotten their house.
-2.  EstateEase shows a list of all his/her house buyers based on the filter
-    (i.e. still looking for a house).
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. There are no buyers that match the filter.
-    * 1a1. EstateEase displays a message stating that the list is empty.
-
-      Use case ends.
+Similar to <u>UC11</u>, except the system does not accept the parameters for budget and prefferedHousingType.
 
 **Use case: UC13 - Match sellers with buyer's preferences**
 
@@ -883,82 +869,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3a. There are no matching listings
     * 3a1. EstateEase shows a message indicating there is no matching results.
 
-      Use case ends.
-
-**Use case: UC14 - Link Buyer to Seller**
-
-**MSS:**
-
-1. User initiates the process of linking a buyer to sellers for a specific property.
-2. EstateEase validates the provided property information, buyer ID, and seller ID.
-3. EstateEase proceeds to link the buyer to the specified seller(s) for the given property.
-4. Use case ends.
-
-**Extensions**
-
-* 1a. User provides invalid input for linking.
-    * 1a1. EstateEase displays an error message indicating the issue with the input.
-      Use case ends.
-
-
-**Use case: UC15 - View home sellers by priority**
-
-**Preconditions:**
-- The user initialises a view command with home-seller as a filter
-
-**MSS:**
-1.  EstateEase process the view command with home-seller as filter.
-2.  EstateEase shows a list of home-sellers, arranged based on their priority. <br>
-    Use case ends.
-
-**Extensions**
-* 1a. The contact list does not have any home-seller. <br>
-    * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
-      Use case ends.
-
-**Use case: UC16 - Differentiate home-seller status**
-
-**MSS:**
-
-1. User filters for home-sellers
-2. EstateEase displays home-sellers. Free home-sellers are highlighted in green.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. Pending home-sellers are displayed in red.
-    *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
-
-        Use case ends.
-
-* 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
-
-  Use case ends.
-
-**Use case: UC17 - Differentiate home-buyer status**
-
-**MSS:**
-
-1.  User requests to <u>view all contacts</u>.
-2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green,
-    and the home-buyers who are pending in finalizing a deal or done deal in red.
-
-    Use case ends.
-
-**Use case: UC18 - Adding notes about clients**
-
-**MSS:**
-
-1. User enters a remark regarding a client.
-2. EstateEase adds the provided remark to the client identified by the specified index.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid index or remark format.
-    * 1a1. EstateEase displays an error message indicating the invalid input.
       Use case ends.
 
 **Use case: UC19 - Exit application**
