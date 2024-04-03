@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;

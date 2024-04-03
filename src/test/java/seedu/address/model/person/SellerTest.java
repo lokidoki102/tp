@@ -15,13 +15,10 @@ import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
 import static seedu.address.testutil.TypicalPersons.BOB_SELLER;
 import static seedu.address.testutil.TypicalPersons.KHOONSUN_SELLER;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-
 import seedu.address.model.house.House;
 import seedu.address.testutil.SellerBuilder;
 
