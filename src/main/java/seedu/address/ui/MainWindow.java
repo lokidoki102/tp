@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private PersonDetailsPanel personDetailsPanel;
+
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -138,6 +139,7 @@ public class MainWindow extends UiPart<Stage> {
 
         personDetailsPanel = new PersonDetailsPanel();
         personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+
 
         personDetails.setVisible(false);
         contentBoxSplitPane.getItems().removeAll(personDetails);

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.HouseListCard"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<VBox id="houseCard" fx:id="houseCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15"/>
+    </padding>
+    <Label fx:id="postalCode" styleClass="cell_small_label" text="\$postalCode"/>
+    <Label fx:id="street" styleClass="cell_small_label" text="\$street"/>
+    <Label fx:id="unitNumber" styleClass="cell_small_label" text="\$unitNumber"/>
+    <Label fx:id="block" styleClass="cell_small_label" text="\$block"/>
+    <Label fx:id="level" styleClass="cell_small_label" text="\$level"/>
+    <Label fx:id="price" styleClass="cell_small_label" text="\$price"/>
+</VBox>
+

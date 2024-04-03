@@ -6,10 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 
 /**
@@ -20,6 +22,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
 
     private Person displayedPerson;
+
+    private HouseListPanel houseListPanel;
 
     @FXML
     private VBox personDetailsPane;
@@ -38,7 +42,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-
+    @FXML
+    private VBox houseList;
+    @FXML
+    private StackPane houseListPanelPlaceholder;
     /**
      * Creates a {@code PersonDetailsPanel} with the given {@code ObservableList}.
      */
@@ -57,6 +64,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
             Buyer buyer = (Buyer) displayedPerson;
             housingType.setText(buyer.getPreferredHousingType().value);
             budget.setText("$" + buyer.getBudget().toString());
+        } else if (displayedPerson instanceof Seller) {
+            Seller seller = (Seller) displayedPerson;
+            houseListPanel = new HouseListPanel(seller.getHouses());
         }
     }
 
