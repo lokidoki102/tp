@@ -158,26 +158,26 @@ The `editBuyer` command allows users to edit the details an existing `Buyer` in 
 
 <puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" width="1200"/>
 
-1. The user enters the `editBuyer` command in the format `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] 
-[type/HOUSING_TYPE] [budget/BUDGET]` (E.g. editBuyer 1 p/91234567 e/johndoe@example.com). 
-2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input. 
-   If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went 
-   wrong. 
-3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the input is valid. 
-    The `editBuyerDescriptor` object contains the edited values of the `Buyer`. 
-    `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the 
+1. The user enters the `editBuyer` command in the format `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL]
+[type/HOUSING_TYPE] [budget/BUDGET]` (E.g. editBuyer 1 p/91234567 e/johndoe@example.com).
+2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input.
+   If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went
+   wrong.
+3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the input is valid.
+    The `editBuyerDescriptor` object contains the edited values of the `Buyer`.
+    `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the
     `Buyer` and `editBuyerDescriptor`.
 4. The logic manager will then `execute()` of the `EditBuyerCommand` object.
-5. In the `execute()`, the system will check if the `INDEX` is valid, check if the object being edited is of `Buyer` 
-   type, and check if the edited `name` value already exists in EstateEase. If any of these checks fail, a 
+5. In the `execute()`, the system will check if the `INDEX` is valid, check if the object being edited is of `Buyer`
+   type, and check if the edited `name` value already exists in EstateEase. If any of these checks fail, a
    `CommandException` will be thrown.
 6. Once the checks are all done, the system will construct a new `Buyer` object which contains the edited values. This
    object will then be used to update the model through `setPerson()` method of `model`.
 
 #### Design Considerations
 It is important to ensure that the target of the `editBuyer` command is in fact a `Buyer` object as it has different
-parameters that is not available to `Seller` object. Hence, the reason why the edit command is also separated into two 
-commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also 
+parameters that is not available to `Seller` object. Hence, the reason why the edit command is also separated into two
+commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also
 needed as some of the commands uses the `name` to execute the command.
 
 ### Edit Seller
@@ -186,7 +186,7 @@ needed as some of the commands uses the `name` to execute the command.
 The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
 
 #### Implementation
-The overall implementation of this command is very similar to `editBuyer` command, except the command format is 
+The overall implementation of this command is very similar to `editBuyer` command, except the command format is
 `editSeller [n/NAME] [p/PHONE] [e/EMAIL]` (E.g. editSeller 1 p/91234567 e/johndoe@example.com).
 
 ### Matching Sellers to a Buyer
@@ -820,7 +820,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
       Use case ends.
 
 **Use case: UC12 - Edit seller details**
-This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in different field 
+This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in different field
 (i.e. parameters for name, phone, and email).
 
 
