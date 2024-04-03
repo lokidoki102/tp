@@ -31,8 +31,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
     private ObservableList<Seller> filteredSellers;
+
 
     private Ui ui = null;
     private State state = State.PERSON_LIST;
