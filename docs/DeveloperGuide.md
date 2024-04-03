@@ -212,7 +212,7 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
 ### \[Proposed\] Add seller feature
 
 #### Purpose
-This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase. 
+This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
 
 #### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addSeller` command
@@ -233,7 +233,7 @@ Additionally, it implements the following operations:
 * `Seller#copy()` — Values of the seller is copied to a new seller object.
 
 **Details:**
-1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input. 
+1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input.
 2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
 3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
 4. The argument which contains a `Seller` and a `House` will then be parsed to `parse()` in `AddSellerCommandParser`.
@@ -242,7 +242,7 @@ Additionally, it implements the following operations:
 7. At the `AddSellerCommand`, it will check whether there is duplicate `Seller` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. The `House` will also be checked to see whether it is a duplicate `House`, since the same `House` should not exist in the EstateEase data.
 8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Seller` object which contains the `Seller` details and `House` details. This object will then be used to update the `Model` through `addPerson()` method of model.
 
-**Note:** 
+**Note:**
 - If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
 - If there is a duplicate `House` in the EstateEase, it will return an error to the user that the should `House` has existed. Each `House` is unique, and there should not be duplicates.
 
