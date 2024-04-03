@@ -177,5 +177,5 @@ public interface Model {
     public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate);
 
     /** Returns an unmodifiable view of seller list*/
-    public ArrayList<Seller> getFilteredSeller();
+    public ObservableList<Seller> getFilteredSeller();
 }

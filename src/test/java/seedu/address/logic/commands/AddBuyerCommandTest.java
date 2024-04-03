@@ -239,7 +239,7 @@ public class AddBuyerCommandTest {
         }
 
         @Override
-        public ArrayList<Seller> getFilteredSeller() {
+        public ObservableList<Seller> getFilteredSeller() {
             throw new AssertionError("This method should not be called.");
         }
     }

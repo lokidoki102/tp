@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -32,7 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final ArrayList<Seller> filteredSellers;
+    private final FilteredList<Seller> filteredSellers;
 
     private Ui ui = null;
     private State state = State.PERSON_LIST;
@@ -48,7 +47,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredSellers = new ArrayList<>();
+        filteredSellers = new FilteredList<>(FXCollections.observableArrayList());
     }
 
     public ModelManager() {
@@ -229,7 +228,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(person -> {
             if (person instanceof Seller) {
                 Seller seller = ((Seller) person).copy();
-                ArrayList<House> houses = getFilteredHouses((Seller) person, predicate);
+                ObservableList<House> houses = getFilteredHouses((Seller) person, predicate);
 
                 if (houses.isEmpty()) {
                     return false;
@@ -245,15 +244,21 @@ public class ModelManager implements Model {
             return false;
         });
     }
+
+    // TODO: Update the name of this method to getFilteredSellers()
     @Override
-    public ArrayList<Seller> getFilteredSeller() {
+    public ObservableList<Seller> getFilteredSeller() {
         return filteredSellers;
     }
 
-    private ArrayList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
+    private ObservableList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
+        ObservableList<House> originalHouseList = seller.getHouses();
+        FilteredList<House> filteredHouseList = new FilteredList<>(originalHouseList, predicate);
+        return FXCollections.observableArrayList(filteredHouseList);
+        /**  ORIGINAL CODE
         return seller.getHouses().stream()
                 .filter(predicate)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList::new)); */
     }
     @Override
     public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
