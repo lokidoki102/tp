@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -31,12 +32,11 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    private final FilteredList<Seller> filteredSellers;
+    private ObservableList<Seller> filteredSellers;
 
     private Ui ui = null;
     private State state = State.PERSON_LIST;
     private Person currentDisplayedPerson = null;
-    private ObservableList<Seller> sellers = null;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -219,9 +219,8 @@ public class ModelManager implements Model {
     @Override
     public void showMatchResults(ObservableList<Seller> seller) {
         requireNonNull(seller);
-        this.sellers = seller;
         if (ui != null) {
-            ui.showMatchResults(seller);
+            ui.showMatchResults(filteredSellers);
         }
     }
 
@@ -235,6 +234,7 @@ public class ModelManager implements Model {
     public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         requireNonNull(predicate);
         filteredSellers.clear();
+        ArrayList<Seller> temp = new ArrayList<>();
         filteredPersons.setPredicate(person -> {
             if (person instanceof Seller) {
                 Seller seller = ((Seller) person).copy();
@@ -248,9 +248,11 @@ public class ModelManager implements Model {
                 for (House house : houses) {
                     seller.addHouse(house);
                 }
-                filteredSellers.add(seller);
+                temp.add(seller);
+                filteredSellers = FXCollections.observableArrayList(temp);
                 return true;
             }
+
             return false;
         });
     }
@@ -264,11 +266,12 @@ public class ModelManager implements Model {
     private ObservableList<House> getFilteredHousesForSeller(Seller seller, PriceAndHousingTypePredicate predicate) {
         ObservableList<House> originalHouseList = seller.getHouses();
         FilteredList<House> filteredHouseList = new FilteredList<>(originalHouseList, predicate);
-        return FXCollections.observableArrayList(filteredHouseList);
-        /**  ORIGINAL CODE
-        return seller.getHouses().stream()
-                .filter(predicate)
-                .collect(Collectors.toCollection(ArrayList::new)); */
+
+        ObservableList<House> convertedList = FXCollections.observableArrayList();
+        convertedList.addAll(filteredHouseList);
+
+
+        return convertedList;
     }
 
     @Override

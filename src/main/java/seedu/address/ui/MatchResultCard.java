@@ -31,7 +31,8 @@ public class MatchResultCard extends UiPart<Region> {
         this.seller = seller;
         this.filteredHouses = seller.getHouses();
 
-        sellerPanel = new PersonCard(this.seller, displayedIndex);
+        sellerPanel = new PersonCard();
+        sellerPanel.setPersonDetails(this.seller, displayedIndex);
         sellerInfoPanelPlaceholder.getChildren().add(sellerPanel.getRoot());
 
         houseListPanel = new HouseListPanel(this.filteredHouses);

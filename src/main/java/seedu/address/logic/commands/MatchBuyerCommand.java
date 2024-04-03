@@ -13,6 +13,7 @@ import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.FullNameEqualsKeywordPredicate;
+import seedu.address.model.person.Seller;
 
 
 /**
@@ -52,6 +53,13 @@ public class MatchBuyerCommand extends Command {
             ObservableList<House> filteredSellerList = model.getAllFilteredHouseList(predicate);
             model.setState(State.MATCH_RESULTS);
             model.showMatchResults(model.getFilteredSellerList());
+
+            for (Seller filteredSeller : model.getFilteredSellerList()) {
+                System.out.println(filteredSeller.toString());
+                System.out.println(filteredSeller.getHouses().toString());
+
+                return new CommandResult(filteredSeller.toString() + filteredSeller.getHouses().toString());
+            }
             return new CommandResult(
                     String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));
         }

@@ -147,7 +147,7 @@ public class MainWindow extends UiPart<Stage> {
         personDetailsPanel = new PersonDetailsPanel();
         personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
-        matchResultListPanel = new MatchResultListPanel(logic.getFilteredSellerList());
+        matchResultListPanel = new MatchResultListPanel();
         matchResultListPanelPlaceholder.getChildren().add(matchResultListPanel.getRoot());
 
         personDetails.setVisible(false);
@@ -213,6 +213,7 @@ public class MainWindow extends UiPart<Stage> {
             matchResultList.setVisible(false);
         }
         matchResultList.setVisible(true);
+        matchResultListPanel.setMatchResults(logic.getFilteredSellerList());
     }
 
     public PersonListPanel getPersonListPanel() {

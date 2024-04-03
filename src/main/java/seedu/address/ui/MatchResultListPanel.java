@@ -23,8 +23,11 @@ public class MatchResultListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public MatchResultListPanel(ObservableList<Seller> filteredSellerList) {
+    public MatchResultListPanel() {
         super(FXML);
+    }
+
+    public void setMatchResults(ObservableList<Seller> filteredSellerList) {
         matchResultListView.setItems(filteredSellerList);
         matchResultListView.setCellFactory(listView -> new MatchResultListPanel.MatchResultListViewCell());
     }

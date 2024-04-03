@@ -19,7 +19,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    public final Person person;
+    public Person person;
 
     @FXML
     private HBox cardPane;
@@ -45,8 +45,11 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard() {
         super(FXML);
+    }
+
+    public void setPersonDetails(Person person, int displayedIndex) {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
