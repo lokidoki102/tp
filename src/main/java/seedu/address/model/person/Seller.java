@@ -42,7 +42,7 @@ public class Seller extends Person {
     /**
      * Gets the seller's list of houses.
      */
-    public ArrayList<House> getHouse() {
+    public ArrayList<House> getHouses() {
         return this.houses;
     }
 
@@ -51,14 +51,6 @@ public class Seller extends Person {
      */
     public boolean hasHouse(House h) {
         return this.houses.contains(h);
-    }
-
-    /**
-     * Returns the list of houses associated with this seller.
-     * @return An ArrayList containing House objects.
-     */
-    public ArrayList<House> getHouses() {
-        return new ArrayList<>(houses);
     }
 
     /**

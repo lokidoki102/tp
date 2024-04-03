@@ -37,23 +37,36 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddSellerCommand
      * and returns an AddSellerCommand object for execution.
+     * Separate methods to adhere to SLAP.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddSellerCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_HOUSING_TYPE, PREFIX_LEVEL, PREFIX_BLOCK, PREFIX_STREET,
-                        PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
+        ArgumentMultimap argMultimap = tokenizeArguments(args);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
-                PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER,
-                PREFIX_PRICE) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
-        }
+        validateRequiredPrefixes(argMultimap);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_HOUSING_TYPE, PREFIX_LEVEL,
                 PREFIX_EMAIL, PREFIX_BLOCK, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
 
+        Seller seller = createSeller(argMultimap);
+        return new AddSellerCommand(seller);
+    }
+
+    private ArgumentMultimap tokenizeArguments(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_HOUSING_TYPE, PREFIX_LEVEL, PREFIX_BLOCK, PREFIX_STREET,
+                PREFIX_UNITNUMBER, PREFIX_POSTALCODE, PREFIX_PRICE);
+    }
+
+    private void validateRequiredPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
+                PREFIX_POSTALCODE, PREFIX_STREET, PREFIX_UNITNUMBER, PREFIX_PRICE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Seller createSeller(ArgumentMultimap argMultimap) throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -66,13 +79,12 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         boolean hasBlock = argMultimap.getValue(PREFIX_BLOCK).isPresent();
         boolean hasLevel = argMultimap.getValue(PREFIX_LEVEL).isPresent();
 
-        ArrayList<House> houses = new ArrayList<House>();
-        House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock, hasLevel,
-                argMultimap);
+        House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock,
+                hasLevel, argMultimap);
+        ArrayList<House> houses = new ArrayList<>();
         houses.add(house);
 
-        Seller seller = new Seller(name, phone, email, houses);
-        return new AddSellerCommand(seller);
+        return new Seller(name, phone, email, houses);
     }
 
     /**

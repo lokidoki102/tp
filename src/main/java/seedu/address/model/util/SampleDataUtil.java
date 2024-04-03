@@ -2,7 +2,6 @@ package seedu.address.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -69,6 +68,13 @@ public class SampleDataUtil {
         };
     }
 
+    public static List<Person> getSamplePersons() {
+        List<Person> persons = new ArrayList<>();
+        persons.addAll(Arrays.asList(getSampleBuyers()));
+        persons.addAll(Arrays.asList(getSampleSellers()));
+        return persons;
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person person: getSamplePersons()) {
@@ -84,14 +90,6 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
-    }
-
-    public static List<Person> getSamplePersons() {
-        List<Person> persons = new ArrayList<>();
-        persons.addAll(Arrays.asList(getSampleBuyers()));
-        persons.addAll(Arrays.asList(getSampleSellers()));
-        persons.sort(Comparator.comparing(person -> person.getName().fullName));
-        return persons;
     }
 
 }

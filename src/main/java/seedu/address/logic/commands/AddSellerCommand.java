@@ -83,10 +83,10 @@ public class AddSellerCommand extends Command {
         model.setState(State.PERSON_LIST);
         model.addPerson(sellerToAdd);
 
-        House houseToAdd = sellerToAdd.getHouse().get(0);
+        House houseToAdd = sellerToAdd.getHouses().get(0);
 
         if (model.hasHouse(houseToAdd)) {
-            model.deletePerson(sellerToAdd);
+            model.deletePersonFromPersons(sellerToAdd);
             throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
         }
 
