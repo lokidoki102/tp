@@ -58,10 +58,6 @@ deactivate AddressBookParser
 LogicManager -> EditBuyerCommand : execute(model)
 activate EditBuyerCommand
 
-'EditBuyerCommand -> Model
-'activate Model
-'Model --> EditBuyerCommand : buyerToEdit
-'deactivate Model
 create EditedBuyer
 EditBuyerCommand -> EditedBuyer
 activate EditedBuyer
