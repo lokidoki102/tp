@@ -152,21 +152,18 @@ This section describes some noteworthy details on how certain features are imple
 ### Edit Buyer
 
 #### Purpose
-The `editBuyer` command allows users to edit an existing `Buyer` in EstateEase.
-
-#### Example Usage Scenario
-The activity diagram below shows what happens when a user executes `editBuyer` command.
+The `editBuyer` command allows users to edit the details an existing `Buyer` in EstateEase.
 
 #### Implementation
 
-<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram"/>
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" width="1200"/>
 
 1. The user enters the `editBuyer` command in the format `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] 
 [type/HOUSING_TYPE] [budget/BUDGET]` (E.g. editBuyer 1 p/91234567 e/johndoe@example.com). 
 2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input. 
    If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went 
    wrong. 
-3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the inupt is valid. 
+3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the input is valid. 
     The `editBuyerDescriptor` object contains the edited values of the `Buyer`. 
     `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the 
     `Buyer` and `editBuyerDescriptor`.
@@ -176,6 +173,21 @@ The activity diagram below shows what happens when a user executes `editBuyer` c
    `CommandException` will be thrown.
 6. Once the checks are all done, the system will construct a new `Buyer` object which contains the edited values. This
    object will then be used to update the model through `setPerson()` method of `model`.
+
+#### Design Considerations
+It is important to ensure that the target of the `editBuyer` command is in fact a `Buyer` object as it has different
+parameters that is not available to `Seller` object. Hence, the reason why the edit command is also separated into two 
+commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also 
+needed as some of the commands uses the `name` to execute the command.
+
+### Edit Seller
+
+#### Purpose
+The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
+
+#### Implementation
+The overall implementation of this command is very similar to `editBuyer` command, except the command format is 
+`editSeller [n/NAME] [p/PHONE] [e/EMAIL]` (E.g. editSeller 1 p/91234567 e/johndoe@example.com).
 
 ### Matching Sellers to a Buyer
 
@@ -200,7 +212,7 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
-<puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic"/>
+<puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic" width="1200"/>
 
 #### Design Considerations
 
@@ -227,12 +239,12 @@ This `addSeller` feature allows user to add a `Seller` and a `House` into the Es
 #### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addSeller` command
 
-<puml src="diagrams/AddSellerActivityDiagram.puml" width="350" />
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="500" />
 
 #### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
 
-<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" />
+<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" width="1200"/>
 
 The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
 Additionally, it implements the following operations:
@@ -295,7 +307,7 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
-<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic"/>
+<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic" width="1200"/>
 
 ### Design Considerations
 
@@ -329,7 +341,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
 
-<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic"/>
+<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic" width="1200"/>
 
 ### Design Considerations
 
