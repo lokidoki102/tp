@@ -1,14 +1,16 @@
 @startuml
 !include style.puml
+skinparam participantFontSize 20
+skinparam arrowFontSize 16
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditBuyerCommandParser" as EditBuyerCommandParser LOGIC_COLOR
 participant ":EditBuyerDescriptor" as EditBuyerDescriptor LOGIC_COLOR
-participant "newTransaction:Transaction" as Transaction LOGIC_COLOR
 participant "command:EditBuyerCommand" as EditBuyerCommand LOGIC_COLOR
 participant "editedBuyer:Buyer" as EditedBuyer LOGIC_COLOR
+participant "buyerToEdit:Buyer" as BuyerToEdit LOGIC_COLOR
 participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 
 end box
@@ -56,16 +58,21 @@ deactivate AddressBookParser
 LogicManager -> EditBuyerCommand : execute(model)
 activate EditBuyerCommand
 
-EditBuyerCommand -> Model
-activate Model
-Model --> EditBuyerCommand : buyerToEdit
-deactivate Model
-
+'EditBuyerCommand -> Model
+'activate Model
+'Model --> EditBuyerCommand : buyerToEdit
+'deactivate Model
 create EditedBuyer
 EditBuyerCommand -> EditedBuyer
 activate EditedBuyer
 EditedBuyer --> EditBuyerCommand
 deactivate EditedBuyer
+
+create BuyerToEdit
+EditBuyerCommand -> BuyerToEdit
+activate BuyerToEdit
+BuyerToEdit --> EditBuyerCommand
+deactivate BuyerToEdit
 
 EditBuyerCommand -> Model : setPerson(buyerToEdit, editedBuyer)
 activate Model
