@@ -132,6 +132,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonFromPersons(Person target) {
+        addressBook.removePersonFromPersons(target);
+    }
+
+    @Override
     public void deleteHouse(House house, Person owner) {
         addressBook.removeHouse(house, owner);
     }
@@ -229,7 +234,7 @@ public class ModelManager implements Model {
                 if (houses.isEmpty()) {
                     return false;
                 }
-                seller.getHouse().clear();
+                seller.getHouses().clear();
 
                 for (House house : houses) {
                     seller.addHouse(house);

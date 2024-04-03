@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -76,10 +75,6 @@ class JsonSerializableAddressBook {
             combinedList.add(buyer);
         }
 
-        // Sort the combined list by name in alphabetical order
-        combinedList.sort(Comparator.comparing(person -> person.getName().fullName));
-
-        // Add sorted persons to the address book
         for (Person person : combinedList) {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
