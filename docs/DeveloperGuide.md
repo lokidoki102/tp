@@ -169,13 +169,17 @@ there's a need to separate out the requirements accordingly.
 
 ### Matching Sellers to a Buyer
 
+#### Purpose
+
+The real estate agent may want to obtain all houses from sellers that match the buyer's preferences. For example, the real estate agent may want to gather all houses from sellers that align with a specified buyer's budget and preferred housing type.
+
 #### Implementation
 
-The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
 
-The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
+2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
 
-### Example Usage Scenario:
+#### Example Usage Scenario:
 
 **Step 1:** The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
 
@@ -188,7 +192,7 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
 
 <puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic"/>
 
-### Design Considerations
+#### Design Considerations
 
 * *Alternative 1 (current choice):* Use a new `MatchBuyerCommand` to do matching.
     * Pros:
