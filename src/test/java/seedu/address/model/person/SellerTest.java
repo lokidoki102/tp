@@ -15,11 +15,10 @@ import static seedu.address.testutil.TypicalPersons.ALICE_SELLER;
 import static seedu.address.testutil.TypicalPersons.BOB_SELLER;
 import static seedu.address.testutil.TypicalPersons.KHOONSUN_SELLER;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
 import seedu.address.testutil.SellerBuilder;
 
@@ -61,8 +60,8 @@ public class SellerTest {
     @Test
     public void equals() {
         // Initialize with houses for ALICE and BOB
-        ArrayList<House> aliceHouses = new ArrayList<>(Arrays.asList(HOUSE3));
-        ArrayList<House> bobHouses = new ArrayList<>(Arrays.asList(HOUSE2));
+        ObservableList<House> aliceHouses = FXCollections.observableArrayList(HOUSE3);
+        ObservableList<House> bobHouses = FXCollections.observableArrayList(HOUSE2);
 
         // Create new Seller instances with houses
         Seller sellerAlice = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
