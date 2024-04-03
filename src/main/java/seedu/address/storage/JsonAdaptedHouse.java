@@ -20,9 +20,9 @@ import seedu.address.model.house.UnitNumber;
  */
 public class JsonAdaptedHouse {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "House's %s field is missing!";
-    private final String housingType;
-    private final String block;
-    private final String level;
+    private String housingType;
+    private String block;
+    private String level;
     private final String postalCode;
     private final String street;
     private final String unitNumber;
@@ -52,25 +52,39 @@ public class JsonAdaptedHouse {
      * Converts a given {@code House} into this class for Jackson use.
      */
     public JsonAdaptedHouse(House source) {
-        if (source instanceof Condominium) {
-            Condominium condominium = (Condominium) source;
-            this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
-            this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
-            this.housingType = "Condominium";
-        } else if (source instanceof Hdb) {
-            Hdb hdb = (Hdb) source;
-            this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
-            this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
-            this.housingType = "Hdb";
-        } else {
-            this.block = null;
-            this.level = null;
-            this.housingType = "Landed";
-        }
+        extractHouseDetails(source);
         this.postalCode = source.getPostalCode().value;
         this.street = source.getStreet().value;
         this.unitNumber = source.getUnitNumber().value;
         this.price = source.getPrice().value;
+    }
+
+    private void extractHouseDetails(House source) {
+        if (source instanceof Condominium) {
+            extractCondominiumDetails((Condominium) source);
+        } else if (source instanceof Hdb) {
+            extractHdbDetails((Hdb) source);
+        } else {
+            extractDefaultHouseDetails();
+        }
+    }
+
+    private void extractCondominiumDetails(Condominium condominium) {
+        this.block = condominium.getBlock() == null ? null : condominium.getBlock().value;
+        this.level = condominium.getLevel() == null ? null : condominium.getLevel().value;
+        this.housingType = "Condominium";
+    }
+
+    private void extractHdbDetails(Hdb hdb) {
+        this.block = hdb.getBlock() == null ? null : hdb.getBlock().value;
+        this.level = hdb.getLevel() == null ? null : hdb.getLevel().value;
+        this.housingType = "Hdb";
+    }
+
+    private void extractDefaultHouseDetails() {
+        this.block = null;
+        this.level = null;
+        this.housingType = "Landed";
     }
 
     /**
@@ -114,22 +128,23 @@ public class JsonAdaptedHouse {
         }
         final Price modelPrice = new Price(price);
 
-        if ("Condominium".equals(housingType)) {
+        switch (housingType.toLowerCase()) {
+        case "condominium":
             Block modelBlock = block != null ? new Block(block) : null;
             Level modelLevel = level != null ? new Level(level) : null;
             if (modelBlock != null) {
-                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock,
-                        modelPrice);
+                return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber,
+                            modelBlock, modelPrice);
             } else {
                 return new Condominium(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelPrice);
             }
-        } else if ("hdb".equalsIgnoreCase(housingType)) {
-            Block modelBlock = block != null ? new Block(block) : null;
-            Level modelLevel = level != null ? new Level(level) : null;
+        case "hdb":
+            modelBlock = block != null ? new Block(block) : null;
+            modelLevel = level != null ? new Level(level) : null;
             return new Hdb(modelLevel, modelPostalCode, modelStreet, modelUnitNumber, modelBlock, modelPrice);
-        } else if ("Landed".equals(housingType)) {
+        case "landed":
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet, modelPrice);
-        } else {
+        default:
             throw new IllegalValueException("Unknown House Type");
         }
     }
