@@ -158,23 +158,33 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Edit Buyer/Seller feature
+### Edit Buyer
 
-#### Proposed Implementation
+#### Purpose
+The `editBuyer` command allows users to edit an existing `Buyer` in EstateEase.
 
-The proposed edit buyer/seller mechanism allows user to edit a Buyer or Seller accordingly.
-Previously, AB3 only allows users to edit a Person, but since we have two types of Person,
-there's a need to separate out the requirements accordingly.
+#### Example Usage Scenario
+The activity diagram below shows what happens when a user executes `editBuyer` command.
 
-#### Implementation Details
-- Upon invoking the command `editBuyer [INDEX]` or `editSeller [INDEX]`, the system will identify the specified person by index.
-- The System, will then check if the target person type corresponds to the right command.
-  (i.e. editBuyer should only work with Buyer type and editSeller should only work with Seller type)
-- It will then retrieve the buyer/seller from the model (in memory storage), to edit the changes accordingly.
-- Once, the edit is successful, the json (storage) is also updated accordingly.
+#### Implementation
 
-#### Why It's Implemented That Way
-- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram"/>
+
+1. The user enters the `editBuyer` command in the format `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] 
+[type/HOUSING_TYPE] [budget/BUDGET]` (E.g. editBuyer 1 p/91234567 e/johndoe@example.com). 
+2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input. 
+   If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went 
+   wrong. 
+3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the inupt is valid. 
+    The `editBuyerDescriptor` object contains the edited values of the `Buyer`. 
+    `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the 
+    `Buyer` and `editBuyerDescriptor`.
+4. The logic manager will then `execute()` of the `EditBuyerCommand` object.
+5. In the `execute()`, the system will check if the `INDEX` is valid, check if the object being edited is of `Buyer` 
+   type, and check if the edited `name` value already exists in EstateEase. If any of these checks fail, a 
+   `CommandException` will be thrown.
+6. Once the checks are all done, the system will construct a new `Buyer` object which contains the edited values. This
+   object will then be used to update the model through `setPerson()` method of `model`.
 
 ### Matching Sellers to a Buyer
 
