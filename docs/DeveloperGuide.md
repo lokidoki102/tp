@@ -184,7 +184,7 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 #### Implementation
 
-1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the `Buyer` to be specified in the command input. Upon execution, the command retrieves the `Budget` and `HousingType` of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
 
 2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
 

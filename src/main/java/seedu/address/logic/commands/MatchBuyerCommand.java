@@ -24,8 +24,8 @@ public class MatchBuyerCommand extends Command {
     public static final String COMMAND_WORD = "matchBuyer";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Matches a specific buyer's budget and housing type "
-            + "to sellers' house price and housing type when given the buyer's name.\n"
-            + "Parameters: full name\n"
+            + "to sellers' house price and housing type when given the buyer's full name (case-insensitive).\n"
+            + "Parameters: FULL_NAME\n"
             + "Example: " + COMMAND_WORD + " alice chan";
 
     private final FullNameEqualsKeywordPredicate fullNamePredicate;
