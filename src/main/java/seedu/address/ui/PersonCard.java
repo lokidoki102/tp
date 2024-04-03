@@ -8,9 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -19,7 +17,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    public Person person;
+    private Person person;
 
     @FXML
     private HBox cardPane;

@@ -208,6 +208,9 @@ public class MainWindow extends UiPart<Stage> {
         personDetailsPanel.setPersonDetails(person);
     }
 
+    /**
+     * Handles displaying match results from the matchBuyer command.
+     */
     public void handleDisplayMatchResults(ObservableList<Seller> sellers) {
         if (sellers == null) {
             matchResultList.setVisible(false);

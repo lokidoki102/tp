@@ -42,10 +42,9 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 PersonCard personCard = new PersonCard();
-                personCard.setPersonDetails(person,getIndex() + 1);
+                personCard.setPersonDetails(person, getIndex() + 1);
                 setGraphic(personCard.getRoot());
             }
         }
     }
-
 }

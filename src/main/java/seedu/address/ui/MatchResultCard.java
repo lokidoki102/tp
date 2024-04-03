@@ -8,6 +8,9 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Seller;
 
+/**
+ * An UI component that displays information of a match result.
+ */
 public class MatchResultCard extends UiPart<Region> {
     private static final String FXML = "MatchResultListCard.fxml";
 
@@ -25,7 +28,9 @@ public class MatchResultCard extends UiPart<Region> {
     @FXML
     private StackPane houseListPanelPlaceholder;
 
-
+    /**
+     * Creates a {@code MatchResultCard} with the given match result to display.
+     */
     public MatchResultCard(Seller seller, int displayedIndex) {
         super(FXML);
         this.seller = seller;

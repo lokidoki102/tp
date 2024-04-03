@@ -220,6 +220,11 @@ class AddSellerCommandTest {
         }
 
         @Override
+        public void showMatchResults(ObservableList<Seller> seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person getPerson() {
             throw new AssertionError("This method should not be called.");
         }
