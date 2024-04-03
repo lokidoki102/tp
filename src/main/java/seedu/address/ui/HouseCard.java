@@ -40,22 +40,35 @@ public class HouseCard extends UiPart<Region> {
     public HouseCard(House house) {
         super(FXML);
         this.house = house;
-        postalCode.setText(house.getPostalCode().value);
-        street.setText(house.getStreet().value);
-        unitNumber.setText(house.getUnitNumber().value);
-        price.setText(house.getPrice().value);
+        postalCode.setText("Postal Code: " + house.getPostalCode().value);
+        street.setText("Street: " + house.getStreet().value);
+        unitNumber.setText("Unit Number: " + house.getUnitNumber().value);
+        price.setText("Price: " + house.getPrice().value);
+        block.setVisible(false);
+        level.setVisible(false);
 
         if (house instanceof Hdb) {
-            Block block = ((Hdb) house).getBlock();
-            Level level = ((Hdb) house).getLevel();
-            houseCard.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
-            houseCard.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
+            block.setVisible(true);
+            level.setVisible(true);
+            Hdb hdb = (Hdb) house;
+            String block_value = hdb.getBlock().value;
+            block_value = block_value != null ? block_value : "N/A";
+            block.setText("Block: " + block_value);
+
+            String level_value = hdb.getLevel().value;
+            level_value = level_value != null ? level_value : "N/A";
+            level.setText("Level: " + level_value);
         } else if (house instanceof Condominium) {
-            Block block = ((Condominium) house).getBlock();
-            Level level = ((Condominium) house).getLevel();
-            houseCard.getChildren().add(new Label("Block: " + (block != null ? block.value : "N/A")));
-            houseCard.getChildren().add(new Label("Level: " + (level != null ? level.value : "N/A")));
+            block.setVisible(true);
+            level.setVisible(true);
+            Condominium condominium = (Condominium) house;
+            String block_value = condominium.getBlock().value;
+            block_value = block_value != null ? block_value : "N/A";
+            block.setText("Block: " + block_value);
+
+            String level_value = condominium.getLevel().value;
+            level_value = level_value != null ? level_value : "N/A";
+            level.setText("Level: " + level_value);
         }
     }
-
 }

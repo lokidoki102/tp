@@ -56,17 +56,24 @@ public class PersonDetailsPanel extends UiPart<Region> {
     public void setPersonDetails(Person person) {
         this.displayedPerson = person;
         name.setText(displayedPerson.getName().fullName);
-        phone.setText(displayedPerson.getPhone().value);
-        email.setText(displayedPerson.getEmail().value);
+        phone.setText("Phone: " + displayedPerson.getPhone().value);
+        email.setText("Email: " + displayedPerson.getEmail().value);
 
 
         if (displayedPerson instanceof Buyer) {
+            budget.setVisible(true);
+            housingType.setVisible(true);
+            houseList.setVisible(false);
             Buyer buyer = (Buyer) displayedPerson;
-            housingType.setText(buyer.getPreferredHousingType().value);
-            budget.setText("$" + buyer.getBudget().toString());
+            housingType.setText("Housing Type Requirement: " + buyer.getPreferredHousingType().value);
+            budget.setText("Budget: $" + buyer.getBudget().toString());
         } else if (displayedPerson instanceof Seller) {
+            housingType.setVisible(false);
+            budget.setVisible(false);
+            houseList.setVisible(true);
             Seller seller = (Seller) displayedPerson;
             houseListPanel = new HouseListPanel(seller.getHouses());
+            houseListPanelPlaceholder.getChildren().add(houseListPanel.getRoot());
         }
     }
 
