@@ -10,12 +10,14 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -39,15 +41,15 @@ public class EditBuyerCommand extends Command {
     public static final String COMMAND_WORD = "editBuyer";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "
-            + "by the name of the buyer. "
+            + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NAME (of buyer to edit) "
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_HOUSING_TYPE + "HOUSING_TYPE] "
             + "[" + PREFIX_BUDGET + "BUDGET]\n"
-            + "Example: " + COMMAND_WORD + " en/John Doe "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -55,23 +57,21 @@ public class EditBuyerCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in EstateEase.";
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a buyer.";
-
-    public static final String MESSAGE_INVALID_PERSON = "This Person does not exist in EstateEase";
     private final Logger logger = LogsCenter.getLogger(EditBuyerCommand.class);
 
 
-    private final Name name;
+    private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
-     * @param name                of the buyer in the filtered person list to edit
+     * @param index                of the buyer in the filtered person list to edit
      * @param editBuyerDescriptor details to edit the buyer with
      */
-    public EditBuyerCommand(Name name, EditBuyerDescriptor editBuyerDescriptor) {
-        requireNonNull(name);
+    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
+        requireNonNull(index);
         requireNonNull(editBuyerDescriptor);
 
-        this.name = name;
+        this.index = index;
         this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
     }
 
@@ -79,25 +79,23 @@ public class EditBuyerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         logger.info("----------------[EDIT BUYER] executing edit command");
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (!model.hasPerson(name)) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        Person BuyerToChange = model.findPersonByName(name);
-
-        if (!(BuyerToChange instanceof Buyer)) {
+        if (!(lastShownList.get(index.getZeroBased()) instanceof Buyer)) {
+            logger.info("----------------[EDIT BUYER] target person is not a buyer");
             throw new CommandException(MESSAGE_WRONG_TYPE);
         }
 
-        if(model.hasPerson(new Name(editBuyerDescriptor.getName().get().toString()))) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         // safe to cast to Buyer type as there's already a validation to check if the target is a Buyer.
-        Buyer buyerToEdit = (Buyer) BuyerToChange;
+        Buyer buyerToEdit = (Buyer) lastShownList.get(index.getZeroBased());
         Buyer editedBuyer = createEditedBuyer(buyerToEdit, editBuyerDescriptor);
 
+        if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasPerson(editedBuyer)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
         model.setState(State.PERSON_LIST);
         model.setPerson(buyerToEdit, editedBuyer);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -133,14 +131,14 @@ public class EditBuyerCommand extends Command {
         }
 
         EditBuyerCommand otherEditCommand = (EditBuyerCommand) other;
-        return name.equals(otherEditCommand.name)
+        return index.equals(otherEditCommand.index)
                 && editBuyerDescriptor.equals(otherEditCommand.editBuyerDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("index", index)
                 .add("editBuyerDescriptor", editBuyerDescriptor)
                 .toString();
     }

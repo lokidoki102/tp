@@ -264,23 +264,77 @@ The following activity diagram summarizes what happens when a user executes the 
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Add House feature
-
-#### Proposed Implementation
-
-The proposed add house mechanism allows user to add a House.
-Previously, AB3 does not have a House implementation. Given that buyers and sellers will need to have Houses
-associated, there is a need to for an add House feature.
-
-#### Implementation Details
-- Upon invoking the command `addSeller`, the system will take in the relevant arguments such as StreetName, Level
-- or UnitNumber.
-- The System will then create a House associated with the Seller.
-- The House will be linked to the Seller for all further commands.
-
 #### Why It's Implemented That Way
-- The add house function allows houses to be easily added alongside Sellers, making it more convenient as compared
-- to adding separately.
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
+#### Adding Houses
+
+### Purpose
+
+The `AddHouse` Command is necessary to allow Houses to be added to Sellers.
+
+### Implementation
+
+The `AddHouseCommand` class extends the `Command` class and is responsible for executing the adding of a house to a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does not exist and the seller is valid, the house is added to the seller.
+
+The `AddHouseCommandParser` class is used to parse the user input and create the `AddHouseCommand` object. When executed by the `LogicManager`, the `AddHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
+
+### Example Usage Scenario:
+
+**Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe.
+
+**Step 2:** The user executes the `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ` command to add a `House` with these details to `AddressBook`.
+
+**Note:** If the `addHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House`, an error message is displayed.
+
+
+The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
+
+<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic"/>
+
+### Design Considerations
+
+* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
+    * Pros:
+        * Allows for only seller handling for houses and reduces overlap within classes
+        * Easier to track house logic as it will be contained within the seller
+    * Cons:
+        * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
+
+#### Deleting Houses
+
+### Purpose
+
+The `DeleteHouse` Command is necessary to delete Houses from relevant Sellers.
+
+### Implementation
+
+The `DeleteHouseCommand` class extends the `Command` class and is responsible for executing the deletion of a house from a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does exist and the seller is valid, the house is deleted from the seller.
+
+The `DeleteHouseCommandParser` class is used to parse the user input and create the `DeleteHouseCommand` object. When executed by the `LogicManager`, the `DeleteHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
+
+### Example Usage Scenario:
+
+**Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe. John Doe is assumed to have a Condominium located at Clementi Ave 2, level 2 (with no block), unit number 25, postal code 578578 with price 99999.
+
+**Step 2:** The user executes the `deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999 ` command to delete a `House` with these details from `AddressBook` and John Doe's houses.
+
+**Note:** If the `deleteHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House` not under the named `Seller`, an error message is displayed.
+
+
+The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
+
+<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic"/>
+
+### Design Considerations
+
+* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
+    * Pros:
+        * Allows for only seller handling for houses and reduces overlap within classes
+        * Easier to track house logic as it will be contained within the seller
+    * Cons:
+        * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
+
 
 
 ### \[Proposed\] Add buyer feature
