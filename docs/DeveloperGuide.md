@@ -833,45 +833,36 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC11 - Edit contact details**
+**Use case: UC11 - Edit buyer details**
 
 **MSS:**
 
-1.  User requests to <u>view all contacts (UC04)</u>.
-2.  User requests to edit the details of a specific person in the list.
-3.  EstateEase updates the details of the specific person selected by the user.
+1.  User executes the command to edit a Buyer in EstateEase.
+2.  EstateEase updates the details of the specific buyer selected by the user.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
-    * 2a1. EstateEase shows an error message.
+* 1a. The given index is invalid.
+    * 1a1. EstateEase shows an error message.
 
       Use case ends.
 
-* 2b. The new value for the field being updated is not valid.
-    * 2b1. EstateEase shows error message, indicating the nature of the invalid input.
+* 1b. The new value for the field being updated is not valid.
+    * 1b1. EstateEase shows format error message.
 
       Use case ends.
 
-**Use case: UC12 - Filter out buyers**
-
-**MSS:**
-
-1.  User requests to view only buyers that are still looking for a houses or those that
-    have already gotten their house.
-2.  EstateEase shows a list of all his/her house buyers based on the filter
-    (i.e. still looking for a house).
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. There are no buyers that match the filter.
-    * 1a1. EstateEase displays a message stating that the list is empty.
+* 1c. The edited name field already exists in EstateEase.
+    * 1c1. EstateEase error message, indicating that the person already exists.
 
       Use case ends.
+
+**Use case: UC12 - Edit seller details**
+This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in different field 
+(i.e. parameters for name, phone, and email).
+
 
 **Use case: UC13 - Match sellers with buyer's preferences**
 
@@ -893,82 +884,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 3a. There are no matching listings
     * 3a1. EstateEase shows a message indicating there is no matching results.
 
-      Use case ends.
-
-**Use case: UC14 - Link Buyer to Seller**
-
-**MSS:**
-
-1. User initiates the process of linking a buyer to sellers for a specific property.
-2. EstateEase validates the provided property information, buyer ID, and seller ID.
-3. EstateEase proceeds to link the buyer to the specified seller(s) for the given property.
-4. Use case ends.
-
-**Extensions**
-
-* 1a. User provides invalid input for linking.
-    * 1a1. EstateEase displays an error message indicating the issue with the input.
-      Use case ends.
-
-
-**Use case: UC15 - View home sellers by priority**
-
-**Preconditions:**
-- The user initialises a view command with home-seller as a filter
-
-**MSS:**
-1.  EstateEase process the view command with home-seller as filter.
-2.  EstateEase shows a list of home-sellers, arranged based on their priority. <br>
-    Use case ends.
-
-**Extensions**
-* 1a. The contact list does not have any home-seller. <br>
-    * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
-      Use case ends.
-
-**Use case: UC16 - Differentiate home-seller status**
-
-**MSS:**
-
-1. User filters for home-sellers
-2. EstateEase displays home-sellers. Free home-sellers are highlighted in green.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. Pending home-sellers are displayed in red.
-    *   2a1. User clicks on one of the pending home-sellers. The home-seller's status is set to pending.
-
-        Use case ends.
-
-* 2b. User clicks on one of the free home-sellers. The home-seller's status is set to free.
-
-  Use case ends.
-
-**Use case: UC17 - Differentiate home-buyer status**
-
-**MSS:**
-
-1.  User requests to <u>view all contacts</u>.
-2.  EstateEase displays and highlights the home-buyers who are still looking for houses in green,
-    and the home-buyers who are pending in finalizing a deal or done deal in red.
-
-    Use case ends.
-
-**Use case: UC18 - Adding notes about clients**
-
-**MSS:**
-
-1. User enters a remark regarding a client.
-2. EstateEase adds the provided remark to the client identified by the specified index.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid index or remark format.
-    * 1a1. EstateEase displays an error message indicating the invalid input.
       Use case ends.
 
 **Use case: UC19 - Exit application**
