@@ -176,26 +176,43 @@ there's a need to separate out the requirements accordingly.
 #### Why It's Implemented That Way
 - The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
 
-### [Proposed] Matching Buyer feature
+### Matching Sellers to a Buyer
 
-#### Proposed Implementation
+#### Implementation
 
-The Matching Buyer feature aims to facilitate the process of connecting buyers with suitable seller houses based on their housing type and budget.
+The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
 
-#### Implementation Details
-- Upon invoking the command `match [buyer_name]`, the system will identify the specified buyer by name.
-- It will then retrieve the buyer's housing type and budget from the database.
-- The system will compare these attributes with each available seller house's housing type and price.
-- Suitable matches will be determined based on compatibility, and a list of matched seller houses will be presented to the user.
+The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
 
-#### Why It's Implemented That Way
-- This implementation focuses on simplicity and efficiency by directly comparing buyer requirements with available seller houses.
-- Retrieving buyer information by name ensures personalized matching and ease of use.
-- By considering both housing type and budget, the system ensures that matched houses meet the buyer's specific criteria effectively.
+### Example Usage Scenario:
 
-#### Alternatives Considered
-- Alternative approaches, such as machine learning-based recommendation systems, were considered but deemed unnecessary for the current scope of the feature.
-- Additional matching criteria, such as location or amenities, were also contemplated, but it was decided to prioritize simplicity and clarity for the initial implementation.
+**Step 1:** The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+
+**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the `AddressBook`.
+
+**Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
+
+
+The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
+
+<puml src="diagrams/MatchBuyerSequenceDiagram-Logic" alt="MatchBuyerSequenceDiagram-Logic"/>
+
+### Design Considerations
+
+* *Alternative 1 (current choice):* Use a new `MatchBuyerCommand` to do matching.
+    * Pros:
+        * Provides a dedicated command specifically tailored for matching sellers to a `Buyer`, enhancing clarity and readability in the codebase.
+        * Allows for specialized handling of buyer matching logic within its own command class, facilitating easier maintenance and updates.
+    * Cons:
+        * Requires the introduction of a new command class, potentially increasing the overall complexity of the codebase.
+        * More commands for the user to remember
+* *Alternative 2:* Use prefix in `FindCommand` to do matching
+    * Pros:
+        * Utilizes an existing command class, reducing the need for additional code and command classes dedicated to matching.
+        * Leverages the flexibility of the `FindCommand` structure to accommodate various matching scenarios with different prefixes.
+    * Cons:
+        * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
+        * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
 
 ### \[Proposed\] Add seller feature
 
@@ -433,15 +450,15 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* * * *` | real estate agent           | delete the contact that I want to remove                                                      | remove outdated or irrelevant contacts                                       |
 | `* * * *` | real estate agent           | be able to exit the program when I want to                                                    | close the application                                                        |
 | `* * * *` | real estate agent           | be able to automatically save the data I added, changed, and deleted                          | load the data when I open the application, with the saved data, next time    |
-| `* * *`   | real estate agent           | keep track of my buyer's budget and the price of the houses                                   | better manage my client's requirement                                        |
-| `* * *`   | real estate agent           | match the buyer with sellers based on the buyer's requirements                                | quickly identify properties that align with the buyers' preferences          |
+| `* * *`   | real estate agent           | keep track of my buyer's budgets                                                              | efficiently match them with houses within their financial constraints        |
+| `* * *`   | real estate agent           | keep track of the prices of the houses                                                        | better manage my clients' requirements                                       |
+| `* * *`   | real estate agent           | match buyers with sellers based on the buyers' requirements                                   | quickly identify houses that align with their preferences.                   |
 | `* * *`   | real estate agent           | find for a specific contact                                                                   | access their details without scrolling through a long list                   |
 | `* * *`   | real estate agent           | easily update or modify existing contact information                                          | have accurate and up-to-date records                                         |
 | `* * *`   | real estate agent           | add new houses to the home-sellers                                                            | keep track of the houses the home-sellers have                               |
 | `* * *`   | real estate agent           | have whatever contacts I add load to the laptop I am using                                    | do not need to re-enter all the details whenever I open the app              |
 | `* *`     | busy real estate agent      | be able to view specific buyer's requirements                                                 | understand what are their needs quickly                                      |
 | `* *`     | busy real estate agent      | be able to view specific seller's properties                                                  | effectively assess their listings quickly                                    |
-| `* *`     | busy real estate agent      | match the buyer with sellers based on the buyer's requirements                                | quickly identify properties that align with the buyers' preferences          |
 | `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller                          | do not need to remember their identity                                       |
 | `* *`     | forgetful real estate agent | filter my contacts based on buyers who do not have a pending or done deal status              | easily identify and manage active buyer contacts                             |
 | `* *`     | forgetful real estate agent | link a buyer to sellers with the properties they are interested in buying                     | push them towards making a transaction                                       |
@@ -655,7 +672,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-
 **Use case: UC05 - Delete a contact**
 
 **MSS:**
@@ -752,7 +768,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 2b1. EstateEase shows error message regarding the IOException to the user.
       Use case ends.
 
-
 **Use case: UC08 - Search a contact**
 
 **MSS:**
@@ -768,7 +783,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 1a1. EstateEase shows an error message indicating no matches found.
 
       Use case ends.
-
 
 **Use case: UC09 - View a home-buyer's requirements**
 
@@ -808,7 +822,6 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 2b1. EstateEase shows an error message regarding an invalid command.
 
       Use case ends.
-
 
 **Use case: UC11 - Edit contact details**
 
@@ -850,41 +863,27 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC13 - Find matching sellers for a buyer**
+**Use case: UC13 - Match sellers with buyer's preferences**
 
 **MSS:**
-1. User requests to <u>filter out buyers (UC12)</u>.
-2. User requests to find all the matching sellers for a buyer based on their requirements.
-3. EstateEase displays the list of sellers who have properties that match the buyer's requirements.
+1. User requests to match a buyer's preferences.
+2. EstateEase retrieves the budget and preferred housing type of the specified buyer.
+3. EstateEase matches the buyer's preferences with the listings of available sellers.
+4. EstateEase displays the list of sellers who have houses matching the specified buyer's budget and housing type.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
-* 2a. The given index for the buyer is invalid input type.
-    * 2a1. EstateEase shows an error message indicating the invalid input type.
-
-      Use case resumes at step 1.
-
-* 2b. The given index for the buyer is out of range.
-    * 2b1. EstateEase shows an error message indicating the out of range for the index.
-
-      Use case resumes at step 1.
-
-* 3a. There are no sellers in the contact list.
-    * 3a1. EstateEase shows a message indicating there is no sellers in the contact list.
+* 1a. The specified buyer does not exist
+    * 1a1. EstateEase shows a message the specified buyer does not exist.
 
       Use case ends.
 
-* 3b. There are no matching properties based on the buyer's requirements.
-    * 3b1. EstateEase shows a message indicating there is no matching results.
+* 3a. There are no matching listings
+    * 3a1. EstateEase shows a message indicating there is no matching results.
 
       Use case ends.
-
 
 **Use case: UC14 - Link Buyer to Seller**
 
@@ -917,8 +916,6 @@ Use case ends.
     * 1a1. EstateEase shows an error message stating that the contact list does not have home-seller. <br>
       Use case ends.
 
-
-
 **Use case: UC16 - Differentiate home-seller status**
 
 **MSS:**
@@ -927,7 +924,6 @@ Use case ends.
 2. EstateEase displays home-sellers. Free home-sellers are highlighted in green.
 
    Use case ends.
-
 
 **Extensions**
 
@@ -940,7 +936,6 @@ Use case ends.
 
   Use case ends.
 
-
 **Use case: UC17 - Differentiate home-buyer status**
 
 **MSS:**
@@ -950,7 +945,6 @@ Use case ends.
     and the home-buyers who are pending in finalizing a deal or done deal in red.
 
     Use case ends.
-
 
 **Use case: UC18 - Adding notes about clients**
 
@@ -967,8 +961,6 @@ Use case ends.
     * 1a1. EstateEase displays an error message indicating the invalid input.
       Use case ends.
 
-
-
 **Use case: UC19 - Exit application**
 
 **MSS:**
@@ -983,7 +975,6 @@ Use case ends.
 * 1a. User enters an unrecognized command.
     * 1a1. EstateEase displays a message "Unknown command".
       Use case resumes from the previous step.
-
 
 ### Non-Functional Requirements
 
@@ -1054,20 +1045,41 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Loading and Saving Data
 
 1. **Dealing with Missing/Created Data Folder**
-    - **Loading Data:**
-        - _{Explain how to simulate a missing data folder during loading, and the expected behavior}_
-    - **Saving Data:**
-        - _{Explain how to simulate a missing data folder during saving, and the expected behavior}_
+
+    1.  **Loading Data:**
+
+        1.  _{Explain how to simulate a missing data folder during loading, and the expected behavior}_
+
+    1.  **Saving Data:**
+
+        1.  _{Explain how to simulate a missing data folder during saving, and the expected behavior}_
 
 2.  **Dealing with Missing/Corrupted Data Files**
-    - **Loading Data:**
-        - _{Explain how to simulate a missing or corrupted data file during loading, and the expected behavior}_
-    - **Saving Data:**
-        - _{Explain how to simulate a missing or corrupted data file during saving, and the expected behavior}_
 
-3. _{ more test cases …​ }_
+    2. **Loading Data:**
+
+        2. _{Explain how to simulate a missing or corrupted data file during loading, and the expected behavior}_
+
+    2. **Saving Data:**
+
+        2. _{Explain how to simulate a missing or corrupted data file during saving, and the expected behavior}_
+
+### Matching Sellers to a Buyer
+
+**Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
+
+1. **Matching suitable sellers to a buyer using buyer's full name**
+
+   1. **Test case:** `matchBuyer Alice Lee`
+      **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
+
+2. **Invalid formats**
+
+   2. **Test case:** `matchBuyer Alice`
+      **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+   2. **Test case:** `matchBuyer Lee`
+      **Expected:** Message indicating invalid format. The specified buyer was not found.
