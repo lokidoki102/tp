@@ -31,7 +31,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
     private final ArrayList<Seller> filteredSellers;
 
     private Ui ui = null;
