@@ -195,7 +195,7 @@ The `MatchBuyerCommandParser` class is used to parse the user input and create t
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
-<puml src="diagrams/MatchBuyerSequenceDiagram-Logic" alt="MatchBuyerSequenceDiagram-Logic"/>
+<puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic"/>
 
 ### Design Considerations
 
