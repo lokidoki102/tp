@@ -246,7 +246,7 @@ public class ModelManager implements Model {
     }
 
     private ArrayList<House> getFilteredHouses(Seller seller, PriceAndHousingTypePredicate predicate) {
-        return seller.getHouses().stream()
+        return seller.getHouse().stream()
                 .filter(predicate)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -254,7 +254,7 @@ public class ModelManager implements Model {
     public ObservableList<House> getFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         FilteredList<Person> filteredSellers = filteredPersons.filtered(person -> person instanceof Seller);
         ObservableList<House> allHouses = filteredSellers.stream()
-                .map(seller -> ((Seller) seller).getHouses())
+                .map(seller -> ((Seller) seller).getHouse())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
 

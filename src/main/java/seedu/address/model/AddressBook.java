@@ -140,8 +140,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         if (key instanceof Seller) {
             Seller seller = (Seller) key;
-            if (!seller.getHouses().isEmpty()) {
-                for (House h: seller.getHouses()) {
+            if (!seller.getHouse().isEmpty()) {
+                for (House h: seller.getHouse()) {
                     houses.remove(h);
                 }
             }

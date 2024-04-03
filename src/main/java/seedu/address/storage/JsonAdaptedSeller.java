@@ -38,7 +38,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
      */
     public JsonAdaptedSeller(Seller source) {
         super(source);
-        houses.addAll(source.getHouses().stream()
+        houses.addAll(source.getHouse().stream()
                 .map(JsonAdaptedHouse::new)
                 .collect(Collectors.toList()));
     }

@@ -85,13 +85,13 @@ public class SellerTest {
         // Same details, different houses -> returns false
         Seller sellerAliceCloneWithDifferentHouses = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(),
                 ALICE_SELLER.getEmail(), bobHouses);
-        assertFalse(sellerAlice.getHouses().get(0).toString()
-                .equals(sellerAliceCloneWithDifferentHouses.getHouses().get(0).toString()));
+        assertFalse(sellerAlice.getHouse().get(0).toString()
+                .equals(sellerAliceCloneWithDifferentHouses.getHouse().get(0).toString()));
 
         // Same details, same houses -> returns true
         Seller sellerAliceClone = new Seller(ALICE_SELLER.getName(), ALICE_SELLER.getPhone(), ALICE_SELLER.getEmail(),
                 aliceHouses);
-        assertTrue(sellerAlice.getHouses().get(0).toString().equals(sellerAliceClone.getHouses().get(0).toString()));
+        assertTrue(sellerAlice.getHouse().get(0).toString().equals(sellerAliceClone.getHouse().get(0).toString()));
     }
 
     @Test

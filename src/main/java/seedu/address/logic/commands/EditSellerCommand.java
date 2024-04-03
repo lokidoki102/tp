@@ -104,7 +104,7 @@ public class EditSellerCommand extends Command {
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
 
         // Houses are non-editable via editSellerCommand
-        ArrayList<House> houses = sellerToEdit.getHouses();
+        ArrayList<House> houses = sellerToEdit.getHouse();
 
         return new Seller(updatedName, updatedPhone, updatedEmail, houses);
     }

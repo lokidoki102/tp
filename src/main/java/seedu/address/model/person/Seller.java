@@ -54,14 +54,6 @@ public class Seller extends Person {
     }
 
     /**
-     * Returns the list of houses associated with this seller.
-     * @return An ArrayList containing House objects.
-     */
-    public ArrayList<House> getHouses() {
-        return new ArrayList<>(houses);
-    }
-
-    /**
      * Creates a copy of seller.
      *
      * @return An instance of seller.
