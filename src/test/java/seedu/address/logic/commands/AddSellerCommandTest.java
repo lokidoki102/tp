@@ -180,6 +180,11 @@ class AddSellerCommandTest {
         }
 
         @Override
+        public void deletePersonFromPersons(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteHouse(House house, Person owner) {
             throw new AssertionError("This method should not be called.");
         }
