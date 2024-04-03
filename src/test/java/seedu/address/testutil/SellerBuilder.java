@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,7 +26,7 @@ public class SellerBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private ArrayList<House> houses;
+    private ObservableList<House> houses;
     private Set<Tag> tags;
 
     /**
@@ -36,7 +36,7 @@ public class SellerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        houses = new ArrayList<>();
+        houses = FXCollections.observableArrayList();
         tags = new HashSet<>();
         tags.add(new Tag(DEFAULT_SELLER_TAG));
     }
@@ -48,7 +48,7 @@ public class SellerBuilder {
         name = sellerToCopy.getName();
         phone = sellerToCopy.getPhone();
         email = sellerToCopy.getEmail();
-        houses = new ArrayList<>(sellerToCopy.getHouses());
+        houses = FXCollections.observableArrayList(sellerToCopy.getHouses());
         tags = new HashSet<>(sellerToCopy.getTags());
     }
 
@@ -88,7 +88,7 @@ public class SellerBuilder {
      * Sets the {@code houses} of the {@code Seller} that we are building.
      */
     public SellerBuilder withHouses(House... houses) {
-        this.houses = new ArrayList<>(Arrays.asList(houses));
+        this.houses = FXCollections.observableArrayList(houses);
         return this;
     }
 

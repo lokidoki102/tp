@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.house.Block;
@@ -46,13 +48,13 @@ public class SampleDataUtil {
     }
 
     public static Seller[] getSampleSellers() {
-        ArrayList<House> bavidLiHouses = new ArrayList<>();
+        ObservableList<House> bavidLiHouses = FXCollections.observableArrayList();
         bavidLiHouses.add(new Hdb(new Level("3"), new PostalCode("098703"),
                 new Street("Ang Mo Kio Avenue 1"), new UnitNumber("02"), new Block("51"), new Price("1111111")));
-        ArrayList<House> drfanHouses = new ArrayList<>();
+        ObservableList<House> drfanHouses = FXCollections.observableArrayList();
         drfanHouses.add(new Condominium(new Level("4"), new PostalCode("098713"),
                 new Street("Ang Mo Kio Avenue 2"), new UnitNumber("03"), new Block("52"), new Price("2222222")));
-        ArrayList<House> foyHouses = new ArrayList<>();
+        ObservableList<House> foyHouses = FXCollections.observableArrayList();
         foyHouses.add(new Hdb(new Level("5"), new PostalCode("098723"),
                 new Street("Ang Mo Kio Avenue 3"), new UnitNumber("04"), new Block("53"), new Price("3333333")));
         foyHouses.add(new Hdb(new Level("6"), new PostalCode("098724"),

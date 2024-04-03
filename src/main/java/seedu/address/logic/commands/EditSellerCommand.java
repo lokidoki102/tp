@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -104,7 +104,7 @@ public class EditSellerCommand extends Command {
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
 
         // Houses are non-editable via editSellerCommand
-        ArrayList<House> houses = sellerToEdit.getHouses();
+        ObservableList<House> houses = sellerToEdit.getHouses();
 
         return new Seller(updatedName, updatedPhone, updatedEmail, houses);
     }
@@ -162,7 +162,6 @@ public class EditSellerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            // TODO(TAG): Remove tags
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 

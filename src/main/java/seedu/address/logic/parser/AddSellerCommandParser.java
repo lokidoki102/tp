@@ -13,9 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.house.House;
@@ -81,7 +82,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
 
         House house = checkValidity(housingType, unitNumber, street, postalCode, price, hasBlock,
                 hasLevel, argMultimap);
-        ArrayList<House> houses = new ArrayList<>();
+        ObservableList<House> houses = FXCollections.observableArrayList();
         houses.add(house);
 
         return new Seller(name, phone, email, houses);

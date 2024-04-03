@@ -1,14 +1,14 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
 
 /**
  * Represents a seller in the address book.
  */
 public class Seller extends Person {
-    private final ArrayList<House> houses;
+    private final ObservableList<House> houses;
 
     /**
      * Constructs a new Seller instance.
@@ -18,7 +18,7 @@ public class Seller extends Person {
      * @param email       The email address of the seller.
      * @param houses      The houses the seller has (modified to accept a list of houses)
      */
-    public Seller(Name name, Phone phone, Email email, ArrayList<House> houses) {
+    public Seller(Name name, Phone phone, Email email, ObservableList<House> houses) {
         super(name, phone, email);
         this.houses = houses;
     }
@@ -42,7 +42,7 @@ public class Seller extends Person {
     /**
      * Gets the seller's list of houses.
      */
-    public ArrayList<House> getHouses() {
+    public ObservableList<House> getHouses() {
         return this.houses;
     }
 
@@ -62,7 +62,7 @@ public class Seller extends Person {
         Name copyName = new Name(this.getName().toString());
         Phone copyPhone = new Phone(this.getPhone().toString());
         Email copyEmail = new Email(this.getEmail().toString());
-        ArrayList<House> copyHouse = new ArrayList<>();
+        ObservableList<House> copyHouse = FXCollections.observableArrayList();
 
         return new Seller(copyName, copyPhone, copyEmail, copyHouse);
     }
