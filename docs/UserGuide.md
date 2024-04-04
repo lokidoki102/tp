@@ -17,11 +17,11 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `EstateEase.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EstateEase.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -33,6 +33,8 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
    * `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney` : Adds a seller named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   
+   * `matchBuyer Alice Lim` : Display Seller details with House that match the Budget and HousingType of the Buyer named `Alice Lim` in the Address Book.
 
    * `clear` : Deletes all contacts.
 
@@ -130,6 +132,21 @@ Examples:
 * `deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/10000`
 * `deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 * `deleteHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+
+### Matching Sellers to a Buyer: `matchBuyer`
+
+Shows the list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
+
+Format: `matchBuyer FULL_NAME`
+
+<box type="tip" seamless>
+
+**Tip:** A full name of the buyer must be used in the command.
+
+</box>
+
+Examples:
+* `matchBuyer Alice Lim`
 
 ### Listing all persons : `list`
 
