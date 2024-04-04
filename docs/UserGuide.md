@@ -134,7 +134,7 @@ Examples:
 
 Shows the list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
 
-Format: `matchBuyer [FULL_NAME]`
+Format: `matchBuyer FULL_NAME`
 
 <box type="tip" seamless>
 
