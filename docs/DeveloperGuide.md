@@ -354,12 +354,15 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 #### Example Usage Scenario:
 
-**Step 1:** The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+**Step 1:** The user launches the application for the first time. EstateEase will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
 
-**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the `AddressBook`.
+**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the EstateEase.
 
 **Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
 
+The following activity diagram summarises the execution of a `matchBuyer` command:
+
+<puml src="diagrams/MatchBuyerActivityDiagram.puml" alt="MatchBuyerActivityDiagram" width="1000"/>
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
@@ -903,7 +906,7 @@ testers are expected to do more *exploratory* testing.
 
    1. **Loading Data:**
 
-        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it. 
+        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
         - The application should automatically populate the address book with sample data, displaying buyers and sellers, where sellers are associated with houses.
 
    2. **Saving Data:**
@@ -945,7 +948,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** Message indicating invalid format. The specified buyer was not found.
 
 3. **Invalid buyer**
-   
+
    3. **Test case:** `matchBuyer Bob Lim`
       **Expected:** Message indicating invalid person. The specified person is not a buyer.
 
@@ -971,11 +974,11 @@ testers are expected to do more *exploratory* testing.
     Expected: An error message indicating that "The person you are trying to edit is not a seller."
 3. **Successful edit**<br>
    **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson". 
+    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
     The updated details of the edited seller will also be shown in the response box.
 4. **Invalid INDEX**<br>
    **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
-    Expected: An error messsage indicating that the command has invalid format. 
+    Expected: An error messsage indicating that the command has invalid format.
     The error message also indicates that the `INDEX` must be a positive number.
 
 ### Editing Buyer Details
