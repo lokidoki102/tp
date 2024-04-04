@@ -139,6 +139,9 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+### Malformed JSONs
+> **Warning:** If the JSON file is malformed, the contents of EstateEase will not be loaded, and a log message will be printed to a log file instead of being displayed within the application itself. <br> No proactive measures are taken to rectify this issue, such as deleting the corrupted file immediately upon detection or automatically fixing the fields or values in the malformed JSON. <br> While we do not assume the intended action for encountering a malformed JSON file, it should be noted that the malformed JSON will eventually be overwritten with a correctly formatted JSON once a valid command is triggered.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -188,6 +191,9 @@ The `editSeller` command allows user to edit the details of an existing `Seller`
 #### Implementation
 The overall implementation of this command is very similar to `editBuyer` command, except the command format is
 `editSeller [n/NAME] [p/PHONE] [e/EMAIL]` (E.g. editSeller 1 p/91234567 e/johndoe@example.com).
+
+#### Why It's Implemented That Way
+- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
 
 ### Matching Sellers to a Buyer
 
@@ -239,7 +245,7 @@ This `addSeller` feature allows user to add a `Seller` and a `House` into the Es
 #### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addSeller` command
 
-<puml src="diagrams/AddSellerActivityDiagram.puml" width="500" />
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="1200" />
 
 #### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
@@ -279,10 +285,13 @@ Additionally, it implements the following operations:
     * **Pros:** Having lesser commands is easier for the user to remember.
     * **Cons:** Difficult to implement, having more prefixes means more validation.
 
-_{more aspects and alternatives to be added}_
+* **Alternative 1 (current choice):** Use the `addSeller` command to add one `Seller` and one `House`.
+    * **Pros:** It allows the `Seller` to have at least one house, so that `Seller` and `Buyer` can match instantly (if the requirements matches).
+    * **Cons:** Difficult to implement, as there needs to be validation on both `Seller` and `House`.
 
-#### Why It's Implemented That Way
-- The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+* **Alternative 2:** Use the `addSeller` command to add only `Seller`.
+    * **Pros:** It is easier to implement, because it does not require `House` validation.
+    * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
 #### Adding Houses
 
@@ -668,7 +677,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case resumes at step 1.
 
-**Use case: UC06 - Load contact data from file**
+**Use case: UC06 - Load EstateEase data from file**
 
 **Actor: EstateEase**
 
@@ -678,51 +687,36 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 **MSS:**
 
-1. EstateEase automatically loads existing contact and address data from a JSON file stored in the "data" folder at the same directory level as the application.
-2. EstateEase parses the JSON file and imports the contact and address data into the application's memory.
-3. EstateEase displays the imported contact and address data to the user.
-
+1. EstateEase automatically attempts to load EstateEase data from a JSON file located in the "data" folder at the same directory level as the application.
+2. EstateEase parses the JSON file and imports the EstateEase data into the application's memory.
+3. EstateEase displays the EstateEase data to the user. <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. EstateEase detects that the JSON file in the "data" folder is missing or inaccessible.
-    * 1a1. EstateEase attempts to create an empty JSON file named "addressbook.json" in the "data" folder.
-    * 1a2. If EstateEase fails to create the JSON file:
-        * 1a2a. EstateEase displays an error message indicating that the contact and address data could not be loaded, and the "data" folder could not be accessed.
-          Use case ends.
-    * 1a3. If EstateEase successfully creates the JSON file:
-        * 1a3a. EstateEase proceeds to load contact and address data from the newly created JSON file.
-          Use case continues from step 2.
+* 1a. JSON file is missing or the "data" folder is missing:
+    * 1a1. EstateEase retrieves sample data and populates the address book with it.
+    * 1a2. EstateEase displays the EstateEase data from the sample data to the user.
+    * 1a3. EstateEase waits for any command to the address book data before creating an empty JSON file or the "data" folder as needed. <br>
+    Use case ends.
 
-* 1b. EstateEase detects that the JSON file in the "data" folder is empty.
-    * 1b1. EstateEase displays a message indicating that there are no contacts with address data to load.
-      Use case resumes from step 2.
-
-* 1c. EstateEase detects that the JSON file in the "data" folder has incorrect format.
-    * 1c1. EstateEase displays an error message indicating that the contact and address data could not be loaded due to incorrect file format.
-      Use case ends.
-
-* 1d. EstateEase detects that the "data" folder does not exist.
-    * 1d1. EstateEase attempts to create the "data" folder.
-    * 1d2. If EstateEase fails to create the "data" folder:
-        * 1d2a. EstateEase displays an error message indicating that the "data" folder could not be created.
-          Use case ends.
-    * 1d3. If EstateEase successfully creates the "data" folder:
-        * 1d3a. EstateEase proceeds to create an empty JSON file named "addressbook.json" in the "data" folder.
-        * 1d3b. EstateEase proceeds to load contact and address data from the newly created JSON file.
-          Use case continues from step 2.
+* 1b. JSON file has an incorrect format or fields:
+  * 1b1. EstateEase initializes an empty address book without displaying an error message.
+  * 1b2. EstateEase displays an empty address book to the user.
+  * 1b3. Any command to the address book data trigger the creation of a new, corrected JSON file. <br>
+  Use case ends.
 
 **Use case: UC07 - Save to storage**
 
 **Actor: EstateEase**
 
-**Preconditions: The user initiates an add or delete command**
+**Preconditions:**
+- The user initiates a command that modifies the EstateEase data.**
 
 **MSS:**
 
-1.  EstateEase processes the add (UC01) or delete (UC03) command and updates the address book accordingly.
-2.  EstateEase attempts to update the JSON file accordingly.
+1.  EstateEase processes the command <u>(UC01, UC02, UC03, UC05, UC011, UC012)</u> and updates the address book accordingly.
+2.  EstateEase updates the JSON file with the new changes.
 3.  EstateEase successfully updates the JSON file.
 
     Use case ends.
@@ -730,12 +724,11 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 **Extensions**
 
 * 2a. EstateEase is unable to write to the JSON file due to file permission issue.
-    * 2a1. EstateEase shows error message regarding the insufficient file permission to the user.
-
+    * 2a1. EstateEase shows error message regarding the insufficient file permission to the user. <br>
       Use case ends.
 
 * 2b. EstateEase is unable to write to the JSON file due to some IOException.
-    * 2b1. EstateEase shows error message regarding the IOException to the user.
+    * 2b1. EstateEase shows error message regarding the IOException to the user. <br>
       Use case ends.
 
 **Use case: UC08 - Search a contact**
@@ -934,23 +927,27 @@ testers are expected to do more *exploratory* testing.
 
 1. **Dealing with Missing/Created Data Folder**
 
-    1.  **Loading Data:**
+   1. **Loading Data:**
 
-        1.  _{Explain how to simulate a missing data folder during loading, and the expected behavior}_
+        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it. 
+        - The application should automatically populate the address book with sample data, displaying buyers and sellers, where sellers are associated with houses.
 
-    1.  **Saving Data:**
+   2. **Saving Data:**
 
-        1.  _{Explain how to simulate a missing data folder during saving, and the expected behavior}_
+        - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon the next save trigger (e.g., after executing a command that modifies data).
+        - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon the next save trigger.
+        - The application saves the sample data to `addressbook.json` only after executing a command.
 
-2.  **Dealing with Missing/Corrupted Data Files**
+2. **Dealing with Missing/Corrupted Data Files**
 
-    2. **Loading Data:**
+   1. **Loading Data:**
 
-        2. _{Explain how to simulate a missing or corrupted data file during loading, and the expected behavior}_
+        - To simulate a corrupted `addressbook.json` file, alter the data fields for buyers, sellers, or seller houses in `addressbook.json` to invalid formats. For example, adding symbols to the name field or changing the field name from 'name' to 'NAME' makes it invalid.
+        - Following such corruption, the application will load with an empty `addressbook.json`. If no commands are input, even when closing and reopening the application, the corrupted `addressbook.json` will remain.
 
-    2. **Saving Data:**
+   2. **Saving Data:**
 
-        2. _{Explain how to simulate a missing or corrupted data file during saving, and the expected behavior}_
+        - The corrupted `addressbook.json` will be replaced with a correctly formatted file only after a command that modifies the data is executed.
 
 ### Matching Sellers to a Buyer
 
@@ -978,5 +975,3 @@ testers are expected to do more *exploratory* testing.
 
     4. **Test case:** `matchBuyer Ben Chan`
        **Expected:** Message indicating invalid person. The specified buyer was not found.
-
-### Matching Sellers to a Buyer
