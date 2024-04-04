@@ -91,6 +91,7 @@ Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [street/STREET]  [blk/BLO
 
 Examples:
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`
+  ![addSeller](images/ui-screenshots/addSeller-success.png)
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/10000`
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
@@ -116,8 +117,6 @@ Examples:
 *  `editSeller 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person,
    that is also a seller, to be `91234567` and `johndoe@example.com` respectively.
 
-![editSeller](images/ui-screenshots/editSeller-success.png)
-
 ### Editing buyer details : `editBuyer`
 
 Edits an existing `Buyer` in EstateEase.
@@ -136,8 +135,6 @@ Examples:
 * `editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000` edits the phone number, email,
   preferred housing type, and budget of the 1st person, that is also a buyer, to be `88888888`, `buyer@example.com`,
   `Landed`, and `5000000` respectively.
-
-![editBuyer](images/ui-screenshots/editBuyer-success.png)
 
 ### Adding a house: `addHouse`
 
@@ -191,12 +188,20 @@ Format: `matchBuyer FULL_NAME`
 
 Examples:
 * `matchBuyer Alice Lim`
+  ![matchBuyer](images/ui-screenshots/matchBuyer-success.png)
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+![list](images/ui-screenshots/list-success.png)
+
+### View a person detail : `view INDEX`
+
+![view](images/ui-screenshots/view-success.png)
+
 
 ### Locating persons by name: `find`
 
