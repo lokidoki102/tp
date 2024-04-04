@@ -274,6 +274,9 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 **Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
 
+The following activity diagram summarises the execution of a `matchBuyer` command:
+
+<puml src="diagrams/MatchBuyerActivityDiagram.puml" alt="MatchBuyerActivityDiagram" width="1000"/>
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
