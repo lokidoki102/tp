@@ -86,3 +86,8 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.custom-prompt-text {
+    -fx-prompt-text-fill: derive(#0A1833, 80%);
+    -fx-font-size: 12;
+}
