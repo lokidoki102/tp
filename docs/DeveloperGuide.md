@@ -211,6 +211,92 @@ Additionally, it implements the following operations:
     * **Pros:** It is easier to implement, because it does not require `House` validation.
     * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
+### Add buyer feature
+
+#### Purpose
+This `addBuyer` feature allows user to add a `Buyer` into the EstateEase
+
+#### Example Usage Scenario
+The following activity diagram summarizes what happens when a user executes the `addBuyer` command
+
+<puml src="diagrams/AddBuyerActivityDiagram.puml" width="1000" />
+
+#### Implementation
+The following sequence diagram shows how an `addBuyer` operation goes through the `Logic` component:
+
+<puml src="diagrams/AddBuyerSequenceDiagram-Logic.puml" alt="AddBuyerSequenceDiagram-Logic"/>
+
+The proposed add buyer mechanism is facilitated by `Person`. It extends `Person` with additional field `Budget` and `PreferredHousingType`.
+
+**Details:**
+1. The `AddBuyerCommand` class extends the `Command` class and is responsible for executing the add buyer process. It expects the full name and full details of the `Buyer` to be specified in the command input.
+2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
+3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
+4. The argument which contains a `Buyer` will then be parsed to `parse()` in `AddBuyerCommandParser`.
+6. If all the arguments for a `Buyer` are valid, it will then be parsed to the `AddBuyerCommand`, where a constructor will be created.
+7. At the `AddBuyerCommand`, it will check whether there is duplicate `Seller` or `Buyer` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. 
+8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Buyer` object which contains the `Buyer` details. This object will then be used to update the `Model` through `addPerson()` method of model.
+
+**Note:**
+- If the `Buyer` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+
+#### Design Considerations
+**Aspect: How `addBuyer` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Buyer`.
+    * **Pros:** Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * **Cons:** May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`.
+    * **Pros:** Having lesser commands is easier for the user to remember.
+    * **Cons:** Difficult to implement, having more prefixes means more validation.
+
+
+### View the details of a Person feature
+
+#### Purpose
+This `view` feature allows user to view the details of a `Person` in the EstateEase
+
+#### Example Usage Scenario
+The following activity diagram summarizes what happens when a user executes the `view` command
+
+#### Implementation
+The following sequence diagram shows how an `view` operation goes through the `Logic` component:
+
+<puml src="diagrams/ViewSequenceDiagram-Logic.puml" alt="ViewSequenceDiagram-Logic"/>
+
+**Details:**
+1. The `ViewCommand` class extends the `Command` class and is responsible for executing the view person details process. It expects the index of the person in the displayed list to be specified in the command input.
+2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
+3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
+4. The argument which contains a `Index` will then be parsed to `parse()` in `ViewCommandParser`.
+6. If the `Index` is valid, it will then be parsed to the `ViewCommand`, where a constructor will be created.
+7. At the `ViewCommand`, it will check whether `Index` is within the range of the displayed list.
+8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Person` object which contains the `Person` details. This object will then be used to update the `Model` through `showPerson()` method of model.
+
+**Note:**
+- The `Index` should be the index of the displayed person list.
+- 
+#### Design Considerations
+**Aspect: How `view` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to view for both `Buyer` and `Seller` and system will check which object to display.
+    * **Pros:** Having lesser commands, lesser confusion on adding too many commands for user to remember.
+    * **Cons:** May be messy to implement it.
+
+* **Alternative 2:** Use 2 commands to differentiate between `Seller` and `Buyer`.
+    * **Pros:** Clear commands for user to view either `Seller` or `Buyer`.
+    * **Cons:** Having too many commands is troublesome for the user to remember.
+
+* **Alternative 1 (current choice):** Use `INDEX` in the command input to select the person to view details.
+    * **Pros:** Easier for input validation checks, easier to implement.
+      * **Cons:** When there is too many `Person` added to EstateEase, it might not be easy to find the index of the person the user want to view details..
+
+* **Alternative 2:** Use `FULLNAME` in the command input to select the person to view details.
+    * **Pros:** Save user the trouble to search for index of the person that user want to view.
+    * **Cons:** More input validation has to be done, user might not remember the full name of the person if the full name is too long.
+
+
 ### Edit Buyer
 
 #### Purpose
@@ -363,137 +449,6 @@ The following sequence diagram shows how an `deleteHouse` operation goes through
         * Easier to track house logic as it will be contained within the seller
     * Cons:
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
-
-
-### \[Proposed\] Add buyer feature
-
-#### Proposed Implementation
-
-This feature aims to facilitate the process of adding buyer to EstateEase.
-
-Given below is an example usage scenario and how the add buyer behaves at each step.
-
-Step 1: The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
-
-Step 2: The user executes the `addBuyer n/Ben ...` command to add one `Buyer`.
-
-Step 3: After the user add `Buyer` to EstateEase, it will then be displayed in the list of `Person`.
-
-**Note:** If the `Buyer` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the person has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
-
-#### Design Considerations
-
-**Aspect: How `addBuyer` executes:**
-
-* **Alternative 1 (current choice):** Use a new command to add `Buyer`.
-    * Pros: Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
-    * Cons: May lead to many commands, which is difficult for user to remember.
-
-* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`
-  itself.
-    * Pros: Having lesser commands is easier for the user to remember.
-    * Cons: Difficult to implement, having more prefixes means more validation.
-
-_{more aspects and alternatives to be added}_
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -754,14 +709,13 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 **MSS:**
 
-1. User enters the command to view the specific buyer's requirements.
-2. EstateEase processes the view command with home-buyer as filter.
-3. EstateEase displays the home-buyer's requirements.
+1. User requests to view a specific buyer's requirements.
+2. EstateEase displays the home-buyer's personal details with their requirements.
    Use case ends.
 
 **Extensions**
 
-* 2a. EstateEase detects an invalid name.
+* 2a. EstateEase detects an invalid index.
     *   2a1. EstateEase shows an error message regarding an invalid entry.
         Use case ends.
 * 2b. Command does not match EstateEase's registered command spelling.
@@ -772,15 +726,14 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 **MSS:**
 
-1. User enters the command to view the specific seller's requirements.
-2. EstateEase processes the view command with home-seller as filter.
-3. EstateEase displays the home-seller's requirements.
+1. User requests to view a specific seller's properties.
+2. EstateEase displays the home-seller's personal details with their properties details.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. EstateEase detects an invalid name.
+* 2a. EstateEase detects an invalid index.
     * 2a1. EstateEase shows an error message regarding an invalid entry.
 
       Use case ends.
@@ -910,6 +863,24 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Viewing the details of a person
+
+1. Viewing the details of a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `view 1`<br>
+       Expected: Details of the first contact from the displayed list is displayed at the right side of the panel 
+       with the displayed person list at the left side of the panel. Name of the selected person shown in the 
+       status message. 
+
+    1. Test case: `view 0`<br>
+       Expected: No person details is displayed. Error details shown in the status message. 
+
+    1. Other invalid view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 
 ### Deleting a person
 
