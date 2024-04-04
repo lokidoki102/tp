@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,10 +60,13 @@ public class UniqueHouseList implements Iterable<House> {
     public void add(House toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateHouseException();
+            Logger.getLogger(UniqueHouseList.class.getName()).log(Level.WARNING,
+                    "Duplicate house detected: " + toAdd.toString());
+            return;
         }
         internalList.add(toAdd);
     }
+
 
     /* WE KEEP THIS HERE IN CASE GOT EDITHOUSE YA
     /**
