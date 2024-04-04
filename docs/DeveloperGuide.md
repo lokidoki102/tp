@@ -140,7 +140,10 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Malformed JSONs
-> **Warning:** If the JSON file is malformed, the contents of EstateEase will not be loaded, and a log message will be printed to a log file instead of being displayed within the application itself. <br> No proactive measures are taken to rectify this issue, such as deleting the corrupted file immediately upon detection or automatically fixing the fields or values in the malformed JSON. <br> While we do not assume the intended action for encountering a malformed JSON file, it should be noted that the malformed JSON will eventually be overwritten with a correctly formatted JSON once a valid command is triggered.
+<box type="warning" seamless>
+
+> **Warning:** If the JSON file is malformed, the contents of EstateEase will not be loaded, and a log message will be printed to a log file instead of being displayed within the application itself. <br><br> No proactive measures are taken to rectify this issue, such as deleting the corrupted file immediately upon detection or automatically fixing the fields or values in the malformed JSON. <br><br> While we do not assume the intended action for encountering a malformed JSON file, it should be noted that the malformed JSON will eventually be overwritten with a correctly formatted JSON once a valid command is triggered.
+</box>
 
 ### Common classes
 
@@ -151,6 +154,62 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add seller feature
+
+#### Purpose
+This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
+
+#### Example Usage Scenario
+The following activity diagram summarizes what happens when a user executes the `addSeller` command
+
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="1000" />
+
+#### Implementation
+The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
+
+<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic"/>
+
+The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
+Additionally, it implements the following operations:
+* `Seller#addHouse()` — Add a house to the seller list of houses.
+* `Seller#removeHouse()` — Remove a list of houses from the seller.
+* `Seller#getHouses()` — Get a list of houses from the seller.
+* `Seller#hasHouse()` — Check if a house in a list of houses from the seller.
+* `Seller#copy()` — Values of the seller is copied to a new seller object.
+
+**Details:**
+1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input.
+2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
+3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
+4. The argument which contains a `Seller` and a `House` will then be parsed to `parse()` in `AddSellerCommandParser`.
+5. The `House` will then be checked at the `checkValidity()` in `AddHouseCommandParser`.
+6. If all the arguments for a `Seller` and a `House` is valid, it will then be parsed to the `AddSellerCommand`, where a constructor will be created.
+7. At the `AddSellerCommand`, it will check whether there is duplicate `Seller` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. The `House` will also be checked to see whether it is a duplicate `House`, since the same `House` should not exist in the EstateEase data.
+8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Seller` object which contains the `Seller` details and `House` details. This object will then be used to update the `Model` through `addPerson()` method of model.
+
+**Note:**
+- If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
+- If there is a duplicate `House` in the EstateEase, it will return an error to the user that the should `House` has existed. Each `House` is unique, and there should not be duplicates.
+
+#### Design Considerations
+**Aspect: How `addSeller` executes:**
+
+* **Alternative 1 (current choice):** Use a new command to add `Seller`.
+    * **Pros:** Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * **Cons:** May lead to many commands, which is difficult for user to remember.
+
+* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`.
+    * **Pros:** Having lesser commands is easier for the user to remember.
+    * **Cons:** Difficult to implement, having more prefixes means more validation.
+
+* **Alternative 1 (current choice):** Use the `addSeller` command to add one `Seller` and one `House`.
+    * **Pros:** It allows the `Seller` to have at least one house, so that `Seller` and `Buyer` can match instantly (if the requirements matches).
+    * **Cons:** Difficult to implement, as there needs to be validation on both `Seller` and `House`.
+
+* **Alternative 2:** Use the `addSeller` command to add only `Seller`.
+    * **Pros:** It is easier to implement, because it does not require `House` validation.
+    * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
 ### Edit Buyer
 
@@ -236,62 +295,6 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
     * Cons:
         * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
         * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
-
-### \[Proposed\] Add seller feature
-
-#### Purpose
-This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
-
-#### Example Usage Scenario
-The following activity diagram summarizes what happens when a user executes the `addSeller` command
-
-<puml src="diagrams/AddSellerActivityDiagram.puml" width="1200" />
-
-#### Implementation
-The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
-
-<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" width="1200"/>
-
-The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
-Additionally, it implements the following operations:
-* `Seller#addHouse()` — Add a house to the seller list of houses.
-* `Seller#removeHouse()` — Remove a list of houses from the seller.
-* `Seller#getHouses()` — Get a list of houses from the seller.
-* `Seller#hasHouse()` — Check if a house in a list of houses from the seller.
-* `Seller#copy()` — Values of the seller is copied to a new seller object.
-
-**Details:**
-1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input.
-2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
-3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
-4. The argument which contains a `Seller` and a `House` will then be parsed to `parse()` in `AddSellerCommandParser`.
-5. The `House` will then be checked at the `checkValidity()` in `AddHouseCommandParser`.
-6. If all the arguments for a `Seller` and a `House` is valid, it will then be parsed to the `AddSellerCommand`, where a constructor will be created.
-7. At the `AddSellerCommand`, it will check whether there is duplicate `Seller` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. The `House` will also be checked to see whether it is a duplicate `House`, since the same `House` should not exist in the EstateEase data.
-8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Seller` object which contains the `Seller` details and `House` details. This object will then be used to update the `Model` through `addPerson()` method of model.
-
-**Note:**
-- If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
-- If there is a duplicate `House` in the EstateEase, it will return an error to the user that the should `House` has existed. Each `House` is unique, and there should not be duplicates.
-
-#### Design Considerations
-**Aspect: How `addSeller` executes:**
-
-* **Alternative 1 (current choice):** Use a new command to add `Seller`.
-    * **Pros:** Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
-    * **Cons:** May lead to many commands, which is difficult for user to remember.
-
-* **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`.
-    * **Pros:** Having lesser commands is easier for the user to remember.
-    * **Cons:** Difficult to implement, having more prefixes means more validation.
-
-* **Alternative 1 (current choice):** Use the `addSeller` command to add one `Seller` and one `House`.
-    * **Pros:** It allows the `Seller` to have at least one house, so that `Seller` and `Buyer` can match instantly (if the requirements matches).
-    * **Cons:** Difficult to implement, as there needs to be validation on both `Seller` and `House`.
-
-* **Alternative 2:** Use the `addSeller` command to add only `Seller`.
-    * **Pros:** It is easier to implement, because it does not require `House` validation.
-    * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
 #### Adding Houses
 
@@ -925,7 +928,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Loading and Saving Data
 
-1. **Dealing with Missing/Created Data Folder**
+1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
 
    1. **Loading Data:**
 
@@ -934,20 +937,24 @@ testers are expected to do more *exploratory* testing.
 
    2. **Saving Data:**
 
-        - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon the next save trigger (e.g., after executing a command that modifies data).
-        - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon the next save trigger.
-        - The application saves the sample data to `addressbook.json` only after executing a command.
+        - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon executing a valid command.
+        - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon executing a valid command.
+        - The application saves the sample data to `addressbook.json` upon executing a valid command.
 
-2. **Dealing with Missing/Corrupted Data Files**
+2. **Dealing with Corrupted Data Files**
 
    1. **Loading Data:**
 
-        - To simulate a corrupted `addressbook.json` file, alter the data fields for buyers, sellers, or seller houses in `addressbook.json` to invalid formats. For example, adding symbols to the name field or changing the field name from 'name' to 'NAME' makes it invalid.
-        - Following such corruption, the application will load with an empty `addressbook.json`. If no commands are input, even when closing and reopening the application, the corrupted `addressbook.json` will remain.
+        - Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). *OR*
+        - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
+        - Having a data file that has same name as `addressbook.json` but incorrect format.
+        - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
+        - The application should automatically detect this, and display an empty address book.
 
    2. **Saving Data:**
 
-        - The corrupted `addressbook.json` will be replaced with a correctly formatted file only after a command that modifies the data is executed.
+        - The corrupted `addressbook.json` will be replaced with a correctly formatted `addressbook.json` only after a valid command is executed.
+        - If no valid command is executed, the application maintains the corrupted `addressbook.json`.
 
 ### Matching Sellers to a Buyer
 
