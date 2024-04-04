@@ -13,6 +13,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
+
 [-> LogicManager : execute(addBuyer n/James \n\
 p/98765432 e/james@gmail.com \n\
 budget/20000 type/HDB)
@@ -72,3 +73,4 @@ deactivate AddBuyerCommand
 [<-- LogicManager : commandResult
 deactivate LogicManager
 @enduml
+

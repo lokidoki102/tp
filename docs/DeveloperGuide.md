@@ -234,7 +234,7 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
 3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
 4. The argument which contains a `Buyer` will then be parsed to `parse()` in `AddBuyerCommandParser`.
 6. If all the arguments for a `Buyer` are valid, it will then be parsed to the `AddBuyerCommand`, where a constructor will be created.
-7. At the `AddBuyerCommand`, it will check whether there is duplicate `Seller` or `Buyer` in `Person`, `Seller` and `Buyer` cannot be the same `Person`. 
+7. At the `AddBuyerCommand`, it will check whether there is duplicate `Seller` or `Buyer` in `Person`, `Seller` and `Buyer` cannot be the same `Person`.
 8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Buyer` object which contains the `Buyer` details. This object will then be used to update the `Model` through `addPerson()` method of model.
 
 **Note:**
@@ -276,7 +276,7 @@ The following sequence diagram shows how an `view` operation goes through the `L
 
 **Note:**
 - The `Index` should be the index of the displayed person list.
-- 
+
 #### Design Considerations
 **Aspect: How `view` executes:**
 
@@ -874,12 +874,12 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1`<br>
-       Expected: Details of the first contact from the displayed list is displayed at the right side of the panel 
-       with the displayed person list at the left side of the panel. Name of the selected person shown in the 
-       status message. 
+       Expected: Details of the first contact from the displayed list is displayed at the right side of the panel
+        with the displayed person list at the left side of the panel. Name of the selected person shown in the
+        status message.
 
     1. Test case: `view 0`<br>
-       Expected: No person details is displayed. Error details shown in the status message. 
+       Expected: No person details is displayed. Error details shown in the status message.
 
     1. Other invalid view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
