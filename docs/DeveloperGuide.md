@@ -268,9 +268,9 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 #### Example Usage Scenario:
 
-**Step 1:** The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+**Step 1:** The user launches the application for the first time. EstateEase will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
 
-**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the `AddressBook`.
+**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the EstateEase.
 
 **Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
 
