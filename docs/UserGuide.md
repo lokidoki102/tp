@@ -163,6 +163,15 @@ Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [stre
 > This person already exists in EstateEase
 > ```
 
+**Example 3**
+> **Case**: Duplicate house.
+>
+> **Input**: `addSeller n/John Kokomelon p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`
+>
+> **Output**:
+> ```
+> This house already exists in EstateEase
+> ```
 
 ### View a person detail : `view INDEX`
 
@@ -348,7 +357,7 @@ EstateEase data are saved automatically as a JSON file `[JAR file location]/data
 
 **Caution:**
 If your changes to the data file makes its format invalid, EstateEase will override the existing data file with an empty data file in the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause EstateEase to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 
