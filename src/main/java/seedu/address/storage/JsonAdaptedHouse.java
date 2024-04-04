@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,6 +22,7 @@ import seedu.address.model.house.UnitNumber;
  */
 public class JsonAdaptedHouse {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "House's %s field is missing!";
+    private static final Logger LOGGER = Logger.getLogger(JsonAdaptedHouse.class.getName());
     private String housingType;
     private String block;
     private String level;
@@ -39,6 +42,7 @@ public class JsonAdaptedHouse {
                             @JsonProperty("street") String street,
                             @JsonProperty("unitNumber") String unitNumber,
                             @JsonProperty("price") String price) {
+        assert housingType != null : "housingType is required";
         this.housingType = housingType;
         this.block = block;
         this.level = level;
@@ -52,6 +56,7 @@ public class JsonAdaptedHouse {
      * Converts a given {@code House} into this class for Jackson use.
      */
     public JsonAdaptedHouse(House source) {
+        LOGGER.info("Converting House to JsonAdaptedHouse");
         extractHouseDetails(source);
         this.postalCode = source.getPostalCode().value;
         this.street = source.getStreet().value;
@@ -60,6 +65,7 @@ public class JsonAdaptedHouse {
     }
 
     private void extractHouseDetails(House source) {
+        assert source != null : "source house is required!";
         if (source instanceof Condominium) {
             extractCondominiumDetails((Condominium) source);
         } else if (source instanceof Hdb) {
@@ -70,6 +76,7 @@ public class JsonAdaptedHouse {
     }
 
     private void extractCondominiumDetails(Condominium condominium) {
+        assert condominium != null : "Condominium is required!";
         if (condominium.getBlock() != null) {
             this.block = condominium.getBlock().value;
         } else {
@@ -84,6 +91,7 @@ public class JsonAdaptedHouse {
     }
 
     private void extractHdbDetails(Hdb hdb) {
+        assert hdb != null : "Hdb is required!";
         if (hdb.getBlock() != null) {
             this.block = hdb.getBlock().value;
         } else {
@@ -109,6 +117,7 @@ public class JsonAdaptedHouse {
      * @throws IllegalValueException if there were any data constraints violated in the adapted house.
      */
     public House toModelType() throws IllegalValueException {
+        LOGGER.info("Converting JsonAdaptedHouse to House model type");
         if (postalCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PostalCode.class.getSimpleName()));
@@ -167,6 +176,7 @@ public class JsonAdaptedHouse {
         case "landed":
             return new Landed(modelUnitNumber, modelPostalCode, modelStreet, modelPrice);
         default:
+            LOGGER.severe("Unknown housing type in JsonAdaptedHouse");
             throw new IllegalValueException("Unknown House Type");
         }
     }

@@ -3,7 +3,16 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "homework": "CS2103 Assignment",
+    "houses" : [ {
+      "housingType" : "Condominium",
+      "block" : "N/A",
+      "level" : "02",
+      "postalCode" : "578578",
+      "street" : "Clementi Ave 2",
+      "unitNumber" : "25",
+      "price" : "99999"
+    } ]
   } ],
   "buyers" : [ {
     "name" : "Ben Yolo",
