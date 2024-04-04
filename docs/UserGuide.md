@@ -480,11 +480,21 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* 
+##### Successful Execution
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+**Example 1**
+
+> **Case**: Find people named John.
+>
+> **Input**: `find John`
+>
+> **Output**:
+> ```3 persons listed!```
+
+Here's an example of how it looks like
+
+![result for 'find John'](images/ui-screenshots/find-success.png)
 
 ### Deleting a person : `delete`
 
