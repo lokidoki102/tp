@@ -389,7 +389,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
+2. When executing commands that require `INDEX`, using a non-positive value and a positive value, but out of bound, will return different error message. (E.g. delete -99 and delete 999999 shows different error messages).
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
