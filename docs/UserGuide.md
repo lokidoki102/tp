@@ -565,7 +565,6 @@ Action     | Format, Examples
 **Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`editSeller 1 n/James Lee e/jameslee@example.com`
 **Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`<br> e.g.,`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
 **List**          | `list`
-**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
 **Clear**         | `clear`
