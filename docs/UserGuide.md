@@ -30,7 +30,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney` : Adds a seller named `John Doe` to the Address Book.
+   * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` : Adds a seller named `John Doe` with a `House` to EstateEase.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    
@@ -89,12 +89,59 @@ Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [stre
 - A `Seller` cannot have the same name as a `Buyer`, because a `Seller` cannot be a `Buyer`, they must be unique.
 </box>
 
-Examples:
-* `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`
-  ![addSeller](images/ui-screenshots/addSeller-success.png)
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Add seller with name, phone, email, housing type of `Hdb`, street, block, level, unit number, postal code and housing price.
+>
+> **Input**: `addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`
+>
+> **Output**:
+> ```
+> New seller added= John Doe; Phone= 98765432; Email= johnd@example.com
+> ```
+*Example 1 will be presented in EstateEase as follows:*
+![addSeller](images/ui-screenshots/addSeller-success.png)
+
+**Example 2**
+
+> **Case**: Add seller with name, phone, email, housing type of `Landed`, unit number, postal code and housing price.
+>
+> **Input**: `addSeller n/John Koe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+>
+> **Output**:
+> ```
+> New seller added= John Koe; Phone= 98765432; Email= johnd@example.com
+> ```
+
+**Other possible examples**:
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/10000`
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
-* `addSeller n/John Doe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+
+##### Failed Execution
+**Example 1**
+
+> **Case**: Missing compulsory details.
+>
+> **Input**: `addSeller`
+>
+> **Output**:
+> ```
+> Invalid command format!
+> addSeller: Adds a seller to EstateEase. Parameters: n/NAME p/PHONE e/EMAIL type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT NUMBER postal/POSTAL CODE price/PRICE
+> Example: addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999
+> ```
+
+**Example 2**
+> **Case**: Duplicate seller (seller and buyer cannot be same name).
+>
+> **Input**: `addSeller n/John Koe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+>
+> **Output**:
+> ```
+> This person already exists in EstateEase
+> ```
 
 ### Editing seller details : `editSeller`
 
@@ -285,7 +332,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Seller**    | `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [street/STREET] [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`<br> e.g.,`addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`
+**Add Seller**    | `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [street/STREET] [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`<br> e.g.,`addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`
 **Clear**         | `clear`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
 **Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`editSeller 1 n/James Lee e/jameslee@example.com`
