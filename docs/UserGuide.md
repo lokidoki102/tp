@@ -108,14 +108,81 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 * Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …
 * The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
+* The new `name` value of the seller should not have a duplicate in EstateEase.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 </box>
 
-Examples:
-*  `editSeller 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person,
-   that is also a seller, to be `91234567` and `johndoe@example.com` respectively.
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Edit a seller's phone number and email.
+>
+> **Input**: `editSeller 1 p/91234567 e/johndoe@example.com`
+>
+> **Output**:
+> ```
+> Edited Person(Seller): Bavid Li; Phone= 91234567; Email= johndoe@example.com
+> ```
+
+**Example 2**
+
+> **Case**: Edit a seller name (no duplicate).
+>
+> **Input**: `editSeller 1 n/David Newman`
+>
+> **Output**:
+> ```
+> Edited Person(Seller): David Newman; Phone= 91234567; Email= johndoe@example.com
+> ```
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Edit a seller's name to an existing person in EstateEase.
+>
+> **Input**: `editSeller 3 n/David Newman`
+>
+> **Output**:
+> ```
+> This person already exists in the address book.
+> ```
+
+**Example 2**
+
+> **Case**: Edit a `buyer` while using `editSeller` command.
+>
+> **Input**: `editSeller 2 n/John Doe`
+>
+> **Output**:
+> ```
+> The person you are trying to edit is not a seller.
+> ```
+
+**Example 3**
+
+> **Case**: Edit a seller without any parameters.
+>
+> **Input**: `editSeller 3`
+>
+> **Output**:
+> ```
+> At least one field to edit must be provided.
+> ```
+
+**Example 4**
+
+> **Case**: Edit a seller with invalid `INDEX`.
+>
+> **Input**: `editSeller 9999999 n/Bob Freeman`
+>
+> **Output**:
+> ```
+> The person index provided is invalid.
+> ```
 
 ### Editing buyer details : `editBuyer`
 
@@ -132,9 +199,53 @@ Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budge
 </box>
 
 Examples:
-* `editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000` edits the phone number, email,
-  preferred housing type, and budget of the 1st person, that is also a buyer, to be `88888888`, `buyer@example.com`,
-  `Landed`, and `5000000` respectively.
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Edit a buyer's phone number, email, preferred housing type, and budget.
+>
+> **Input**: `editBuyer 1 p/91234567 e/johndoe@example.com type/Landed budget/15000000`
+>
+> **Output**:
+> ```
+> Edited Person(Buyer): Alex Yeoh; Phone= 91234567; Email= johndoe@example.com; Preferred Housing Type= Landed; Budget= 15000000
+> ```
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Edit a buyer's budget to a non-positive number.
+>
+> **Input**: `editBuyer 1 budget/-200000`
+>
+> **Output**:
+> ```
+> Budget should be a positive number.
+> ```
+
+**Example 2**
+
+> **Case**: Edit a `seller` while using `editBuyer` command.
+>
+> **Input**: `editBuyer 2 n/John Buyer`
+>
+> **Output**:
+> ```
+> The person you are trying to edit is not a buyer..
+> ```
+
+**Example 3**
+
+> **Case**: Edit a buyer's preferred housing type that's not valid.
+>
+> **Input**: `editBuyer 1 type/Bungalow`
+>
+> **Output**:
+> ```
+> HousingType should only be Landed, Hdb or Condominium.
+> ```
 
 ### Adding a house: `addHouse`
 
