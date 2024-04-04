@@ -33,7 +33,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
    * `addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney` : Adds a seller named `John Doe` to EstateEase.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
-   
+
    * `matchBuyer Alice Lim` : Display Seller details with House that match the Budget and HousingType of the Buyer named `Alice Lim` in EstateEase.
 
    * `clear` : Deletes all contacts.
@@ -104,7 +104,7 @@ Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [stre
 
 <box type="tip" seamless>
 
-**Note:** 
+**Note:**
 - Adding a `Seller` will add a `House` to his/her list of houses, so that `Seller` and `Buyer` can be matched immediately if their preference matched.
 - A `Seller` cannot have the same name as a `Buyer`, because a `Seller` cannot be a `Buyer`, they must be unique.
 </box>
