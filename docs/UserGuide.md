@@ -203,7 +203,8 @@ Format: `addHouse [n/NAME] [p/PHONE_NUMBER] [blk/BLOCK] [level/LEVEL] [unitNo/UN
 >
 > **Input**: `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/10000`
 >
-> **Output**: `New house added!`
+> **Output**:
+> ```New house added!```
 
 **Example 2**
 
@@ -211,7 +212,8 @@ Format: `addHouse [n/NAME] [p/PHONE_NUMBER] [blk/BLOCK] [level/LEVEL] [unitNo/UN
 >
 > **Input**: `addHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 >
-> **Output**: `New house added!`
+> **Output**:
+> ```New house added!```
 >
 > **Remarks**: Condominiums with no blocks are allowed to either have or exclude the blk/ aspect of the command. If included when the Condominium has no block, the value must be N/A.
 
@@ -221,7 +223,8 @@ Format: `addHouse [n/NAME] [p/PHONE_NUMBER] [blk/BLOCK] [level/LEVEL] [unitNo/UN
 >
 > **Input**: `addHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
 >
-> **Output**: `New house added!`
+> **Output**:
+> ```New house added!```
 > 
 > **Remarks**: Landed must not have blk or level as arguments.
 
