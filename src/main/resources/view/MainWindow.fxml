@@ -11,12 +11,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
-<?import java.lang.String?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="EstateEase" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/real_estate_icon2.png" />
   </icons>
   <scene>
     <Scene>
@@ -26,7 +24,7 @@
         <URL value="@CustomisedTheme.css"/>
       </stylesheets>
 
-      <VBox>
+      <VBox styleClass="result-display-pane">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -49,7 +47,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane fx:id="contentBoxSplitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+        <SplitPane fx:id="contentBoxSplitPane" dividerPositions="0.66, 0.33" VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" styleClass="pane-with-border"
                 VBox.vgrow="ALWAYS">
             <padding>
@@ -60,12 +58,8 @@
           </VBox>
           <VBox fx:id="personDetails" styleClass="pane-with-border"
                 VBox.vgrow="ALWAYS">
-<!--            <styleClass>-->
-<!--              <String fx:value="test-2"/>-->
-
-<!--            </styleClass>-->
             <padding>
-              <Insets top="10" right="10" bottom="10" left="10"/>
+              <Insets top="10" right="20" bottom="10" left="20"/>
             </padding>
             <StackPane fx:id="personDetailsPanelPlaceholder"
                        VBox.vgrow="ALWAYS"/>

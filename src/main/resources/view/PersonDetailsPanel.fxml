@@ -7,32 +7,70 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox id="personDetailsPane" fx:id="personDetailsPane"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       styleClass="details-card"
       alignment="CENTER_LEFT" minHeight="105" HBox.hgrow="ALWAYS">
     <padding>
-        <Insets top="5" right="5" bottom="5" left="15"/>
+        <Insets top="5" right="15" bottom="5" left="15"/>
     </padding>
     <VBox>
-        <HBox spacing="5" alignment="CENTER_LEFT" >
-            <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <HBox alignment="CENTER_LEFT" >
+            <Label fx:id="name" styleClass="big-label-details" text="\$first" />
+            <padding>
+                <Insets top="15" left="15" bottom="5"/>
+            </padding>
         </HBox>
         <FlowPane fx:id="tags"/>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
-        <Label fx:id="housingType" styleClass="cell_small_label" text="\$housingType"/>
-        <Label fx:id="budget" styleClass="cell_small_label" text="\$budget"/>
+        <Label fx:id="phone" styleClass="small-label-details" text="\$phone">
+            <padding>
+                <Insets top="5" left="15" bottom="5"/>
+            </padding>
+            <graphic>
+                <ImageView fitWidth="16" fitHeight="16">
+                    <Image url="@/images/phone_icon.png"/>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="email" styleClass="small-label-details" text="\$email">
+            <padding>
+                <Insets top="5" left="15" bottom="5"/>
+            </padding>
+            <graphic>
+                <ImageView fitWidth="16" fitHeight="16">
+                    <Image url="@/images/email_icon.png"/>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="housingType" styleClass="small-label-details" text="\$housingType">
+            <padding>
+                <Insets top="5" left="15" bottom="5"/>
+            </padding>
+            <graphic>
+                <ImageView fitWidth="16" fitHeight="16">
+                    <Image url="@/images/house_icon.png"/>
+                </ImageView>
+            </graphic>
+        </Label>
+        <Label fx:id="budget" styleClass="small-label-details" text="\$budget">
+            <padding>
+                <Insets top="5" left="15" bottom="5"/>
+            </padding>
+            <graphic>
+                <ImageView fitWidth="16" fitHeight="16">
+                    <Image url="@/images/budget_icon.png"/>
+                </ImageView>
+            </graphic>
+        </Label>
     </VBox>
-    <padding>
-        <Insets top="5" right="5" bottom="5" left="15"/>
-    </padding>
-    <VBox fx:id="houseList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+    <VBox fx:id="houseList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
+            <Insets left="15" bottom="10"/>
         </padding>
-        <StackPane fx:id="houseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        <StackPane fx:id="houseListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
     </VBox>
 </VBox>
 
