@@ -932,7 +932,7 @@ testers are expected to do more *exploratory* testing.
 
    1. **Loading Data:**
 
-        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it. 
+        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
         - The application should automatically populate the address book with sample data, displaying buyers and sellers, where sellers are associated with houses.
 
    2. **Saving Data:**
@@ -974,7 +974,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** Message indicating invalid format. The specified buyer was not found.
 
 3. **Invalid buyer**
-   
+
    3. **Test case:** `matchBuyer Bob Lim`
       **Expected:** Message indicating invalid person. The specified person is not a buyer.
 
@@ -1000,11 +1000,11 @@ testers are expected to do more *exploratory* testing.
     Expected: An error message indicating that "The person you are trying to edit is not a seller."
 3. **Successful edit**<br>
    **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson". 
+    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
     The updated details of the edited seller will also be shown in the response box.
 4. **Invalid INDEX**<br>
    **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
-    Expected: An error messsage indicating that the command has invalid format. 
+    Expected: An error messsage indicating that the command has invalid format.
     The error message also indicates that the `INDEX` must be a positive number.
 
 ### Editing Buyer Details
