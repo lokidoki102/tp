@@ -43,9 +43,7 @@ public class Messages {
                 .append("; Phone= ")
                 .append(person.getPhone())
                 .append("; Email= ")
-                .append(person.getEmail())
-                .append("; Tags= ");
-        person.getTags().forEach(tag -> builder.append("[").append(tag.tagName).append("] "));
+                .append(person.getEmail());
         if (person instanceof Buyer) {
             Buyer buyer = (Buyer) person;
             builder.append("; Preferred Housing Type= ")
