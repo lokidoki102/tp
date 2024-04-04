@@ -13,6 +13,7 @@ import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.FullNameEqualsKeywordPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Matches a specific buyer's budget and housing type to sellers' house price and
@@ -24,9 +25,9 @@ public class MatchBuyerCommand extends Command {
     public static final String COMMAND_WORD = "matchBuyer";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Matches a specific buyer's budget and housing type "
-            + "to sellers' house price and housing type when given the buyer's name.\n"
-            + "Parameters: full name\n"
-            + "Example: " + COMMAND_WORD + " alice chan";
+            + "to sellers' house price and housing type when given the buyer's full name (case-insensitive).\n"
+            + "Parameters: FULL_NAME\n"
+            + "Example: " + COMMAND_WORD + " Alice Lim";
 
     private final FullNameEqualsKeywordPredicate fullNamePredicate;
 
@@ -41,7 +42,11 @@ public class MatchBuyerCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(Messages.MESSAGE_BUYER_NOT_FOUND);
         } else {
-            Buyer targetBuyer = (Buyer) model.getFilteredPersonList().get(0);
+            Person person = model.getFilteredPersonList().get(0);
+            if (!(person instanceof Buyer)) {
+                return new CommandResult(Messages.MESSAGE_NOT_A_BUYER);
+            }
+            Buyer targetBuyer = (Buyer) person;
             Budget budget = targetBuyer.getBudget();
             HousingType housingType = targetBuyer.getPreferredHousingType();
             PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);

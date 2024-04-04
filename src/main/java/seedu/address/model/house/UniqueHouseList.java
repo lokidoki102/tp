@@ -61,8 +61,6 @@ public class UniqueHouseList implements Iterable<House> {
             throw new DuplicateHouseException();
         }
         internalList.add(toAdd);
-
-        System.out.println(internalList.size());
     }
 
     /* WE KEEP THIS HERE IN CASE GOT EDITHOUSE YA
