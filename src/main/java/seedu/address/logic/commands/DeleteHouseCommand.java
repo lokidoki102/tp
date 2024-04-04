@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -96,6 +97,7 @@ public class DeleteHouseCommand extends Command {
             throw new CommandException(MESSAGE_WRONG_HOUSE);
         }
 
+        model.setState(State.PERSON_LIST);
         model.deleteHouse(houseToDelete, sellerToDeleteFrom);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

@@ -61,11 +61,11 @@ public class PersonCard extends UiPart<Region> {
                     if ("Seller".equals(tag.tagName)) {
                         tagLabel.getStyleClass().add("tag-seller");
                         // TODO(UI): Change background colour value for buyer and seller
-                        cardPane.setStyle("-fx-background-color: #511bb5;");
+                        cardPane.setStyle("-fx-background-color: #75643D;");
                     } else if ("Buyer".equals(tag.tagName)) {
                         tagLabel.getStyleClass().add("tag-buyer");
                         // TODO(UI): Change background colour value for buyer and seller
-                        cardPane.setStyle("-fx-background-color: #2b5d79;");
+                        cardPane.setStyle("-fx-background-color: #3D5175;");
                     }
                     tags.getChildren().add(tagLabel);
                 });
