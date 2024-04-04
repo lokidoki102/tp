@@ -72,7 +72,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/ui-screenshots/helpMessage.png)
 
 Format: `help`
 
