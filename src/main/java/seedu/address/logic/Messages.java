@@ -21,6 +21,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer was not found.";
+    public static final String MESSAGE_NOT_A_BUYER = "The specified person is not a buyer.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

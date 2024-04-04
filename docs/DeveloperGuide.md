@@ -197,7 +197,7 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 #### Implementation
 
-1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the buyer to be specified in the command input. Upon execution, the command retrieves the budget and preferred housing type of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the `Buyer` to be specified in the command input. Upon execution, the command retrieves the `Budget` and `HousingType` of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
 
 2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
 
@@ -961,12 +961,22 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `matchBuyer Alice Lee`
       **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
 
-2. **Invalid formats**
+2. **Invalid name format**
 
    2. **Test case:** `matchBuyer Alice`
       **Expected:** Message indicating invalid format. The specified buyer was not found.
 
    2. **Test case:** `matchBuyer Lee`
       **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+3. **Invalid buyer**
+   
+   3. **Test case:** `matchBuyer Bob Lim`
+      **Expected:** Message indicating invalid person. The specified person is not a buyer.
+
+4. **Buyer does not exist**
+
+    4. **Test case:** `matchBuyer Ben Chan`
+       **Expected:** Message indicating invalid person. The specified buyer was not found.
 
 ### Matching Sellers to a Buyer
