@@ -95,6 +95,46 @@ Examples:
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
 
+### Editing seller details : `editSeller`
+
+Edits an existing `Seller` in EstateEase.
+
+Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
+
+<box type="tip" seamless>
+
+**Note:**
+* Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …
+* The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+</box>
+
+Examples:
+*  `editSeller 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person,
+   that is also a seller, to be `91234567` and `johndoe@example.com` respectively.
+
+### Editing buyer details : `editBuyer`
+
+Edits an existing `Buyer` in EstateEase.
+
+Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`
+
+<box type="tip" seamless>
+
+**Note:**
+* The constraints are very similar to `editSeller` command, except the specified `INDEX` must be pointing to a `Buyer`
+  and not a `Seller`.
+
+</box>
+
+Examples:
+* `editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000` edits the phone number, email,
+  preferred housing type, and budget of the 1st person, that is also a buyer, to be `88888888`, `buyer@example.com`,
+  `Landed`, and `5000000` respectively.
+
 ### Adding a house: `addHouse`
 
 Adds a house to a specific seller.
@@ -153,23 +193,6 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -256,7 +279,8 @@ Action     | Format, Examples
 **Add Seller**    | `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [street/STREET]  [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE] [t/TAG]…​`<br> e.g.,`addSeller n/John Doe p/98765432 e/johnd@example.com type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000 t/friends t/owesMoney`
 **Clear**         | `clear`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
-**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`editSeller 1 n/James Lee e/jameslee@example.com`
+**Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`<br> e.g.,`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
