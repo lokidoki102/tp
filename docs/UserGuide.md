@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a `Seller` to the address book.
 
-Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [street/STREET]  [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`
+Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [street/STREET] [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`
 
 <box type="tip" seamless>
 

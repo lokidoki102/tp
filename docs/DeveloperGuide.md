@@ -155,7 +155,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Add seller feature
+### Add seller feature
 
 #### Purpose
 This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
