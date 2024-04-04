@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,8 +21,8 @@ import seedu.address.model.house.UnitNumber;
  * Jackson-friendly version of {@link House}.
  */
 public class JsonAdaptedHouse {
-    private static final Logger LOGGER = Logger.getLogger(JsonAdaptedHouse.class.getName());
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "House's %s field is missing!";
+    private static final Logger LOGGER = Logger.getLogger(JsonAdaptedHouse.class.getName());
     private String housingType;
     private String block;
     private String level;
