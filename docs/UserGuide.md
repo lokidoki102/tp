@@ -72,7 +72,7 @@ EstateEase is a **desktop app for managing contacts, optimized for use via a  Li
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/ui-screenshots/helpMessage.png)
 
 Format: `help`
 
@@ -209,14 +209,81 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 * Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …
 * The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
+* The new `name` value of the seller should not have a duplicate in EstateEase.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 </box>
 
-Examples:
-*  `editSeller 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person,
-   that is also a seller, to be `91234567` and `johndoe@example.com` respectively.
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Edit a seller's phone number and email.
+>
+> **Input**: `editSeller 1 p/91234567 e/johndoe@example.com`
+>
+> **Output**:
+> ```
+> Edited Person(Seller): Bavid Li; Phone= 91234567; Email= johndoe@example.com
+> ```
+
+**Example 2**
+
+> **Case**: Edit a seller name (no duplicate).
+>
+> **Input**: `editSeller 1 n/David Newman`
+>
+> **Output**:
+> ```
+> Edited Person(Seller): David Newman; Phone= 91234567; Email= johndoe@example.com
+> ```
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Edit a seller's name to an existing person in EstateEase.
+>
+> **Input**: `editSeller 3 n/David Newman`
+>
+> **Output**:
+> ```
+> This person already exists in the address book.
+> ```
+
+**Example 2**
+
+> **Case**: Edit a `buyer` while using `editSeller` command.
+>
+> **Input**: `editSeller 2 n/John Doe`
+>
+> **Output**:
+> ```
+> The person you are trying to edit is not a seller.
+> ```
+
+**Example 3**
+
+> **Case**: Edit a seller without any parameters.
+>
+> **Input**: `editSeller 3`
+>
+> **Output**:
+> ```
+> At least one field to edit must be provided.
+> ```
+
+**Example 4**
+
+> **Case**: Edit a seller with invalid `INDEX`.
+>
+> **Input**: `editSeller 9999999 n/Bob Freeman`
+>
+> **Output**:
+> ```
+> The person index provided is invalid.
+> ```
 
 ### Editing buyer details : `editBuyer`
 
@@ -233,9 +300,53 @@ Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budge
 </box>
 
 Examples:
-* `editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000` edits the phone number, email,
-  preferred housing type, and budget of the 1st person, that is also a buyer, to be `88888888`, `buyer@example.com`,
-  `Landed`, and `5000000` respectively.
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Edit a buyer's phone number, email, preferred housing type, and budget.
+>
+> **Input**: `editBuyer 1 p/91234567 e/johndoe@example.com type/Landed budget/15000000`
+>
+> **Output**:
+> ```
+> Edited Person(Buyer): Alex Yeoh; Phone= 91234567; Email= johndoe@example.com; Preferred Housing Type= Landed; Budget= 15000000
+> ```
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Edit a buyer's budget to a non-positive number.
+>
+> **Input**: `editBuyer 1 budget/-200000`
+>
+> **Output**:
+> ```
+> Budget should be a positive number.
+> ```
+
+**Example 2**
+
+> **Case**: Edit a `seller` while using `editBuyer` command.
+>
+> **Input**: `editBuyer 2 n/John Buyer`
+>
+> **Output**:
+> ```
+> The person you are trying to edit is not a buyer..
+> ```
+
+**Example 3**
+
+> **Case**: Edit a buyer's preferred housing type that's not valid.
+>
+> **Input**: `editBuyer 1 type/Bungalow`
+>
+> **Output**:
+> ```
+> HousingType should only be Landed, Hdb or Condominium.
+> ```
 
 
 ### Adding a house: `addHouse`
@@ -369,11 +480,21 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* 
+##### Successful Execution
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+**Example 1**
+
+> **Case**: Find people named John.
+>
+> **Input**: `find John`
+>
+> **Output**:
+> ```3 persons listed!```
+
+Here's an example of how it looks like
+
+![result for 'find John'](images/ui-screenshots/find-success.png)
 
 ### Deleting a person : `delete`
 
@@ -416,11 +537,6 @@ If your changes to the data file makes its format invalid, EstateEase will overr
 Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -433,7 +549,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
+2. When executing commands that require `INDEX`, using a non-positive value and a positive value, but out of bound, will return different error message. (E.g. delete -99 and delete 999999 shows different error messages).
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -449,7 +565,6 @@ Action     | Format, Examples
 **Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`editSeller 1 n/James Lee e/jameslee@example.com`
 **Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`<br> e.g.,`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
 **List**          | `list`
-**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete**        | `delete INDEX`<br> e.g., `delete 3`
 **Clear**         | `clear`
