@@ -50,40 +50,25 @@ public class HouseCard extends UiPart<Region> {
         this.house = house;
         houseType.setText("House Type: " + house.getHousingType().value);
         postalCode.setText("Postal Code: " + house.getPostalCode().value);
-        //street.setText("Street: " + house.getStreet().value);
-        //unitNumber.setText("Unit Number: " + house.getUnitNumber().value);
         price.setText("Price: " + house.getPrice().value);
-        //block.setVisible(false);
-        //level.setVisible(false);
 
         if (house instanceof Hdb) {
-            //block.setVisible(true);
-            //level.setVisible(true);
             Hdb hdb = (Hdb) house;
             String blockValue = hdb.getBlock().value;
             blockValue = blockValue != null ? blockValue : "";
-            //block.setText("Block: " + blockValue);
-
             String levelValue = hdb.getLevel().value;
             levelValue = levelValue != null ? levelValue : "";
-            //level.setText("Level: " + levelValue);
             String addr = blockValue + " "
                     + hdb.getStreet().value + " "
                     + "#" + levelValue + "-" + hdb.getUnitNumber();
             address.setText(addr);
 
         } else if (house instanceof Condominium) {
-//            block.setVisible(true);
-//            level.setVisible(true);
             Condominium condominium = (Condominium) house;
             String blockValue = condominium.getBlock().value;
             blockValue = blockValue != null ? blockValue : "";
-//            block.setText("Block: " + blockValue);
-
             String levelValue = condominium.getLevel().value;
             levelValue = levelValue != null ? levelValue : "";
-//            level.setText("Level: " + levelValue);
-
             String addr = blockValue + " "
                     + condominium.getStreet().value + " "
                     + "# " + levelValue + " - " + condominium.getUnitNumber();
