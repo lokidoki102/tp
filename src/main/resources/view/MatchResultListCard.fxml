@@ -5,17 +5,21 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.StackPane?>
-<HBox id="matchResultCard" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox fx:id="sellerInfo">
+<HBox id="matchResultCard" fx:id="matchResultCard"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+        HBox.hgrow="ALWAYS"
+        maxHeight="200">
+    <VBox fx:id="sellerInfo" HBox.hgrow="ALWAYS">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
         <StackPane fx:id="sellerInfoPanelPlaceholder" />
     </VBox>
-    <VBox fx:id="houseList" VBox.vgrow="ALWAYS">
+    <VBox fx:id="houseList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
         <StackPane fx:id="houseListPanelPlaceholder" />
     </VBox>
 </HBox>
+
