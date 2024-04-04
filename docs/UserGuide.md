@@ -116,6 +116,8 @@ Examples:
 *  `editSeller 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person,
    that is also a seller, to be `91234567` and `johndoe@example.com` respectively.
 
+![editSeller](images/ui-screenshots/editSeller-success.png)
+
 ### Editing buyer details : `editBuyer`
 
 Edits an existing `Buyer` in EstateEase.
@@ -134,6 +136,8 @@ Examples:
 * `editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000` edits the phone number, email,
   preferred housing type, and budget of the 1st person, that is also a buyer, to be `88888888`, `buyer@example.com`,
   `Landed`, and `5000000` respectively.
+
+![editBuyer](images/ui-screenshots/editBuyer-success.png)
 
 ### Adding a house: `addHouse`
 
