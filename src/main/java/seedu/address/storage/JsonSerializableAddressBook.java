@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.commands.AddHouseCommand.MESSAGE_DUPLICATE_HOUSE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.house.House;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
 /**
@@ -64,28 +65,32 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        List<Person> combinedList = new ArrayList<>();
 
         for (JsonAdaptedSeller jsonAdaptedSeller : sellers) {
             Seller seller = jsonAdaptedSeller.toModelType();
-            combinedList.add(seller);
-            for (House h: seller.getHouses()) {
-                addressBook.addHouseToHouses(h);
+            for (House house : seller.getHouses()) {
+                if (addressBook.hasHouse(house)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_HOUSE);
+                }
+                // After checking that it is not a duplicate, then it is added into the list of houses
+                addressBook.addHouseToHouses(house);
+            }
+            // After all houses are checked and added, add the seller
+            if (!addressBook.hasPerson(seller)) {
+                addressBook.addPerson(seller);
+            } else {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
         }
 
         for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
             Buyer buyer = jsonAdaptedBuyer.toModelType();
-            combinedList.add(buyer);
-        }
-
-        for (Person person : combinedList) {
-            if (addressBook.hasPerson(person)) {
+            if (!addressBook.hasPerson(buyer)) {
+                addressBook.addPerson(buyer);
+            } else {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
         }
-
         return addressBook;
     }
 }

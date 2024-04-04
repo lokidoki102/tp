@@ -30,9 +30,10 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
                              @JsonProperty("houses") List<JsonAdaptedHouse> houses,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, tags);
-        if (houses != null) {
-            this.houses.addAll(houses);
+        if (houses == null) {
+            throw new IllegalArgumentException("The 'houses' field is missing!");
         }
+        this.houses.addAll(houses);
     }
 
     /**
