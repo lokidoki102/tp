@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Label?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label styleClass="cell_big_label" text="Houses"/>
-    <ListView fx:id="houseListView" VBox.vgrow="ALWAYS" />
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      HBox.hgrow="ALWAYS">
+    <Label styleClass="medium-label-details" text="Houses">
+        <padding>
+            <Insets bottom="15"/>
+        </padding>
+    </Label>
+    <ListView fx:id="houseListView" HBox.hgrow="ALWAYS"/>
 </VBox>
