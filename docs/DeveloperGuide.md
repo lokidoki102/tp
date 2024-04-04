@@ -242,7 +242,7 @@ parameters that is not available to `Seller` object. Hence, the reason why the e
 commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also
 needed as some of the commands uses the `name` to execute the command.
 
-### Edit Seller
+### Editing Seller Details
 
 #### Purpose
 The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
@@ -982,3 +982,47 @@ testers are expected to do more *exploratory* testing.
 
     4. **Test case:** `matchBuyer Ben Chan`
        **Expected:** Message indicating invalid person. The specified buyer was not found.
+
+### Editing Seller Details
+
+**Prerequisites:**
+- List all persons using the `list` command.
+- There are no sellers or buyer named "Jessi Oliverson".
+- There is a seller/buyer named "John Doe".
+- There is a seller named "aaaaaaa" and this seller is the first person in the list.
+- There is a buyer named "aaaaaaab" and this buyer is the second person in the list.
+
+1. **Duplicate name**<br>
+   **Test case:** `editSeller 1 n/John Doe`<br>
+    Expected: An error message indicating that "This person already exists in the address book."
+2. **Wrong type**<br>
+   **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
+    Expected: An error message indicating that "The person you are trying to edit is not a seller."
+3. **Successful edit**<br>
+   **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
+    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson". 
+    The updated details of the edited seller will also be shown in the response box.
+4. **Invalid INDEX**<br>
+   **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
+    Expected: An error messsage indicating that the command has invalid format. 
+    The error message also indicates that the `INDEX` must be a positive number.
+
+### Editing Buyer Details
+
+**Prerequisites:**
+- List all persons using the `list` command.
+- There is a buyer named "aaaaaaa" and this buyer is the first person in the list.
+
+1. **Invalid budget value**<br>
+   **Test case:** `editBuyer 1 budget/-1`<br>
+    Expected: An error message indicating that "Budget should be a positive number."
+2. **Invalid preferred housing type**<br>
+   **Test case:** `editBuyer 1 type/bungalow`<br>
+   Expected: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."
+
+<box type="info" seamless>
+
+**Note:** The test cases for duplicate names, wrong type, successful edit, and invalid index are
+similar to the test cases found in `Editing Seller Details`.
+
+</box>
