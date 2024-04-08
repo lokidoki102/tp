@@ -248,11 +248,11 @@ public class ModelManager implements Model {
                 for (House house : houses) {
                     seller.addHouse(house);
                 }
+
                 temp.add(seller);
                 filteredSellers = FXCollections.observableArrayList(temp);
                 return true;
             }
-
             return false;
         });
     }

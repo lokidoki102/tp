@@ -24,7 +24,7 @@
             </padding>
         </Label>
     </HBox>
-    <Label fx:id="address" styleClass="small-label" text="\$street">
+    <Label fx:id="address" styleClass="small-label" text="\$address">
         <padding>
             <Insets top="5"  bottom="5"/>
         </padding>
