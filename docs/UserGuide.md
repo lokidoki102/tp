@@ -90,9 +90,9 @@ Format: `addBuyer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [budget/BUDGET] [type/HOUS
   </box>
 
 Examples:
-* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/HDB`
+* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Hdb`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
-* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium0`
+* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Landed`
 
 
