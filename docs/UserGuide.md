@@ -445,19 +445,56 @@ Examples: Largely similar to addHouse commands, except the addHouse command word
 
 ### Matching Sellers to a Buyer: `matchBuyer`
 
-Shows the list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
+Shows a list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
 
 Format: `matchBuyer FULL_NAME`
 
 <box type="tip" seamless>
 
-**Tip:** A full name of the buyer must be used in the command.
+**Tip:** Ensure you use the buyer's full name when entering the command.
+
+**Note:** This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
 
 </box>
 
-Examples:
-* `matchBuyer Alice Lim`
-  ![matchBuyer](images/ui-screenshots/matchBuyer-success.png)
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Matching sellers to a buyer with the full name "John Doe".
+>
+> **Input**: `matchBuyer John Doe`
+>
+> **Output**:
+> ```
+> 1 house(s) listed!
+> ```
+*Example 1 will be presented in EstateEase as follows:*
+![matchBuyer](images/ui-screenshots/matchBuyer-success.png)
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Buyer with the specified name not found.
+>
+> **Input**: `matchBuyer Alice`
+>
+> **Output**:
+> ```
+> The specified buyer was not found.
+> ```
+
+**Example 2**
+
+> **Case**:  Buyer using the seller's name.
+>
+> **Input**: `matchBuyer Alice Lim`
+>
+> **Output**:
+> ```
+> The specified person is not a buyer.
+> ```
 
 ### Listing all persons : `list`
 

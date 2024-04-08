@@ -97,8 +97,9 @@ public class DeleteHouseCommand extends Command {
             throw new CommandException(MESSAGE_WRONG_HOUSE);
         }
 
-        model.setState(State.PERSON_LIST);
+        model.setState(State.PERSON_DETAILS);
         model.deleteHouse(houseToDelete, sellerToDeleteFrom);
+        model.showPerson(sellerToDeleteFrom);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

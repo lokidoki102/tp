@@ -93,7 +93,8 @@ public class AddHouseCommand extends Command {
 
         try {
             model.addHouse(houseToAdd, sellerToAddTo);
-            model.setState(State.PERSON_LIST);
+            model.setState(State.PERSON_DETAILS);
+            model.showPerson(sellerToAddTo);
         } catch (Exception e) {
             throw new CommandException(MESSAGE_DUPLICATE_HOUSE);
         }

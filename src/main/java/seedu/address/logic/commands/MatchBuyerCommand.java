@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -39,27 +40,42 @@ public class MatchBuyerCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(fullNamePredicate);
+
         if (model.getFilteredPersonList().isEmpty()) {
+            setAndResetState(model);
             return new CommandResult(Messages.MESSAGE_BUYER_NOT_FOUND);
-        } else {
-            Person person = model.getFilteredPersonList().get(0);
-            if (!(person instanceof Buyer)) {
-                return new CommandResult(Messages.MESSAGE_NOT_A_BUYER);
-            }
-            Buyer targetBuyer = (Buyer) person;
-            Budget budget = targetBuyer.getBudget();
-            HousingType housingType = targetBuyer.getPreferredHousingType();
-            PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);
-
-            model.updateFilteredSellerList(predicate);
-
-            ObservableList<House> filteredSellerList = model.getAllFilteredHouseList(predicate);
-            model.setState(State.MATCH_RESULTS);
-            model.showMatchResults(model.getFilteredSellerList());
-
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));
         }
+
+        Person person = model.getFilteredPersonList().get(0);
+
+        if (!(person instanceof Buyer)) {
+            setAndResetState(model);
+            return new CommandResult(Messages.MESSAGE_NOT_A_BUYER);
+        }
+
+        Buyer targetBuyer = (Buyer) person;
+        Budget budget = targetBuyer.getBudget();
+        HousingType housingType = targetBuyer.getPreferredHousingType();
+        PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);
+
+        model.updateFilteredSellerList(predicate);
+
+        ObservableList<House> filteredSellerList = model.getAllFilteredHouseList(predicate);
+
+        model.setState(State.MATCH_RESULTS);
+        model.showMatchResults(model.getFilteredSellerList());
+
+        if (filteredSellerList.isEmpty()) {
+            setAndResetState(model);
+        }
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));
+    }
+
+    private void setAndResetState(Model model) {
+        model.setState(State.PERSON_LIST);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
