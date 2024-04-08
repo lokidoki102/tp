@@ -839,7 +839,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix A: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1000,3 +1000,18 @@ testers are expected to do more *exploratory* testing.
 similar to the test cases found in `Editing Seller Details`.
 
 </box>
+
+## **Appendix B: Proposed enhancements**
+
+### B.1 New Command: matchSeller
+
+#### B.1.1 Motivation
+Real estate agents often need to match sellers with potential buyers efficiently. Currently, our application lacks a feature to facilitate this process. Introducing a matchSeller command would enhance the usability of the application for real estate agents by providing a convenient way to find potential buyers who match their property listings.
+
+#### B.1.2 Implementation
+1. Implement the matchSeller command to filter potential buyers based on seller preferences such as price range and housing type.
+2. Integrate the command into the application's existing command structure for seamless user interaction.
+3. Display the matched buyers and their relevant details in a clear and organized manner for easy reference.
+4. Ensure the command's functionality is efficient and responsive, providing timely results to real estate agents.
+
+
