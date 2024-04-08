@@ -140,4 +140,27 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void isIntegerOverflow() {
+        // EP: integer overflow
+        assertTrue(StringUtil.isIntegerOverflow("2147483648")); // Boundary value
+        assertTrue(StringUtil.isIntegerOverflow("2147483648123"));
+
+
+        // EP: not a number
+        assertFalse(StringUtil.isIntegerOverflow("a"));
+        assertFalse(StringUtil.isIntegerOverflow("asd"));
+        assertFalse(StringUtil.isIntegerOverflow("")); // Boundary value
+        assertFalse(StringUtil.isIntegerOverflow("  "));
+
+        // EP: number + letter
+        assertFalse(StringUtil.isIntegerOverflow("1a"));
+        assertFalse(StringUtil.isIntegerOverflow("2147483648a"));
+        assertFalse(StringUtil.isIntegerOverflow("-1a"));
+        assertFalse(StringUtil.isIntegerOverflow("-0a"));
+
+        // EP: negative
+        assertFalse(StringUtil.isIntegerOverflow("-2147483648"));
+        assertFalse(StringUtil.isIntegerOverflow("-1"));
+    }
 }
