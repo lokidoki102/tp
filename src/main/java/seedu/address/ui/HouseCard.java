@@ -56,21 +56,22 @@ public class HouseCard extends UiPart<Region> {
         if (house instanceof Hdb) {
             Hdb hdb = (Hdb) house;
             String blockValue = hdb.getBlock().value;
-            blockValue = blockValue != null ? blockValue : "";
             String levelValue = hdb.getLevel().value;
-            levelValue = levelValue != null ? levelValue : "";
             addr = blockValue + " "
                     + hdb.getStreet().value + " "
                     + "#" + levelValue + "-" + hdb.getUnitNumber();
         } else if (house instanceof Condominium) {
             Condominium condominium = (Condominium) house;
             String blockValue = condominium.getBlock().value;
-            blockValue = blockValue != null ? blockValue : "";
             String levelValue = condominium.getLevel().value;
-            levelValue = levelValue != null ? levelValue : "";
-            addr = blockValue + " "
-                    + condominium.getStreet().value + " "
-                    + "# " + levelValue + " - " + condominium.getUnitNumber();
+            if (blockValue == null || blockValue.equals("N/A")) {
+                addr = condominium.getStreet().value + " "
+                        + "# " + levelValue + " - " + condominium.getUnitNumber();
+            } else {
+                addr = blockValue + " "
+                        + condominium.getStreet().value + " "
+                        + "# " + levelValue + " - " + condominium.getUnitNumber();
+            }
         }
         address.setText(addr);
 
