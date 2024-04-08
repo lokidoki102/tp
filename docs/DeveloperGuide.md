@@ -839,7 +839,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix A: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1001,20 +1001,45 @@ similar to the test cases found in `Editing Seller Details`.
 
 </box>
 
-### B.2 Add Seller/Buyer command
+## **Appendix B: Proposed enhancements**
+
+### B.1 New Command: matchSeller
+
+#### B.1.1 Motivation
+Real estate agents often need to match sellers with potential buyers efficiently. Currently, our application lacks a feature to facilitate this process. Introducing a matchSeller command would enhance the usability of the application for real estate agents by providing a convenient way to find potential buyers who match their property listings.
+
+#### B.1.2 Implementation
+1. Implement the matchSeller command to filter potential buyers based on seller preferences such as price range and housing type.
+2. Integrate the command into the application's existing command structure for seamless user interaction.
+3. Display the matched buyers and their relevant details in a clear and organized manner for easy reference.
+4. Ensure the command's functionality is efficient and responsive, providing timely results to real estate agents.
+
+### B.2 Limit Price and Budget to 1 Trillion
 
 #### B.2.1 Motivation
+In the current implementation, there is no limit on the price and budget fields, which can lead to unrealistic values being entered. Setting a limit of 1 trillion ensures that prices and budgets remain within a reasonable range, preventing errors and maintaining data integrity.
+
+#### B.2.2 Implementation
+1. Update the Price and Budget classes to enforce a maximum value of 1 trillion.
+2. Implement validation checks in the user interface to prevent users from entering values exceeding the limit.
+3. Provide clear error messages when users attempt to input values beyond the specified limit, guiding them to enter valid data.
+
+This enhancement improves the usability and reliability of the application by ensuring that price and budget inputs are realistic and within acceptable bounds.
+
+### B.3 Add Seller/Buyer command
+
+#### B.3.1 Motivation
 - The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are three main reasons for this approach.
-- Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house. 
+- Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house.
 - Secondly, to distinguish between individuals sharing the same `name`, the user can append numbers to the `name`, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
 - Lastly, if we choose to require both `name` and another unique identifier, such as `email` or `phone`, to distinctly identify a `person`, it would necessitate users repetitively typing both pieces of information for actions like `add House` or `delete House`. This requirement could significantly hinder the user experience, making the process inconvenient.
 
-### B.3 Phone Number Field
+### B.4 Phone Number Field
 
-#### B.3.1 Motivation
-- In the current implementation, the `phone` field accepts more than three digits without specifically limiting the input to the standard eight digits customary for Singaporean phone numbers, despite the application being Singapore-focused. 
+#### B.4.1 Motivation
+- In the current implementation, the `phone` field accepts more than three digits without specifically limiting the input to the standard eight digits customary for Singaporean phone numbers, despite the application being Singapore-focused.
 - This design decision accounts for the potential users living abroad with international `phone` numbers, such as Singaporeans residing overseas who wish to purchase property back home, or foreigners intending to relocate to Singapore who may not yet have a local `phone` number.
 - However, this method has led to confusion, since it permits the entry of invalid `phone` numbers into the system due to the absence of strict validation criteria.
 
-#### B.3.2 Implementation
+#### B.4.2 Implementation
 - To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.

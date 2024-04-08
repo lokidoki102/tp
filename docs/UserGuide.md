@@ -54,10 +54,7 @@
   e.g. in `addBuyer n/NAME`, `NAME` is a parameter which can be used as `addBuyer n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnny@doe.com` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -85,7 +82,8 @@ Format: `addBuyer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [budget/BUDGET] [type/HOUS
 <box type="tip" seamless>
 
 **Note:**
-- `Budget` and `Housing_type` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
+- `BUDGET` and `HOUSING_TYPE` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
+- The `BUDGET` value should not exceed $1 trillion.
 - A `Buyer` cannot have the same name as a `Seller`, because a `Buyer` cannot be a `Seller`, they must be unique.
   </box>
 
@@ -187,7 +185,7 @@ Format: `view INDEX`
 **Note:**
 - Views the details of the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 - `list` followed by `view 2` views the details of the 2nd person in EstateEase.
 - `find Betsy` followed by `view 1` views the details of the 1st person in the results of the `find` command.
 
@@ -208,9 +206,9 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 **Note:**
 * Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-  The index **must be a positive integer** 1, 2, 3, …
+* The `INDEX` **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 * The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
-* The new `name` value of the seller should not have a duplicate in EstateEase.
+* The new `NAME` value of the seller should not have a duplicate in EstateEase.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -297,6 +295,7 @@ Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budge
 **Note:**
 * The constraints are very similar to `editSeller` command, except the specified `INDEX` must be pointing to a `Buyer`
   and not a `Seller`.
+* The `BUDGET` value should not exceed $1 trillion.
 
 </box>
 
@@ -440,19 +439,56 @@ Examples: Largely similar to addHouse commands, except the addHouse command word
 
 ### Matching Sellers to a Buyer: `matchBuyer`
 
-Shows the list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
+Shows a list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
 
 Format: `matchBuyer FULL_NAME`
 
 <box type="tip" seamless>
 
-**Tip:** A full name of the buyer must be used in the command.
+**Tip:** Ensure you use the buyer's full name when entering the command.
 
+**Note:** 
+* This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
 </box>
 
-Examples:
-* `matchBuyer Alice Lim`
-  ![matchBuyer](images/ui-screenshots/matchBuyer-success.png)
+##### Successful Execution
+
+**Example 1**
+
+> **Case**: Matching sellers to a buyer with the full name "John Doe".
+>
+> **Input**: `matchBuyer John Doe`
+>
+> **Output**:
+> ```
+> 1 house(s) listed!
+> ```
+*Example 1 will be presented in EstateEase as follows:*
+![matchBuyer](images/ui-screenshots/matchBuyer-success.png)
+
+##### Failed Execution
+
+**Example 1**
+
+> **Case**: Buyer with the specified name not found.
+>
+> **Input**: `matchBuyer Alice`
+>
+> **Output**:
+> ```
+> The specified buyer was not found.
+> ```
+
+**Example 2**
+
+> **Case**:  Specified name is a seller.
+>
+> **Input**: `matchBuyer Alice Lim`
+>
+> **Output**:
+> ```
+> The specified person is not a buyer.
+> ```
 
 ### Listing all persons : `list`
 
@@ -499,7 +535,7 @@ Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EstateEase.
