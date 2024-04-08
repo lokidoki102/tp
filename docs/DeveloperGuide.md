@@ -1004,13 +1004,10 @@ similar to the test cases found in `Editing Seller Details`.
 ### B.2 Add Seller/Buyer command
 
 #### B.2.1 Motivation
-- The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are two main reasons for this approach.
+- The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are three main reasons for this approach.
 - Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house. 
-- Secondly, to distinguish between individuals sharing the same `name`, we append numbers to their names, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
-- However, this method has led to confusion, as relying on `name` as unique identifiers is problematic due to the common occurrence of name duplication.
-
-#### B.2.2 Implementation
-- To address this issue, we are considering a change to use more distinct identifiers such as `email` or `phone` numbers, in conjunction with names, as these fields are highly unlikely to be identical between two individuals, thereby improving the clarity and reliability of our identification process.
+- Secondly, to distinguish between individuals sharing the same `name`, the user can append numbers to the `name`, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
+- Lastly, if we choose to require both `name` and another unique identifier, such as `email` or `phone`, to distinctly identify a `person`, it would necessitate users repetitively typing both pieces of information for actions like `add House` or `delete House`. This requirement could significantly hinder the user experience, making the process inconvenient.
 
 ### B.3 Phone Number Field
 

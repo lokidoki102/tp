@@ -100,13 +100,14 @@ Examples:
 
 Adds a `Seller` to EstateEase.
 
-Format: `addSeller [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [type/HOUSING_TYPE] [street/STREET] [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`
+Format: `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
 
 <box type="tip" seamless>
 
 **Note:**
 - Adding a `Seller` will add a `House` to his/her list of houses, so that `Seller` and `Buyer` can be matched immediately if their preference matched.
 - A `Seller` cannot have the same name as a `Buyer`, because a `Seller` cannot be a `Buyer`, they must be unique.
+- The fields `Block` and `Level` are optional and their necessity depends on the `Housing Type`. For instance, if the `Housing Type` is a `Condominium`, including a `Block` is optional. Conversely, if the `Housing Type` is `Landed`, there is no requirement to include either `Block` or `Level`.
 </box>
 
 ##### Successful Execution
@@ -550,17 +551,17 @@ Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Th
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Buyer**     | `addBuyer n/NAME p/PHONE_NUMBER e/EMAIL budget/BUDGET type/HOUSING_TYPE…​`<br> e.g., `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/HDB`
-**Add Seller**    | `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> e.g.,`addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`
-**View**          | `view INDEX` <br> e.g., `view 1`
-**Add House**     | `addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> e.g., `addHouse n/John Doe type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`
-**Delete House**  | `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> e.g., `deleteHouse n/John Doe type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`
-**Match Buyer**   | `matchBuyer FULL_NAME`<br> e.g., `matchBuyer Alice Lim`
+**Add Buyer**     | `addBuyer n/NAME p/PHONE_NUMBER e/EMAIL budget/BUDGET type/HOUSING_TYPE…​`<br> **e.g.,** `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/HDB`
+**Add Seller**    | `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> **Add Seller with Hdb:**`addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br> **Add Seller with Landed:** `addSeller n/John Koe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br> **Add Seller with Condominium:** `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000` 
+**View**          | `view INDEX` <br> **e.g.,** `view 1`
+**Add House**     | `addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> **Add House (Hdb):** `addHouse n/John Doe type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br> **Add House (Landed):** `addHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br> **Add House (Condominium):**`addHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
+**Delete House**  | `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> **Delete House (Hdb)** `deleteHouse n/John Doe type/HDB street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br> **Delete House (Landed):** `deleteHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br> **Delete House (Condominium):**`deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
+**Match Buyer**   | `matchBuyer FULL_NAME`<br> **e.g.,** `matchBuyer Alice Lim`
 **Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`editSeller 1 n/James Lee e/jameslee@example.com`
 **Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`<br> e.g.,`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
 **List**          | `list`
-**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete**        | `delete INDEX`<br> e.g., `delete 3`
+**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> **e.g.,** `find James Jake`
+**Delete**        | `delete INDEX`<br> **e.g.,** `delete 3`
 **Clear**         | `clear`
 **Exit**          | `exit`
 **Help**          | `help`
