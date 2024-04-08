@@ -1026,4 +1026,12 @@ In the current implementation, there is no limit on the price and budget fields,
 
 This enhancement improves the usability and reliability of the application by ensuring that price and budget inputs are realistic and within acceptable bounds.
 
+### B.3 Restrict Landed Properties to a unique postal code
+
+#### B.3.1 Motivation
+In the current implementation, HDBs and Condominiums are allowed to share postal codes, similar to real world situations. However, following further research, landed properties have shown no need to share postal codes.
+
+#### B3.2 Implementation
+1. Update the method used to check Landed Property uniqueness. Currently, the method uses the whole string. Include postal code uniqueness as a requirement.
+
 
