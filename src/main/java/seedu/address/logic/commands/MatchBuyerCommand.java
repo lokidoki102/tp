@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -42,14 +41,12 @@ public class MatchBuyerCommand extends Command {
         model.updateFilteredPersonList(fullNamePredicate);
 
         if (model.getFilteredPersonList().isEmpty()) {
-            setAndResetState(model);
             return new CommandResult(Messages.MESSAGE_BUYER_NOT_FOUND);
         }
 
         Person person = model.getFilteredPersonList().get(0);
 
         if (!(person instanceof Buyer)) {
-            setAndResetState(model);
             return new CommandResult(Messages.MESSAGE_NOT_A_BUYER);
         }
 
@@ -65,17 +62,8 @@ public class MatchBuyerCommand extends Command {
         model.setState(State.MATCH_RESULTS);
         model.showMatchResults(model.getFilteredSellerList());
 
-        if (filteredSellerList.isEmpty()) {
-            setAndResetState(model);
-        }
-
         return new CommandResult(
                 String.format(Messages.MESSAGE_HOUSE_LISTED_OVERVIEW, filteredSellerList.size()));
-    }
-
-    private void setAndResetState(Model model) {
-        model.setState(State.PERSON_LIST);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
