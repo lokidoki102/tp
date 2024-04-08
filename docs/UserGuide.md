@@ -487,7 +487,7 @@ Format: `matchBuyer FULL_NAME`
 
 **Example 2**
 
-> **Case**:  Buyer using the seller's name.
+> **Case**:  Specified name is a seller.
 >
 > **Input**: `matchBuyer Alice Lim`
 >
