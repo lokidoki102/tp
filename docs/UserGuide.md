@@ -90,9 +90,9 @@ Format: `addBuyer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [budget/BUDGET] [type/HOUS
   </box>
 
 Examples:
-* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/HDB`
+* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Hdb`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
-* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium0`
+* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Landed`
 
 
@@ -474,7 +474,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* 
+
 ##### Successful Execution
 
 **Example 1**
