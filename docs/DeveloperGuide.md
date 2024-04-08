@@ -1014,4 +1014,16 @@ Real estate agents often need to match sellers with potential buyers efficiently
 3. Display the matched buyers and their relevant details in a clear and organized manner for easy reference.
 4. Ensure the command's functionality is efficient and responsive, providing timely results to real estate agents.
 
+### B.2 Limit Price and Budget to 1 Trillion
+
+#### B.2.1 Motivation
+In the current implementation, there is no limit on the price and budget fields, which can lead to unrealistic values being entered. Setting a limit of 1 trillion ensures that prices and budgets remain within a reasonable range, preventing errors and maintaining data integrity.
+
+#### B.2.2 Implementation
+1. Update the Price and Budget classes to enforce a maximum value of 1 trillion.
+2. Implement validation checks in the user interface to prevent users from entering values exceeding the limit.
+3. Provide clear error messages when users attempt to input values beyond the specified limit, guiding them to enter valid data.
+
+This enhancement improves the usability and reliability of the application by ensuring that price and budget inputs are realistic and within acceptable bounds.
+
 
