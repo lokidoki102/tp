@@ -1000,3 +1000,24 @@ testers are expected to do more *exploratory* testing.
 similar to the test cases found in `Editing Seller Details`.
 
 </box>
+
+### B.2 Add Seller/Buyer command
+
+#### B.2.1 Motivation
+- The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are two main reasons for this approach.
+- Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house. 
+- Secondly, to distinguish between individuals sharing the same `name`, we append numbers to their names, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
+- However, this method has led to confusion, as relying on `name` as unique identifiers is problematic due to the common occurrence of name duplication.
+
+#### B.2.2 Implementation
+- To address this issue, we are considering a change to use more distinct identifiers such as `email` or `phone` numbers, in conjunction with names, as these fields are highly unlikely to be identical between two individuals, thereby improving the clarity and reliability of our identification process.
+
+### B.3 Phone Number Field
+
+#### B.3.1 Motivation
+- In the current implementation, the `phone` field accepts more than three digits without specifically limiting the input to the standard eight digits customary for Singaporean phone numbers, despite the application being Singapore-focused. 
+- This design decision accounts for the potential users living abroad with international `phone` numbers, such as Singaporeans residing overseas who wish to purchase property back home, or foreigners intending to relocate to Singapore who may not yet have a local `phone` number.
+- However, this method has led to confusion, since it permits the entry of invalid `phone` numbers into the system due to the absence of strict validation criteria.
+
+#### B.3.2 Implementation
+- To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.
