@@ -25,6 +25,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(nfe.getMessage(), nfe);
         }
     }
 }
