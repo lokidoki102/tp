@@ -41,6 +41,8 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
 
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBuyerCommand.MESSAGE_USAGE), pe);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(nfe.getMessage(), nfe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSING_TYPE,
