@@ -82,8 +82,8 @@ Format: `addBuyer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [budget/BUDGET] [type/HOUS
 <box type="tip" seamless>
 
 **Note:**
-- `Budget` and `Housing_type` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
-- The `Budget` value should not exceed $1 trillion.
+- `BUDGET` and `HOUSING_TYPE` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
+- The `BUDGET` value should not exceed $1 trillion.
 - A `Buyer` cannot have the same name as a `Seller`, because a `Buyer` cannot be a `Seller`, they must be unique.
   </box>
 
@@ -207,7 +207,7 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 * Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 * The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
-* The new `name` value of the seller should not have a duplicate in EstateEase.
+* The new `NAME` value of the seller should not have a duplicate in EstateEase.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -294,7 +294,7 @@ Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budge
 **Note:**
 * The constraints are very similar to `editSeller` command, except the specified `INDEX` must be pointing to a `Buyer`
   and not a `Seller`.
-* The `Budget` value should not exceed $1 trillion.
+* The `BUDGET` value should not exceed $1 trillion.
 
 </box>
 
