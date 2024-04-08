@@ -65,4 +65,17 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a non-zero unsigned integer and an overflow.
+     * e.g. 2147483648, 2147483649, ... <br>
+     * Returns false for any other non-null string input.
+     */
+    public static boolean isIntegerOverflow(String s) {
+        return !isNonZeroUnsignedInteger(s) && isInteger(s);
+    }
+
+    private static boolean isInteger(String s) {
+        return s.matches("[1-9]\\d*");
+    }
 }
