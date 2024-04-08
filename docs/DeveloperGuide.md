@@ -1026,4 +1026,14 @@ In the current implementation, there is no limit on the price and budget fields,
 
 This enhancement improves the usability and reliability of the application by ensuring that price and budget inputs are realistic and within acceptable bounds.
 
+### B.3 Price and Budget 2 Decimal Places Only
 
+#### B.3.1 Motivation
+Allowing prices and budgets to have more than two decimal places can lead to confusion and inaccuracies. Limiting them to two decimal places ensures consistency and precision in financial calculations.
+
+#### B.3.2 Implementation
+1. Modify the Price and Budget classes to round values to two decimal places during input validation.
+2. Update user interface components to accept inputs with up to two decimal places only.
+3. Provide feedback to users if they attempt to input values with more than two decimal places, informing them of the restriction and prompting them to correct their input.
+
+This enhancement promotes clarity and accuracy in price and budget management within the application.

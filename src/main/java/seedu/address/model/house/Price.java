@@ -27,7 +27,7 @@ public class Price implements Comparable<Price> {
      * Returns true if a given String is a valid price amount.
      */
     public static boolean isValidPrice(String test) {
-        return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) >= 0;
+        return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) > 0;
     }
 
     @Override

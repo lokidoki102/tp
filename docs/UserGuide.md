@@ -455,6 +455,8 @@ Format: `matchBuyer FULL_NAME`
 
 **Note:** This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
 
+**Important:** Extreme cases of using more than 16 decimal places for both price and budget are not allowed as they may result in incorrect outcomes.
+
 </box>
 
 ##### Successful Execution
