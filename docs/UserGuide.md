@@ -83,6 +83,7 @@ Format: `addBuyer [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [budget/BUDGET] [type/HOUS
 
 **Note:**
 - `Budget` and `Housing_type` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
+- The `Budget` value should not exceed $1 trillion.
 - A `Buyer` cannot have the same name as a `Seller`, because a `Buyer` cannot be a `Seller`, they must be unique.
   </box>
 
@@ -293,6 +294,7 @@ Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budge
 **Note:**
 * The constraints are very similar to `editSeller` command, except the specified `INDEX` must be pointing to a `Buyer`
   and not a `Seller`.
+* The `Budget` value should not exceed $1 trillion.
 
 </box>
 
@@ -452,7 +454,6 @@ Format: `matchBuyer FULL_NAME`
 
 **Note:** 
 * This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
-* The budget value should not exceed $1 trillion.
 </box>
 
 ##### Successful Execution
