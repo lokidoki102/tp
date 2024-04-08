@@ -183,7 +183,7 @@ Format: `view INDEX`
 **Note:**
 - Views the details of the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 - `list` followed by `view 2` views the details of the 2nd person in EstateEase.
 - `find Betsy` followed by `view 1` views the details of the 1st person in the results of the `find` command.
 
@@ -204,7 +204,7 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 **Note:**
 * Edits the seller at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-  The index **must be a positive integer** 1, 2, 3, …
+* The `INDEX` **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 * The specified `INDEX` must be pointing to a `Seller` and not a `Buyer`.
 * The new `name` value of the seller should not have a duplicate in EstateEase.
 * At least one of the optional fields must be provided.
@@ -450,8 +450,9 @@ Format: `matchBuyer FULL_NAME`
 
 **Tip:** Ensure you use the buyer's full name when entering the command.
 
-**Note:** This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
-
+**Note:** 
+* This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
+* The budget value should not exceed $1 trillion.
 </box>
 
 ##### Successful Execution
@@ -538,7 +539,7 @@ Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EstateEase.
