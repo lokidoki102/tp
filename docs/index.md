@@ -4,9 +4,7 @@
 ---
 
 # EstateEase
-
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2324S2-CS2103-F09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions) [![codecov](https://codecov.io/gh/AY2324S2-CS2103-F09-1/tp/graph/badge.svg?token=NB86I9H23Z)](https://codecov.io/gh/AY2324S2-CS2103-F09-1/tp)
 
 ![Ui](images/estate_ease_ui.png)
 
