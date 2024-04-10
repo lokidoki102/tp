@@ -353,13 +353,13 @@ Examples:
 
 Adds a house to a specific seller.
 
-Format: `addHouse [n/NAME] [p/PHONE_NUMBER] [blk/BLOCK] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`
+Format: `addHouse [n/NAME] [p/PHONE_NUMBER] [blk/BLOCK] [street/STREET] [level/LEVEL] [unitNo/UNIT_NUMBER] [postal/POSTAL_CODE] [price/HOUSE_PRICE]`
 
 <box type="tip" seamless>
 
 **Tip:** A Hdb must have blk and level in the command. A condominium must have level in the command. A landed house must NOT have blk or level.
 
-**Note:** Even if the house type is different, if all other details (except Price) are the same, they are considered as the same house.
+**Note:** Even if the house type is different, if all other details (except Price) are the same, they are considered as the same house. Different hdbs and Condominiums are allowed to have the same Postal Code. While landed houses are not supposed to have that functionality, such checks will only be introduced in future versions.
 </box>
 
 ##### Successful Execution
