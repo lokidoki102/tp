@@ -47,11 +47,10 @@ EstateEase is an **advanced desktop application designed to streamline residenti
 --------------------------------------------------------------------------------------------------------------------
 
 ## Variable Constraints
-- `BUDGET` must be positive and less than 1 trillion
-- `PRICE` must be positive and less than 1 trillion
+- `BUDGET` must be a positive number with at most 17 digits, including any decimal points, and less than 1 trillion.
+- `PRICE` must be a positive number with at most 17 digits, including any decimal points, and less than 1 trillion.
 - `INDEX` must be positive with a maximum value equal to the number of people stored in the app or 2147483647, whichever is smaller.
 - `PHONE` must be at least 3 digits long and at most 15 digits long to account for international constraints. Phone numbers entered should be no shorter than 3 characters and no longer than 15 characters.
-- 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -471,7 +470,7 @@ Format: `matchBuyer FULL_NAME`
 * This command only matches sellers whose house prices are less than or equal to the buyer's budget and whose housing types match the buyer's preference.
 
 **Important:** 
-* Extreme cases of using more than 16 decimal places for both price and budget are not allowed as they may result in incorrect outcomes.
+* Extreme cases of using more than 17 digits for both price and budget are not allowed as they may result in incorrect outcomes.
                     
 </box>
 
