@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a House's unit number in the address book.
+ * Represents a House's unit number in EstateEase.
  * Guarantees: immutable; is valid as declared in {@link #isValidUnitNumber(String)}
  */
 public class UnitNumber {

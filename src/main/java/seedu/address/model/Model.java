@@ -40,17 +40,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' EstateEase file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' EstateEase file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces EstateEase data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
@@ -63,61 +63,61 @@ public interface Model {
     Person findPersonByName(Name name);
 
     /**
-     * Returns true if a person who is the same object as {@code person} exists in the address book.
+     * Returns true if a person who is the same object as {@code person} exists in EstateEase.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a person with the same name as {@code person} exists in the address book.
+     * Returns true if a person with the same name as {@code person} exists in EstateEase.
      */
     boolean hasPerson(Name name);
 
 
     /**
-     * Returns true if a house with the same address details as {@code house} exists in the address book.
+     * Returns true if a house with the same address details as {@code house} exists in EstateEase.
      */
     boolean hasHouse(House house);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in EstateEase.
      */
     void deletePerson(Person target);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in EstateEase.
      */
     void deletePersonFromPersons(Person target);
 
     /**
      * Deletes the given house.
-     * The house must belong to a seller in the address book.
+     * The house must belong to a seller in EstateEase.
      */
     void deleteHouse(House house, Person owner);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in EstateEase.
      */
     void addPerson(Person person);
 
     /**
      * Adds the given house.
-     * {@code house} must not already exist in the address book.
+     * {@code house} must not already exist in the EstateEase.
      */
     void addHouse(House house, Person person);
 
     /**
      * Adds the given house.
-     * {@code house} must not already exist in the address book.
+     * {@code house} must not already exist in the EstateEase.
      */
     void addHouseToHouses(House house);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in EstateEase.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in EstateEase.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -143,7 +143,7 @@ public interface Model {
 
     /**
      * Displays the given person.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in EstateEase.
      */
     void showPerson(Person target);
 

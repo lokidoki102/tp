@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.house.HousingType;
 
 /**
- * Represents a buyer in the address book.
+ * Represents a buyer in EstateEase.
  */
 public class Buyer extends Person {
 

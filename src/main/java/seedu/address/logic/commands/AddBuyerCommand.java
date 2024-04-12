@@ -15,7 +15,7 @@ import seedu.address.model.State;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a buyer to the address book.
+ * Adds a buyer to the EstateEase.
  */
 public class AddBuyerCommand extends Command {
 

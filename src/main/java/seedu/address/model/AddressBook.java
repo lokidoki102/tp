@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a house with the same identity as {@code housse} exists in the address book.
+     * Returns true if a house with the same identity as {@code housse} exists in EstateEase.
      */
     public boolean hasHouse(House house) {
         requireNonNull(house);
@@ -91,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in EstateEase.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -99,7 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same String name as {@code person} exists in the address book.
+     * Returns true if a person with the same String name as {@code person} exists in EstateEase.
      */
     public boolean hasPerson(Name name) {
         requireNonNull(name);
@@ -107,15 +107,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to EstateEase.
+     * The person must not already exist in EstateEase.
      */
     public void addPerson(Person p) {
         persons.add(p);
     }
 
     /**
-     * Adds a house to a person in the address book.
+     * Adds a house to a person in EstateEase.
      * The house must not already exist in the person's houses.
      */
     public void addHouse(House house, Person owner) {
@@ -133,8 +133,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in EstateEase.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in EstateEase.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -144,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in EstateEase.
      */
     public void removePerson(Person key) {
         if (key instanceof Seller) {
@@ -160,7 +160,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in EstateEase.
      */
     public void removePersonFromPersons(Person key) {
         persons.remove(key);
@@ -168,7 +168,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in EstateEase.
      */
     public void removeHouse(House house, Person owner) {
         persons.removeHouse(house, owner);

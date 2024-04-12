@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.model.house.Price;
 
 /**
- * Represents a Buyer's budget in the address book.
+ * Represents a Buyer's budget in EstateEase.
  * Guarantees: immutable; is valid as declared in {@link #isValidBudget(String)}
  */
 public class Budget {

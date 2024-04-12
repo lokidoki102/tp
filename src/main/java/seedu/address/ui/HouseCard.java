@@ -87,20 +87,14 @@ public class HouseCard extends UiPart<Region> {
         String levelValue = hdb.getLevel().value;
         return blockValue + " "
                 + hdb.getStreet().value + " "
-                + "#" + levelValue + "-" + hdb.getUnitNumber();
+                + "# " + levelValue + "-" + hdb.getUnitNumber();
     }
 
     //@@author zengzihui
     private String getAddressForCondominium(Condominium condominium) {
         String blockValue = condominium.getBlock().value;
         String levelValue = condominium.getLevel().value;
-        if (blockValue == null || blockValue.equals("N/A")) {
-            return condominium.getStreet().value + " "
-                    + "#" + levelValue + " - " + condominium.getUnitNumber();
-        } else {
-            return blockValue + " "
-                    + condominium.getStreet().value + " "
-                    + "#" + levelValue + " - " + condominium.getUnitNumber();
-        }
+        return blockValue + " " + condominium.getStreet().value + " "
+                + "# " + levelValue + " - " + condominium.getUnitNumber();
     }
 }
