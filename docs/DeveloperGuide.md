@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores EstateEase data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -354,9 +354,9 @@ The real estate agent may want to obtain all houses from sellers that match the 
 
 #### Example Usage Scenario:
 
-**Step 1:** The user launches the application for the first time. EstateEase will be initialized with the initial address book state (consisting of both `Buyer` and `Seller` details).
+**Step 1:** The user launches the application for the first time. EstateEase will be initialized with the initial app state (consisting of both `Buyer` and `Seller` details).
 
-**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in the EstateEase.
+**Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in EstateEase.
 
 **Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
 
@@ -656,15 +656,15 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 **Extensions**
 
 * 1a. JSON file is missing or the "data" folder is missing:
-    * 1a1. EstateEase retrieves sample data and populates the address book with it.
-    * 1a2. EstateEase displays the EstateEase data from the sample data to the user.
-    * 1a3. EstateEase waits for any command to the address book data before creating an empty JSON file or the "data" folder as needed. <br>
+    * 1a1. EstateEase retrieves sample data.
+    * 1a2. EstateEase displays the sample data to the user.
+    * 1a3. EstateEase waits for a valid command to be executed before creating an empty JSON file or the "data" folder as needed. <br>
     Use case ends.
 
 * 1b. JSON file has an incorrect format or fields:
-  * 1b1. EstateEase initializes an empty address book without displaying an error message.
-  * 1b2. EstateEase displays an empty address book to the user.
-  * 1b3. Any command to the address book data trigger the creation of a new, corrected JSON file. <br>
+  * 1b1. EstateEase initializes an empty person list without displaying an error message.
+  * 1b2. EstateEase displays an empty person list to the user.
+  * 1b3. Any valid command to empty person list data trigger the creation of a new, corrected JSON file. <br>
   Use case ends.
 
 **Use case: UC07 - Save to storage**
@@ -676,7 +676,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 **MSS:**
 
-1.  EstateEase processes the command <u>(UC01, UC02, UC03, UC05, UC011, UC012)</u> and updates the address book accordingly.
+1.  EstateEase processes the command <u>(UC01, UC02, UC03, UC05, UC011, UC012)</u> and updates EstateEase accordingly.
 2.  EstateEase updates the JSON file with the new changes.
 3.  EstateEase successfully updates the JSON file.
 
@@ -798,7 +798,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 
       Use case ends.
 
-**Use case: UC19 - Exit application**
+**Use case: UC14 - Exit application**
 
 **MSS:**
 
@@ -907,7 +907,7 @@ testers are expected to do more *exploratory* testing.
    1. **Loading Data:**
 
         - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
-        - The application should automatically populate the address book with sample data, displaying buyers and sellers, where sellers are associated with houses.
+        - The application should automatically populate EstateEase with sample data, displaying buyers and sellers, where sellers are associated with houses.
 
    2. **Saving Data:**
 
@@ -923,7 +923,7 @@ testers are expected to do more *exploratory* testing.
         - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
         - Having a data file that has same name as `addressbook.json` but incorrect format.
         - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
-        - The application should automatically detect this, and display an empty address book.
+        - The application should automatically detect this, and display an empty EstateEase.
 
    2. **Saving Data:**
 
@@ -968,7 +968,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Duplicate name**<br>
    **Test case:** `editSeller 1 n/John Doe`<br>
-    Expected: An error message indicating that "This person already exists in the address book."
+    Expected: An error message indicating that "This person already exists in EstateEase."
 2. **Wrong type**<br>
    **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
     Expected: An error message indicating that "The person you are trying to edit is not a seller."
@@ -1063,3 +1063,22 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 
 #### B.6.2 Implementation
 - To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.
+
+[//]: # (@@author redcolorbicycle)
+### B.7 Edit House Command
+
+#### B.7.1 Motivation
+- In the current implementation, the `editHouse` command was not implemented as it could be broken down into `deleteHouse` and `addHouse` and was not seen as necessary.
+- However, to increase user convenience, `editHouse` can be implemented in future versions.
+
+#### B.7.2 Implementation
+- Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
+
+### B.8 Switch all index based commands to name based commands
+
+#### B.8.1 Motivation
+- In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
+- However, to standardise all commands for user's convenience, index based commands can be refactor to name based.
+
+#### B.8.2 Implementation
+- Similar to the current `addHouse` command which uses name based.

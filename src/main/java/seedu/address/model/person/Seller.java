@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.house.House;
 
 /**
- * Represents a seller in the address book.
+ * Represents a seller in EstateEase.
  */
 public class Seller extends Person {
     private final ObservableList<House> houses;

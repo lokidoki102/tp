@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.State;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in the EstateEase to the user.
  */
 public class ListCommand extends Command {
 

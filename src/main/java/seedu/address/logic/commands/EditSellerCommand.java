@@ -30,7 +30,7 @@ import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in EstateEase.
  */
 public class EditSellerCommand extends Command {
 
@@ -49,7 +49,7 @@ public class EditSellerCommand extends Command {
 
     public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited Person(Seller): %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EstateEase.";
     public static final String MESSAGE_WRONG_TYPE = "The person you are trying to edit is not a seller.";
 
     private final Index index;

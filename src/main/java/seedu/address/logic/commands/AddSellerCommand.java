@@ -23,7 +23,7 @@ import seedu.address.model.person.Seller;
 
 
 /**
- * Adds a seller to the address book.
+ * Adds a seller to EstateEase.
  */
 public class AddSellerCommand extends Command {
 

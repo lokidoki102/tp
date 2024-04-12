@@ -41,7 +41,7 @@ public interface Logic {
     ObservableList<Seller> getFilteredSellerList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' EstateEase file path.
      */
     Path getAddressBookFilePath();
 
