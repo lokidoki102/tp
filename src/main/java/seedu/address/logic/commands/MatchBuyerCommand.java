@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -31,12 +34,15 @@ public class MatchBuyerCommand extends Command {
 
     private final FullNameEqualsKeywordPredicate fullNamePredicate;
 
+    private final Logger logger = LogsCenter.getLogger(MatchBuyerCommand.class);
+
     public MatchBuyerCommand(FullNameEqualsKeywordPredicate fullNamePredicate) {
         this.fullNamePredicate = fullNamePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("----------------[MATCH BUYER] executing matchBuyer command");
         requireNonNull(model);
         model.updateFilteredPersonList(fullNamePredicate);
 
