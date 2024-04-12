@@ -30,7 +30,7 @@ public class Budget {
      * Returns true if a given string is a valid budget amount.
      */
     public static boolean isValidBudget(String test) {
-        return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) >= 0;
+        return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) > 0;
     }
 
     /**
