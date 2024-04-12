@@ -10,10 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class UnitNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "The unit number should only contain numbers, it should be at least 1 digit "
-                    + "and at most 3 digits long, and cannot be '0', '00' or '000'.";
-    public static final String VALIDATION_REGEX = "\\d{1,3}";
+            "The unit number should only contain numbers, with or without a letter as the end. "
+                    + "There can only be at most 3 digits long.";
+    public static final String VALIDATION_REGEX = "\\d{1,3}[a-zA-Z]?";
     public static final String ZERO_REGEX = "^0+$";
+    public static final String ZERO_AND_ALPHABET_REGEX = "^0*[a-zA-Z]$";
 
     public final String value;
 
@@ -32,10 +33,10 @@ public class UnitNumber {
      * Returns true if a given string is a valid unit number.
      *
      * @param test The string to test.
-     * @return true if the test matches the VALIDATION_REGEX and is not "0".
+     * @return true if the test matches the VALIDATION_REGEX.
      */
     public static boolean isValidUnitNumber(String test) {
-        return test.matches(VALIDATION_REGEX) && !test.matches(ZERO_REGEX);
+        return test.matches(VALIDATION_REGEX) && !test.matches(ZERO_REGEX) && !test.matches(ZERO_AND_ALPHABET_REGEX);
     }
 
     @Override
