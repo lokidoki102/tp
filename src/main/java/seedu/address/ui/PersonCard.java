@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An ui component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -60,11 +60,9 @@ public class PersonCard extends UiPart<Region> {
                     tagLabel.getStyleClass().add("label");
                     if ("Seller".equals(tag.tagName)) {
                         tagLabel.getStyleClass().add("tag-seller");
-                        // TODO(UI): Change background colour value for buyer and seller
                         cardPane.setStyle("-fx-background-color: #75643D;");
                     } else if ("Buyer".equals(tag.tagName)) {
                         tagLabel.getStyleClass().add("tag-buyer");
-                        // TODO(UI): Change background colour value for buyer and seller
                         cardPane.setStyle("-fx-background-color: #3D5175;");
                     }
                     tags.getChildren().add(tagLabel);

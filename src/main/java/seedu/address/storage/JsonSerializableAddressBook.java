@@ -72,10 +72,9 @@ class JsonSerializableAddressBook {
                 if (addressBook.hasHouse(house)) {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_HOUSE);
                 }
-                // After checking that it is not a duplicate, then it is added into the list of houses
                 addressBook.addHouseToHouses(house);
             }
-            // After all houses are checked and added, add the seller
+
             if (!addressBook.hasPerson(seller)) {
                 addressBook.addPerson(seller);
             } else {

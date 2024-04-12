@@ -64,8 +64,8 @@ public class EditBuyerCommand extends Command {
     private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
-     * @param index                of the buyer in the filtered person list to edit
-     * @param editBuyerDescriptor details to edit the buyer with
+     * @param index of the buyer in the filtered person list to edit.
+     * @param editBuyerDescriptor details to edit the buyer with.
      */
     public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
         requireNonNull(index);

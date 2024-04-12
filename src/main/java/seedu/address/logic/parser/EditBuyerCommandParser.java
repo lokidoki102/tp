@@ -84,7 +84,15 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+
+        Collection<String> tagSet;
+
+        if (tags.size() == 1 && tags.contains("")) {
+            tagSet = Collections.emptySet();
+        } else {
+            tagSet = tags;
+        }
+
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 }

@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -58,6 +61,9 @@ public class DeleteHouseCommand extends Command {
 
     private final Name nameToCheck;
 
+    //@@author redcolorbicycle
+    private final Logger logger = LogsCenter.getLogger(DeleteHouseCommand.class);
+
     /**
      * Creates a DeleteHouseCommand to delete the specified {@code house}
      */
@@ -68,6 +74,7 @@ public class DeleteHouseCommand extends Command {
         nameToCheck = name;
     }
 
+    //@@author redcolorbicycle
     /**
      * Executes the command and returns the result message.
      *
@@ -77,6 +84,8 @@ public class DeleteHouseCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        logger.info("----------------[DELETE HOUSE] executing deleteHouse command");
         requireNonNull(model);
 
         if (!model.hasHouse(houseToDelete)) {

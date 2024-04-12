@@ -131,7 +131,6 @@ public class Hdb implements House {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this);
-        // For now, it just appends the super class's toString method.
         return "Hdb: " + builder.toString() + ", " + new ToStringBuilder(this)
                 .add("Street", street)
                 .add("Block", block)

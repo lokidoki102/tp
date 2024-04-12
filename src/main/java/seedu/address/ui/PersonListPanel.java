@@ -27,6 +27,7 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        logger.info("----------------[SET PERSON LIST] setting person list");
     }
 
     /**

@@ -29,8 +29,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private VBox personDetailsPane;
     @FXML
     private Label name;
-    //    @FXML
-    // private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -54,27 +52,43 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     public void setPersonDetails(Person person) {
+        logger.info("----------------[SET PERSON DETAILS] setting person details");
         this.displayedPerson = person;
+        setNameAndContactDetails();
+
+        if (displayedPerson instanceof Buyer) {
+            setBuyerDetails((Buyer) displayedPerson);
+        } else if (displayedPerson instanceof Seller) {
+            setSellerDetails((Seller) displayedPerson);
+        }
+    }
+
+    private void setNameAndContactDetails() {
         name.setText(displayedPerson.getName().fullName);
         phone.setText(displayedPerson.getPhone().value);
         email.setText(displayedPerson.getEmail().value);
-
-        if (displayedPerson instanceof Buyer) {
-            budget.setVisible(true);
-            housingType.setVisible(true);
-            houseList.setVisible(false);
-            Buyer buyer = (Buyer) displayedPerson;
-            housingType.setText(buyer.getPreferredHousingType().value);
-            budget.setText("$" + buyer.getBudget().toString());
-        } else if (displayedPerson instanceof Seller) {
-            housingType.setVisible(false);
-            budget.setVisible(false);
-            houseList.setVisible(true);
-            Seller seller = (Seller) displayedPerson;
-            houseListPanel = new HouseListPanel(seller.getHouses());
-            houseListPanelPlaceholder.getChildren().add(houseListPanel.getRoot());
-        }
     }
+
+    //@@author zengzihui
+    private void setBuyerDetails(Buyer buyer) {
+        budget.setVisible(true);
+        housingType.setVisible(true);
+        houseList.setVisible(false);
+
+        housingType.setText(buyer.getPreferredHousingType().value);
+        budget.setText("$" + buyer.getBudget().toString());
+    }
+
+    //@@author zengzihui
+    private void setSellerDetails(Seller seller) {
+        housingType.setVisible(false);
+        budget.setVisible(false);
+        houseList.setVisible(true);
+
+        houseListPanel = new HouseListPanel(seller.getHouses());
+        houseListPanelPlaceholder.getChildren().add(houseListPanel.getRoot());
+    }
+
 
 }
 

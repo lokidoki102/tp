@@ -32,11 +32,10 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Seller> filteredSellers;
-
-
     private Ui ui = null;
     private State state = State.PERSON_LIST;
     private Person currentDisplayedPerson = null;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -54,8 +53,6 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
-
-    //=========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -89,8 +86,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -163,9 +158,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-
-    //=========== Filtered Person List Accessors =============================================================
-
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -180,8 +172,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
-    //=========== Update Ui state ============================================================================
 
     public State getState() {
         return state;
@@ -200,8 +190,6 @@ public class ModelManager implements Model {
     public boolean isSameState(State newState) {
         return state.equals(newState);
     }
-
-    //=========== Get Data for displaying ====================================================================
 
     @Override
     public void setUi(Ui ui) {
@@ -229,7 +217,6 @@ public class ModelManager implements Model {
         return this.currentDisplayedPerson;
     }
 
-    //=================================================================================================
     @Override
     public void updateFilteredSellerList(PriceAndHousingTypePredicate predicate) {
         requireNonNull(predicate);
@@ -244,17 +231,14 @@ public class ModelManager implements Model {
                     return false;
                 }
                 seller.getHouses().clear();
-
-                for (House house : houses) {
-                    seller.addHouse(house);
-                }
+                seller.getHouses().addAll(houses);
 
                 temp.add(seller);
-                filteredSellers = FXCollections.observableArrayList(temp);
                 return true;
             }
             return false;
         });
+        filteredSellers = FXCollections.observableArrayList(temp);
     }
 
     @Override
@@ -262,14 +246,13 @@ public class ModelManager implements Model {
         return filteredSellers;
     }
 
-
+    //@@author felixchanyy
     private ObservableList<House> getFilteredHousesForSeller(Seller seller, PriceAndHousingTypePredicate predicate) {
         ObservableList<House> originalHouseList = seller.getHouses();
         FilteredList<House> filteredHouseList = new FilteredList<>(originalHouseList, predicate);
 
         ObservableList<House> convertedList = FXCollections.observableArrayList();
         convertedList.addAll(filteredHouseList);
-
 
         return convertedList;
     }
@@ -284,6 +267,7 @@ public class ModelManager implements Model {
         return allHouses.filtered(predicate);
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         if (other == this) {

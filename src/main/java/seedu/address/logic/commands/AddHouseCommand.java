@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STREET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -56,6 +59,8 @@ public class AddHouseCommand extends Command {
 
     private final Name nameToCheck;
 
+    //@@author redcolorbicycle
+    private final Logger logger = LogsCenter.getLogger(AddHouseCommand.class);
     /**
      * Creates an AddHouseCommand to add the specified {@code house}
      */
@@ -65,7 +70,7 @@ public class AddHouseCommand extends Command {
         houseToAdd = house;
         nameToCheck = name;
     }
-
+    //@@author redcolorbicycle
     /**
      * Executes the command and returns the result message.
      *
@@ -75,6 +80,8 @@ public class AddHouseCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        logger.info("----------------[ADD HOUSE] executing addHouse command");
         requireNonNull(model);
 
         if (model.hasHouse(houseToAdd)) {
