@@ -36,24 +36,6 @@ class AddSellerCommandTest {
         assertThrows(NullPointerException.class, () -> new AddSellerCommand(null));
     }
 
-    //    Not sure where it went wrong, formatting got issue, but the values are correct
-    //    org.opentest4j.AssertionFailedError:
-    //    expected: <New seller added= seedu.address.model.person.Seller{name=Amy Bee, phone=85355255,
-    //    email=amy@gmail.com,
-    //    housingType=HDB, tags=[]}>
-    //    but was: <New seller added= Amy Bee; Phone= 85355255; Email= amy@gmail.com; Housing Type= HDB; Tags= >
-    //    @Test
-    //    public void execute_sellerAcceptedByModel_addSuccessful() throws Exception {
-    //        ModelStubAcceptingSellerAdded modelStub = new ModelStubAcceptingSellerAdded();
-    //        Seller validSeller = new SellerBuilder().build();
-    //
-    //        CommandResult commandResult = new AddSellerCommand(validSeller).execute(modelStub);
-    //
-    //        assertEquals(String.format(AddSellerCommand.MESSAGE_SUCCESS, validSeller),
-    //                commandResult.getFeedbackToUser());
-    //        assertEquals(Arrays.asList(validSeller), modelStub.sellersAdded);
-    //    }
-
     @Test
     public void execute_duplicateSeller_throwsCommandException() {
         Seller validSeller = new SellerBuilder().build();
