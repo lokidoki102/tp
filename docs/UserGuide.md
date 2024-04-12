@@ -46,6 +46,14 @@ EstateEase is an **advanced desktop application designed to streamline residenti
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Variable Constraints
+- `BUDGET` must be positive and less than 1 trillion
+- `PRICE` must be positive and less than 1 trillion
+- `INDEX` must be positive with a maximum value equal to the number of people stored in the app or 2147483647, whichever is smaller.
+- `PHONE` must be at least 3 digits long and at most 15 digits long to account for international constraints. Phone numbers entered should be no shorter than 3 characters and no longer than 15 characters.
+- 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <box type="info" seamless>
@@ -59,7 +67,7 @@ EstateEase is an **advanced desktop application designed to streamline residenti
   e.g `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnny@doe.com` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -79,19 +87,18 @@ Format: `help`
 
 Adds a `Buyer` to EstateEase.
 
-Format: `addBuyer n/NAME p/PHONE_NUMBER e/EMAIL budget/BUDGET type/HOUSING_TYPE`
+Format: `addBuyer n/NAME p/PHONE e/EMAIL budget/BUDGET type/PREFERRED_HOUSING_TYPE`
 
 <box type="tip" seamless>
 
 **Note:**
-- `BUDGET` and `HOUSING_TYPE` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
+- `BUDGET` and `PREFERRED_HOUSING_TYPE` are the housing requirement preferences for every `Buyer`, so that `Buyer` and `Seller` can be matched immediately if their preference matched.
 - The `BUDGET` value should not exceed $1 trillion.
 - A `Buyer` cannot have the same name as a `Seller`, because a `Buyer` cannot be a `Seller`, they must be unique.
   </box>
 
 Examples:
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Hdb`
-* `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Landed`
 
@@ -100,14 +107,14 @@ Examples:
 
 Adds a `Seller` to EstateEase.
 
-Format: `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
+Format: `addSeller n/NAME p/PHONE e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
 
 <box type="tip" seamless>
 
 **Note:**
 - Adding a `Seller` will add a `House` to his/her list of houses, so that `Seller` and `Buyer` can be matched immediately if their preference matched.
 - A `Seller` cannot have the same name as a `Buyer`, because a `Seller` cannot be a `Buyer`, they must be unique.
-- The fields `Block` and `Level` are optional and their necessity depends on the `Housing Type`. For instance, if the `Housing Type` is a `Condominium`, including a `Block` is optional. Conversely, if the `Housing Type` is `Landed`, there is no requirement to include either `Block` or `Level`.
+- The necessity of fields `Block` and `Level` depends on the `Housing Type`. If the `Housing Type` is a `Condominium`, including a `Block` is optional but a `Level` is compulsory. If the `Housing Type` is `Landed`, `Block` and `Level` must not exist. For `Hdb`, `Block` and `Level` are compulsory.
 </box>
 
 ##### Successful Execution
@@ -136,7 +143,7 @@ Format: `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET
 > New seller added= John Koe; Phone= 98765432; Email= johnd@example.com
 > ```
 
-**Other possible examples**:
+**Other possible examples (Commands assumed to be standalone)**:
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/10000`
 * `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
 
@@ -176,7 +183,7 @@ Format: `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET
 
 ### View a person detail : `view INDEX`
 
-Views the detail of a `Person` in EstateEase.
+Views the detail of a `Person` in EstateEase. The index provided must be a positive number from 1 to the number of entries present.
 
 Format: `view INDEX`
 
@@ -189,7 +196,7 @@ Format: `view INDEX`
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …, and should not exceed 2147483647.
 - `list` followed by `view 2` views the details of the 2nd person in EstateEase.
-- `find Betsy` followed by `view 1` views the details of the 1st person in the results of the `find` command.
+- `find Foy` (sample name) followed by `view 1` views the details of the 1st person in the results of the `find` command.
 
 </box>
 
@@ -290,7 +297,7 @@ Format: `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 Edits an existing `Buyer` in EstateEase.
 
-Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`
+Format: `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/PREFERRED_HOUSING_TYPE] [budget/BUDGET]`
 
 <box type="tip" seamless>
 
@@ -355,12 +362,14 @@ Examples:
 
 Adds a house to a specific seller.
 
-Format: **Add House (HDB):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominum):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
+Format: 
+
+**Add House (HDB):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominium):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
 <box type="tip" seamless>
 
-**Tip:** A Hdb must have blk and level in the command. A condominium must have level in the command. A landed house must NOT have blk or level.
+**Tip:** A Hdb must have blk and level in the command. A condominium must have level in the command. Condominiums without blocks can have block represented by "N/A", or by completely omitting the blk/ prefix. A landed house must NOT have blk or level.
 
-**Note:** Even if the house type is different, if all other details (except Price) are the same, they are considered as the same house. Different hdbs and Condominiums are allowed to have the same Postal Code. While landed houses are not supposed to have that functionality, such checks will only be introduced in future versions.
+**Note:** Even if the house type is different, if all other details (except Price) are the same, they are considered as the same house. Different Hdbs and Condominiums are allowed to have the same Postal Code. While landed houses are not supposed to have that functionality, such checks will only be introduced in future versions.
 </box>
 
 ##### Successful Execution
@@ -441,7 +450,7 @@ Format: `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/L
 
 <box type="tip" seamless>
 
-**Tip:** A Hdb must have blk and level in the command. A condominium must have level in the command. A landed house must NOT have blk or level.
+**Tip:** The exact House restrictions applied in addHouse apply here too.
 
 **Note:** A seller with one house can have his house deleted. The seller would have no houses to his name then but would still exist.
 </box>
@@ -470,9 +479,9 @@ Format: `matchBuyer FULL_NAME`
 
 **Example 1**
 
-> **Case**: Matching sellers to a buyer with the full name "John Doe".
+> **Case**: Matching sellers to a buyer with the full name "Helix Doe".
 >
-> **Input**: `matchBuyer John Doe`
+> **Input**: `matchBuyer Helix Doe`
 >
 > **Output**:
 > ```
@@ -580,7 +589,7 @@ EstateEase data are saved automatically as a JSON file `[JAR file location]/data
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, EstateEase will override the existing data file with an empty data file in the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, EstateEase will override the existing data file with an empty data file in the next successful command execution. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -593,25 +602,18 @@ Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Th
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. When executing commands that require `INDEX`, using a non-positive value and a positive value, but out of bound, will return different error message. (E.g. delete -99 and delete 999999 shows different error messages).
-3. Condominiums created with a Block parameter of "N/A" will have "N/A" displayed in the Block section of the House card being displayed. 
---------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Buyer**     | `addBuyer n/NAME p/PHONE_NUMBER e/EMAIL budget/BUDGET type/HOUSING_TYPE`<br><br> **e.g.,** `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Hdb`
-**Add Seller**    | `addSeller n/NAME p/PHONE_NUMBER e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br>**e.g.,**<br> **Add Seller with Hdb:**`addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br><br> **Add Seller with Landed:** `addSeller n/John Koe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Add Seller with Condominium:** `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Take note that the format of adding a `Seller` is the same as adding a `House`, but with additional field of `phone` and `email`. Please refer to [Add House](#add-house).** 
+**Add Buyer**     | `addBuyer n/NAME p/PHONE e/EMAIL budget/BUDGET type/PREFERRED_HOUSING_TYPE`<br><br> **e.g.,** `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Hdb`
+**Add Seller**    | `addSeller n/NAME p/PHONE e/EMAIL type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br> <br>**e.g.,**<br> **Add Seller with Hdb:**`addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br><br> **Add Seller with Landed:** `addSeller n/John Koe p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Add Seller with Condominium:** `addSeller n/John Doe p/98765432 e/johnd@example.com type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Take note that the format of adding a `Seller` is the same as adding a `House`, but with additional field of `phone` and `email`. Please refer to [Add House](#add-house).** 
 **View**          | `view INDEX` <br><br> **e.g.,** `view 1`
-**Add House**     | <a name="add-house"></a>**Add House (Hdb):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominum):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**e.g.,**<br> **Add House (Hdb):** `addHouse n/John Doe type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Add House (Landed):** `addHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Add House (Condominium):**`addHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
-**Delete House**  | `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br>**e.g.,**<br> **Delete House (Hdb)** `deleteHouse n/John Doe type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Delete House (Landed):** `deleteHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Delete House (Condominium):**`deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000` <br><br> **Take note that the format of deleting a `House` is the same as adding a `House`. Please refer to [Add House](#add-house).**
+**Add House**     | <a name="add-house"></a>**Add House (Hdb):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominium):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**e.g.,**<br> **Add House (Hdb):** `addHouse n/John Doe type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Add House (Landed):** `addHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Add House (Condominium):**`addHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000`
+**Delete House**  | `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/LEVEL] unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**e.g.,**<br> **Delete House (Hdb)** `deleteHouse n/John Doe type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/10000`<br><br> **Delete House (Landed):** `deleteHouse n/John Doe type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`<br><br> **Delete House (Condominium):**`deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 level/02 unitNo/25 postal/578578 price/10000` <br><br> **Take note that the format of deleting a `House` is the same as adding a `House`. Please refer to [Add House](#add-house).**
 **Match Buyer**   | `matchBuyer FULL_NAME`<br><br> **e.g.,** `matchBuyer Alex Yeoh`
-**Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br><br> **e.g.,**`editSeller 1 n/James Lee e/jameslee@example.com`
-**Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/HOUSING_TYPE] [budget/BUDGET]`<br><br> **e.g.,**`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
+**Edit Seller**   | `editSeller INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br><br> **e.g.,**`editSeller 1 n/James Lee e/jameslee@example.com`
+**Edit Buyer**    | `editBuyer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [type/PREFERRED_HOUSING_TYPE] [budget/BUDGET]`<br><br> **e.g.,**`editBuyer 1 p/88888888 e/buyer@example.com type/Landed budget/5000000`
 **List**          | `list`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br><br> **e.g.,** `find James Jake`
 **Delete**        | `delete INDEX`<br><br> **e.g.,** `delete 3`
