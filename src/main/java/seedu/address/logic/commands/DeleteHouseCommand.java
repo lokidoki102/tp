@@ -61,7 +61,7 @@ public class DeleteHouseCommand extends Command {
 
     private final Name nameToCheck;
 
-    // @@author redcolorbicycle
+    //@@author redcolorbicycle
     private final Logger logger = LogsCenter.getLogger(DeleteHouseCommand.class);
 
     /**
@@ -74,6 +74,7 @@ public class DeleteHouseCommand extends Command {
         nameToCheck = name;
     }
 
+    //@@author redcolorbicycle
     /**
      * Executes the command and returns the result message.
      *
@@ -83,7 +84,7 @@ public class DeleteHouseCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // @@author redcolorbicycle
+
         logger.info("----------------[DELETE HOUSE] executing deleteHouse command");
         requireNonNull(model);
 

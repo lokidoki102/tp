@@ -11,16 +11,16 @@ import seedu.address.model.person.Seller;
  */
 public interface Ui {
 
-    /** Starts the UI (and the App).  */
+    /** Starts the UI (and the App). */
     void start(Stage primaryStage);
 
-    /** Displays Person details */
+    /** Displays Person details. */
     void showPersonDetails(Person person);
 
-    /** Displays list of filtered sellers */
+    /** Displays list of filtered sellers. */
     void showMatchResults(ObservableList<Seller> sellers);
 
-    /** Updates the ui layout */
+    /** Updates the ui layout. */
     void updateUiLayout(State newState);
 
 }

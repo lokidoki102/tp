@@ -29,6 +29,7 @@ public class MatchResultListPanel extends UiPart<Region> {
     }
 
     public void setMatchResults(ObservableList<Seller> filteredSellerList) {
+        logger.info("----------------[MATCH RESULT] setting match result");
         matchResultListView.setItems(filteredSellerList);
         matchResultListView.setCellFactory(listView -> new MatchResultListPanel.MatchResultListViewCell());
     }

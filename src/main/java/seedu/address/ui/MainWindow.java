@@ -35,8 +35,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-
-    // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private PersonDetailsPanel personDetailsPanel;
     private MatchResultListPanel matchResultListPanel;
@@ -77,12 +75,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-
-        // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();

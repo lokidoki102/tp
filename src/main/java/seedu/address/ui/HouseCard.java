@@ -9,7 +9,7 @@ import seedu.address.model.house.Hdb;
 import seedu.address.model.house.House;
 
 /**
- * An UI component that displays information of a {@code House}.
+ * An ui component that displays information of a {@code House}.
  */
 public class HouseCard extends UiPart<Region> {
     private static final String FXML = "HouseListCard.fxml";
@@ -48,32 +48,59 @@ public class HouseCard extends UiPart<Region> {
     public HouseCard(House house) {
         super(FXML);
         this.house = house;
+
+        setHouseType();
+        setPostalCode();
+        setPrice();
+        setAddress();
+    }
+
+    //@@author zengzihui
+    private void setHouseType() {
         houseType.setText("House Type: " + house.getHousingType().value);
+    }
+
+    //@@author zengzihui
+    private void setPostalCode() {
         postalCode.setText("Postal Code: " + house.getPostalCode().value);
-        price.setText("Price: " + house.getPrice().value);
-        String addr = house.getUnitNumber().value + " "
-                        + house.getStreet().value;
+    }
+
+    //@@author zengzihui
+    private void setPrice() {
+        price.setText("Price: $" + house.getPrice().value);
+    }
+
+    //@@author zengzihui
+    private void setAddress() {
+        String addr = house.getUnitNumber().value + " " + house.getStreet().value;
         if (house instanceof Hdb) {
-            Hdb hdb = (Hdb) house;
-            String blockValue = hdb.getBlock().value;
-            String levelValue = hdb.getLevel().value;
-            addr = blockValue + " "
-                    + hdb.getStreet().value + " "
-                    + "#" + levelValue + "-" + hdb.getUnitNumber();
+            addr = getAddressForHdb((Hdb) house);
         } else if (house instanceof Condominium) {
-            Condominium condominium = (Condominium) house;
-            String blockValue = condominium.getBlock().value;
-            String levelValue = condominium.getLevel().value;
-            if (blockValue == null || blockValue.equals("N/A")) {
-                addr = condominium.getStreet().value + " "
-                        + "# " + levelValue + " - " + condominium.getUnitNumber();
-            } else {
-                addr = blockValue + " "
-                        + condominium.getStreet().value + " "
-                        + "# " + levelValue + " - " + condominium.getUnitNumber();
-            }
+            addr = getAddressForCondominium((Condominium) house);
         }
         address.setText(addr);
+    }
 
+    //@@author zengzihui
+    private String getAddressForHdb(Hdb hdb) {
+        String blockValue = hdb.getBlock().value;
+        String levelValue = hdb.getLevel().value;
+        return blockValue + " "
+                + hdb.getStreet().value + " "
+                + "#" + levelValue + "-" + hdb.getUnitNumber();
+    }
+
+    //@@author zengzihui
+    private String getAddressForCondominium(Condominium condominium) {
+        String blockValue = condominium.getBlock().value;
+        String levelValue = condominium.getLevel().value;
+        if (blockValue == null || blockValue.equals("N/A")) {
+            return condominium.getStreet().value + " "
+                    + "#" + levelValue + " - " + condominium.getUnitNumber();
+        } else {
+            return blockValue + " "
+                    + condominium.getStreet().value + " "
+                    + "#" + levelValue + " - " + condominium.getUnitNumber();
+        }
     }
 }

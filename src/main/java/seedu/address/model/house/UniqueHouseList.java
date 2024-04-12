@@ -36,15 +36,15 @@ public class UniqueHouseList implements Iterable<House> {
     public boolean contains(House toCheck) {
         requireNonNull(toCheck);
         for (House h: internalList) {
-            int checkAddressOfHouse = toCheck.toString().toLowerCase().indexOf("street");
-            int checkAddressOfHouseInList = h.toString().toLowerCase().indexOf("street");
-            int cutOffPriceOfHouse = toCheck.toString().toLowerCase().lastIndexOf("price");
-            int cutOffPriceOfHouseInList = h.toString().toLowerCase().lastIndexOf("price");
+            int addressOfHouseIndex = toCheck.toString().toLowerCase().indexOf("street");
+            int addressOfHouseInListIndex = h.toString().toLowerCase().indexOf("street");
+            int cutOffPriceOfHouseIndex = toCheck.toString().toLowerCase().lastIndexOf("price");
+            int cutOffPriceOfHouseInListIndex = h.toString().toLowerCase().lastIndexOf("price");
 
-            String firstAddress = toCheck.toString().substring(checkAddressOfHouse + "street".length(),
-                                                               cutOffPriceOfHouse).toLowerCase();
-            String secondAddress = h.toString().substring(checkAddressOfHouseInList + "street".length(),
-                                                          cutOffPriceOfHouseInList).toLowerCase();
+            String firstAddress = toCheck.toString().substring(addressOfHouseIndex + "street".length(),
+                                                               cutOffPriceOfHouseIndex).toLowerCase();
+            String secondAddress = h.toString().substring(addressOfHouseInListIndex + "street".length(),
+                                                          cutOffPriceOfHouseInListIndex).toLowerCase();
             if (firstAddress.equals(secondAddress)) {
                 return true;
             }
@@ -66,31 +66,6 @@ public class UniqueHouseList implements Iterable<House> {
         }
         internalList.add(toAdd);
     }
-
-
-    /* WE KEEP THIS HERE IN CASE GOT EDITHOUSE YA
-    /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
-
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new PersonNotFoundException();
-        }
-
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.set(index, editedPerson);
-    }
-    */
-
-
 
     /**
      * Removes the equivalent house from the list.

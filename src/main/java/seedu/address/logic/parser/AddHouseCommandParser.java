@@ -86,6 +86,8 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         }
     }
 
+    //@@author redcolorbicycle
+    //@@author KhoonSun47
     /**
      * Create a HDB.
      */
@@ -103,6 +105,8 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         return new Hdb(level, postalCode, street, unitNumber, block, price);
     }
 
+    //@@author redcolorbicycle
+    //@@author KhoonSun47
     /**
      * Create a Condominium.
      */
@@ -125,6 +129,8 @@ public class AddHouseCommandParser implements Parser<AddHouseCommand> {
         }
     }
 
+    //@@author redcolorbicycle
+    //@@author KhoonSun47
     /**
      * Create a Landed.
      */
