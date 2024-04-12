@@ -31,7 +31,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_STREET = "t3$t!ng";
     private static final String INVALID_LEVEL = "aa";
-    private static final String INVALID_UNIT_NUMBER = "1234";
+    private static final String INVALID_UNIT_NUMBER = "1234A";
     private static final String INVALID_BLOCK = "12a34";
     private static final String INVALID_POSTAL_CODE = "5678990";
 
@@ -111,11 +111,6 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
-    }
-
-    @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
 
     @Test

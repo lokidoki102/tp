@@ -25,21 +25,26 @@ public class UnitNumberTest {
         assertThrows(NullPointerException.class, () -> UnitNumber.isValidUnitNumber(null));
 
         // invalid unit numbers
-        assertFalse(UnitNumber.isValidUnitNumber("0")); // '0' is invalid
-        assertFalse(UnitNumber.isValidUnitNumber("00")); // '00' is invalid
-        assertFalse(UnitNumber.isValidUnitNumber("000")); // '000' is invalid
+        assertFalse(UnitNumber.isValidUnitNumber("0")); // '0' alone is invalid
+        assertFalse(UnitNumber.isValidUnitNumber("00")); // multiple zeros invalid
+        assertFalse(UnitNumber.isValidUnitNumber("0000")); // four digits are invalid
+        assertFalse(UnitNumber.isValidUnitNumber("0A")); // 1 zero + alphabet
+        assertFalse(UnitNumber.isValidUnitNumber("00A")); // 2 zeroes + alphabet
+        assertFalse(UnitNumber.isValidUnitNumber("000A")); // 3 zeroes + alphabet
         assertFalse(UnitNumber.isValidUnitNumber("")); // empty string
         assertFalse(UnitNumber.isValidUnitNumber(" ")); // spaces only
-        assertFalse(UnitNumber.isValidUnitNumber("1234")); // more than 3 digits
-        assertFalse(UnitNumber.isValidUnitNumber("ab")); // non-numeric
-        assertFalse(UnitNumber.isValidUnitNumber("1a2")); // alphabets within digits
+        assertFalse(UnitNumber.isValidUnitNumber("A")); // character only
+        assertFalse(UnitNumber.isValidUnitNumber("1000")); // four digits without a letter are invalid
+        assertFalse(UnitNumber.isValidUnitNumber("14 1")); // spaces within digits
+        assertFalse(UnitNumber.isValidUnitNumber("1a2b")); // invalid mixed letters and numbers
 
         // valid unit numbers
-        assertTrue(UnitNumber.isValidUnitNumber("1")); // minimum valid number
-        assertTrue(UnitNumber.isValidUnitNumber("01")); // leading 0 is allowed
-        assertTrue(UnitNumber.isValidUnitNumber("10")); // 2 digits
-        assertTrue(UnitNumber.isValidUnitNumber("001")); // 3 digits
-        assertTrue(UnitNumber.isValidUnitNumber("999")); // maximum valid number
+        assertTrue(UnitNumber.isValidUnitNumber("1")); // single digit
+        assertTrue(UnitNumber.isValidUnitNumber("10")); // two digits
+        assertTrue(UnitNumber.isValidUnitNumber("100")); // three digits
+        assertTrue(UnitNumber.isValidUnitNumber("10A")); // two digits followed by a letter
+        assertTrue(UnitNumber.isValidUnitNumber("100A")); // three digits followed by a letter
+        assertTrue(UnitNumber.isValidUnitNumber("1A")); // one digit followed by a letter
     }
 
     @Test
