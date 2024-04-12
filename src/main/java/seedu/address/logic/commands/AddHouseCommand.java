@@ -59,7 +59,7 @@ public class AddHouseCommand extends Command {
 
     private final Name nameToCheck;
 
-    // @@author redcolorbicycle
+    //@@author redcolorbicycle
     private final Logger logger = LogsCenter.getLogger(AddHouseCommand.class);
     /**
      * Creates an AddHouseCommand to add the specified {@code house}
@@ -70,7 +70,7 @@ public class AddHouseCommand extends Command {
         houseToAdd = house;
         nameToCheck = name;
     }
-
+    //@@author redcolorbicycle
     /**
      * Executes the command and returns the result message.
      *
@@ -80,7 +80,7 @@ public class AddHouseCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // @@author redcolorbicycle
+
         logger.info("----------------[ADD HOUSE] executing addHouse command");
         requireNonNull(model);
 

@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.State;
 import seedu.address.model.house.House;
 import seedu.address.model.house.HousingType;
+import seedu.address.model.house.Price;
 import seedu.address.model.house.PriceAndHousingTypePredicate;
 import seedu.address.model.person.Budget;
 import seedu.address.model.person.Buyer;
@@ -59,7 +60,8 @@ public class MatchBuyerCommand extends Command {
         Buyer targetBuyer = (Buyer) person;
         Budget budget = targetBuyer.getBudget();
         HousingType housingType = targetBuyer.getPreferredHousingType();
-        PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(budget.toPrice(), housingType);
+        Price price = budget.toPrice();
+        PriceAndHousingTypePredicate predicate = new PriceAndHousingTypePredicate(price, housingType);
 
         model.updateFilteredSellerList(predicate);
 

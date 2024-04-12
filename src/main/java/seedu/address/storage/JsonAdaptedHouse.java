@@ -71,7 +71,7 @@ public class JsonAdaptedHouse {
         } else if (source instanceof Hdb) {
             extractHdbDetails((Hdb) source);
         } else {
-            extractDefaultHouseDetails();
+            extractLandedDetails();
         }
     }
 
@@ -105,7 +105,7 @@ public class JsonAdaptedHouse {
         this.housingType = "Hdb";
     }
 
-    private void extractDefaultHouseDetails() {
+    private void extractLandedDetails() {
         this.block = null;
         this.level = null;
         this.housingType = "Landed";

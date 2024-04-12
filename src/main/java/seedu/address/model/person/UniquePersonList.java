@@ -88,9 +88,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!(owner instanceof Seller)) {
             throw new InvalidSellerException();
         }
-        /*else if (((Seller) owner).hasHouse(toAdd)) {
-            throw new DuplicateHouseException();
-        } */
         Seller seller = (Seller) owner;
         seller.addHouse(toAdd);
         remove(owner);

@@ -106,7 +106,6 @@ public class Landed implements House {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this);
-        // For now, it just appends the super class's toString method.
         return "Landed House: " + builder.toString() + ", " + new ToStringBuilder(this)
                 .add("Unit Number", unitNumber)
                 .add("Street", street)
