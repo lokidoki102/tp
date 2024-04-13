@@ -985,7 +985,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** No buyer is added. Error indicating budget should be a positive number. <br><br>
    
    3. **Test case:** `addBuyer n/Chris Ong p/98765432 e/chrisong@examaple.com budget/aa type/Hdb` <br>
-         **Expected:** No buyer is added. Error indicating budget should be a positive number. <br><br>
+      **Expected:** No buyer is added. Error indicating budget should be a positive number. <br>
 
 
 [//]: # (@@author redcolorbicycle)
