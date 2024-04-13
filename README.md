@@ -4,7 +4,7 @@
 
 ## About the app
 
-EstateEase is an **advanced desktop application designed to streamline residential property management for real estate listing agents in Singapore.** Engineered for efficiency, it combines the precision of a Command Line Interface (CLI) with a Graphical User Interface (GUI). For those proficient in typing, EstateEase delivers administrative task management at a speed surpassing that of conventional GUI-based applications.
+EstateEase is an **advanced desktop application designed to streamline residential property management for real estate listing agents in Singapore.** Engineered for efficiency, it combines the precision of a Command Line Interface (CLI) with the versatility of a Graphical User Interface (GUI). For those proficient in typing, EstateEase enables quicker and more effective residential property management than conventional GUI-based applications.
 
 ### Key Features:
   * With intuitive tools for listing contacts and houses, the app is tailored for efficiency.

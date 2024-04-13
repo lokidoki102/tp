@@ -6,12 +6,13 @@
 
 # EstateEase User Guide
 
-EstateEase is an **advanced desktop application designed to streamline residential property management for real estate listing agents in Singapore.** Engineered for efficiency, it combines the precision of a Command Line Interface (CLI) with a Graphical User Interface (GUI). For those proficient in typing, EstateEase delivers administrative task management at a speed surpassing that of conventional GUI-based applications.
+EstateEase is an **advanced desktop application designed to streamline residential property management for real estate listing agents in Singapore.** Engineered for efficiency, it combines the precision of a Command Line Interface (CLI) with the versatility of a Graphical User Interface (GUI). For those proficient in typing, EstateEase enables quicker and more effective residential property management than conventional GUI-based applications.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -45,6 +46,7 @@ EstateEase is an **advanced desktop application designed to streamline residenti
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Variable Constraints
 - `BUDGET` must be a positive number with at most 17 digits, including any decimal points, and less than 1 trillion.
@@ -52,6 +54,7 @@ EstateEase is an **advanced desktop application designed to streamline residenti
 - `INDEX` must be positive with a maximum value equal to the number of people stored in the app or 2147483647, whichever is smaller.
 - `PHONE` must be at least 3 digits long and at most 15 digits long to account for international constraints. Phone numbers entered should be no shorter than 3 characters and no longer than 15 characters.
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -101,6 +104,7 @@ Examples:
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Condominium`
 * `addBuyer n/James p/98765432 e/james@gmail.com budget/20000 type/Landed`
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a seller: `addSeller`
 
@@ -179,6 +183,8 @@ Format: `addSeller n/NAME p/PHONE e/EMAIL type/HOUSING_TYPE street/STREET [blk/B
 > ```
 > This house already exists in EstateEase
 > ```
+
+<div style="page-break-after: always;"></div>
 
 ### View a person detail : `view INDEX`
 
@@ -356,6 +362,7 @@ Examples:
 > HousingType should only be Landed, Hdb or Condominium.
 > ```
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a house: `addHouse`
 
@@ -440,6 +447,7 @@ Format:
 > Multiple values specified for the following single-valued field(s): type/
 > ```
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting a house: `deleteHouse`
 
@@ -514,6 +522,8 @@ Format: `matchBuyer FULL_NAME`
 > The specified person is not a buyer.
 > ```
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in EstateEase.
@@ -521,7 +531,6 @@ Shows a list of all persons in EstateEase.
 Format: `list`
 
 ![list](images/ui-screenshots/list-success.png)
-
 
 ### Locating persons by name: `find`
 
@@ -600,6 +609,7 @@ Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Th
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EstateEase home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
