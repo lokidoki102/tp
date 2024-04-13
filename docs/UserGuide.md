@@ -466,8 +466,6 @@ Format:
 
 <div style="page-break-after: always;"></div>
 
-[//]: # (@@author )
-
 ### Matching Sellers to a Buyer: `matchBuyer`
 
 Shows a list of sellers and their houses that match the budget and preferred housing type of a specified buyer.
@@ -543,6 +541,8 @@ Format: `deleteHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] [level/L
 </box>
 
 Examples: Largely similar to addHouse commands, except the addHouse command word is now deleteHouse.
+
+[//]: # (@@author )
 
 <div style="page-break-after: always;"></div>
 
@@ -658,17 +658,21 @@ Action     | Format, Examples
 
 ## Glossary
 
-| ID   | Term              | Definitions                                                                                                                                                                                 |
-|------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1    | **CLI**           | Abbreviation for Command Line Interface, a system that lets users operate the software through typed commands. Users input instructions and receive textual responses from the application. |
-| 2    | **GUI**           | Stands for Graphical User Interface, which enables users to interact with the application through visual elements like icons, buttons, and menus.                                           |
-| 3    | **Mainstream OS** | The common operating systems including Windows, Linux, and MacOS.                                                                                                                           |
-| 4    | **Java**          | A programming language required to run EstateEase. For installation guidelines or to check if Java is already installed on your device, refer to the FAQ section.                           |
-| 5    | **Index**         | Represents the position of a person within the displayed list.                                                                                                                              |
-| 6    | **Hdb**           | Hdb refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                                |
-| 7    | **Condo**         | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                    |
-| 8    | **Landed**        | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                             |
-| 9    | **Buyer**         | An individual interested in purchasing a house.                                                                                                                                             |
-| 10   | **Seller**        | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                               |
-| 11   | **House**         | Refers to a property owned by a seller, which are used by **EstateEase** to match with a buyer's preferences.                                                                               |
-| 12   | **JSON**          | Short for JavaScript Object Notation, a format used for storing and transmitting data.                                                                                                      |
+| ID   | Term                  | Definitions                                                                                                                                                                                |
+|------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | CLI                   | Abbreviation for Command Line Interface, a system that lets users operate the software through typed commands. Users input instructions and receive textual responses from the application. |
+| 2    | GUI                   | Stands for Graphical User Interface, which enables users to interact with the application through visual elements like icons, buttons, and menus.                                          |
+| 3    | Mainstream OS         | The common operating systems including Windows, Linux, and MacOS.                                                                                                                          |
+| 4    | Java                  | A programming language required to run EstateEase. For installation guidelines or to check if Java is already installed on your device, refer to the FAQ section.                          |
+| 5    | Index                 | Represents the position of a person within the displayed list.                                                                                                                             |
+| 6    | HDB                   | HDB refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                               |
+| 7    | Condo                 | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                   |
+| 8    | Landed                | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                            |
+| 9    | Buyer                 | An individual interested in purchasing a house.                                                                                                                                            |
+| 10   | Seller                | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                              |
+| 11   | House                 | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                                                   |
+| 12   | JSON                  | Short for JavaScript Object Notation, a format used for storing and transmitting data.                                                                                                     |
+| 13   | Budget                | Refers to the amount a buyer is willing to pay for a house.                                                                                                                                |
+| 14   | Price                 | Refers to the amount a seller is willing to sell the house for.                                                                                                                            |
+| 15   | Preferred Housing Type| The type of house a buyer is seeking.                                                                                                                                                      |
+| 16   | Housing Type          | The type of house being sold by the seller.                                                                                                                                                |
