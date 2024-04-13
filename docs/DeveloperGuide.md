@@ -935,21 +935,21 @@ testers are expected to do more *exploratory* testing.
 - There is currently no `person` with the name "John Carl", "John Felix", "John Zy". <br>
 
 1. **Add seller**
-   1. **Test case** (add a `seller` named `John Carl` with a house `Hdb`): `addSeller n/John Carl p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
-      **Expected**: A new seller is added, with name `John Carl`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
+   1. **Test case** (add a `seller` named `John Carl 1` with a house `Hdb`): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
+      **Expected**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
 
    2. **Test case** (add a `seller` named `John Felix` with a house `Condominium`): `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
       **Expected**: A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
 
-   3. **Test case** (add a `seller` named `John Zy` with a house `Landed`): `addSeller n/John Zy p/98765434 e/johnzy@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
-      **Expected**: A new seller is added, with name `John Zy`, phone `98765434`, email `ohnzy@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
+   3. **Test case** (add a `seller` named `John Carl 2` with a house `Landed`): `addSeller n/John Carl 2 p/98765434 e/johncarl2@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
+      **Expected**: A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
 
 2. **Invalid format**
    1. **Test case** (add a `seller` without compulsory details): `addSeller` <br>
       **Expected**: No seller is added. Error indicating invalid format with constraints shown. <br><br>
 
 3. **Invalid (Duplicate)**
-   1. **Test case** (Duplicate seller -> seller and buyer cannot be same name): `addSeller n/John Carl p/98765432 e/johnd@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+   1. **Test case** (Duplicate seller -> seller and buyer cannot be same name): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
       **Expected**: No seller is added. Error indicating that the person already existed in the data. <br><br>
 
    2. **Test case** (Duplicate house): `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
