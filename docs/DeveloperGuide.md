@@ -996,13 +996,13 @@ testers are expected to do more *exploratory* testing.
 1. **Duplicate name**<br>
 
    1. **Test case:** `editSeller 1 n/John Zy`<br>
-   **Expected:** An error message will be shown, indicating that this person already exists in EstateEase."<br><br>
+   **Expected:** An error message will be shown, indicating that this person already exists in EstateEase.<br><br>
 
 1. **Invalid person type**<br>
 
    1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
    **Expected:** An error message will be shown, indicating that that person you are 
-   trying to edit is not a seller."<br><br>
+   trying to edit is not a seller.<br><br>
 
 1. **Invalid INDEX**<br>
 
@@ -1026,16 +1026,16 @@ testers are expected to do more *exploratory* testing.
 1. **Invalid budget value**<br>
 
     1. **Test case:** `editBuyer 1 budget/-1`<br>
-       **Expected:** An error message will be shown, indicating that the budget should be a positive number."<br><br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
 
     1. **Test case:** `editBuyer 1 budget/0`<br>
-       **Expected:** An error message will be shown, indicating that "Budget should be a positive number."<br><br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
    
 1. **Invalid preferred housing type**<br>
 
     1. **Test case:** `editBuyer 1 type/bungalow`<br>
        **Expected:**: An error message will be shown, indicating that housingType 
-        should only be Landed, Hdb or Condominium."<br><br>
+        should only be Landed, Hdb or Condominium.<br><br>
 
 <box type="info" seamless>
 
