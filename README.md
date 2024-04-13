@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2324S2-CS2103-F09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions) [![codecov](https://codecov.io/gh/AY2324S2-CS2103-F09-1/tp/graph/badge.svg?token=NB86I9H23Z)](https://codecov.io/gh/AY2324S2-CS2103-F09-1/tp)
 
-![Ui](docs/images/estate_ease_ui.png)
+![Ui](docs/images/Ui.png)
 
 ## About the app
 
