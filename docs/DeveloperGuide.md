@@ -909,51 +909,66 @@ testers are expected to do more *exploratory* testing.
 
 [//]: # (@@author KhoonSun47)
 ### Loading Data
+1. **Dealing with Missing Data Folder**
 
-1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
+    1. **Test case:** Manually delete the `data` folder. <br>
+       **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
+   
+2.  **Dealing with Missing Data File**
 
-    1. **Loading Data:**
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
+       **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
 
-        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
-        - The application should automatically populate EstateEase with sample data, displaying buyers and sellers, where sellers are associated with houses. <br>
-        <br>
-1. **Dealing with Corrupted Data Files**
+3. **Dealing with Corrupted Data Files**
 
-    1. **Loading Data:**
+    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). <br>
+       **Expected:** This action violates EstateEase's constraints against duplicate persons, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-        - Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). *OR*
-        - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
-        - Having a data file that has same name as `addressbook.json` but incorrect format.
-        - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
-        - The application should automatically detect this, and display an empty EstateEase.
+    2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
+       **Expected:** This action violates EstateEase's constraints against duplicate houses, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
+
+    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
+       **Expected:** This action violates EstateEase's constraints against incorrect data formats, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br>
 
 [//]: # (@@author KhoonSun47)
 ### Adding a seller
 
 **Prerequisites:** 
 - List all persons using the `list` command. 
-- There is currently no `person` with the name "John Carl", "John Felix", "John Zy". <br>
+- There is currently no `person` with the name "John Carl 1", "John Felix", "John Carl 2". <br>
 
 1. **Add seller**
-   1. **Test case** (add a `seller` named `John Carl 1` with a house `Hdb`): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
-      **Expected**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
+   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
+      **Expected:**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
 
-   2. **Test case** (add a `seller` named `John Felix` with a house `Condominium`): `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
-      **Expected**: A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
+   2. **Test case:** `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
+      **Expected:** A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
 
-   3. **Test case** (add a `seller` named `John Carl 2` with a house `Landed`): `addSeller n/John Carl 2 p/98765434 e/johncarl2@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
-      **Expected**: A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
+   3. **Test case:** `addSeller n/John Carl 2 p/98765434 e/johncarl2@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
+      **Expected:** A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
 
 2. **Invalid format**
-   1. **Test case** (add a `seller` without compulsory details): `addSeller` <br>
-      **Expected**: No seller is added. Error indicating invalid format with constraints shown. <br><br>
+   1. **Test case:** `addSeller` with no compulsory details.<br>
+      **Expected:** No seller is added. Error indicating invalid format with constraints shown. <br><br>
+   
+   2. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
+      **Expected:** No seller is added. Error indicating name should not be blank. <br><br>
+   
+   3. **Test case:** `addSeller n/X Æ A-Xii p/98769999 e/elonmuskson@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating name should only contain alphanumeric and spaces. <br><br>
+
+   4. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating phone numbers should only contain numbers. <br><br>
+
+   5. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that email should be in the format of should be of the format local-part@domain. <br><br>
 
 3. **Invalid (Duplicate)**
-   1. **Test case** (Duplicate seller -> seller and buyer cannot be same name): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
-      **Expected**: No seller is added. Error indicating that the person already existed in the data. <br><br>
+   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000` <br>
+      **Expected:** No seller is added. Error indicating that the person already existed in the data. <br><br>
 
-   2. **Test case** (Duplicate house): `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
-      **Expected**: No seller is added. Error indicating that the house already existed in the data. <br>
+   2. **Test case:** `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
+      **Expected:** No seller is added. Error indicating that the house already existed in the data. <br>
 
 [//]: # (@@author redcolorbicycle)
 ### Adding a house to a seller
@@ -1162,21 +1177,24 @@ similar to the test cases found in `Editing Seller Details`.
 
 [//]: # (@@author KhoonSun47)
 ### Saving Data
+**Prerequisites:**
+- Execute a valid command.
 
-1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
+1. **Dealing with Missing Data Folder**
 
-    1. **Saving Data:**
+    1. **Test case:** Manually delete the `data` folder. <br>
+       **Expected:** The application recreates the `data` folder along with a new `addressbook.json` file, saving the current state of data to this new file. <br><br>
 
-        - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon executing a valid command.
-        - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon executing a valid command.
-        - The application saves the sample data to `addressbook.json` upon executing a valid command. <br>
-        <br>
-1. **Dealing with Corrupted Data Files**
+2. **Dealing with Missing Data File**
 
-    1. **Saving Data:**
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
+       **Expected:** The application recreates the `addressbook.json` file within the existing `data` folder and saves the current state of data to this new file. <br><br>
 
-        - The corrupted `addressbook.json` will be replaced with a correctly formatted `addressbook.json` only after a valid command is executed.
-        - If no valid command is executed, the application maintains the corrupted `addressbook.json`.
+3. **Dealing with Corrupted Data Files**
+
+    1. **Test case:** The `addressbook.json` is corrupted either by incorrect data or format issues. <br>
+       **Expected:** If a valid command is executed after the data file becomes corrupted, the application replaces the corrupted `addressbook.json` with a correctly formatted `addressbook.json` containing the current state of data. If no valid command is executed, the application maintains the corrupted `addressbook.json`. <br><br>
+
 
 [//]: # (@@author)
 
