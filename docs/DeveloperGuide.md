@@ -970,6 +970,40 @@ testers are expected to do more *exploratory* testing.
    2. **Test case:** `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
       **Expected:** No seller is added. Error indicating that the house already existed in the data. <br>
 
+[//]: # (@@author zengzihui)
+### Adding a Buyer
+
+**Prerequisites:**
+- List all persons using the `list` command.
+- There is currently no `person` with the name "James Cook", "Kris Hua", "Neo Ng", "Grace Tan" and "Chris Ong". 
+- "John Carl 1" exists as a seller in EstateEase.<br>
+
+1. **Add buyer**
+    1. **Test case:** `addBuyer n/James Cook p/98753432 e/jamescook@example.com budget/550000 type/Hdb`<br>
+       **Expected:** A new buyer is added, with name `James Cook`, phone `98753432`, email `jamescook@example.com`, budget `550000`, preferred housing type `Hdb`<br><br>
+
+2. **Invalid format**
+    1. **Test case:** `addBuyer` <br>
+       **Expected:** No buyer is added. Error indicating invalid format with constraints shown. <br><br>
+   
+    2. **Test case:** `addBuyer n/Kris Hua p/98765432 e/krishua@example.com budget/99999900` <br>
+       **Expected:** No buyer is added. Error indicating invalid command format. <br><br>
+
+3. **Invalid (Duplicate Person)**
+    1. **Test case:** `addBuyer n/John Carl 1 p/98765432 e/johncarl1@example.com budget/550000 type/Hdb`
+       **Expected:** No buyer is added. Error indicating that the person already existed in the data. <br><br>
+
+4. **Invalid Value**
+   1. **Test case:** `addBuyer n/Neo Ng p/98765432 e/neong@examaple.com budget/99999900 type/HDB` <br>
+       **Expected:** No buyer is added. Error indicating HousingType should only be 'Landed', 'Hdb' or 'Condominium'. HousingType is case-sensitive. <br><br>
+   
+   2. **Test case:** `addBuyer n/Grace Tan p/98765432 e/gracetan@examaple.com budget/-99999900 type/Hdb` <br>
+      **Expected:** No buyer is added. Error indicating budget should be a positive number. <br><br>
+   
+   3. **Test case:** `addBuyer n/Chris Ong p/98765432 e/chrisong@examaple.com budget/aa type/Hdb` <br>
+      **Expected:** No buyer is added. Error indicating budget should be a positive number. <br>
+
+
 [//]: # (@@author redcolorbicycle)
 ### Adding a house to a seller
 
