@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
-  "titlePrefix": "EstateEase",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titlePrefix": "",
+  "titleSuffix": "EstateEase",
+  "faviconPath": "images/real_estate_icon.png",
   "style": {
     "codeTheme": "light"
   },

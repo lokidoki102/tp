@@ -1,3 +1,8 @@
+---
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
+---
 
 # EstateEase Developer Guide
 
@@ -134,11 +139,15 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[//]: # (@@author KhoonSun47)
 ### Malformed JSONs
 <box type="warning" seamless>
 
-> **Warning:** If the JSON file is malformed, the contents of EstateEase will not be loaded, and a log message will be printed to a log file instead of being displayed within the application itself. <br><br> No proactive measures are taken to rectify this issue, such as deleting the corrupted file immediately upon detection or automatically fixing the fields or values in the malformed JSON. <br><br> While we do not assume the intended action for encountering a malformed JSON file, it should be noted that the malformed JSON will eventually be overwritten with a correctly formatted JSON once a valid command is triggered.
+**Warning:** If the JSON file is malformed, the contents of EstateEase will not be loaded, and a log message will be printed to a log file instead of being displayed within the application itself. <br><br> No proactive measures are taken to rectify this issue, such as deleting the corrupted file immediately upon detection or automatically fixing the fields or values in the malformed JSON. <br><br> While we do not assume the intended action for encountering a malformed JSON file, it should be noted that the malformed JSON will eventually be overwritten with a correctly formatted JSON once a valid command is triggered.
+
 </box>
+
+[//]: # (@@author)
 
 ### Common classes
 
@@ -150,17 +159,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+[//]: # (@@author KhoonSun47)
 ### Add seller feature
 
-#### Purpose
-This `addSeller` feature allows user to add a `Seller` and a `House` into the EstateEase
+###### Purpose
+This `addSeller` feature allows user to add a `Seller` and a `House` into EstateEase.
 
-#### Example Usage Scenario
-The following activity diagram summarizes what happens when a user executes the `addSeller` command
+###### Example Usage Scenario
+The following activity diagram summarizes what happens when a user executes the `addSeller` command.
 
 <puml src="diagrams/AddSellerActivityDiagram.puml" width="700" />
 
-#### Implementation
+###### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
 
 <puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" width="1200"/>
@@ -197,7 +207,7 @@ Additionally, it implements the following operations:
 - If the `Seller` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
 - If there is a duplicate `House` in the EstateEase, it will return an error to the user that the should `House` has existed. Each `House` is unique, and there should not be duplicates.
 
-#### Design Considerations
+###### Design Considerations
 **Aspect: How `addSeller` executes:**
 
 * **Alternative 1 (current choice):** Use a new command to add `Seller`.
@@ -216,17 +226,18 @@ Additionally, it implements the following operations:
     * **Pros:** It is easier to implement, because it does not require `House` validation.
     * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
+[//]: # (@@author zengzihui)
 ### Add buyer feature
 
-#### Purpose
+###### Purpose
 This `addBuyer` feature allows user to add a `Buyer` into the EstateEase
 
-#### Example Usage Scenario
+###### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addBuyer` command
 
 <puml src="diagrams/AddBuyerActivityDiagram.puml" width="1000" />
 
-#### Implementation
+###### Implementation
 The following sequence diagram shows how an `addBuyer` operation goes through the `Logic` component:
 
 <puml src="diagrams/AddBuyerSequenceDiagram-Logic.puml" alt="AddBuyerSequenceDiagram-Logic"/>
@@ -245,7 +256,7 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
 **Note:**
 - If the `Buyer` has the same name as a `Seller` or a `Buyer`, it will return an error to the user that the `Person` has existed. Each `Buyer` and `Seller` are unique, and `Buyer` cannot be a `Seller`, and vice versa.
 
-#### Design Considerations
+###### Design Considerations
 **Aspect: How `addBuyer` executes:**
 
 * **Alternative 1 (current choice):** Use a new command to add `Buyer`.
@@ -256,16 +267,12 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
     * **Pros:** Having lesser commands is easier for the user to remember.
     * **Cons:** Difficult to implement, having more prefixes means more validation.
 
-
 ### View the details of a Person feature
 
-#### Purpose
-This `view` feature allows user to view the details of a `Person` in the EstateEase
+###### Purpose
+This `view` feature allows user to view the details of a `Person` in EstateEase.
 
-#### Example Usage Scenario
-The following activity diagram summarizes what happens when a user executes the `view` command
-
-#### Implementation
+###### Implementation
 The following sequence diagram shows how an `view` operation goes through the `Logic` component:
 
 <puml src="diagrams/ViewSequenceDiagram-Logic.puml" alt="ViewSequenceDiagram-Logic"/>
@@ -274,15 +281,15 @@ The following sequence diagram shows how an `view` operation goes through the `L
 1. The `ViewCommand` class extends the `Command` class and is responsible for executing the view person details process. It expects the index of the person in the displayed list to be specified in the command input.
 2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
 3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
-4. The argument which contains a `Index` will then be parsed to `parse()` in `ViewCommandParser`.
-6. If the `Index` is valid, it will then be parsed to the `ViewCommand`, where a constructor will be created.
-7. At the `ViewCommand`, it will check whether `Index` is within the range of the displayed list.
+4. The argument which contains a `INDEX` will then be parsed to `parse()` in `ViewCommandParser`.
+6. If the `INDEX` is valid, it will then be parsed to the `ViewCommand`, where a constructor will be created.
+7. At the `ViewCommand`, it will check whether `INDEX` is within the range of the displayed list.
 8. Once the checks are all done, a `CommandResult` will then be returned. The system will then construct a new `Person` object which contains the `Person` details. This object will then be used to update the `Model` through `showPerson()` method of model.
 
 **Note:**
-- The `Index` should be the index of the displayed person list.
+- The `INDEX` should be the index of the displayed person list.
 
-#### Design Considerations
+###### Design Considerations
 **Aspect: How `view` executes:**
 
 * **Alternative 1 (current choice):** Use a new command to view for both `Buyer` and `Seller` and system will check which object to display.
@@ -301,13 +308,14 @@ The following sequence diagram shows how an `view` operation goes through the `L
     * **Pros:** Save user the trouble to search for index of the person that user want to view.
     * **Cons:** More input validation has to be done, user might not remember the full name of the person if the full name is too long.
 
+[//]: # (@@author lokidoki102)
 
 ### Edit Buyer
 
-#### Purpose
+###### Purpose
 The `editBuyer` command allows users to edit the details an existing `Buyer` in EstateEase.
 
-#### Implementation
+###### Implementation
 
 <puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" width="1200"/>
 
@@ -316,64 +324,65 @@ The `editBuyer` command allows users to edit the details an existing `Buyer` in 
 2. The input is then passed to the `AddressBookParser` which calls `EditBuyerCommandParser.parse()` to parse the input.
    If the input is invalid, this method will throw a `ParseException`, prompting the user where the invalid input went
    wrong.
-3. `EditBuyerCommandParser.parse()` will create an `editBuyerDescriptor` object if the input is valid.
-    The `editBuyerDescriptor` object contains the edited values of the `Buyer`.
+3. `EditBuyerCommandParser.parse()` will create an `EditBuyerDescriptor` object if the input is valid.
+    The `EditBuyerDescriptor` object contains the edited values of the `Buyer`.
     `EditBuyerCommandParser.parse()` will then return an `EditBuyerCommand` object which contains the `INDEX` of the
-    `Buyer` and `editBuyerDescriptor`.
+    `Buyer` and `EditBuyerDescriptor`.
 4. The logic manager will then `execute()` of the `EditBuyerCommand` object.
 5. In the `execute()`, the system will check if the `INDEX` is valid, check if the object being edited is of `Buyer`
-   type, and check if the edited `name` value already exists in EstateEase. If any of these checks fail, a
+   type, and check if the edited `NAME` value already exists in EstateEase. If any of these checks fail, a
    `CommandException` will be thrown.
 6. Once the checks are all done, the system will construct a new `Buyer` object which contains the edited values. This
    object will then be used to update the model through `setPerson()` method of `model`.
 
-#### Design Considerations
+###### Design Considerations
 It is important to ensure that the target of the `editBuyer` command is in fact a `Buyer` object as it has different
 parameters that is not available to `Seller` object. Hence, the reason why the edit command is also separated into two
-commands, one for buyer and one for seller. The uniqueness of the `name` value in the EstateEase is also
-needed as some of the commands uses the `name` to execute the command.
+commands, one for buyer and one for seller. The uniqueness of the `NAME` value in the EstateEase is also
+needed as some of the commands uses the `NAME` to execute the command.
 
 ### Editing Seller Details
 
-#### Purpose
+###### Purpose
 The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
 
-#### Implementation
+###### Implementation
 The overall implementation of this command is very similar to `editBuyer` command, except the command format is
 `editSeller [n/NAME] [p/PHONE] [e/EMAIL]` (E.g. editSeller 1 p/91234567 e/johndoe@example.com).
 
-#### Why It's Implemented That Way
+###### Why It's Implemented That Way
 - The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
 
+[//]: # (@@author felixchanyy)
 ### Matching Sellers to a Buyer
 
-#### Purpose
+###### Purpose
 
 The real estate agent may want to obtain all houses from sellers that match the buyer's preferences. For example, the real estate agent may want to gather all houses from sellers that align with a specified buyer's budget and preferred housing type.
 
-#### Implementation
+###### Example Usage Scenario:
 
-1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the `Buyer` to be specified in the command input. Upon execution, the command retrieves the `Budget` and `HousingType` of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+The following activity diagram summarises the execution of a `matchBuyer` command:
 
-2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
-
-#### Example Usage Scenario:
+<puml src="diagrams/MatchBuyerActivityDiagram.puml" alt="MatchBuyerActivityDiagram" width="800"/>
 
 **Step 1:** The user launches the application for the first time. EstateEase will be initialized with the initial app state (consisting of both `Buyer` and `Seller` details).
 
 **Step 2:** The user executes the `matchBuyer Alice Lim` command to find and display `Seller` details with `House` that match the preferences of the buyer named "Alice Lim" in EstateEase.
 
-**Note:** If the `matchBuyer` command is used without specifying the full name of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
+**Note:** If the `matchBuyer` command is used without specifying `FULL_NAME` of a `Buyer`, it will return a message to the user indicating that the buyer does not exist.
 
-The following activity diagram summarises the execution of a `matchBuyer` command:
-
-<puml src="diagrams/MatchBuyerActivityDiagram.puml" alt="MatchBuyerActivityDiagram" width="1000"/>
+###### Implementation
 
 The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
 
 <puml src="diagrams/MatchBuyerSequenceDiagram-Logic.puml" alt="MatchBuyerSequenceDiagram-Logic" width="1200"/>
 
-#### Design Considerations
+1. The `MatchBuyerCommand` class extends the `Command` class and is responsible for executing the matching process. It expects the full name of the `Buyer` to be specified in the command input. Upon execution, the command retrieves the `Budget` and `HousingType` of the specified buyer. It then matches these preferences with the listings of available sellers' houses.
+
+2. The `MatchBuyerCommandParser` class is used to parse the user input and create the `MatchBuyerCommand` object. When executed by the `LogicManager`, the `MatchBuyerCommand#execute(Model model)` method is called. This method matches the buyer's preferences with available sellers' houses in the model and returns a `CommandResult` object.
+
+###### Design Considerations
 
 * *Alternative 1 (current choice):* Use a new `MatchBuyerCommand` to do matching.
     * Pros:
@@ -390,19 +399,18 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
         * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
         * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
 
-#### Adding Houses
+[//]: # (@@author redcolorbicycle)
+### Adding Houses
 
-### Purpose
+###### Purpose
 
-The `AddHouse` Command is necessary to allow Houses to be added to Sellers.
+The `addHouse` Command is necessary to allow Houses to be added to Sellers.
 
-### Implementation
+###### Example Usage Scenario:
 
-The `AddHouseCommand` class extends the `Command` class and is responsible for executing the adding of a house to a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does not exist and the seller is valid, the house is added to the seller.
+The following sequence diagram shows how an `addHouse` operation goes through the `Logic` component:
 
-The `AddHouseCommandParser` class is used to parse the user input and create the `AddHouseCommand` object. When executed by the `LogicManager`, the `AddHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
-
-### Example Usage Scenario:
+<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic" width="1200"/>
 
 **Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe.
 
@@ -410,12 +418,13 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
 
 **Note:** If the `addHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House`, an error message is displayed.
 
+###### Implementation
 
-The following sequence diagram shows how an `matchBuyer` operation goes through the `Logic` component:
+The `AddHouseCommand` class extends the `Command` class and is responsible for executing the adding of a house to a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does not exist and the seller is valid, the house is added to the seller.
 
-<puml src="diagrams/AddHouseSequenceDiagram-Logic.puml" alt="AddHouseSequenceDiagram-Logic" width="1200"/>
+The `AddHouseCommandParser` class is used to parse the user input and create the `AddHouseCommand` object. When executed by the `LogicManager`, the `AddHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
 
-### Design Considerations
+###### Design Considerations
 
 * *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
     * Pros:
@@ -424,19 +433,17 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
     * Cons:
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
-#### Deleting Houses
+### Deleting Houses
 
-### Purpose
+###### Purpose
 
-The `DeleteHouse` Command is necessary to delete Houses from relevant Sellers.
+The `deleteHouse` Command is necessary to delete Houses from relevant Sellers.
 
-### Implementation
+###### Example Usage Scenario:
 
-The `DeleteHouseCommand` class extends the `Command` class and is responsible for executing the deletion of a house from a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does exist and the seller is valid, the house is deleted from the seller.
+The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
 
-The `DeleteHouseCommandParser` class is used to parse the user input and create the `DeleteHouseCommand` object. When executed by the `LogicManager`, the `DeleteHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
-
-### Example Usage Scenario:
+<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic" width="1200"/>
 
 **Step 1:** The user launches the application. The `AddressBook` is assumed to already have the `Seller` John Doe. John Doe is assumed to have a Condominium located at Clementi Ave 2, level 2 (with no block), unit number 25, postal code 578578 with price 99999.
 
@@ -444,12 +451,13 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 **Note:** If the `deleteHouse` command is used with a `Person` who is not a `Seller`, or with invalid house details, or to a nonexistent `Seller`, or an already existing `House` not under the named `Seller`, an error message is displayed.
 
+###### Implementation
 
-The following sequence diagram shows how an `deleteHouse` operation goes through the `Logic` component:
+The `DeleteHouseCommand` class extends the `Command` class and is responsible for executing the deletion of a house from a seller. It expects the full name of the seller to be specified in the command input, along with the full details of the house. Upon execution, the command fetches listings of available sellers' houses. It checks if the house already exists and if the seller is a valid seller. If it does exist and the seller is valid, the house is deleted from the seller.
 
-<puml src="diagrams/DeleteHouseSequenceDiagram-Logic.puml" alt="DeleteHouseSequenceDiagram-Logic" width="1200"/>
+The `DeleteHouseCommandParser` class is used to parse the user input and create the `DeleteHouseCommand` object. When executed by the `LogicManager`, the `DeleteHouseCommand#execute(Model model)` method is called. This method checks if the seller exists and if the house already exists and if the house is valid and returns a `CommandResult` object.
 
-### Design Considerations
+###### Design Considerations
 
 * *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
     * Pros:
@@ -457,6 +465,8 @@ The following sequence diagram shows how an `deleteHouse` operation goes through
         * Easier to track house logic as it will be contained within the seller
     * Cons:
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
+
+[//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -870,9 +880,28 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+[//]: # (@@author KhoonSun47)
+### Loading Data
 
-### Viewing the details of a person
+1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
+
+    1. **Loading Data:**
+
+        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
+        - The application should automatically populate EstateEase with sample data, displaying buyers and sellers, where sellers are associated with houses.
+
+1. **Dealing with Corrupted Data Files**
+
+    1. **Loading Data:**
+
+        - Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). *OR*
+        - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
+        - Having a data file that has same name as `addressbook.json` but incorrect format.
+        - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
+        - The application should automatically detect this, and display an empty EstateEase.
+
+[//]: # (@@author zengzihui)
+### Viewing a person
 
 1. Viewing the details of a person while all persons are being shown
 
@@ -889,7 +918,80 @@ testers are expected to do more *exploratory* testing.
     1. Other invalid view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+[//]: # (@@author felixchanyy)
+### Matching Sellers to a Buyer
 
+**Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
+
+1. **Matching suitable sellers to a buyer using buyer's full name**
+
+   1. **Test case:** `matchBuyer Alice Lee`
+      **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
+
+1. **Invalid name format**
+
+   1. **Test case:** `matchBuyer Alice`
+      **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+   1. **Test case:** `matchBuyer Lee`
+      **Expected:** Message indicating invalid format. The specified buyer was not found.
+
+1. **Invalid buyer**
+
+   1. **Test case:** `matchBuyer Bob Lim`
+      **Expected:** Message indicating invalid person. The specified person is not a buyer.
+
+1. **Buyer does not exist**
+
+    1. **Test case:** `matchBuyer Ben Chan`
+       **Expected:** Message indicating invalid person. The specified buyer was not found.
+
+[//]: # (@@author lokidoki102)
+### Editing Buyer Details
+
+**Prerequisites:**
+- List all persons using the `list` command.
+- There is a buyer named "aaaaaaa" and this buyer is the first person in the list.
+
+1. **Invalid budget value**<br>
+   **Test case:** `editBuyer 1 budget/-1`<br>
+    Expected: An error message indicating that "Budget should be a positive number."
+1. **Invalid preferred housing type**<br>
+   **Test case:** `editBuyer 1 type/bungalow`<br>
+   Expected: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."
+
+### Editing Seller Details
+
+**Prerequisites:**
+- List all persons using the `list` command.
+- There are no sellers or buyer named "Jessi Oliverson".
+- There is a seller/buyer named "John Doe".
+- There is a seller named "aaaaaaa" and this seller is the first person in the list.
+- There is a buyer named "aaaaaaab" and this buyer is the second person in the list.
+
+1. **Duplicate name**<br>
+   **Test case:** `editSeller 1 n/John Doe`<br>
+   Expected: An error message indicating that "This person already exists in EstateEase."
+1. **Wrong type**<br>
+   **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
+   Expected: An error message indicating that "The person you are trying to edit is not a seller."
+1. **Successful edit**<br>
+   **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
+   Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
+   The updated details of the edited seller will also be shown in the response box.
+1. **Invalid INDEX**<br>
+   **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
+   Expected: An error messsage indicating that the command has invalid format.
+   The error message also indicates that the `INDEX` must be a positive number.
+
+<box type="info" seamless>
+
+**Note:** The test cases for duplicate names, wrong type, successful edit, and invalid index are
+similar to the test cases found in `Editing Seller Details`.
+
+</box>
+
+[//]: # (@@author)
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -905,106 +1007,27 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Loading and Saving Data
+[//]: # (@@author KhoonSun47)
+### Saving Data
 
 1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
 
-   1. **Loading Data:**
-
-        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
-        - The application should automatically populate EstateEase with sample data, displaying buyers and sellers, where sellers are associated with houses.
-
-   2. **Saving Data:**
+    1. **Saving Data:**
 
         - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon executing a valid command.
         - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon executing a valid command.
         - The application saves the sample data to `addressbook.json` upon executing a valid command.
 
-2. **Dealing with Corrupted Data Files**
+1. **Dealing with Corrupted Data Files**
 
-   1. **Loading Data:**
-
-        - Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). *OR*
-        - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
-        - Having a data file that has same name as `addressbook.json` but incorrect format.
-        - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
-        - The application should automatically detect this, and display an empty EstateEase.
-
-   2. **Saving Data:**
+    1. **Saving Data:**
 
         - The corrupted `addressbook.json` will be replaced with a correctly formatted `addressbook.json` only after a valid command is executed.
         - If no valid command is executed, the application maintains the corrupted `addressbook.json`.
 
-### Matching Sellers to a Buyer
+[//]: # (@@author)
 
-**Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
-
-1. **Matching suitable sellers to a buyer using buyer's full name**
-
-   1. **Test case:** `matchBuyer Alice Lee`
-      **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
-
-2. **Invalid name format**
-
-   2. **Test case:** `matchBuyer Alice`
-      **Expected:** Message indicating invalid format. The specified buyer was not found.
-
-   2. **Test case:** `matchBuyer Lee`
-      **Expected:** Message indicating invalid format. The specified buyer was not found.
-
-3. **Invalid buyer**
-
-   3. **Test case:** `matchBuyer Bob Lim`
-      **Expected:** Message indicating invalid person. The specified person is not a buyer.
-
-4. **Buyer does not exist**
-
-    4. **Test case:** `matchBuyer Ben Chan`
-       **Expected:** Message indicating invalid person. The specified buyer was not found.
-
-### Editing Seller Details
-
-**Prerequisites:**
-- List all persons using the `list` command.
-- There are no sellers or buyer named "Jessi Oliverson".
-- There is a seller/buyer named "John Doe".
-- There is a seller named "aaaaaaa" and this seller is the first person in the list.
-- There is a buyer named "aaaaaaab" and this buyer is the second person in the list.
-
-1. **Duplicate name**<br>
-   **Test case:** `editSeller 1 n/John Doe`<br>
-    Expected: An error message indicating that "This person already exists in EstateEase."
-2. **Wrong type**<br>
-   **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
-    Expected: An error message indicating that "The person you are trying to edit is not a seller."
-3. **Successful edit**<br>
-   **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-    Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
-    The updated details of the edited seller will also be shown in the response box.
-4. **Invalid INDEX**<br>
-   **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
-    Expected: An error messsage indicating that the command has invalid format.
-    The error message also indicates that the `INDEX` must be a positive number.
-
-### Editing Buyer Details
-
-**Prerequisites:**
-- List all persons using the `list` command.
-- There is a buyer named "aaaaaaa" and this buyer is the first person in the list.
-
-1. **Invalid budget value**<br>
-   **Test case:** `editBuyer 1 budget/-1`<br>
-    Expected: An error message indicating that "Budget should be a positive number."
-2. **Invalid preferred housing type**<br>
-   **Test case:** `editBuyer 1 type/bungalow`<br>
-   Expected: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."
-
-<box type="info" seamless>
-
-**Note:** The test cases for duplicate names, wrong type, successful edit, and invalid index are
-similar to the test cases found in `Editing Seller Details`.
-
-</box>
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix B: Proposed enhancements**
 
