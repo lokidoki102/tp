@@ -930,9 +930,9 @@ testers are expected to do more *exploratory* testing.
 [//]: # (@@author KhoonSun47)
 ### Adding a seller
 
-1. **Prerequisites:** 
-   1. List all persons using the `list` command. 
-   2. There is currently no `person` with the name "John Carl", "John Felix", "John Zy". <br><br>
+**Prerequisites:** 
+- List all persons using the `list` command. 
+- There is currently no `person` with the name "John Carl", "John Felix", "John Zy". <br>
 
 1. **Add seller**
    1. **Test case** (add a `seller` named `John Carl` with a house `Hdb`): `addSeller n/John Carl p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
