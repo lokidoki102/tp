@@ -1086,47 +1086,76 @@ testers are expected to do more *exploratory* testing.
        **Expected:** Message indicating invalid person. The specified buyer was not found.
 
 [//]: # (@@author lokidoki102)
-### Editing Buyer Details
-
-**Prerequisites:**
-- List all persons using the `list` command.
-- There is a buyer named "aaaaaaa" and this buyer is the first person in the list.
-
-1. **Invalid budget value**<br>
-   **Test case:** `editBuyer 1 budget/-1`<br>
-    Expected: An error message indicating that "Budget should be a positive number."
-1. **Invalid preferred housing type**<br>
-   **Test case:** `editBuyer 1 type/bungalow`<br>
-   Expected: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."
-
 ### Editing Seller Details
 
 **Prerequisites:**
-- List all persons using the `list` command.
 - There are no sellers or buyer named "Jessi Oliverson".
-- There is a seller/buyer named "John Doe".
-- There is a seller named "aaaaaaa" and this seller is the first person in the list.
-- There is a buyer named "aaaaaaab" and this buyer is the second person in the list.
+- There is a seller named "John Felix".
+- There is a seller/buyer named "John Zy".
+- For each `editSeller` command execution in this manual testing, execute the `find` command on the targeted
+  buyer/seller to ensure that this person is displayed as the first person in the list.
+- For invalid person type test case, ensure that the first person in the list is a `Buyer`.
+
+1. **Successful edit**<br>
+
+   1. **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
+   **Expected:** The name "John Felix" is edited to "Jessi Oliverson".
+   The updated details of the edited seller will also be shown.<br><br>
+
+   1. **Test case:** `editSeller 1 p/87654321`<br>
+      **Expected:** The phone number is edited to "87654321".
+      The updated details of the edited seller will also be shown.<br><br>
 
 1. **Duplicate name**<br>
-   **Test case:** `editSeller 1 n/John Doe`<br>
-   Expected: An error message indicating that "This person already exists in EstateEase."
-1. **Wrong type**<br>
-   **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
-   Expected: An error message indicating that "The person you are trying to edit is not a seller."
-1. **Successful edit**<br>
-   **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-   Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
-   The updated details of the edited seller will also be shown in the response box.
+
+   1. **Test case:** `editSeller 1 n/John Zy`<br>
+   **Expected:** An error message will be shown, indicating that this person already exists in EstateEase.<br><br>
+
+1. **Invalid person type**<br>
+
+   1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
+   **Expected:** An error message will be shown, indicating that that person you are 
+   trying to edit is not a seller.<br><br>
+
 1. **Invalid INDEX**<br>
-   **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
-   Expected: An error messsage indicating that the command has invalid format.
+
+   1. **Test case:** `editSeller 0 p/87654321`<br>
+   **Expected:** An error messsage will be shown, indicating that the command has invalid format.
    The error message also indicates that the `INDEX` must be a positive number.
 
 <box type="info" seamless>
 
-**Note:** The test cases for duplicate names, wrong type, successful edit, and invalid index are
+**Note:** The test cases for invalid input for each parameter is similar the test cases found in `Adding a seller.`
+
+</box>
+
+### Editing Buyer Details
+
+**Prerequisites:**
+- There is a buyer named "James Cook".
+- For each `editBuyer` command execution in this manual testing, execute the `find` command on the targeted
+  buyer/seller to ensure that this person is displayed as the first person in the list.
+
+1. **Invalid budget value**<br>
+
+    1. **Test case:** `editBuyer 1 budget/-1`<br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
+
+    1. **Test case:** `editBuyer 1 budget/0`<br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
+   
+1. **Invalid preferred housing type**<br>
+
+    1. **Test case:** `editBuyer 1 type/bungalow`<br>
+       **Expected:**: An error message will be shown, indicating that housingType 
+        should only be Landed, Hdb or Condominium.<br><br>
+
+<box type="info" seamless>
+
+**Note:** 
+1. The test cases for duplicate names, invalid person type, successful edit, and invalid index are
 similar to the test cases found in `Editing Seller Details`.
+2. The test cases for invalid input for each parameter is similar the test cases found in `Adding a buyer.`
 
 </box>
 
