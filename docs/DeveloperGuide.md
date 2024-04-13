@@ -1002,9 +1002,15 @@ testers are expected to do more *exploratory* testing.
    **Expected:** An error message indicating that "The person you are trying to edit is not a seller."<br><br>
 
 1. **Invalid INDEX**<br>
-   1. **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
+   1. **Test case:** `editSeller 0 p/87654321`<br>
    **Expected:** An error messsage indicating that the command has invalid format.
    The error message also indicates that the `INDEX` must be a positive number.
+
+<box type="info" seamless>
+
+**Note:** The test cases for invalid input for each parameter is similar the test cases found in `Adding a seller.`
+
+</box>
 
 ### Editing Buyer Details
 
@@ -1023,8 +1029,10 @@ testers are expected to do more *exploratory* testing.
 
 <box type="info" seamless>
 
-**Note:** The test cases for duplicate names, invalid person type, successful edit, and invalid index are
+**Note:** 
+1. The test cases for duplicate names, invalid person type, successful edit, and invalid index are
 similar to the test cases found in `Editing Seller Details`.
+2. The test cases for invalid input for each parameter is similar the test cases found in `Adding a buyer.`
 
 </box>
 
