@@ -994,14 +994,17 @@ testers are expected to do more *exploratory* testing.
       The updated details of the edited seller will also be shown in the response box.<br><br>
 
 1. **Duplicate name**<br>
+
    1. **Test case:** `editSeller 1 n/John Zy`<br>
    **Expected:** An error message indicating that "This person already exists in EstateEase."<br><br>
 
 1. **Invalid person type**<br>
+
    1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
    **Expected:** An error message indicating that "The person you are trying to edit is not a seller."<br><br>
 
 1. **Invalid INDEX**<br>
+
    1. **Test case:** `editSeller 0 p/87654321`<br>
    **Expected:** An error messsage indicating that the command has invalid format.
    The error message also indicates that the `INDEX` must be a positive number.
@@ -1020,10 +1023,15 @@ testers are expected to do more *exploratory* testing.
   buyer/seller to ensure that this person is displayed as the first person in the list.
 
 1. **Invalid budget value**<br>
+
     1. **Test case:** `editBuyer 1 budget/-1`<br>
        **Expected:** An error message indicating that "Budget should be a positive number."<br><br>
 
+    1. **Test case:** `editBuyer 1 budget/0`<br>
+       **Expected:** An error message indicating that "Budget should be a positive number."<br><br>
+   
 1. **Invalid preferred housing type**<br>
+
     1. **Test case:** `editBuyer 1 type/bungalow`<br>
        **Expected:**: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."<br><br>
 
