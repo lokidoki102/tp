@@ -1,8 +1,3 @@
----
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
----
 
 # EstateEase Developer Guide
 
