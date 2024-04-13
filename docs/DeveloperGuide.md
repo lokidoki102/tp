@@ -960,7 +960,8 @@ testers are expected to do more *exploratory* testing.
 
 **Prerequisites:**
 - List all persons using the `list` command.
-- There is currently no `person` with the name "James Cook", "Kris Hua". "John Carl 1" exists as a seller in EstateEase.<br>
+- There is currently no `person` with the name "James Cook", "Kris Hua", "Neo Ng", "Grace Tan" and "Chris Ong". 
+- "John Carl 1" exists as a seller in EstateEase.<br>
 
 1. **Add buyer**
     1. **Test case:** `addBuyer n/James Cook p/98753432 e/jamescook@example.com budget/550000 type/Hdb`<br>
