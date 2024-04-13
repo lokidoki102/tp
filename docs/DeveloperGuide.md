@@ -168,12 +168,22 @@ This `addSeller` feature allows user to add a `Seller` and a `House` into Estate
 ###### Example Usage Scenario
 The following activity diagram summarizes what happens when a user executes the `addSeller` command.
 
-<puml src="diagrams/AddSellerActivityDiagram.puml"/>
+<puml src="diagrams/AddSellerActivityDiagram.puml" width="700" />
 
 ###### Implementation
 The following sequence diagram shows how an `addSeller` operation goes through the `Logic` component:
 
-<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic"/>
+<puml src="diagrams/AddSellerSequenceDiagram-Logic.puml" alt="AddSellerSequenceDiagram-Logic" width="1200"/>
+
+<box type="info" seamless>
+
+**Take Note of the Parameters for Sequence Diagram:**
+
+- `argumentA`: addSeller n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999
+- `argumentB`: n/John Doe p/98765432 e/johnd@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999
+- `argumentC`: type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999
+</box>
+
 
 The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
 Additionally, it implements the following operations:
