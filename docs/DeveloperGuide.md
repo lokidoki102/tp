@@ -987,11 +987,11 @@ testers are expected to do more *exploratory* testing.
 
    1. **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
    **Expected:** The name "John Felix" is edited to "Jessi Oliverson".
-   The updated details of the edited seller will also be shown in the response box.<br><br>
+   The updated details of the edited seller will also be shown.<br><br>
 
    1. **Test case:** `editSeller 1 p/87654321`<br>
       **Expected:** The phone number is edited to "87654321".
-      The updated details of the edited seller will also be shown in the response box.<br><br>
+      The updated details of the edited seller will also be shown.<br><br>
 
 1. **Duplicate name**<br>
 
