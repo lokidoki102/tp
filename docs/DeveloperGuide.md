@@ -497,38 +497,42 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​                     | I want to …​                                                                                  | So that I can…​                                                              |
-|-----------|-----------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| `* * * *` | real estate agent           | add home-sellers clients                                                                      | keep track of their contact details and the properties that they are selling |
-| `* * * *` | real estate agent           | add home-buyers clients                                                                       | keep track of their contact details and requirements                         |
-| `* * * *` | real estate agent           | view the list of all contacts stored                                                          | quickly find the contact I need                                              |
-| `* * * *` | real estate agent           | delete the contact that I want to remove                                                      | remove outdated or irrelevant contacts                                       |
-| `* * * *` | real estate agent           | be able to exit the program when I want to                                                    | close the application                                                        |
-| `* * * *` | real estate agent           | be able to automatically save the data I added, changed, and deleted                          | load the data when I open the application, with the saved data, next time    |
-| `* * *`   | real estate agent           | keep track of my buyer's budgets                                                              | efficiently match them with houses within their financial constraints        |
-| `* * *`   | real estate agent           | keep track of the prices of the houses                                                        | better manage my clients' requirements                                       |
-| `* * *`   | real estate agent           | match buyers with sellers based on the buyers' requirements                                   | quickly identify houses that align with their preferences.                   |
-| `* * *`   | real estate agent           | find for a specific contact                                                                   | access their details without scrolling through a long list                   |
-| `* * *`   | real estate agent           | easily update or modify existing contact information                                          | have accurate and up-to-date records                                         |
-| `* * *`   | real estate agent           | add new houses to the home-sellers                                                            | keep track of the houses the home-sellers have                               |
-| `* * *`   | real estate agent           | have whatever contacts I add load to the laptop I am using                                    | do not need to re-enter all the details whenever I open the app              |
-| `* *`     | busy real estate agent      | be able to view specific buyer's requirements                                                 | understand what are their needs quickly                                      |
-| `* *`     | busy real estate agent      | be able to view specific seller's properties                                                  | effectively assess their listings quickly                                    |
-| `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller                          | do not need to remember their identity                                       |
+[//]: # (@@author zengzihui)
+| Priority  | As a …​                     | I want to …​                                                         | So that I can…​                                                           |
+|-----------|-----------------------------|----------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * * *` | real estate agent           | add seller                                                           | keep track of their contact details and the houses that they are selling  |
+| `* * * *` | real estate agent           | add buyer                                                            | keep track of their contact details and requirements                      |
+| `* * * *` | real estate agent           | view the list of all persons                                         | quickly find the contact I need                                           |
+| `* * * *` | real estate agent           | delete the buyer/seller that I want to remove                        | remove outdated or irrelevant contacts                                    |
+| `* * * *` | real estate agent           | be able to exit the program when I want to                           | close the application                                                     |
+| `* * * *` | real estate agent           | be able to automatically save the data I added, changed, and deleted | load the data when I open the application, with the saved data, next time |
+| `* * *`   | real estate agent           | keep track of my buyer's budgets                                     | efficiently match them with houses within their financial constraints     |
+| `* * *`   | real estate agent           | keep track of the prices of the houses                               | better manage my buyers' requirements                                     |
+| `* * *`   | real estate agent           | match buyers with sellers based on the buyers' requirements          | quickly identify houses that align with their preferences.                |
+| `* * *`   | real estate agent           | find for a specific contact                                          | access their details without scrolling through a long list                |
+| `* * *`   | real estate agent           | easily update or modify existing contact information                 | have accurate and up-to-date records                                      |
+| `* * *`   | real estate agent           | add new houses to the sellers                                        | keep track of the houses that the sellers have                            |
+| `* * *`   | real estate agent           | delete existing houses from the sellers house list                   | remove irrelevant or incorrect houses                                     |
+| `* * *`   | real estate agent           | have whatever EstateEase data I add load to the laptop I am using    | do not need to re-enter all the details whenever I open the app           |
+| `* *`     | busy real estate agent      | be able to view specific buyer's requirements                        | understand what are their needs quickly                                   |
+| `* *`     | busy real estate agent      | be able to view specific seller's properties                         | effectively assess their listings quickly                                 |
+| `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller | do not need to remember their identity                                    |
+
+[//]: # (@@author )
 
 ### Use cases
 
 (For all use cases below, the **System** is the `EstateEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a home-seller to contact list**
+**Use case: UC01 - Add a seller to person list**
 
 **MSS:**
 
-1. User chooses to add home-seller.
-2. EstateEase requests for the details of the home-seller.
+1. User chooses to add seller.
+2. EstateEase requests for the details of the seller.
 3. User enters the requested details.
-4. Include Use Case UC03 (Add house to home-seller) for the first house.
-4. EstateEase adds the home-seller and displays the newly added home-seller along with one house. <br>
+4. Include Use Case UC03 (Add house to seller) for the first house.
+4. EstateEase adds the seller and displays the newly added seller along with one house. <br>
    Use case ends.
 
 **Extensions**
@@ -536,7 +540,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3b. User enters a home-seller that already exists. <br>
+* 3b. User enters a seller that already exists. <br>
     * 3b1. EstateEase shows an error message. <br>
       Use case ends.
 
@@ -548,14 +552,14 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3d1. EstateEase shows an error message. <br>
       Use case ends.
 
-**Use case: UC02 - Add a home-buyer to contact list**
+**Use case: UC02 - Add a buyer to person list**
 
 **MSS:**
 
-1. User chooses to add home-buyer.
-2. EstateEase requests for the details of the home-buyer.
+1. User chooses to add buyer.
+2. EstateEase requests for the details of the buyer.
 3. User enters the requested details.
-4. EstateEase adds the home-buyer and displays the newly added home-buyer. <br>
+4. EstateEase adds the buyer and displays the newly added buyer. <br>
    Use case ends.
 
 **Extensions**
@@ -563,7 +567,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3a1. EstateEase shows an error message. <br>
       Use case ends.
 
-* 3b. User enters a home-buyer that already exists. <br>
+* 3b. User enters a buyer that already exists. <br>
     * 3b1. EstateEase shows an error message. <br>
       Use case ends.
 
@@ -575,18 +579,18 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3d1. EstateEase shows an error message. <br>
       Use case ends.
 
-**Use case: UC03 - Add house to house-seller**
+**Use case: UC03 - Add house to seller**
 
 **MSS:**
 
-1. User chooses to add new house to home-seller.
+1. User chooses to add new house to seller.
 2. EstateEase requests for the details of the house.
 3. User enters requested details.
-4. EstateEase adds the new house and displays the newly added house of the home-seller. <br>
+4. EstateEase adds the new house and displays the newly added house of the seller. <br>
    Use case ends.
 
 **Extensions**
-* 1a. The EstateEase list does not have any home-seller. <br>
+* 1a. The EstateEase list does not have any seller. <br>
     * 1a1. EstateEase shows an error message. <br>
       Use case ends.
 
@@ -610,12 +614,13 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3e1. EstateEase shows an error message. <br>
       Use case ends.
 
-**Use case: UC04 - View all contacts**
+[//]: # (@@author lokidoki102)
+**Use case: UC04 - View all persons**
 
 **MSS:**
 
-1.  User requests to list all of his/her contacts.
-2.  EstateEase displays a list of contacts, each with their details
+1.  User requests to list all of his/her persons.
+2.  EstateEase displays a list of persons, each with their details
     and an indication of whether they are a buyer or seller.
 
     Use case ends.
@@ -627,19 +632,22 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC05 - Delete a contact**
+[//]: # (@@author )
+
+[//]: # (@@author zengzihui)
+**Use case: UC05 - Delete a person**
 
 **MSS:**
 
-1.  User requests to <u>view all contacts (UC04)</u>.
-2.  User requests to delete a specific contact in the contact list.
-3.  EstateEase deletes the contact.
+1.  User requests to <u>view all person (UC04)</u>.
+2.  User requests to delete a specific person in the person list.
+3.  EstateEase deletes the person.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The contact list is empty.
+* 1a. The person list is empty.
 
   Use case ends.
 
@@ -652,6 +660,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 2b1. EstateEase shows an error message regarding the out of range.
 
       Use case resumes at step 1.
+
+[//]: # (@@author )
 
 **Use case: UC06 - Load EstateEase data from file**
 
@@ -707,28 +717,29 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 2b1. EstateEase shows error message regarding the IOException to the user. <br>
       Use case ends.
 
-**Use case: UC08 - Search a contact**
+[//]: # (@@author zengzihui)
+**Use case: UC08 - Search a person**
 
 **MSS:**
 
-1. User requests to search for a contact.
-2. EstateEase displays all the contacts that match the inputted contact name.
+1. User requests to search for a person.
+2. EstateEase displays all the person that match the inputted person name.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given contact name does not match any contact names in the contact list.
+* 1a. The given person name does not match any person names in the person list.
     * 1a1. EstateEase shows an error message indicating no matches found.
 
       Use case ends.
 
-**Use case: UC09 - View a home-buyer's requirements**
+**Use case: UC09 - View a buyer's requirements**
 
 **MSS:**
 
 1. User requests to view a specific buyer's requirements.
-2. EstateEase displays the home-buyer's personal details with their requirements.
+2. EstateEase displays the buyer's personal details with their requirements.
    Use case ends.
 
 **Extensions**
@@ -740,12 +751,12 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     *   2b1. EstateEase shows an error message regarding an invalid command.
         Use case ends.
 
-**Use case: UC10 - View a home-seller's properties**
+**Use case: UC10 - View a seller's houses**
 
 **MSS:**
 
-1. User requests to view a specific seller's properties.
-2. EstateEase displays the home-seller's personal details with their properties details.
+1. User requests to view a specific seller's houses.
+2. EstateEase displays the seller's personal details with their houses details.
 
    Use case ends.
 
@@ -760,11 +771,14 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
+[//]: # (@@author )
+
+[//]: # (@@author lokidoki102)
 **Use case: UC11 - Edit buyer details**
 
 **MSS:**
 
-1.  User executes the command to edit a Buyer in EstateEase.
+1.  User executes the command to edit a buyer in EstateEase.
 2.  EstateEase updates the details of the specific buyer selected by the user.
 
     Use case ends.
@@ -786,10 +800,11 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
       Use case ends.
 
-**Use case: UC12 - Edit seller details**
+**Use case: UC12 - Edit seller details** <br>
 This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in different field
 (i.e. parameters for name, phone, and email).
 
+[//]: # (@@author )
 
 **Use case: UC13 - Match sellers with buyer's preferences**
 
@@ -830,27 +845,38 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 
 ### Non-Functional Requirements
 
-1. The program should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. The program should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. The program should be capable of running both online and offline.
-4. The program should be able to recover from common errors and not crash without user intervention.
-5. The program should provide meaningful error messages that guide the user to resolve issues.
-6. The program should be able to respond to any user input within at most 2 seconds.
-7. The program must perform consistently across different devices and operating systems with a reliability rate of 99%.
-8. The program only supports one user at a time.
-9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+| ID | Requirement                                                                                                                             |
+|----|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | The application must operate on Windows, Linux, and MacOS platforms provided Java `11` is installed.                                    |
+| 2  | The system should support up to 1000 persons and 1000 houses without experiencing performance lags during typical usage.                |
+| 3  | Users with above-average typing speeds should be able to perform most tasks more efficiently using keyboard commands than with a mouse. |
+| 4  | The application should function properly both online and offline.                                                                       |
+| 5  | All data should load and the application should respond within three seconds.                                                           |
+| 6  | Actions such as adding, updating, or deleting person records must complete within three seconds.                                        |
+| 7  | The response time for adding or deleting a house must also be within three seconds.                                                     |
+| 8  | The user interface should be intuitive enough for users unfamiliar with similar applications.                                           |
+| 9  | The software must maintain a reliability rate of 99% across various devices and operating systems.                                      |
+| 10 | The system is designed to support only one user at a time.                                                                              |
+| 11 | Data should be stored locally on the user's device.                                                                                     |
+| 12 | The application should automatically recover from common errors without crashing or requiring user intervention.                        |
+| 13 | The program must provide meaningful error messages either in the application or terminal to help users resolve issues.                  |
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
-* **Index**: A number that references the position of the contact in the contact list
-* **Unique ID**: An attribute that uniquely identifies the contacts and houses in the contact list
-* **Home-buyer**: The contact who wants to buy a house
-* **Home-seller**: The contact who wants to sell their houses.
-* **Contact**: Home-buyer/Home-seller who is added to the list, containing details of name, phone number etc.
-* **Home**: Details of the homes by the home-seller
+| ID | Term                   | Definitions                                                                                                                                                                                |
+|----|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Index                  | Represents the position of a person within the displayed list.                                                                                                                             |
+| 2  | HDB                    | HDB refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                               |
+| 3  | Condo                  | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                   |
+| 4  | Landed                 | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                            |
+| 5  | Buyer                  | An individual interested in purchasing a house.                                                                                                                                            |
+| 6  | Seller                 | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                              |
+| 7  | House                  | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                                                   |
+| 8  | Budget                 | Refers to the amount a buyer is willing to pay for a house.                                                                                                                                |
+| 9  | Price                  | Refers to the amount a seller is willing to sell the house for.                                                                                                                            |
+| 10 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                      |
+| 11 | Housing Type           | The type of house being sold by the seller.                                                                                                                                                |
+| 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -908,7 +934,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1`<br>
-       Expected: Details of the first contact from the displayed list is displayed at the right side of the panel
+       Expected: Details of the first person from the displayed list is displayed at the right side of the panel
         with the displayed person list at the left side of the panel. Name of the selected person shown in the
         status message.
 
@@ -999,7 +1025,7 @@ similar to the test cases found in `Editing Seller Details`.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
