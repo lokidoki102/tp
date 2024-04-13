@@ -911,23 +911,23 @@ testers are expected to do more *exploratory* testing.
 ### Loading Data
 1. **Dealing with Missing Data Folder**
 
-    1. **Test case:** Manually delete the `data` folder.
+    1. **Test case:** Manually delete the `data` folder. <br>
        **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
    
 2.  **Dealing with Missing Data File**
 
-    1. **Test case:** Manually delete the `addressbook.json` file.
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
        **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
 
 3. **Dealing with Corrupted Data Files**
 
-    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa).
+    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). <br>
        **Expected:** This action violates EstateEase's constraints against duplicate persons, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-    2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses.
+    2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
        **Expected:** This action violates EstateEase's constraints against duplicate houses, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format.
+    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
        **Expected:** This action violates EstateEase's constraints against incorrect data formats, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br>
 
 [//]: # (@@author KhoonSun47)
@@ -1182,18 +1182,18 @@ similar to the test cases found in `Editing Seller Details`.
 
 1. **Dealing with Missing Data Folder**
 
-    1. **Test case** (Missing data folder): Manually delete the `data` folder.
-       **Expected**: The application recreates the `data` folder along with a new `addressbook.json` file, saving the current state of data to this new file. <br><br>
+    1. **Test case:** Manually delete the `data` folder. <br>
+       **Expected:** The application recreates the `data` folder along with a new `addressbook.json` file, saving the current state of data to this new file. <br><br>
 
 2. **Dealing with Missing Data File**
 
-    1. **Test case** (Missing `addressbook.json` file): Manually delete the `addressbook.json` file.
-       **Expected**: The application recreates the `addressbook.json` file within the existing `data` folder and saves the current state of data to this new file. <br><br>
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
+       **Expected:** The application recreates the `addressbook.json` file within the existing `data` folder and saves the current state of data to this new file. <br><br>
 
 3. **Dealing with Corrupted Data Files**
 
-    1. **Test case** (Saving after data file corruption): The `addressbook.json` is corrupted either by incorrect data or format issues.
-       **Expected**: If a valid command is executed after the data file becomes corrupted, the application replaces the corrupted `addressbook.json` with a correctly formatted `addressbook.json` containing the current state of data. If no valid command is executed, the application maintains the corrupted `addressbook.json`. <br><br>
+    1. **Test case:** The `addressbook.json` is corrupted either by incorrect data or format issues. <br>
+       **Expected:** If a valid command is executed after the data file becomes corrupted, the application replaces the corrupted `addressbook.json` with a correctly formatted `addressbook.json` containing the current state of data. If no valid command is executed, the application maintains the corrupted `addressbook.json`. <br><br>
 
 
 [//]: # (@@author)
