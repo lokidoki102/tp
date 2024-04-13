@@ -964,7 +964,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** No seller is added. Error indicating that email should be in the format of should be of the format local-part@domain. <br><br>
 
 3. **Invalid (Duplicate)**
-   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
+   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000` <br>
       **Expected:** No seller is added. Error indicating that the person already existed in the data. <br><br>
 
    2. **Test case:** `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
