@@ -937,31 +937,31 @@ testers are expected to do more *exploratory* testing.
 
 1. **Adding the house to the seller**
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** New house added!
 
 1. **Invalid house format**
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` addHouse n/John Doe type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** Invalid command format!
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578578 price/99999`<br>
        **Expected:** Invalid command format!
    
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578578 price/99999`
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578578 price/99999`<br>
        **Expected:** Invalid command format!
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`<br>
        **Expected:** Invalid command format!
 
 1. **Invalid seller**
 
-    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** This Seller does not exist in EstateEase
 
 1. **House already exists**
 
-    1. **Test case:** `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** This house already exists in EstateEase
 
 [//]: # (@@author redcolorbicycle)
@@ -976,22 +976,22 @@ testers are expected to do more *exploratory* testing.
 
 1. **Deleting the house from the seller**
 
-    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** House deleted!
 
 1. **Deleting the house from the wrong seller**
 
-    1. **Test case:** ` deleteHouse n/Jovi Rato type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` deleteHouse n/Jovi Rato type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** This house does not belong to this seller!
 
 1. **House does not exist**
 
-    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** This house does not exist in EstateEase
 
 1. **Invalid seller**
 
-    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
        **Expected:** This Seller does not exist in EstateEase
 
 
