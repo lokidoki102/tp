@@ -977,7 +977,7 @@ testers are expected to do more *exploratory* testing.
     1. **Test case:** `addBuyer n/John Carl 1 p/98765432 e/johncarl1@example.com budget/550000 type/Hdb`
        **Expected:** No buyer is added. Error indicating that the person already existed in the data. <br><br>
 
-4. **Invalid Value for certain fields**
+4. **Invalid Value**
    1. **Test case:** `addBuyer n/Neo Ng p/98765432 e/neong@examaple.com budget/99999900 type/HDB` <br>
        **Expected:** No buyer is added. Error indicating HousingType should only be 'Landed', 'Hdb' or 'Condominium'. HousingType is case-sensitive. <br><br>
    
