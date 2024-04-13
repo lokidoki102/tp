@@ -926,6 +926,75 @@ testers are expected to do more *exploratory* testing.
         - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
         - The application should automatically detect this, and display an empty EstateEase.
 
+[//]: # (@@author redcolorbicycle)
+### Adding a house to a seller
+
+**Prerequisites:** 
+- There is a seller by the name of "John Doe".
+- There is no seller by the name of "Lim Carl".
+- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578578 and Price of 99999 does not currently exist in EstateEase.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578578 and Price of 99999 currently exists in EstateEase.
+
+1. **Adding the house to the seller**
+
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** New house added!
+
+1. **Invalid house format**
+
+    1. **Test case:** ` addHouse n/John Doe type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** Invalid command format!
+
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578578 price/99999`
+       **Expected:** Invalid command format!
+   
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578578 price/99999`
+       **Expected:** Invalid command format!
+
+    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`
+       **Expected:** Invalid command format!
+
+1. **Invalid seller**
+
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** This Seller does not exist in EstateEase
+
+1. **House already exists**
+
+    1. **Test case:** `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`
+       **Expected:** This house already exists in EstateEase
+
+[//]: # (@@author redcolorbicycle)
+### Deleting a house from a seller
+
+**Prerequisites:**
+- There is a seller by the name of "John Doe".
+- There is a seller by the name of "Jovi Rato".
+- There is no seller by the name of "Lim Carl".
+- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578578 and Price of 99999 does not currently exist in EstateEase.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578578 and Price of 99999 currently exists in EstateEase and is owned by John Doe.
+
+1. **Deleting the house from the seller**
+
+    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** House deleted!
+
+1. **Deleting the house from the wrong seller**
+
+    1. **Test case:** ` deleteHouse n/Jovi Rato type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** This house does not belong to this seller!
+
+1. **House does not exist**
+
+    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`
+       **Expected:** This house does not exist in EstateEase
+
+1. **Invalid seller**
+
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`
+       **Expected:** This Seller does not exist in EstateEase
+
+
 [//]: # (@@author zengzihui)
 ### Viewing a person
 
@@ -935,14 +1004,15 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `view 1`<br>
        Expected: Details of the first person from the displayed list is displayed at the right side of the panel
-        with the displayed person list at the left side of the panel. Name of the selected person shown in the
-        status message.
+       with the displayed person list at the left side of the panel. Name of the selected person shown in the
+       status message.
 
     1. Test case: `view 0`<br>
        Expected: No person details is displayed. Error details shown in the status message.
 
     1. Other invalid view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
 
 [//]: # (@@author felixchanyy)
 ### Matching Sellers to a Buyer
