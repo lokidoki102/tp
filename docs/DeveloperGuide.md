@@ -512,6 +512,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* * *`   | real estate agent           | find for a specific contact                                          | access their details without scrolling through a long list                |
 | `* * *`   | real estate agent           | easily update or modify existing contact information                 | have accurate and up-to-date records                                      |
 | `* * *`   | real estate agent           | add new houses to the sellers                                        | keep track of the houses that the sellers have                            |
+| `* * *`   | real estate agent           | delete existing houses from the sellers house list                   | remove irrelevant or incorrect houses                                     |
 | `* * *`   | real estate agent           | have whatever EstateEase data I add load to the laptop I am using    | do not need to re-enter all the details whenever I open the app           |
 | `* *`     | busy real estate agent      | be able to view specific buyer's requirements                        | understand what are their needs quickly                                   |
 | `* *`     | busy real estate agent      | be able to view specific seller's properties                         | effectively assess their listings quickly                                 |
@@ -523,7 +524,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 (For all use cases below, the **System** is the `EstateEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a seller to contact list**
+**Use case: UC01 - Add a seller to person list**
 
 **MSS:**
 
@@ -551,7 +552,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
     * 3d1. EstateEase shows an error message. <br>
       Use case ends.
 
-**Use case: UC02 - Add a buyer to contact list**
+**Use case: UC02 - Add a buyer to person list**
 
 **MSS:**
 
@@ -933,7 +934,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1`<br>
-       Expected: Details of the first contact from the displayed list is displayed at the right side of the panel
+       Expected: Details of the first person from the displayed list is displayed at the right side of the panel
         with the displayed person list at the left side of the panel. Name of the selected person shown in the
         status message.
 
@@ -1024,7 +1025,7 @@ similar to the test cases found in `Editing Seller Details`.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
