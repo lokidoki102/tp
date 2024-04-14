@@ -54,8 +54,8 @@ public class MatchBuyerCommand extends Command {
         Person person = model.getFilteredPersonList().get(0);
 
         if (!(person instanceof Buyer)) {
-            model.setState(State.MATCH_RESULTS);
-            model.showMatchResults(model.getFilteredSellerList());
+            model.setState(State.PERSON_LIST);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(Messages.MESSAGE_NOT_A_BUYER);
         }
 
