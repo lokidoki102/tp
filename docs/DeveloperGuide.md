@@ -973,7 +973,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Add seller**
    1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
-      **Expected:**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
+      **Expected:** A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
 
    2. **Test case:** `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
       **Expected:** A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
@@ -1362,7 +1362,7 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 ### B.8 Unique Identifier Refinement
 
 #### B.8.1 Motivation
-- The commands `addSeller` and `addBuyer` currently identify `person` using `name`, which may lead to confusion when multiple `person` share the same `name`. 
+- The commands `addSeller`, `addBuyer`, `editSeller` and `editBuyer` currently validates whether a `person` exist in the application by checking the uniqueness of the `name`, which may lead to confusion when multiple `person` could share the same `name`. 
 - Even though alphanumeric entries (e.g., `John Doe 1`, `John Doe 2`) are allowed to identify different `person` with the same `name`, this method has proven to be inconvenient and potentially confusing for user managing multiple entries with similar or identical `name`.
 
 #### B.8.2 Implementation
