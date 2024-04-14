@@ -129,6 +129,7 @@ How the parsing works:
 
 <puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
+<div style="page-break-after: always;"></div>
 
 The `Model` component,
 
