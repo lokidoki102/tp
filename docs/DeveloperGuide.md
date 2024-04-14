@@ -1250,21 +1250,29 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 #### B.6.2 Implementation
 - To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.
 
-[//]: # (@@author redcolorbicycle)
-### B.7 Edit House Command
+### B.7 Display Person Details after AddHouse & DeleteHouse Command
 
 #### B.7.1 Motivation
+- In the current implementation, after the user adds a house to a seller or deletes a house from a seller, the list being displayed is the person list. Consequently, the user can only check for updated house details by viewing the selected seller. This can be troublesome for users.
+
+#### B.7.2 Implementation
+- To enhance the user experience, one potential improvement could be displaying the seller's personal and house details after an "add house" or "delete house" command is performed.
+
+[//]: # (@@author redcolorbicycle)
+### B.8 Edit House Command
+
+#### B.8.1 Motivation
 - In the current implementation, the `editHouse` command was not implemented as it could be broken down into `deleteHouse` and `addHouse` and was not seen as necessary.
 - However, to increase user convenience, `editHouse` can be implemented in future versions.
 
-#### B.7.2 Implementation
+#### B.8.2 Implementation
 - Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
 
-### B.8 Switch all index based commands to name based commands
+### B.9 Switch all index based commands to name based commands
 
-#### B.8.1 Motivation
+#### B.9.1 Motivation
 - In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
 - However, to standardise all commands for user's convenience, index based commands can be refactor to name based.
 
-#### B.8.2 Implementation
+#### B.9.2 Implementation
 - Similar to the current `addHouse` command which uses name based.
