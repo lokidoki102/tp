@@ -22,6 +22,7 @@ This project is based on the AddressBook-Level3 project created by the
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -65,6 +66,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +84,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -127,6 +134,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -154,6 +163,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -226,6 +236,8 @@ Additionally, it implements the following operations:
     * **Pros:** It is easier to implement, because it does not require `House` validation.
     * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
+<div style="page-break-after: always;"></div>
+
 [//]: # (@@author zengzihui)
 ### Adding Buyer
 
@@ -267,6 +279,10 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
     * **Pros:** Having lesser commands is easier for the user to remember.
     * **Cons:** Difficult to implement, having more prefixes means more validation.
 
+<div style="page-break-after: always;"></div>
+
+[//]: # (@@author zengzihui)
+
 ### Viewing Person
 
 ###### Purpose
@@ -307,6 +323,8 @@ The following sequence diagram shows how an `view` operation goes through the `L
 * **Alternative 2:** Use `FULLNAME` in the command input to select the person to view details.
     * **Pros:** Save user the trouble to search for index of the person that user want to view.
     * **Cons:** More input validation has to be done, user might not remember the full name of the person if the full name is too long.
+
+<div style="page-break-after: always;"></div>
 
 [//]: # (@@author lokidoki102)
 
@@ -352,6 +370,8 @@ The overall implementation of this command is very similar to `editBuyer` comman
 
 ###### Why It's Implemented That Way
 - The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
+<div style="page-break-after: always;"></div>
 
 [//]: # (@@author felixchanyy)
 ### Matching Sellers to a Buyer
@@ -399,6 +419,8 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
         * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
         * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
 
+<div style="page-break-after: always;"></div>
+
 [//]: # (@@author redcolorbicycle)
 ### Adding Houses
 
@@ -433,6 +455,9 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
     * Cons:
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
+<div style="page-break-after: always;"></div>
+
+[//]: # (@@author redcolorbicycle)
 ### Deleting Houses
 
 ###### Purpose
@@ -469,6 +494,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 [//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -492,6 +518,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 **Value proposition**: EstateEase simplifies residential property management for real estate listing agents in Singapore. With intuitive tools for listing and client communication, the app is tailored for efficiency. Agents can quickly access contacts and prioritize them, ensuring swift connections with clients.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -519,6 +546,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller | do not need to remember their identity                                    |
 
 [//]: # (@@author )
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -843,6 +872,8 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
     * 1a1. EstateEase displays a message "Unknown command".
       Use case resumes from the previous step.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 | ID | Requirement                                                                                                                             |
@@ -860,6 +891,8 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 11 | Data should be stored locally on the user's device.                                                                                     |
 | 12 | The application should automatically recover from common errors without crashing or requiring user intervention.                        |
 | 13 | The program must provide meaningful error messages either in the application or terminal to help users resolve issues.                  |
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -879,6 +912,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Instructions for manual testing**
 
@@ -1248,6 +1282,7 @@ Prerequisites:
 [//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: Proposed enhancements**
 
