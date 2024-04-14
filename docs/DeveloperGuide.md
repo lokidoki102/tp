@@ -1324,7 +1324,6 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 - The implementation will involve modifying existing name-based commands to use `index`, similar to how `editSeller`, `editBuyer` and `view` are currently structured. This will ensure consistency across the application, making it easier for users to interact with EstateEase.
 
 [//]: # (@@author KhoonSun47)
-
 ### B.8 Unique Identifier Refinement
 
 #### B.8.1 Motivation
@@ -1335,3 +1334,12 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 - Moving forward, while `name` can be non-unique, each `person` in the `Person` list will be uniquely identified by two mandatory fields: `email` and `phone`.
 - If a new `seller` or `buyer` is added with an `email` or `phone` that matches an existing entry, the system will reject the addition to prevent duplicates. Similarly, modifications to `email` or `phone` in commands like `editSeller` or `editBuyer` will be checked against existing entries, and duplicates will not be allowed.
 - This enhancement ensures the uniqueness of each `person` in EstateEase, as both `email` and `phone` are unique to each `person`, thereby reducing confusion to the user.
+
+[//]: # (@@author zengzihui)
+### B.9 Display Person Details after AddHouse & DeleteHouse Command
+
+#### B.9.1 Motivation
+- In the current implementation, after the user adds a house to a seller or deletes a house from a seller, the list being displayed is the person list. Consequently, the user can only check for updated house details by viewing the selected seller. This can be troublesome for users.
+
+#### B.9.2 Implementation
+- To enhance the user experience, one potential improvement could be displaying the seller's personal and house details after an "add house" or "delete house" command is performed.
