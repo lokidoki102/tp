@@ -877,6 +877,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 10 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                      |
 | 11 | Housing Type           | The type of house being sold by the seller.                                                                                                                                                |
 | 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
+| 13 | Name                   | Represents the full names of both the buyer and the seller for the EstateEase application.                                                                                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -921,7 +922,7 @@ testers are expected to do more *exploratory* testing.
 
 3. **Dealing with Corrupted Data Files**
 
-    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). <br>
+    1. **Test case:** Duplicate a buyer or seller's details (`name`, `phone`, and `email`) and use them for the opposite role (e.g., use a buyer details for a seller or vice versa). <br>
        **Expected:** This action violates EstateEase's constraints against duplicate persons, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
     2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
@@ -1299,39 +1300,40 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 #### B4.2 Implementation
 1. Update the method used to check Landed Property uniqueness. Currently, the method uses the whole string. Include postal code uniqueness as a requirement.
 
-### B.5 Add Seller/Buyer command
+### B.5 Phone Number Field
 
 #### B.5.1 Motivation
-- The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are three main reasons for this approach.
-- Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house.
-- Secondly, to distinguish between individuals sharing the same `name`, the user can append numbers to the `name`, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
-- Lastly, if we choose to require both `name` and another unique identifier, such as `email` or `phone`, to distinctly identify a `person`, it would necessitate users repetitively typing both pieces of information for actions like `add House` or `delete House`. This requirement could significantly hinder the user experience, making the process inconvenient.
-
-### B.6 Phone Number Field
-
-#### B.6.1 Motivation
 - In the current implementation, the `phone` field accepts more than three digits without specifically limiting the input to the standard eight digits customary for Singaporean phone numbers, despite the application being Singapore-focused.
 - This design decision accounts for the potential users living abroad with international `phone` numbers, such as Singaporeans residing overseas who wish to purchase property back home, or foreigners intending to relocate to Singapore who may not yet have a local `phone` number.
 - However, this method has led to confusion, since it permits the entry of invalid `phone` numbers into the system due to the absence of strict validation criteria.
 
-#### B.6.2 Implementation
+#### B.5.2 Implementation
 - To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.
 
 [//]: # (@@author redcolorbicycle)
-### B.7 Edit House Command
+### B.6 Edit House Command
 
-#### B.7.1 Motivation
+#### B.6.1 Motivation
 - In the current implementation, the `editHouse` command was not implemented as it could be broken down into `deleteHouse` and `addHouse` and was not seen as necessary.
 - However, to increase user convenience, `editHouse` can be implemented in future versions.
 
-#### B.7.2 Implementation
+#### B.6.2 Implementation
 - Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
 
-### B.8 Switch all Index Based Commands to Name Based Commands
+### B.7 Switch all Index Based Commands to Name Based Commands
 
-#### B.8.1 Motivation
+#### B.7.1 Motivation
 - In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
 - However, to standardise all commands for user's convenience, index based commands can be refactor to name based.
 
-#### B.8.2 Implementation
+#### B.7.2 Implementation
 - Similar to the current `addHouse` command which uses name based.
+
+[//]: # (@@author KhoonSun47)
+### B.8 Unique Name Identifier
+
+#### B.8.1 Motivation
+- The commands `addSeller` and `addBuyer` uniquely identify individuals within the `Persons` list using the `name` as a unique identifier. This approach is justified for 3 reasons:
+    1. `Name` is already used as an unique identifiers across various commands, such as adding or deleting a `house`. With the transition to exclusively name-based commands (as outlined in B.7), ensuring the uniqueness of the `name` field becomes critical for EstateEase to work.
+    2. In the real world context, it is uncommon for `name` to be duplicates, as indicated in the glossary. In cases where duplication might occur, our system allows for alphanumeric characters, enabling users to create unique identifiers by appending numbers, e.g., `John Doe 1`, `John Doe 2`.
+    3. Requiring additional identifiers such as `email` or `phone` for each command would complicate the user interface and interactions. Using `name` alone enhances user experience by reducing the burden of complicated data entry during commands such as adding `house` and deleting `house`.
