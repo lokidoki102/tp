@@ -1039,36 +1039,30 @@ testers are expected to do more *exploratory* testing.
 **Prerequisites:** 
 - There is a seller by the name of "John Felix".
 - There is no seller by the name of "Lim Carl".
-- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578578 and Price of 99999 does not currently exist in EstateEase.
-- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578578 and Price of 99999 currently exists in EstateEase.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578568 and Price of 99999 does not currently exist in EstateEase.
+- A Condominium with Street "Clementi Ave 3", no Block, Level "03", Unit Number 26, Postal Code 578579 and Price of 100000 currently exists in EstateEase.
 
 1. **Adding the house to the seller**
 
-    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
        **Expected:** New house added! <br><br>
 
 1. **Invalid house format**
 
-    1. **Test case:** ` addHouse n/John Felix type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+    1. **Test case:** `addHouse n/John Felix type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
        **Expected:** Invalid command format! <br><br>
 
-    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578568 price/99999`<br>
-       **Expected:** Invalid command format! <br><br>
-   
-    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578568 price/99999`<br>
-       **Expected:** Invalid command format! <br><br>
-
-    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`<br>
+    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578568 price/99999`<br>
        **Expected:** Invalid command format! <br><br>
 
 1. **Invalid seller**
 
-    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578558 price/99999`<br>
        **Expected:** This Seller does not exist in EstateEase <br><br>
 
 1. **House already exists**
 
-    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578568 price/99999`<br>
+    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
        **Expected:** This house already exists in EstateEase <br>
 
 [//]: # (@@author redcolorbicycle)
@@ -1078,12 +1072,12 @@ testers are expected to do more *exploratory* testing.
 - There is a seller by the name of "John Felix".
 - There is a seller by the name of "John Carl 1".
 - There is no seller by the name of "Lim Carl".
-- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578568 and Price of 99999 does not currently exist in EstateEase.
-- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578568 and Price of 99999 currently exists in EstateEase and is owned by John Felix.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578568 and Price of 99999 does not currently exist in EstateEase.
+- A Condominium with Street "Clementi Ave 3", no Block, Level "03", Unit Number 26, Postal Code 578579 and Price of 100000 currently exists in EstateEase and is owned by John Felix.
 
 1. **Deleting the house from the seller**
 
-    1. **Test case:** `deleteHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+    1. **Test case:** `deleteHouse n/John Felix type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
        **Expected:** House deleted! <br><br>
 
 1. **Deleting the house from the wrong seller**
@@ -1105,7 +1099,7 @@ testers are expected to do more *exploratory* testing.
 ### Viewing a Person
 
 **Prerequisites:**
-- List all persons using the list command. Make sure there are 8 people in the list. <br>
+- List all persons using the list command. Make sure there are at least 1 people in the list. <br>
 
 1. **Valid index**
 
