@@ -1159,20 +1159,16 @@ testers are expected to do more *exploratory* testing.
 **Prerequisites:**
 - There are no sellers or buyer named "Jessi Oliverson".
 - There is a seller named "John Felix".
-- There is a seller/buyer named "John Carl 1".
-- For each `editSeller` command execution in this manual testing, execute the `find` command on the targeted
-  buyer/seller to ensure that this person is displayed as the first person in the list.
-- For invalid person type test case, ensure that the first person in the list is a `Buyer`.
+- There is a person named "John Carl 1".
+- There is a buyer by the name of "James Cook".
+- For each `editSeller` command execution in this manual testing, execute the command `find Felix` 
+  to ensure that this person is displayed as the first person in the list.
 
 1. **Successful edit**<br>
 
-   1. **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-      **Expected:** The name "John Felix" is edited to "Jessi Oliverson".
-      The updated details of the edited seller will also be shown.<br><br>
-
-   1. **Test case:** `editSeller 1 p/87654321`<br>
-      **Expected:** The phone number is edited to "87654321".
-      The updated details of the edited seller will also be shown.<br><br>
+    1. **Test case:** `editSeller 1 p/87654321`<br>
+       **Expected:** The phone number is edited to "87654321".
+       The updated details of the edited seller will also be shown.<br><br>
 
 1. **Duplicate name**<br>
 
@@ -1181,9 +1177,14 @@ testers are expected to do more *exploratory* testing.
 
 1. **Invalid person type**<br>
 
-   1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
+   1. **Test case** `editSeller 1 n/Jessi Yek`<br>
       **Expected:** An error message will be shown, indicating that that person you are 
       trying to edit is not a seller.<br><br>
+   <box type="info" seamless>
+    
+    **Note:** Ensure that the first person in the list is a `Buyer`. You can ensure this by executing the command `find James Cook`.
+    
+   </box>
 
 1. **Invalid INDEX**<br>
 
