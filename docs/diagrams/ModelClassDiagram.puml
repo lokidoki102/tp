@@ -20,15 +20,17 @@ Class Phone
 Class Tag
 Class PostalCode
 '@@author lokidoki102
+Class UniqueHouseList
 Class Street
 Class Level
 Class Block
+Class Price
 '@@author
 Class UnitNumber
 Class Buyer extends Person
 Class Seller extends Person
 Class House
-Class Condo implements House
+Class Condominium implements House
 Class Hdb implements House
 Class Landed implements House
 Class Budget
@@ -54,15 +56,18 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> "*" Tag
+Person *--> Tag
 House *--> PostalCode
 House *--> UnitNumber
 House *--> Street
+House *--> Price
 House *--> HousingType
 Seller *--> "0..*" House : owns
 Buyer *--> "*" House : match
 Buyer *--> Budget
 
+AddressBook *--> "1" UniqueHouseList
+UniqueHouseList --> "~* all" House
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -71,4 +76,5 @@ Name -[hidden]right-> Phone
 
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" House
 @enduml
