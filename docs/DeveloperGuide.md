@@ -1371,3 +1371,15 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 
 #### B.9.2 Implementation
 - To enhance the user experience, one potential improvement could be displaying the seller's personal and house details after an "add house" or "delete house" command is performed.
+
+### B.10 Fix Index Error Message
+
+#### B.10.1 Motivation
+- In the current implementation, the commands that use `INDEX`, such as `editBuyer`, `editSeller`, `delete` and `view`,
+show a wrong error message when the `INDEX` exceeds the maximum int value. It would show an error message for negative 
+value instead of indicating that the `INDEX` provided is invalid.
+
+#### B.10.2 Implementation
+- To fix this issue, one potential way is to detect if there is an integer overflow when parsing the `INDEX` input.
+When an integer overflow is detected, it should show the error message that indicates that
+the `INDEX` provided is invalid.
