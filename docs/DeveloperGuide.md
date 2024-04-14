@@ -877,7 +877,6 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 10 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                      |
 | 11 | Housing Type           | The type of house being sold by the seller.                                                                                                                                                |
 | 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
-| 13 | Name                   | Represents the full names of both the buyer and the seller for the EstateEase application.                                                                                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -928,7 +927,7 @@ testers are expected to do more *exploratory* testing.
     2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
        **Expected:** This action violates EstateEase's constraints against duplicate houses, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
+    3. **Test case:** Make a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
        **Expected:** This action violates EstateEase's constraints against incorrect data formats, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br>
 
 [//]: # (@@author KhoonSun47)
@@ -949,20 +948,15 @@ testers are expected to do more *exploratory* testing.
       **Expected:** A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
 
 2. **Invalid format**
-   1. **Test case:** `addSeller` with no compulsory details.<br>
-      **Expected:** No seller is added. Error indicating invalid format with constraints shown. <br><br>
    
-   2. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
+   1. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
       **Expected:** No seller is added. Error indicating name should not be blank. <br><br>
-   
-   3. **Test case:** `addSeller n/X Æ A-Xii p/98769999 e/elonmuskson@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating name should only contain alphanumeric and spaces. <br><br>
 
-   4. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating phone numbers should only contain numbers. <br><br>
+   2. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that phone should only contain numbers. <br><br>
 
-   5. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating that email should be in the format of should be of the format local-part@domain. <br><br>
+   3. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that email should be in the format of local-part@domain. <br><br>
 
 3. **Invalid (Duplicate)**
    1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000` <br>
@@ -1320,20 +1314,24 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 #### B.6.2 Implementation
 - Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
 
-### B.7 Switch all Index Based Commands to Name Based Commands
+### B.7 Switch all Name-Based Commands to Index-Based Commands
 
 #### B.7.1 Motivation
-- In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
-- However, to standardise all commands for user's convenience, index based commands can be refactor to name based.
+- Currently, commands like `addHouse`, `deleteHouse`, and `matchBuyer` utilize name-based identifiers, whereas other operations are index-based.
+- To standardize all commands and minimize user errors (e.g., typos in long names), it has been decided to switch all commands to index-based commands. This change will improve accuracy and streamline user interactions.
 
 #### B.7.2 Implementation
-- Similar to the current `addHouse` command which uses name based.
+- The implementation will involve modifying existing name-based commands to use `index`, similar to how `editSeller`, `editBuyer` and `view` are currently structured. This will ensure consistency across the application, making it easier for users to interact with EstateEase.
 
 [//]: # (@@author KhoonSun47)
-### B.8 Unique Name Identifier
+
+### B.8 Unique Identifier Refinement
 
 #### B.8.1 Motivation
-- The commands `addSeller` and `addBuyer` uniquely identify individuals within the `Persons` list using the `name` as a unique identifier. This approach is justified for 3 reasons:
-    1. `Name` is already used as an unique identifiers across various commands, such as adding or deleting a `house`. With the transition to exclusively name-based commands (as outlined in B.7), ensuring the uniqueness of the `name` field becomes critical for EstateEase to work.
-    2. In the real world context, it is uncommon for `name` to be duplicates, as indicated in the glossary. In cases where duplication might occur, our system allows for alphanumeric characters, enabling users to create unique identifiers by appending numbers, e.g., `John Doe 1`, `John Doe 2`.
-    3. Requiring additional identifiers such as `email` or `phone` for each command would complicate the user interface and interactions. Using `name` alone enhances user experience by reducing the burden of complicated data entry during commands such as adding `house` and deleting `house`.
+- The commands `addSeller` and `addBuyer` currently identify `person` using `name`, which may lead to confusion when multiple `person` share the same `name`. 
+- Even though alphanumeric entries (e.g., `John Doe 1`, `John Doe 2`) are allowed to identify different `person` with the same `name`, this method has proven to be inconvenient and potentially confusing for user managing multiple entries with similar or identical `name`.
+
+#### B.8.2 Implementation
+- Moving forward, while `name` can be non-unique, each `person` in the `Person` list will be uniquely identified by two mandatory fields: `email` and `phone`.
+- If a new `seller` or `buyer` is added with an `email` or `phone` that matches an existing entry, the system will reject the addition to prevent duplicates. Similarly, modifications to `email` or `phone` in commands like `editSeller` or `editBuyer` will be checked against existing entries, and duplicates will not be allowed.
+- This enhancement ensures the uniqueness of each `person` in EstateEase, as both `email` and `phone` are unique to each `person`, thereby reducing confusion to the user.
