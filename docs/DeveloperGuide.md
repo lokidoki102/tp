@@ -969,7 +969,7 @@ testers are expected to do more *exploratory* testing.
 
 **Prerequisites:** 
 - List all persons using the `list` command. 
-- There is currently no `person` with the name "John Carl 1", "John Felix", "John Carl 2". <br>
+- There is currently no `person` with the name "John Carl 1", "John Felix", "John Carl 2", "Carl Lim Jovi Rato", "Carl Lim". <br>
 
 1. **Add seller**
    1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
@@ -1012,10 +1012,8 @@ testers are expected to do more *exploratory* testing.
        **Expected:** A new buyer is added, with name `James Cook`, phone `98753432`, email `jamescook@example.com`, budget `550000`, preferred housing type `Hdb`<br><br>
 
 2. **Invalid format**
-    1. **Test case:** `addBuyer` <br>
-       **Expected:** No buyer is added. Error indicating invalid format with constraints shown. <br><br>
-   
-    2. **Test case:** `addBuyer n/Kris Hua p/98765432 e/krishua@example.com budget/99999900` <br>
+
+    1. **Test case:** `addBuyer n/Kris Hua p/98765432 e/krishua@example.com budget/99999900` <br>
        **Expected:** No buyer is added. Error indicating invalid command format. <br><br>
 
 3. **Invalid (Duplicate Person)**
@@ -1023,13 +1021,10 @@ testers are expected to do more *exploratory* testing.
        **Expected:** No buyer is added. Error indicating that the person already existed in the data. <br><br>
 
 4. **Invalid Value**
-   1. **Test case:** `addBuyer n/Neo Ng p/98765432 e/neong@examaple.com budget/99999900 type/HDB` <br>
-       **Expected:** No buyer is added. Error indicating HousingType should only be 'Landed', 'Hdb' or 'Condominium'. HousingType is case-sensitive. <br><br>
-   
-   2. **Test case:** `addBuyer n/Grace Tan p/98765432 e/gracetan@examaple.com budget/-99999900 type/Hdb` <br>
+   1. **Test case:** `addBuyer n/Grace Tan p/98765432 e/gracetan@examaple.com budget/-99999900 type/Hdb` <br>
       **Expected:** No buyer is added. Error indicating budget should be a positive number. <br><br>
-   
-   3. **Test case:** `addBuyer n/Chris Ong p/98765432 e/chrisong@examaple.com budget/aa type/Hdb` <br>
+
+   2. **Test case:** `addBuyer n/Chris Ong p/98765432 e/chrisong@examaple.com budget/aa type/Hdb` <br>
       **Expected:** No buyer is added. Error indicating budget should be a positive number. <br>
 
 
@@ -1047,20 +1042,20 @@ testers are expected to do more *exploratory* testing.
     1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
        **Expected:** New house added! <br><br>
 
-1. **Invalid house format**
+2. **Invalid house format**
 
     1. **Test case:** `addHouse n/John Felix type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
        **Expected:** Invalid command format! <br><br>
 
-    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578568 price/99999`<br>
+    2. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578568 price/99999`<br>
        **Expected:** Invalid command format! <br><br>
 
-1. **Invalid seller**
+3. **Invalid seller**
 
     1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578558 price/99999`<br>
        **Expected:** This Seller does not exist in EstateEase <br><br>
 
-1. **House already exists**
+4. **House already exists**
 
     1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
        **Expected:** This house already exists in EstateEase <br>
@@ -1099,7 +1094,7 @@ testers are expected to do more *exploratory* testing.
 ### Viewing a Person
 
 **Prerequisites:**
-- List all persons using the list command. Make sure there are at least 1 people in the list. <br>
+- List all persons using the `list` command. Make sure there are at least 1 people in the list. <br>
 
 1. **Valid index**
 
@@ -1117,8 +1112,6 @@ testers are expected to do more *exploratory* testing.
       **Expected:** No person details is displayed. Message indicating invalid command format as 0 is not a positive integer. <br><br>
    2. **Test case:** `view a` <br>
       **Expected:** No person details is displayed. Message indicating invalid command format as 'a' is not a positive integer but a string. <br><br>
-   3. **Test case:**: `view` <br> 
-      **Expected:** No person details is displayed. Message indicating invalid command format as there is no input for the index parameter <br>
 
 
 [//]: # (@@author felixchanyy)
@@ -1231,7 +1224,7 @@ similar to the test cases found in `Editing Seller Details`.
 ### Deleting a Person
 
 Prerequisites:
-- List all persons using the list command. Make sure there are 7 people in the list. <br>
+- List all persons using the `list` command. Make sure there are at least 1 person in the list. <br>
 
 1. **Valid index**
 
@@ -1249,8 +1242,6 @@ Prerequisites:
        **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as 0 is not a positive integer. <br><br>
     2. **Test case:** `delete a` <br>
        **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as 'a' is not a positive integer but a string. <br><br>
-    3. **Test case:**: `delete` <br>
-       **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as there is no input for the index parameter <br>
 
 [//]: # (@@author KhoonSun47)
 ### Saving Data
@@ -1272,12 +1263,12 @@ Prerequisites:
     1. **Test case:** The `addressbook.json` is corrupted either by incorrect data or format issues. <br>
        **Expected:** If a valid command is executed after the data file becomes corrupted, the application replaces the corrupted `addressbook.json` with a correctly formatted `addressbook.json` containing the current state of data. If no valid command is executed, the application maintains the corrupted `addressbook.json`. <br><br>
 
-
 [//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author felixchanyy)
 ## **Appendix B: Proposed enhancements**
 
 ### B.1 New Command: matchSeller
@@ -1315,6 +1306,7 @@ Allowing prices and budgets to have more than two decimal places can lead to con
 
 This enhancement promotes clarity and accuracy in price and budget management within the application.
 
+[//]: # (@@author)
 ### B.4 Restrict Landed Properties to a Unique Postal Code
 
 #### B.4.1 Motivation
