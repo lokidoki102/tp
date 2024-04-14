@@ -83,7 +83,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` or `House` object residing in the `Model`.
 
 <div style="page-break-after: always;"></div>
 
@@ -125,13 +125,13 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 
 The `Model` component,
 
-* stores EstateEase data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores EstateEase data i.e., all `Person` objects and `House` objects (which are contained in a `UniquePersonList` object and `UniqueHouseList object respectively).
+* stores the currently 'selected' `Person` objects and `House` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<House>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -1157,22 +1157,17 @@ testers are expected to do more *exploratory* testing.
 ### Editing Seller Details
 
 **Prerequisites:**
-- There are no sellers or buyer named "Jessi Oliverson".
 - There is a seller named "John Felix".
-- There is a seller/buyer named "John Carl 1".
-- For each `editSeller` command execution in this manual testing, execute the `find` command on the targeted
-  buyer/seller to ensure that this person is displayed as the first person in the list.
-- For invalid person type test case, ensure that the first person in the list is a `Buyer`.
+- There is a person named "John Carl 1".
+- There is a buyer by the name of "James Cook".
+- For each `editSeller` command execution in this manual testing, execute the command `find Felix` 
+  to ensure that this person is displayed as the first person in the list.
 
 1. **Successful edit**<br>
 
-   1. **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-      **Expected:** The name "John Felix" is edited to "Jessi Oliverson".
-      The updated details of the edited seller will also be shown.<br><br>
-
-   1. **Test case:** `editSeller 1 p/87654321`<br>
-      **Expected:** The phone number is edited to "87654321".
-      The updated details of the edited seller will also be shown.<br><br>
+    1. **Test case:** `editSeller 1 p/87654321`<br>
+       **Expected:** The phone number is edited to "87654321".
+       The updated details of the edited seller will also be shown.<br><br>
 
 1. **Duplicate name**<br>
 
@@ -1181,9 +1176,15 @@ testers are expected to do more *exploratory* testing.
 
 1. **Invalid person type**<br>
 
-   1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
+   1. **Test case** `editSeller 1 n/Jessi Yek`<br>
       **Expected:** An error message will be shown, indicating that that person you are 
       trying to edit is not a seller.<br><br>
+   
+   <box type="info" seamless>
+    
+    **Note:** Ensure that the first person in the list is a `Buyer`. You can ensure this by executing the command `find James Cook`.
+    
+   </box>
 
 1. **Invalid INDEX**<br>
 
@@ -1200,9 +1201,8 @@ testers are expected to do more *exploratory* testing.
 ### Editing Buyer Details
 
 **Prerequisites:**
+- Execute the command `list` to show all the person in EstateEase.
 - There is a buyer named "James Cook".
-- For each `editBuyer` command execution in this manual testing, execute the `find` command on the targeted
-  buyer/seller to ensure that this person is displayed as the first person in the list.
 
 1. **Invalid budget value**<br>
 
