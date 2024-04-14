@@ -39,10 +39,10 @@ public class MatchResultListPanel extends UiPart<Region> {
      */
     class MatchResultListViewCell extends ListCell<Seller> {
         @Override
-        protected void updateItem(Seller seller, boolean empty) {
-            super.updateItem(seller, empty);
+        protected void updateItem(Seller seller, boolean isEmpty) {
+            super.updateItem(seller, isEmpty);
 
-            if (empty || seller == null) {
+            if (isEmpty || seller == null) {
                 setGraphic(null);
                 setText(null);
             } else {
