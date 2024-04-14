@@ -178,7 +178,8 @@ public class ModelManager implements Model {
     }
 
     public void setState(State newState) {
-        //Solution below inspired by https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java
+        // Solution below inspired by
+        // https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java
         boolean isStateChanged = isSameState(newState);
         if (!isStateChanged) {
             state = newState;
@@ -197,7 +198,8 @@ public class ModelManager implements Model {
         this.ui = ui;
     }
 
-    //Solution below inspired by https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java
+    // Solution below inspired by
+    // https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java
     @Override
     public void showPerson(Person target) {
         requireNonNull(target);

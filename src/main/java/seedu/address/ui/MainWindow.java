@@ -196,7 +196,8 @@ public class MainWindow extends UiPart<Stage> {
      * Handles view a specific person request
      */
     public void handleViewPerson(Person person) {
-        //Solution below inspired by https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
+        // Solution below inspired by
+        // https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
         if (person == null) {
             personDetails.setVisible(false);
             return;
@@ -209,7 +210,8 @@ public class MainWindow extends UiPart<Stage> {
      * Handles displaying match results from the matchBuyer command.
      */
     public void handleDisplayMatchResults(ObservableList<Seller> sellers) {
-        //Solution below inspired by https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
+        // Solution below inspired by
+        // https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
         if (sellers == null) {
             matchResultList.setVisible(false);
         }
@@ -252,7 +254,8 @@ public class MainWindow extends UiPart<Stage> {
      * Updates the ui layout for displaying.
      */
     public void updateUiLayout(State newState) {
-        //Solution below inspired by https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
+        // Solution below inspired by
+        // https://github.com/AY2324S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java
         contentBoxSplitPane.getItems().removeAll(personList, personDetails, matchResultList);
         switch (newState) {
         case PERSON_LIST:
