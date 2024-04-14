@@ -104,6 +104,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -117,8 +119,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddSellerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddSellerCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddSellerCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>
 
@@ -204,7 +206,7 @@ Additionally, it implements the following operations:
 * `Seller#copy()` — Values of the seller is copied to a new seller object.
 
 **Details:**
-1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full name of the `Seller` and the full details of the `House` to be specified in the command input.
+1. The `AddSellerCommand` class extends the `Command` class and is responsible for executing the add seller process. It expects the full details of the `Seller` and `House` to be specified in the command input.
 2. Upon execution, the command will then be parsed to `execute()` in `LogicManager`.
 3. The command will then be parsed to `parseCommand()` in `AddressBookParser`.
 4. The argument which contains a `Seller` and a `House` will then be parsed to `parse()` in `AddSellerCommandParser`.
@@ -404,18 +406,19 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
 
 ###### Design Considerations
 
-* *Alternative 1 (current choice):* Use a new `MatchBuyerCommand` to do matching.
-    * Pros:
+* **Alternative 1 (current choice):** Use a new `MatchBuyerCommand` to do matching.
+    * **Pros:**
         * Provides a dedicated command specifically tailored for matching sellers to a `Buyer`, enhancing clarity and readability in the codebase.
         * Allows for specialized handling of buyer matching logic within its own command class, facilitating easier maintenance and updates.
-    * Cons:
+    * **Cons:**
         * Requires the introduction of a new command class, potentially increasing the overall complexity of the codebase.
         * More commands for the user to remember
-* *Alternative 2:* Use prefix in `FindCommand` to do matching
-    * Pros:
+    
+* **Alternative 2:** Use prefix in `FindCommand` to do matching
+    * **Pros:**
         * Utilizes an existing command class, reducing the need for additional code and command classes dedicated to matching.
         * Leverages the flexibility of the `FindCommand` structure to accommodate various matching scenarios with different prefixes.
-    * Cons:
+    * **Cons:**
         * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
         * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
 
