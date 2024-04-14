@@ -1094,7 +1094,7 @@ testers are expected to do more *exploratory* testing.
 ### Viewing a Person
 
 **Prerequisites:**
-- List all persons using the `list` command. Make sure there are at least 1 people in the list. <br>
+- List all persons using the `list` command. Make sure there are at least 1 person in the list. <br>
 
 1. **Valid index**
 
