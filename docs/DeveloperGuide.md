@@ -1180,6 +1180,7 @@ testers are expected to do more *exploratory* testing.
    1. **Test case** `editSeller 1 n/Jessi Yek`<br>
       **Expected:** An error message will be shown, indicating that that person you are 
       trying to edit is not a seller.<br><br>
+   
    <box type="info" seamless>
     
     **Note:** Ensure that the first person in the list is a `Buyer`. You can ensure this by executing the command `find James Cook`.
@@ -1201,9 +1202,8 @@ testers are expected to do more *exploratory* testing.
 ### Editing Buyer Details
 
 **Prerequisites:**
+- Execute the command `list` to show all the person in EstateEase.
 - There is a buyer named "James Cook".
-- For each `editBuyer` command execution in this manual testing, execute the `find` command on the targeted
-  buyer/seller to ensure that this person is displayed as the first person in the list.
 
 1. **Invalid budget value**<br>
 
