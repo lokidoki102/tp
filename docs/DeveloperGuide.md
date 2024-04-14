@@ -22,6 +22,7 @@ This project is based on the AddressBook-Level3 project created by the
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -65,6 +66,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +84,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -127,6 +134,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -154,6 +163,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -226,6 +236,8 @@ Additionally, it implements the following operations:
     * **Pros:** It is easier to implement, because it does not require `House` validation.
     * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
+<div style="page-break-after: always;"></div>
+
 [//]: # (@@author zengzihui)
 ### Adding Buyer
 
@@ -267,6 +279,10 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
     * **Pros:** Having lesser commands is easier for the user to remember.
     * **Cons:** Difficult to implement, having more prefixes means more validation.
 
+<div style="page-break-after: always;"></div>
+
+[//]: # (@@author zengzihui)
+
 ### Viewing Person
 
 ###### Purpose
@@ -307,6 +323,8 @@ The following sequence diagram shows how an `view` operation goes through the `L
 * **Alternative 2:** Use `FULLNAME` in the command input to select the person to view details.
     * **Pros:** Save user the trouble to search for index of the person that user want to view.
     * **Cons:** More input validation has to be done, user might not remember the full name of the person if the full name is too long.
+
+<div style="page-break-after: always;"></div>
 
 [//]: # (@@author lokidoki102)
 
@@ -352,6 +370,8 @@ The overall implementation of this command is very similar to `editBuyer` comman
 
 ###### Why It's Implemented That Way
 - The edit function is separated out into Buyer and Seller as each Buyer and Seller have a minor difference in their attributes.
+
+<div style="page-break-after: always;"></div>
 
 [//]: # (@@author felixchanyy)
 ### Matching Sellers to a Buyer
@@ -399,6 +419,8 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
         * May lead to less clear and focused command implementations, as matching logic would be mixed with other find functionalities.
         * Could result in increased complexity within the `FindCommand` class, potentially making it harder to maintain and understand.
 
+<div style="page-break-after: always;"></div>
+
 [//]: # (@@author redcolorbicycle)
 ### Adding Houses
 
@@ -433,6 +455,9 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
     * Cons:
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
+<div style="page-break-after: always;"></div>
+
+[//]: # (@@author redcolorbicycle)
 ### Deleting Houses
 
 ###### Purpose
@@ -469,6 +494,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 [//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -492,6 +518,7 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 **Value proposition**: EstateEase simplifies residential property management for real estate listing agents in Singapore. With intuitive tools for listing and client communication, the app is tailored for efficiency. Agents can quickly access contacts and prioritize them, ensuring swift connections with clients.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -519,6 +546,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 | `* *`     | busy real estate agent      | be able to tell at a glance whether the contact is a buyer or seller | do not need to remember their identity                                    |
 
 [//]: # (@@author )
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -843,6 +872,8 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
     * 1a1. EstateEase displays a message "Unknown command".
       Use case resumes from the previous step.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 | ID | Requirement                                                                                                                             |
@@ -860,6 +891,8 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 11 | Data should be stored locally on the user's device.                                                                                     |
 | 12 | The application should automatically recover from common errors without crashing or requiring user intervention.                        |
 | 13 | The program must provide meaningful error messages either in the application or terminal to help users resolve issues.                  |
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -879,6 +912,7 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 | 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Instructions for manual testing**
 
@@ -921,13 +955,13 @@ testers are expected to do more *exploratory* testing.
 
 3. **Dealing with Corrupted Data Files**
 
-    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). <br>
+    1. **Test case:** Duplicate a buyer or seller's details (`name`, `phone`, and `email`) and use them for the opposite role (e.g., use a buyer details for a seller or vice versa). <br>
        **Expected:** This action violates EstateEase's constraints against duplicate persons, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
     2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
        **Expected:** This action violates EstateEase's constraints against duplicate houses, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
+    3. **Test case:** Make a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
        **Expected:** This action violates EstateEase's constraints against incorrect data formats, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br>
 
 [//]: # (@@author KhoonSun47)
@@ -939,7 +973,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Add seller**
    1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
-      **Expected:**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
+      **Expected:** A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
 
    2. **Test case:** `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
       **Expected:** A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
@@ -948,20 +982,15 @@ testers are expected to do more *exploratory* testing.
       **Expected:** A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
 
 2. **Invalid format**
-   1. **Test case:** `addSeller` with no compulsory details.<br>
-      **Expected:** No seller is added. Error indicating invalid format with constraints shown. <br><br>
    
-   2. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
+   1. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
       **Expected:** No seller is added. Error indicating name should not be blank. <br><br>
-   
-   3. **Test case:** `addSeller n/X Æ A-Xii p/98769999 e/elonmuskson@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating name should only contain alphanumeric and spaces. <br><br>
 
-   4. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating phone numbers should only contain numbers. <br><br>
+   2. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that phone should only contain numbers. <br><br>
 
-   5. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
-      **Expected:** No seller is added. Error indicating that email should be in the format of should be of the format local-part@domain. <br><br>
+   3. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that email should be in the format of local-part@domain. <br><br>
 
 3. **Invalid (Duplicate)**
    1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000` <br>
@@ -1253,6 +1282,7 @@ Prerequisites:
 [//]: # (@@author)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: Proposed enhancements**
 
@@ -1299,47 +1329,52 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 #### B4.2 Implementation
 1. Update the method used to check Landed Property uniqueness. Currently, the method uses the whole string. Include postal code uniqueness as a requirement.
 
-### B.5 Add Seller/Buyer command
+### B.5 Phone Number Field
 
 #### B.5.1 Motivation
-- The `addSeller` and `addBuyer` commands currently identify individuals within the `Persons` list using `name` as a unique identifier. There are three main reasons for this approach.
-- Firstly, we have been using the `name` to identify `Buyers` and `Sellers` in various commands, such as adding or deleting a house.
-- Secondly, to distinguish between individuals sharing the same `name`, the user can append numbers to the `name`, resulting in unique identifiers like `John Doe 1` and `John Doe 2`, which is why we allow alphanumeric characters in the `name` field.
-- Lastly, if we choose to require both `name` and another unique identifier, such as `email` or `phone`, to distinctly identify a `person`, it would necessitate users repetitively typing both pieces of information for actions like `add House` or `delete House`. This requirement could significantly hinder the user experience, making the process inconvenient.
-
-### B.6 Phone Number Field
-
-#### B.6.1 Motivation
 - In the current implementation, the `phone` field accepts more than three digits without specifically limiting the input to the standard eight digits customary for Singaporean phone numbers, despite the application being Singapore-focused.
 - This design decision accounts for the potential users living abroad with international `phone` numbers, such as Singaporeans residing overseas who wish to purchase property back home, or foreigners intending to relocate to Singapore who may not yet have a local `phone` number.
 - However, this method has led to confusion, since it permits the entry of invalid `phone` numbers into the system due to the absence of strict validation criteria.
 
-#### B.6.2 Implementation
+#### B.5.2 Implementation
 - To enhance the system's flexibility while maintaining data integrity, one potential improvement could involve updating our validation strategy,which is to introduce a validation mechanism that recognizes and accommodates both local (8-digit) and international `phone` number formats. This could involve specifying a more complex regex pattern or implementing a logic that checks for a country code prefix to distinguish between local and international numbers.
 
-### B.7 Display Person Details after AddHouse & DeleteHouse Command
-
-#### B.7.1 Motivation
-- In the current implementation, after the user adds a house to a seller or deletes a house from a seller, the list being displayed is the person list. Consequently, the user can only check for updated house details by viewing the selected seller. This can be troublesome for users.
-
-#### B.7.2 Implementation
-- To enhance the user experience, one potential improvement could be displaying the seller's personal and house details after an "add house" or "delete house" command is performed.
-
 [//]: # (@@author redcolorbicycle)
-### B.8 Edit House Command
+### B.6 Edit House Command
 
-#### B.8.1 Motivation
+#### B.6.1 Motivation
 - In the current implementation, the `editHouse` command was not implemented as it could be broken down into `deleteHouse` and `addHouse` and was not seen as necessary.
 - However, to increase user convenience, `editHouse` can be implemented in future versions.
 
-#### B.8.2 Implementation
+#### B.6.2 Implementation
 - Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
 
-### B.9 Switch all Index Based Commands to Name Based Commands
+### B.7 Switch all Name-Based Commands to Index-Based Commands
+
+#### B.7.1 Motivation
+- Currently, commands like `addHouse`, `deleteHouse`, and `matchBuyer` utilize name-based identifiers, whereas other operations are index-based.
+- To standardize all commands and minimize user errors (e.g., typos in long names), it has been decided to switch all commands to index-based commands. This change will improve accuracy and streamline user interactions.
+
+#### B.7.2 Implementation
+- The implementation will involve modifying existing name-based commands to use `index`, similar to how `editSeller`, `editBuyer` and `view` are currently structured. This will ensure consistency across the application, making it easier for users to interact with EstateEase.
+
+[//]: # (@@author KhoonSun47)
+### B.8 Unique Identifier Refinement
+
+#### B.8.1 Motivation
+- The commands `addSeller`, `addBuyer`, `editSeller` and `editBuyer` currently validates whether a `person` exist in the application by checking the uniqueness of the `name`, which may lead to confusion when multiple `person` could share the same `name`. 
+- Even though alphanumeric entries (e.g., `John Doe 1`, `John Doe 2`) are allowed to identify different `person` with the same `name`, this method has proven to be inconvenient and potentially confusing for user managing multiple entries with similar or identical `name`.
+
+#### B.8.2 Implementation
+- Moving forward, while `name` can be non-unique, each `person` in the `Person` list will be uniquely identified by two mandatory fields: `email` and `phone`.
+- If a new `seller` or `buyer` is added with an `email` or `phone` that matches an existing entry, the system will reject the addition to prevent duplicates. Similarly, modifications to `email` or `phone` in commands like `editSeller` or `editBuyer` will be checked against existing entries, and duplicates will not be allowed.
+- This enhancement ensures the uniqueness of each `person` in EstateEase, as both `email` and `phone` are unique to each `person`, thereby reducing confusion to the user.
+
+[//]: # (@@author zengzihui)
+### B.9 Display Person Details after AddHouse & DeleteHouse Command
 
 #### B.9.1 Motivation
-- In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
-- However, to standardise all commands for user's convenience, index based commands can be refactor to name based.
+- In the current implementation, after the user adds a house to a seller or deletes a house from a seller, the list being displayed is the person list. Consequently, the user can only check for updated house details by viewing the selected seller. This can be troublesome for users.
 
 #### B.9.2 Implementation
-- Similar to the current `addHouse` command which uses name based.
+- To enhance the user experience, one potential improvement could be displaying the seller's personal and house details after an "add house" or "delete house" command is performed.
