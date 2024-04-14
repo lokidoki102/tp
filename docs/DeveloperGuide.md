@@ -160,7 +160,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 [//]: # (@@author KhoonSun47)
-### Add seller feature
+### Adding Seller
 
 ###### Purpose
 This `addSeller` feature allows user to add a `Seller` and a `House` into EstateEase.
@@ -227,7 +227,7 @@ Additionally, it implements the following operations:
     * **Cons:** The `Seller` will not have a house, and if all the `Seller` in the list does not have a house, `matchBuyer` cannot happen.
 
 [//]: # (@@author zengzihui)
-### Add buyer feature
+### Adding Buyer
 
 ###### Purpose
 This `addBuyer` feature allows user to add a `Buyer` into the EstateEase
@@ -267,7 +267,7 @@ The proposed add buyer mechanism is facilitated by `Person`. It extends `Person`
     * **Pros:** Having lesser commands is easier for the user to remember.
     * **Cons:** Difficult to implement, having more prefixes means more validation.
 
-### View the details of a Person feature
+### Viewing Person
 
 ###### Purpose
 This `view` feature allows user to view the details of a `Person` in EstateEase.
@@ -310,7 +310,7 @@ The following sequence diagram shows how an `view` operation goes through the `L
 
 [//]: # (@@author lokidoki102)
 
-### Edit Buyer
+### Editing Buyer
 
 ###### Purpose
 The `editBuyer` command allows users to edit the details an existing `Buyer` in EstateEase.
@@ -341,7 +341,7 @@ parameters that is not available to `Seller` object. Hence, the reason why the e
 commands, one for buyer and one for seller. The uniqueness of the `NAME` value in the EstateEase is also
 needed as some of the commands uses the `NAME` to execute the command.
 
-### Editing Seller Details
+### Editing Seller
 
 ###### Purpose
 The `editSeller` command allows user to edit the details of an existing `Seller` in EstateEase.
@@ -893,67 +893,82 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file 
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file <br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum. <br><br>
 
-1. Saving window preferences
+2. **Saving window preferences**
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 [//]: # (@@author KhoonSun47)
 ### Loading Data
+1. **Dealing with Missing Data Folder**
 
-1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
+    1. **Test case:** Manually delete the `data` folder. <br>
+       **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
+   
+2.  **Dealing with Missing Data File**
 
-    1. **Loading Data:**
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
+       **Expected:** The application automatically populates EstateEase with sample data, displaying buyers and sellers where sellers are associated with houses. <br><br>
 
-        - To test the application's response to a missing data folder or `addressbook.json` file, manually delete the `data` folder or the `addressbook.json` file from it.
-        - The application should automatically populate EstateEase with sample data, displaying buyers and sellers, where sellers are associated with houses. <br>
-        <br>
-1. **Dealing with Corrupted Data Files**
+3. **Dealing with Corrupted Data Files**
 
-    1. **Loading Data:**
+    1. **Test case:** Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). <br>
+       **Expected:** This action violates EstateEase's constraints against duplicate persons, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
 
-        - Duplicate a buyer or seller's details (name, phone, and email) and use them for the opposite role (e.g., use a buyer's details for a seller or vice versa). *OR*
-        - Copy a house listed under one seller and duplicate it under another seller's list of houses. *OR*
-        - Having a data file that has same name as `addressbook.json` but incorrect format.
-        - These three actions violates EstateEase's constraints against duplicate houses, person and incorrect format, hence making the `addressbook.json` corrupted.
-        - The application should automatically detect this, and display an empty EstateEase.
+    2. **Test case:** Copy a house listed under one seller and duplicate it under another seller's list of houses. <br>
+       **Expected:** This action violates EstateEase's constraints against duplicate houses, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br><br>
+
+    3. **Test case:** Modify a data file to have the same name as `addressbook.json` but with an incorrect format. <br>
+       **Expected:** This action violates EstateEase's constraints against incorrect data formats, resulting in a corrupted `addressbook.json`. The application should detect this error and display an empty EstateEase. <br>
 
 [//]: # (@@author KhoonSun47)
-### Adding a seller
+### Adding a Seller
 
 **Prerequisites:** 
 - List all persons using the `list` command. 
-- There is currently no `person` with the name "John Carl", "John Felix", "John Zy". <br>
+- There is currently no `person` with the name "John Carl 1", "John Felix", "John Carl 2". <br>
 
 1. **Add seller**
-   1. **Test case** (add a `seller` named `John Carl 1` with a house `Hdb`): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
-      **Expected**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
+   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999`<br>
+      **Expected:**: A new seller is added, with name `John Carl 1`, phone `98765432`, email `johncarl@example.com` and `Hdb` house details with street `Clementi Ave 2`, with block `311`, with level `02`, with unit number `25`, with postal code `578578` and price `999999999`. <br><br>
 
-   2. **Test case** (add a `seller` named `John Felix` with a house `Condominium`): `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
-      **Expected**: A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
+   2. **Test case:** `addSeller n/John Felix p/98765433 e/johnfelix@example.com type/Condominium street/Clementi Ave 3 blk/N/A level/03 unitNo/26 postal/578579 price/100000`<br>
+      **Expected:** A new seller is added, with name `John Felix`, phone `98765433`, email `johnfelix@example.com` and `Condominium` house details with street `Clementi Ave 3`, with block `N/A`, with level `03`, with unit number `26`, with postal code `578579` and price `100000`. <br><br>
 
-   3. **Test case** (add a `seller` named `John Carl 2` with a house `Landed`): `addSeller n/John Carl 2 p/98765434 e/johncarl2@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
-      **Expected**: A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
+   3. **Test case:** `addSeller n/John Carl 2 p/98765434 e/johncarl2@example.com type/Landed street/Clementi Ave 4 unitNo/26 postal/578580 price/1000000`<br>
+      **Expected:** A new seller is added, with name `John Carl 2`, phone `98765434`, email `johncarl2@example.com` and `Landed` house details with street `Clementi Ave 4`, with unit number `26`, with postal code `578580` and price `1000000`. <br><br>
 
 2. **Invalid format**
-   1. **Test case** (add a `seller` without compulsory details): `addSeller` <br>
-      **Expected**: No seller is added. Error indicating invalid format with constraints shown. <br><br>
+   1. **Test case:** `addSeller` with no compulsory details.<br>
+      **Expected:** No seller is added. Error indicating invalid format with constraints shown. <br><br>
+   
+   2. **Test case:** `addSeller n/ p/98765432 e/johncarl1@example.com type/Hdb street/Clementi Ave 10 blk/302 level/12 unitNo/29 postal/578978 price/999999999` <br>
+      **Expected:** No seller is added. Error indicating name should not be blank. <br><br>
+   
+   3. **Test case:** `addSeller n/X Æ A-Xii p/98769999 e/elonmuskson@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating name should only contain alphanumeric and spaces. <br><br>
+
+   4. **Test case:** `addSeller n/Carl Lim Jovi Rato p/9876-9999 e/carllimjovirato@example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating phone numbers should only contain numbers. <br><br>
+
+   5. **Test case:** `addSeller n/Carl Lim Jovi Rato p/98769999 e/carllimjovirato-example.com type/Hdb street/Toa Payoh Ave 10 blk/312 level/22 unitNo/39 postal/528978 price/9999999` <br>
+      **Expected:** No seller is added. Error indicating that email should be in the format of should be of the format local-part@domain. <br><br>
 
 3. **Invalid (Duplicate)**
-   1. **Test case** (Duplicate seller -> seller and buyer cannot be same name): `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000`
-      **Expected**: No seller is added. Error indicating that the person already existed in the data. <br><br>
+   1. **Test case:** `addSeller n/John Carl 1 p/98765432 e/johncarl1@example.com type/Landed street/Clementi Ave 2 unitNo/25 postal/578578 price/10000` <br>
+      **Expected:** No seller is added. Error indicating that the person already existed in the data. <br><br>
 
-   2. **Test case** (Duplicate house): `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
-      **Expected**: No seller is added. Error indicating that the house already existed in the data. <br>
+   2. **Test case:** `addSeller n/Carl Lim p/98765432 e/johncarl@example.com type/Hdb street/Clementi Ave 2 blk/311 level/02 unitNo/25 postal/578578 price/999999999` <br>
+      **Expected:** No seller is added. Error indicating that the house already existed in the data. <br>
 
 [//]: # (@@author zengzihui)
 ### Adding a Buyer
@@ -990,198 +1005,250 @@ testers are expected to do more *exploratory* testing.
 
 
 [//]: # (@@author redcolorbicycle)
-### Adding a house to a seller
+### Adding a House
 
 **Prerequisites:** 
-- There is a seller by the name of "John Doe".
+- There is a seller by the name of "John Felix".
 - There is no seller by the name of "Lim Carl".
 - A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578578 and Price of 99999 does not currently exist in EstateEase.
 - A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578578 and Price of 99999 currently exists in EstateEase.
 
 1. **Adding the house to the seller**
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** New house added!
+    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** New house added! <br><br>
 
 1. **Invalid house format**
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** Invalid command format!
+    1. **Test case:** ` addHouse n/John Felix type/Condominium Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** Invalid command format! <br><br>
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** Invalid command format!
+    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** Invalid command format! <br><br>
    
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578578 price/99999`<br>
-       **Expected:** Invalid command format!
+    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 postal/578568 price/99999`<br>
+       **Expected:** Invalid command format! <br><br>
 
-    1. **Test case:** ` addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`<br>
-       **Expected:** Invalid command format!
+    1. **Test case:** ` addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 price/99999`<br>
+       **Expected:** Invalid command format! <br><br>
 
 1. **Invalid seller**
 
-    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** This Seller does not exist in EstateEase
+    1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** This Seller does not exist in EstateEase <br><br>
 
 1. **House already exists**
 
-    1. **Test case:** `addHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** This house already exists in EstateEase
+    1. **Test case:** `addHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** This house already exists in EstateEase <br>
 
 [//]: # (@@author redcolorbicycle)
-### Deleting a house from a seller
+### Deleting a House
 
 **Prerequisites:**
-- There is a seller by the name of "John Doe".
-- There is a seller by the name of "Jovi Rato".
+- There is a seller by the name of "John Felix".
+- There is a seller by the name of "John Carl 1".
 - There is no seller by the name of "Lim Carl".
-- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578578 and Price of 99999 does not currently exist in EstateEase.
-- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578578 and Price of 99999 currently exists in EstateEase and is owned by John Doe.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "05", Unit Number 25, Postal Code 578568 and Price of 99999 does not currently exist in EstateEase.
+- A Condominium with Street "Clementi Ave 2", no Block, Level "02", Unit Number 25, Postal Code 578568 and Price of 99999 currently exists in EstateEase and is owned by John Felix.
 
 1. **Deleting the house from the seller**
 
-    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** House deleted!
+    1. **Test case:** `deleteHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** House deleted! <br><br>
 
 1. **Deleting the house from the wrong seller**
 
-    1. **Test case:** ` deleteHouse n/Jovi Rato type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** This house does not belong to this seller!
+    1. **Test case:** `deleteHouse n/John Carl 1 type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578568 price/99999`<br>
+       **Expected:** This house does not belong to this seller! <br><br>
 
 1. **House does not exist**
 
-    1. **Test case:** ` deleteHouse n/John Doe type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** This house does not exist in EstateEase
+    1. **Test case:** `deleteHouse n/John Felix type/Condominium street/Clementi Ave 2 blk/N/A level/05 unitNo/25 postal/578538 price/99999`<br>
+       **Expected:** This house does not exist in EstateEase <br><br>
 
 1. **Invalid seller**
 
     1. **Test case:** `addHouse n/Lim Carl type/Condominium street/Clementi Ave 2 blk/N/A level/02 unitNo/25 postal/578578 price/99999`<br>
-       **Expected:** This Seller does not exist in EstateEase
+       **Expected:** This Seller does not exist in EstateEase <br>
 
 [//]: # (@@author zengzihui)
-### Viewing a person
+### Viewing a Person
 
-1. Viewing the details of a person while all persons are being shown
+**Prerequisites:**
+- List all persons using the list command. Make sure there are 8 people in the list. <br>
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. **Valid index**
 
-    1. Test case: `view 1`<br>
-       Expected: Details of the first person from the displayed list is displayed at the right side of the panel
-       with the displayed person list at the left side of the panel. Name of the selected person shown in the
-       status message.
+   1. **Test case:** `view 1` <br>
+      **Expected:** Details of the first person from the displayed list is displayed at the right side of the panel with the displayed person list at the left side of the panel. Name of the selected person shown in the status message. <br><br>
+   
+2. **Invalid index**
 
-    1. Test case: `view 0`<br>
-       Expected: No person details is displayed. Error details shown in the status message.
+   1. **Test case:** `view 18` <br>
+      **Expected:** No person details is displayed. Message indicating that the person index is invalid. <br><br>
 
-    1. Other invalid view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+3. **Invalid format**
+
+   1. **Test case:** `view 0` <br>
+      **Expected:** No person details is displayed. Message indicating invalid command format as 0 is not a positive integer. <br><br>
+   2. **Test case:** `view a` <br>
+      **Expected:** No person details is displayed. Message indicating invalid command format as 'a' is not a positive integer but a string. <br><br>
+   3. **Test case:**: `view` <br> 
+      **Expected:** No person details is displayed. Message indicating invalid command format as there is no input for the index parameter <br>
 
 
 [//]: # (@@author felixchanyy)
 ### Matching Sellers to a Buyer
 
-**Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
+**Prerequisites:** 
+- List all persons using the `list` command. Multiple persons in the list.
+- There is a buyer by the name of "James Cook".
+- There is a seller by the name of "John Felix".
+- There is no seller by the name of "Ben Chan".
 
 1. **Matching suitable sellers to a buyer using buyer's full name**
 
-   1. **Test case:** `matchBuyer Alice Lee`
-      **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type.
+   1. **Test case:** `matchBuyer James Cook` <br>
+      **Expected:** List of sellers who have houses' price less than or equal to the buyer's budget and match the buyer's preferred housing type. <br><br>
 
 1. **Invalid name format**
 
-   1. **Test case:** `matchBuyer Alice`
-      **Expected:** Message indicating invalid format. The specified buyer was not found.
+   1. **Test case:** `matchBuyer James` <br>
+      **Expected:** Message indicating invalid format. The specified buyer was not found. <br><br>
 
-   1. **Test case:** `matchBuyer Lee`
-      **Expected:** Message indicating invalid format. The specified buyer was not found.
+   1. **Test case:** `matchBuyer Cook` <br>
+      **Expected:** Message indicating invalid format. The specified buyer was not found. <br><br>
 
 1. **Invalid buyer**
 
-   1. **Test case:** `matchBuyer Bob Lim`
-      **Expected:** Message indicating invalid person. The specified person is not a buyer.
+   1. **Test case:** `matchBuyer John Felix` <br>
+      **Expected:** Message indicating invalid person. The specified person is not a buyer. <br><br>
 
 1. **Buyer does not exist**
 
-    1. **Test case:** `matchBuyer Ben Chan`
-       **Expected:** Message indicating invalid person. The specified buyer was not found.
+    1. **Test case:** `matchBuyer Ben Chan` <br>
+       **Expected:** Message indicating invalid person. The specified buyer was not found. <br>
 
 [//]: # (@@author lokidoki102)
-### Editing Buyer Details
-
-**Prerequisites:**
-- List all persons using the `list` command.
-- There is a buyer named "aaaaaaa" and this buyer is the first person in the list.
-
-1. **Invalid budget value**<br>
-   **Test case:** `editBuyer 1 budget/-1`<br>
-    Expected: An error message indicating that "Budget should be a positive number."
-1. **Invalid preferred housing type**<br>
-   **Test case:** `editBuyer 1 type/bungalow`<br>
-   Expected: An error message indicating that "HousingType should only be Landed, Hdb or Condominium."
-
 ### Editing Seller Details
 
 **Prerequisites:**
-- List all persons using the `list` command.
 - There are no sellers or buyer named "Jessi Oliverson".
-- There is a seller/buyer named "John Doe".
-- There is a seller named "aaaaaaa" and this seller is the first person in the list.
-- There is a buyer named "aaaaaaab" and this buyer is the second person in the list.
+- There is a seller named "John Felix".
+- There is a seller/buyer named "John Carl 1".
+- For each `editSeller` command execution in this manual testing, execute the `find` command on the targeted
+  buyer/seller to ensure that this person is displayed as the first person in the list.
+- For invalid person type test case, ensure that the first person in the list is a `Buyer`.
+
+1. **Successful edit**<br>
+
+   1. **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
+      **Expected:** The name "John Felix" is edited to "Jessi Oliverson".
+      The updated details of the edited seller will also be shown.<br><br>
+
+   1. **Test case:** `editSeller 1 p/87654321`<br>
+      **Expected:** The phone number is edited to "87654321".
+      The updated details of the edited seller will also be shown.<br><br>
 
 1. **Duplicate name**<br>
-   **Test case:** `editSeller 1 n/John Doe`<br>
-   Expected: An error message indicating that "This person already exists in EstateEase."
-1. **Wrong type**<br>
-   **Test case:** `editSeller 2 n/Jessi Oliverson`<br>
-   Expected: An error message indicating that "The person you are trying to edit is not a seller."
-1. **Successful edit**<br>
-   **Test case:** `editSeller 1 n/Jessi Oliverson`<br>
-   Expected: The name "aaaaaaa" is edited to "Jessi Oliverson".
-   The updated details of the edited seller will also be shown in the response box.
+
+   1. **Test case:** `editSeller 1 n/John Carl 1`<br>
+      **Expected:** An error message will be shown, indicating that this person already exists in EstateEase.<br><br>
+
+1. **Invalid person type**<br>
+
+   1. **Test case** `editSeller 1 n/Jessi Oliverson`<br>
+      **Expected:** An error message will be shown, indicating that that person you are 
+      trying to edit is not a seller.<br><br>
+
 1. **Invalid INDEX**<br>
-   **Test case (Invalid INDEX):** `editSeller 0 p/87654321`<br>
-   Expected: An error messsage indicating that the command has invalid format.
-   The error message also indicates that the `INDEX` must be a positive number.
+
+   1. **Test case:** `editSeller 0 p/87654321`<br>
+      **Expected:** An error messsage will be shown, indicating that the command has invalid format.
+      The error message also indicates that the `INDEX` must be a positive number.
 
 <box type="info" seamless>
 
-**Note:** The test cases for duplicate names, wrong type, successful edit, and invalid index are
+**Note:** The test cases for invalid input for each parameter is similar the test cases found in `Adding a seller.`
+
+</box>
+
+### Editing Buyer Details
+
+**Prerequisites:**
+- There is a buyer named "James Cook".
+- For each `editBuyer` command execution in this manual testing, execute the `find` command on the targeted
+  buyer/seller to ensure that this person is displayed as the first person in the list.
+
+1. **Invalid budget value**<br>
+
+    1. **Test case:** `editBuyer 1 budget/-1`<br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
+
+    1. **Test case:** `editBuyer 1 budget/0`<br>
+       **Expected:** An error message will be shown, indicating that the budget should be a positive number.<br><br>
+   
+1. **Invalid preferred housing type**<br>
+
+    1. **Test case:** `editBuyer 1 type/bungalow`<br>
+       **Expected:** An error message will be shown, indicating that housingType 
+        should only be Landed, Hdb or Condominium.<br>
+
+<box type="info" seamless>
+
+**Note:** 
+1. The test cases for duplicate names, invalid person type, successful edit, and invalid index are
 similar to the test cases found in `Editing Seller Details`.
+2. The test cases for invalid input for each parameter is similar the test cases found in `Adding a buyer.`
 
 </box>
 
 [//]: # (@@author)
-### Deleting a person
+### Deleting a Person
 
-1. Deleting a person while all persons are being shown
+Prerequisites:
+- List all persons using the list command. Make sure there are 7 people in the list. <br>
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. **Valid index**
 
-    1. Test case: `delete 1`<br>
-       Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
+    1. **Test case:** `delete 1` <br>
+       **Expected:** First person in the displayed list is deleted. <br><br>
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. **Invalid index**
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. **Test case:** `delete 18` <br>
+       **Expected:** No person is deleted in the displayed list. Message indicating that the person index is invalid. <br><br>
+
+3. **Invalid format**
+
+    1. **Test case:** `delete 0` <br>
+       **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as 0 is not a positive integer. <br><br>
+    2. **Test case:** `delete a` <br>
+       **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as 'a' is not a positive integer but a string. <br><br>
+    3. **Test case:**: `delete` <br>
+       **Expected:** No person is deleted in the displayed list. Message indicating invalid command format as there is no input for the index parameter <br>
 
 [//]: # (@@author KhoonSun47)
 ### Saving Data
+**Prerequisites:**
+- Execute a valid command.
 
-1. **Dealing with Missing Data Folder/ Missing Data File (with Data Folder)**
+1. **Dealing with Missing Data Folder**
 
-    1. **Saving Data:**
+    1. **Test case:** Manually delete the `data` folder. <br>
+       **Expected:** The application recreates the `data` folder along with a new `addressbook.json` file, saving the current state of data to this new file. <br><br>
 
-        - If the `data` folder is deleted, the application will recreate it along with a new `addressbook.json` file upon executing a valid command.
-        - If only the `addressbook.json` file is deleted, it will be recreated within the existing `data` folder upon executing a valid command.
-        - The application saves the sample data to `addressbook.json` upon executing a valid command. <br>
-        <br>
-1. **Dealing with Corrupted Data Files**
+2. **Dealing with Missing Data File**
 
-    1. **Saving Data:**
+    1. **Test case:** Manually delete the `addressbook.json` file. <br>
+       **Expected:** The application recreates the `addressbook.json` file within the existing `data` folder and saves the current state of data to this new file. <br><br>
 
-        - The corrupted `addressbook.json` will be replaced with a correctly formatted `addressbook.json` only after a valid command is executed.
-        - If no valid command is executed, the application maintains the corrupted `addressbook.json`.
+3. **Dealing with Corrupted Data Files**
+
+    1. **Test case:** The `addressbook.json` is corrupted either by incorrect data or format issues. <br>
+       **Expected:** If a valid command is executed after the data file becomes corrupted, the application replaces the corrupted `addressbook.json` with a correctly formatted `addressbook.json` containing the current state of data. If no valid command is executed, the application maintains the corrupted `addressbook.json`. <br><br>
+
 
 [//]: # (@@author)
 
@@ -1224,7 +1291,7 @@ Allowing prices and budgets to have more than two decimal places can lead to con
 
 This enhancement promotes clarity and accuracy in price and budget management within the application.
 
-### B.4 Restrict Landed Properties to a unique postal code
+### B.4 Restrict Landed Properties to a Unique Postal Code
 
 #### B.4.1 Motivation
 In the current implementation, HDBs and Condominiums are allowed to share postal codes, similar to real world situations. However, following further research, landed properties have shown no need to share postal codes.
@@ -1268,7 +1335,7 @@ In the current implementation, HDBs and Condominiums are allowed to share postal
 #### B.8.2 Implementation
 - Similar to the current `addHouse` and `deleteHouse` commands, `editHouse` would require seller and the exact house details. The logic would be fundamentally the same.
 
-### B.9 Switch all index based commands to name based commands
+### B.9 Switch all Index Based Commands to Name Based Commands
 
 #### B.9.1 Motivation
 - In the current implementation, some commands like `editSeller` or `view` are index based while others are name based.
