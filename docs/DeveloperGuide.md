@@ -144,7 +144,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both EstateEase data (including `Buyer`, `Seller`, and `House`) and user preference data in JSON format, and read them back into corresponding objects.
+* can save EstateEase data (which includes `Buyer`, `Seller`, and `House`) and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -198,9 +198,9 @@ The following sequence diagram shows how an `addSeller` operation goes through t
 The proposed add seller mechanism is facilitated by `Person`. It extends `Person` with additional field `House`.
 Additionally, it implements the following operations:
 * `Seller#addHouse()` — Add a house to the seller list of houses.
-* `Seller#removeHouse()` — Remove a list of houses from the seller.
+* `Seller#removeHouse()` — Remove a house from the list of houses of the seller.
 * `Seller#getHouses()` — Get a list of houses from the seller.
-* `Seller#hasHouse()` — Check if a house in a list of houses from the seller.
+* `Seller#hasHouse()` — Check if a house is in the list of houses from the seller.
 * `Seller#copy()` — Values of the seller is copied to a new seller object.
 
 **Details:**
@@ -221,7 +221,7 @@ Additionally, it implements the following operations:
 **Aspect: How `addSeller` executes:**
 
 * **Alternative 1 (current choice):** Use a new command to add `Seller`.
-    * **Pros:** Easy to implement, lesser confusion on adding `Seller` and `Buyer`.
+    * **Pros:** Easier to implement, lesser confusion on adding `Seller` and `Buyer`.
     * **Cons:** May lead to many commands, which is difficult for user to remember.
 
 * **Alternative 2:** Use a prefix to differentiate between `Seller` and `Buyer`.
@@ -320,7 +320,7 @@ The following sequence diagram shows how an `view` operation goes through the `L
     * **Pros:** Easier for input validation checks, easier to implement.
       * **Cons:** When there is too many `Person` added to EstateEase, it might not be easy to find the index of the person the user want to view details..
 
-* **Alternative 2:** Use `FULLNAME` in the command input to select the person to view details.
+* **Alternative 2:** Use `FULL_NAME` in the command input to select the person to view details.
     * **Pros:** Save user the trouble to search for index of the person that user want to view.
     * **Cons:** More input validation has to be done, user might not remember the full name of the person if the full name is too long.
 
@@ -496,16 +496,6 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -644,7 +634,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
       Use case ends.
 
 [//]: # (@@author lokidoki102)
-**Use case: UC04 - View all persons**
+**Use case: UC04 - List all persons**
 
 **MSS:**
 
@@ -668,7 +658,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 **MSS:**
 
-1.  User requests to <u>view all person (UC04)</u>.
+1.  User requests to <u>list all person (UC04)</u>.
 2.  User requests to delete a specific person in the person list.
 3.  EstateEase deletes the person.
 
@@ -692,6 +682,7 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 
 [//]: # (@@author )
 
+[//]: # (@@author KhoonSun47)
 **Use case: UC06 - Load EstateEase data from file**
 
 **Actor: EstateEase**
@@ -721,6 +712,9 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
   * 1b3. Any valid command to empty person list data trigger the creation of a new, corrected JSON file. <br>
   Use case ends.
 
+[//]: # (@@author )
+
+[//]: # (@@author KhoonSun47)
 **Use case: UC07 - Save to storage**
 
 **Actor: EstateEase**
@@ -745,6 +739,8 @@ Priorities: Urgent (must-must have) - `* * * *`, High (must have) - `* * *`, Med
 * 2b. EstateEase is unable to write to the JSON file due to some IOException.
     * 2b1. EstateEase shows error message regarding the IOException to the user. <br>
       Use case ends.
+
+[//]: # (@@author )
 
 [//]: # (@@author zengzihui)
 **Use case: UC08 - Search a person**
@@ -894,22 +890,25 @@ This use case is similar to <u>UC11 - Edit buyer details</u>, except it takes in
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author KhoonSun47)
 ### Glossary
 
-| ID | Term                   | Definitions                                                                                                                                                                                |
-|----|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | Index                  | Represents the position of a person within the displayed list.                                                                                                                             |
-| 2  | HDB                    | HDB refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                               |
-| 3  | Condo                  | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                   |
-| 4  | Landed                 | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                            |
-| 5  | Buyer                  | An individual interested in purchasing a house.                                                                                                                                            |
-| 6  | Seller                 | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                              |
-| 7  | House                  | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                                                   |
-| 8  | Budget                 | Refers to the amount a buyer is willing to pay for a house.                                                                                                                                |
-| 9  | Price                  | Refers to the amount a seller is willing to sell the house for.                                                                                                                            |
-| 10 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                      |
-| 11 | Housing Type           | The type of house being sold by the seller.                                                                                                                                                |
-| 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                  |
+| ID | Term                   | Definitions                                                                                                                                                  |
+|----|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Index                  | Represents the position of a person within the displayed list.                                                                                               |
+| 2  | Hdb                    | Hdb refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace. |
+| 3  | Condominium            | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                     |
+| 4  | Landed                 | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                              |
+| 5  | Buyer                  | An individual interested in purchasing a house.                                                                                                              |
+| 6  | Seller                 | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                |
+| 7  | House                  | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                     |
+| 8  | Budget                 | Refers to the amount a buyer is willing to pay for a house.                                                                                                  |
+| 9  | Price                  | Refers to the amount a seller is willing to sell the house for.                                                                                              |
+| 10 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                        |
+| 11 | Housing Type           | The type of house being sold by the seller.                                                                                                                  |
+| 12 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                    |
+
+[//]: # (@@author )
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
