@@ -1004,7 +1004,7 @@ testers are expected to do more *exploratory* testing.
 
 **Prerequisites:**
 - List all persons using the `list` command.
-- There is currently no `person` with the name "James Cook", "Kris Hua", "Neo Ng", "Grace Tan" and "Chris Ong". 
+- There is currently no `person` with the name "James Cook", "Kris Hua", "Grace Tan" and "Chris Ong". 
 - "John Carl 1" exists as a seller in EstateEase.<br>
 
 1. **Add buyer**
