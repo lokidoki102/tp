@@ -35,10 +35,10 @@ public class HouseListPanel extends UiPart<Region> {
      */
     class HouseListViewCell extends ListCell<House> {
         @Override
-        protected void updateItem(House house, boolean empty) {
-            super.updateItem(house, empty);
+        protected void updateItem(House house, boolean isEmpty) {
+            super.updateItem(house, isEmpty);
 
-            if (empty || house == null) {
+            if (isEmpty || house == null) {
                 setGraphic(null);
                 setText(null);
             } else {

@@ -14,21 +14,21 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
-    private final boolean showPerson;
+    private final boolean isShowPerson;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.showPerson = false;
+        this.isShowHelp = isShowHelp;
+        this.isExit = isExit;
+        this.isShowPerson = false;
     }
 
     /**
@@ -43,26 +43,26 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code person}, {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, boolean showPerson) {
+    public CommandResult(String feedbackToUser, boolean isShowPerson) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = false;
-        this.exit = false;
-        this.showPerson = showPerson;
+        this.isShowHelp = false;
+        this.isExit = false;
+        this.isShowPerson = isShowPerson;
     }
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
     public boolean isShow() {
-        return showPerson;
+        return isShowPerson;
     }
 
     @Override
@@ -78,21 +78,21 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isExit == otherCommandResult.isExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, isShowHelp, isExit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("showHelp", isShowHelp)
+                .add("exit", isExit)
                 .toString();
     }
 
