@@ -1157,7 +1157,6 @@ testers are expected to do more *exploratory* testing.
 ### Editing Seller Details
 
 **Prerequisites:**
-- There are no sellers or buyer named "Jessi Oliverson".
 - There is a seller named "John Felix".
 - There is a person named "John Carl 1".
 - There is a buyer by the name of "James Cook".
