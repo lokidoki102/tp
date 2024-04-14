@@ -1273,10 +1273,10 @@ Prerequisites:
 ### B.1 New Command: matchSeller
 
 #### B.1.1 Motivation
-Real estate agents often need to match sellers with potential buyers efficiently. Currently, our application lacks a feature to facilitate this process. Introducing a matchSeller command would enhance the usability of the application for real estate agents by providing a convenient way to find potential buyers who match their property listings.
+Real estate agents often need to match sellers with potential buyers efficiently. Currently, our application lacks a feature to facilitate this process. Introducing a `matchSeller` command would enhance the usability of the application for real estate agents by providing a convenient way to find potential buyers who match their property listings.
 
 #### B.1.2 Implementation
-1. Implement the matchSeller command to filter potential buyers based on seller preferences such as price range and housing type.
+1. Implement the `matchSeller` command to filter potential buyers based on seller preferences such as price range and housing type.
 2. Integrate the command into the application's existing command structure for seamless user interaction.
 3. Display the matched buyers and their relevant details in a clear and organized manner for easy reference.
 4. Ensure the command's functionality is efficient and responsive, providing timely results to real estate agents.
@@ -1287,7 +1287,7 @@ Real estate agents often need to match sellers with potential buyers efficiently
 In the current implementation, there is no limit on the price and budget fields, which can lead to unrealistic values being entered. Setting a limit of 1 trillion ensures that prices and budgets remain within a reasonable range, preventing errors and maintaining data integrity.
 
 #### B.2.2 Implementation
-1. Update the Price and Budget classes to enforce a maximum value of 1 trillion.
+1. Update the `Price` and `Budget` classes to enforce a maximum value of 1 trillion.
 2. Implement validation checks in the user interface to prevent users from entering values exceeding the limit.
 3. Provide clear error messages when users attempt to input values beyond the specified limit, guiding them to enter valid data.
 
@@ -1299,7 +1299,7 @@ This enhancement improves the usability and reliability of the application by en
 Allowing prices and budgets to have more than two decimal places can lead to confusion and inaccuracies. Limiting them to two decimal places ensures consistency and precision in financial calculations.
 
 #### B.3.2 Implementation
-1. Modify the Price and Budget classes to round values to two decimal places during input validation.
+1. Modify the `Price` and `Budget` classes to round values to two decimal places during input validation.
 2. Update user interface components to accept inputs with up to two decimal places only.
 3. Provide feedback to users if they attempt to input values with more than two decimal places, informing them of the restriction and prompting them to correct their input.
 
