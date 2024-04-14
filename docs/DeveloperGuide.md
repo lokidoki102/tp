@@ -314,13 +314,17 @@ The following sequence diagram shows how an `view` operation goes through the `L
     * **Pros:** Having lesser commands, lesser confusion on adding too many commands for user to remember.
     * **Cons:** May be messy to implement it.
 
+
+
 * **Alternative 2:** Use 2 commands to differentiate between `Seller` and `Buyer`.
     * **Pros:** Clear commands for user to view either `Seller` or `Buyer`.
     * **Cons:** Having too many commands is troublesome for the user to remember.
 
+
 * **Alternative 1 (current choice):** Use `INDEX` in the command input to select the person to view details.
     * **Pros:** Easier for input validation checks, easier to implement.
-      * **Cons:** When there is too many `Person` added to EstateEase, it might not be easy to find the index of the person the user want to view details..
+    * **Cons:** When there is too many `Person` added to EstateEase, it might not be easy to find the index of the person the user want to view details..
+
 
 * **Alternative 2:** Use `FULL_NAME` in the command input to select the person to view details.
     * **Pros:** Save user the trouble to search for index of the person that user want to view.
@@ -414,7 +418,7 @@ The following sequence diagram shows how an `matchBuyer` operation goes through 
         * Requires the introduction of a new command class, potentially increasing the overall complexity of the codebase.
         * More commands for the user to remember
     
-* **Alternative 2:** Use prefix in `FindCommand` to do matching
+* **Alternative 2:** Use prefix in `FindCommand` to do matching.
     * **Pros:**
         * Utilizes an existing command class, reducing the need for additional code and command classes dedicated to matching.
         * Leverages the flexibility of the `FindCommand` structure to accommodate various matching scenarios with different prefixes.
@@ -451,11 +455,11 @@ The `AddHouseCommandParser` class is used to parse the user input and create the
 
 ###### Design Considerations
 
-* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
-    * Pros:
+* **Alternative 1 (current choice):** Use only a `Houses` ArrayList within Sellers to track
+    * **Pros:**
         * Allows for only seller handling for houses and reduces overlap within classes
         * Easier to track house logic as it will be contained within the seller
-    * Cons:
+    * **Cons:**
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
 <div style="page-break-after: always;"></div>
@@ -487,11 +491,11 @@ The `DeleteHouseCommandParser` class is used to parse the user input and create 
 
 ###### Design Considerations
 
-* *Alternative 1 (current choice):* Use only a `Houses` ArrayList within Sellers to track
-    * Pros:
+* **Alternative 1 (current choice):** Use only a `Houses` ArrayList within Sellers to track
+    * **Pros:**
         * Allows for only seller handling for houses and reduces overlap within classes
         * Easier to track house logic as it will be contained within the seller
-    * Cons:
+    * **Cons:**
         * Need to check all sellers whenever houses are checked for duplicates. increasing runtime
 
 [//]: # (@@author)
