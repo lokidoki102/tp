@@ -132,7 +132,10 @@ Format: `addSeller n/NAME p/PHONE e/EMAIL type/HOUSING_TYPE street/STREET [blk/B
 **Note:**
 - Adding a `Seller` will add a `House` to his/her list of houses, so that `Seller` and `Buyer` can be matched immediately if their preference matched.
 - A `Seller` cannot have the same name as a `Buyer`, because a `Seller` cannot be a `Buyer`, they must be unique.
-- The necessity of fields `Block` and `Level` depends on the `Housing Type`. If the `Housing Type` is a `Condominium`, including a `Block` is optional but a `Level` is compulsory. If the `Housing Type` is `Landed`, `Block` and `Level` must not exist. For `Hdb`, `Block` and `Level` are compulsory.
+- The necessity of fields `Block` and `Level` depends on the `Housing Type`. 
+  - If the `Housing Type` is a `Condominium`, `Block` is optional but `Level` is compulsory. 
+  - If the `Housing Type` is a `Landed`, `Block` and `Level` must not exist. 
+  - If the `Housing Type` is a `Hdb`, `Block` and `Level` are compulsory.
 </box>
 
 ##### Successful Execution
@@ -388,7 +391,7 @@ Adds a house to a specific seller.
 
 Format: 
 
-**Add House (HDB):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominium):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
+**Add House (Hdb):**`addHouse n/NAME type/HOUSING_TYPE street/STREET blk/BLOCK level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Landed)**: `addHouse n/NAME type/HOUSING_TYPE street/STREET unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`<br><br>**Add House (Condominium):**`addHouse n/NAME type/HOUSING_TYPE street/STREET [blk/BLOCK] level/LEVEL unitNo/UNIT_NUMBER postal/POSTAL_CODE price/HOUSE_PRICE`
 <box type="tip" seamless>
 
 **Tip:** A Hdb must have blk and level in the command. A condominium must have level in the command. Condominiums without blocks can have block represented by "N/A", or by completely omitting the blk/ prefix. A landed house must NOT have blk or level.
@@ -621,7 +624,7 @@ EstateEase data are saved automatically as a JSON file `[JAR file location]/data
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, EstateEase will override the existing data file with an empty data file in the next successful command execution. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, EstateEase will override the existing data file with an empty data file in the next successful command execution. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause EstateEase to behave in unexpected ways. Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -658,23 +661,22 @@ Action     | Format, Examples
 
 ## Glossary
 
-| ID | Term                   | Definitions                                                                                                                                                                               |
-|----|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ID | Term                   | Definitions                                                                                                                                                                                 |
+|----|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1  | CLI                    | Abbreviation for Command Line Interface, a system that lets users operate the software through typed commands. Users input instructions and receive textual responses from the application. |
-| 2  | GUI                    | Stands for Graphical User Interface, which enables users to interact with the application through visual elements like icons, buttons, and menus.                                         |
-| 3  | Mainstream OS          | The common operating systems including Windows, Linux, and MacOS.                                                                                                                         |
-| 4  | Java                   | A programming language required to run EstateEase. For installation guidelines or to check if Java is already installed on your device, refer to the FAQ section.                         |
-| 5  | Index                  | Represents the position of a person within the displayed list.                                                                                                                            |
-| 6  | HDB                    | HDB refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                              |
-| 7  | Condo                  | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                  |
-| 8  | Landed                 | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                           |
-| 9  | Buyer                  | An individual interested in purchasing a house.                                                                                                                                           |
-| 10 | Seller                 | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                             |
-| 11 | House                  | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                                                  |
-| 12 | JSON                   | Short for JavaScript Object Notation, a format used for storing and transmitting data.                                                                                                    |
-| 13 | Budget                 | Refers to the amount a buyer is willing to pay for a house.                                                                                                                               |
-| 14 | Price                  | Refers to the amount a seller is willing to sell the house for.                                                                                                                           |
-| 15 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                     |
-| 16 | Housing Type           | The type of house being sold by the seller.                                                                                                                                               |
-| 17 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                 |
-| 18 | Name                   | Represents the full legal name of both the buyer and the seller for the EstateEase application.                                                                                           |
+| 2  | GUI                    | Stands for Graphical User Interface, which enables users to interact with the application through visual elements like icons, buttons, and menus.                                           |
+| 3  | Mainstream OS          | The common operating systems including Windows, Linux, and MacOS.                                                                                                                           |
+| 4  | Java                   | A programming language required to run EstateEase. For installation guidelines or to check if Java is already installed on your device, refer to the FAQ section.                           |
+| 5  | Index                  | Represents the position of a person within the displayed list.                                                                                                                              |
+| 6  | Hdb                    | Hdb refers to Housing Development Board flats, which are public housing units in Singapore designed to be affordable and accessible to the general populace.                                |
+| 7  | Condominium            | A condominium is a type of private residence in a building or community complex with shared amenities such as pools, gyms, and security.                                                    |
+| 8  | Landed                 | Landed property refers to residential real estate that includes both the house and the land on which it stands.                                                                             |
+| 9  | Buyer                  | An individual interested in purchasing a house.                                                                                                                                             |
+| 10 | Seller                 | An individual looking to sell a house, who may own anywhere from zero to multiple properties.                                                                                               |
+| 11 | House                  | Refers to a property owned by a seller, defined by its price and type, which are used by EstateEase to match with a buyer's preferences.                                                    |
+| 12 | JSON                   | Short for JavaScript Object Notation, a format used for storing and transmitting data.                                                                                                      |
+| 13 | Budget                 | Refers to the amount a buyer is willing to pay for a house.                                                                                                                                 |
+| 14 | Price                  | Refers to the amount a seller is willing to sell the house for.                                                                                                                             |
+| 15 | Preferred Housing Type | The type of house a buyer is seeking.                                                                                                                                                       |
+| 16 | Housing Type           | The type of house being sold by the seller.                                                                                                                                                 |
+| 17 | Person                 | A person can be classified as either a buyer or a seller.                                                                                                                                   |
